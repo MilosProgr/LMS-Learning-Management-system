@@ -1,7 +1,11 @@
-# Compiled class file
+# =========================
+# Java / Spring Boot
+# =========================
+
+# Compiled class files
 *.class
 
-# Log file
+# Log files
 *.log
 
 # BlueJ files
@@ -10,7 +14,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -19,6 +23,50 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# Virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# Eclipse / IntelliJ / NetBeans
+*.iml
+*.ipr
+*.iws
+.idea/
+*.class
+*.jar
+*.war
+*.ear
+out/
+target/
+bin/
+*.log
+
+# Spring Boot
+spring-boot-devtools.properties
+spring-boot-devtools-*.jar
+*.db
+*.h2.db
+
+# =========================
+# Node / Angular
+# =========================
+node_modules/
+dist/
+.angular/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+.history/
+*.code-workspace
+
+# =========================
+# OS generated
+# =========================
+.DS_Store
+Thumbs.db
