@@ -1,0 +1,27 @@
+<h2 class="dialog-naslov">
+    {{ data?.mode === 'edit' ? 'Izmena godine studija' : 'Dodavanje godine studija' }}
+</h2>
+
+<div class="dialog-content-scroll">
+    <form [formGroup]="form" class="godina-form" (ngSubmit)="onSubmit()">
+        <div>
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Godina</mat-label>
+                <input matInput type="number" formControlName="godina">
+                <mat-error *ngIf="form.get('godina')?.hasError('required')">Polje je obavezno</mat-error>
+                <mat-error *ngIf="form.get('godina')?.hasError('min')">Minimalna vrednost je 1</mat-error>
+                <mat-error *ngIf="form.get('godina')?.hasError('max')">Maksimalna vrednost je 10</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="text-end mt-3">
+            <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+                Sačuvaj
+            </button>
+            <button mat-button type="button" (click)="onCancel()">Otkaži</button>
+        </div>
+    </form>
+    <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+        {{ errorMessage }}
+    </div>
+</div>

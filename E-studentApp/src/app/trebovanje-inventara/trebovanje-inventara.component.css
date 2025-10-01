@@ -1,0 +1,183 @@
+/* Table styling */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.styled-table thead th {
+    background-color: #f1f1f1;
+    color: #0d6efd;
+    padding: 8px;
+}
+
+.styled-table tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+}
+
+.no-data {
+    text-align: center;
+    color: #555;
+    font-size: 1.2em;
+}
+
+/* Page title */
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 34px;
+    font-weight: bold;
+    color: #4287f5;
+}
+
+h2 {
+    color: #4287f5;
+    text-align: center;
+    font-size: 34px;
+}
+
+/* Search bar */
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+}
+
+.search-input {
+    padding: 10px 40px 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaa;
+}
+
+/* Buttons */
+.actions-container {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.refresh-btn, .retry-btn {
+    background-color: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.retry-btn {
+    background-color: #dc3545;
+}
+
+.refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Add form styling */
+.add-form {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.add-form h3 {
+    text-align: center;
+    color: #4287f5;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.form-actions button {
+    margin: 5px;
+}
+
+/* Pagination */
+.pagination-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-submit {
+  background-color: #007bff; /* blue */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-approve {
+  background-color: #28a745; /* green */
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background-color: #dc3545; /* red */
+  color: white;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-toggle-container {
+  margin: 10px 0;
+}
+
+.form-container {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}

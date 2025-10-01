@@ -1,0 +1,46 @@
+<!-- PROGRAMI -->
+<ng-container *ngIf="programi.length > 0; else nemaPredmeta">
+  <ng-container *ngFor="let prog of programi; trackBy: trackByProg">
+    <div class="mb-4 p-3 border rounded">
+      <h4 class="mb-3">{{ prog.naziv }}</h4>
+
+      <!-- GODINE -->
+      <ng-container *ngFor="let g of getGodineZaProgram(prog.id); trackBy: trackByGodina">
+        <div class="mb-3">
+          <ng-container *ngIf="getPredmetiZaProgramIGodinu(prog.id, g.id) as predmetiSekcije">
+            <h6 class="mb-2">Godina studija: <strong>{{ g.label }}</strong></h6>
+
+            <div *ngIf="predmetiSekcije.length; else praznoZaGodinu">
+              <div *ngFor="let p of predmetiSekcije; trackBy: trackByPredmet" class="predmet-item">
+                <mat-checkbox [checked]="isChecked(prog.id, g.id, p.id!)"
+                  (change)="togglePredmet(prog.id, g.id, p.id!, $event.checked)">
+                  <span class="predmet-naziv">{{ p.naziv }}</span>
+                  <span class="predmet-esbn" *ngIf="p.esbn"> (ESBN: {{ p.esbn }})</span>
+                </mat-checkbox>
+              </div>
+
+              <div class="footer mt-2">
+                <small class="brojac">Izabrano u ovoj sekciji: {{ countProgGod(prog.id, g.id) }}</small>
+              </div>
+            </div>
+
+            <ng-template #praznoZaGodinu>
+              <p class="prazno">Nema predmeta za ovu godinu u ovom programu.</p>
+            </ng-template>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <div class="footer">
+    <small class="brojac">Ukupno izabrano: {{ ukupnoIzabrano }}</small>
+    <button mat-flat-button color="primary" (click)="sacuvajSveSekcije()" [disabled]="ukupnoIzabrano === 0">
+      💾 Sačuvaj sve sekcije
+    </button>
+
+  </div>
+</ng-container>
+<ng-template #nemaPredmeta>
+  <p class="prazno">Nema dostupnih predmeta.</p>
+</ng-template>

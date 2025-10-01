@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+      <h1 class="navbar-brand me-4">E-Student Portal</h1>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+          <ng-container *ngFor="let item of navItems">
+            <!-- Prikaz samo linkova na levoj strani -->
+            <li class="nav-item" *ngIf="!item.isButton && item.isVisible">
+              <a class="nav-link" [routerLink]="item.link">{{ item.label }}</a>
+            </li>
+            
+            <!-- Prikaz podmenija -->
+            <div *ngIf="item.submenu" class="btn-group nav-item">
+              <button type="button" class="btn dropdown-toggle dugme" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ item.label }}
+              </button>
+              <ul class="dropdown-menu">
+                <li *ngFor="let subItem of item.submenu">
+                  <a class="dropdown-item" [routerLink]="subItem.link">{{ subItem.label }}</a>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+        </ul>
+  
+        <!-- Drugi ul za dugmad za profil i prijavu -->
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ng-container *ngFor="let item of navItems">
+            <!-- Prikaz dugmadi za profil i prijavu -->
+            <li class="nav-item" *ngIf="item.isButton && item.isVisible">
+              <a class="nav-link active mx-1 px-1" role="button" (click)="item.action!()">
+                <i class="bi bi-person-circle" *ngIf="item.label === 'Profil'" [ngClass]="postaviBojuIkoniceProfila()"></i>
+                <i class="bi bi-box-arrow-right" *ngIf="item.label === 'Odjavi se'"></i>
+                <i class="bi bi-box-arrow-in-left" *ngIf="item.label === 'Prijavi se'"></i>
+                {{ item.label }}
+              </a>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  

@@ -1,0 +1,84 @@
+package ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Controller.implementacija.Nastavnici;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Aspect.Logged;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.DTO.Nastavnici.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Model.Nastavnici.Nastavnik;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Model.Student.Student;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Repository.Nastavnici.NastavnikRepository;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Repository.Student.RegistrovanKorisnikRepository;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
+import ac.rs.singidunum.springBootApp.ac.rs.singidunum.springBootApp.Service.implementacija.Nastavnici.NastavnikService;
+
+@Controller
+@RequestMapping("/api/nastavnici")
+public class NastavnikController extends GenericCrudController<NastavnikDTO, Nastavnik, Long> {
+	
+	@Autowired
+	private NastavnikService nastavnikService;
+	
+    @Autowired
+    private RegistrovanKorisnikRepository registrovaniKorisnikRepository;
+
+    @Autowired
+    private NastavnikRepository nastavnikRepository;
+	
+	@Override
+	protected CrudService<NastavnikDTO, Nastavnik, Long> getService() {
+		return nastavnikService;
+	}
+	
+	@Logged
+	@Secured({"ROLE_NASTAVNIK","ROLE_ADMIN"})
+	@GetMapping
+	public ResponseEntity<List<NastavnikDTO>> getAll(){
+		return super.getAll();
+	}
+	
+	@Logged
+	@Secured({"ROLE_NASTAVNIK","ROLE_ADMIN"})
+	@GetMapping("/{id}")
+	public ResponseEntity<NastavnikDTO> getById(Long id){
+		return super.getById(id);
+	}
+	
+	@Logged
+	@Secured({"ROLE_NASTAVNIK","ROLE_ADMIN"})
+	public ResponseEntity<NastavnikDTO> create (Nastavnik n){
+		return super.create(n);
+	}
+	
+	@Logged
+	@Secured({"ROLE_NASTAVNIK","ROLE_ADMIN"})
+	public ResponseEntity<NastavnikDTO> update(Long id,Nastavnik n){
+		return super.update(id, n);
+	}
+	
+	@Logged
+	@Secured({"ROLE_NASTAVNIK","ROLE_ADMIN"})
+	public ResponseEntity<NastavnikDTO> delete(Long id){
+		return super.delete(id);
+	}
+	@GetMapping("/slobodni-nastavnici-fakultet")
+	public ResponseEntity<List<NastavnikDTO>> getSlobodniNastavnici(){
+		return ResponseEntity.ok(nastavnikService.slobodniNastavniciFakultet());
+	}
+	
+	@GetMapping("/slobodni-nastavnici-univerzitet")
+	public ResponseEntity<List<NastavnikDTO>> getUniverzitetslobodniNastavnici(){
+		return ResponseEntity.ok(nastavnikService.slobodniNastavniciUniverzitet());
+	}
+	
+}

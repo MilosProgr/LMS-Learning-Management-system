@@ -1,0 +1,27 @@
+<h2 class="dialog-naslov">
+    {{ data?.mode === 'edit' ? 'Izmena tipa evaluacije' : 'Dodavanje tipa evaluacije' }}
+</h2>
+
+<div class="dialog-content-scroll">
+    <form [formGroup]="form" class="tip-form" (ngSubmit)="onSubmit()">
+        <div>
+            <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Naziv</mat-label>
+                <input matInput type="text" formControlName="naziv">
+                <mat-error *ngIf="form.get('naziv')?.hasError('required')">Polje je obavezno</mat-error>
+                <mat-error *ngIf="form.get('naziv')?.hasError('maxlength')">Maksimalna dužina je 100 karaktera</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="text-end mt-3">
+            <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+                Sačuvaj
+            </button>
+            <button mat-button type="button" (click)="onCancel()">Otkaži</button>
+        </div>
+    </form>
+
+    <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+        {{ errorMessage }}
+    </div>
+</div>

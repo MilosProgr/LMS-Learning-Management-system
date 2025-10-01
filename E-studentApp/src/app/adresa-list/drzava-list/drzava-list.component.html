@@ -1,0 +1,27 @@
+<div class="container d-flex flex-column align-items-center">
+    <h2>Lista dostupnih drzava</h2>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Naziv</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let d of drzave | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+                <td>{{ d.id }}</td>
+                <td>{{ d.naziv }}</td>
+                <td>
+                    <button class="btn btn-primary btn-sm"(click)="deleteDrzava(d.id!)">Obriši</button>
+                    <button class="btn btn-primary btn-sm"[routerLink]="'/drzava/edit/' + d.id">Izmeni</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <tr>{{errorMessage}}</tr>
+      <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    
+</div>

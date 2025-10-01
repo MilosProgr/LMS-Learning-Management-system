@@ -1,0 +1,98 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/* css kod za kalendar Rasporeda ispita */
+/* Mesec – boji celu ćeliju dana */
+.cal-month-view .cal-day-cell.rok-day--redovan {
+  background: rgba(25,118,210,0.12) !important;
+  box-shadow: inset 0 0 0 2px rgba(25,118,210,0.35);
+}
+
+.cal-month-view .cal-day-cell.rok-day--vanredni {
+  background: rgba(211,47,47,0.12) !important;
+  box-shadow: inset 0 0 0 2px rgba(211,47,47,0.35);
+}
+
+.cal-month-view .cal-day-cell.rok-day--redovan .cal-day-number,
+.cal-month-view .cal-day-cell.rok-day--vanredni .cal-day-number {
+  font-weight: 600;
+}
+
+.mwl-calendar-week-view .cal-day-headers .cal-header.rok-day--redovan {
+  background: rgba(25,118,210,0.12) !important;
+}
+.mwl-calendar-week-view .cal-day-headers .cal-header.rok-day--vanredni {
+  background: rgba(211,47,47,0.12) !important;
+}
+/* css kod za kalendar Rasporeda ispita */
+
+.naslov {
+  margin-left: 50px;
+  color: #4a89f5;
+}
+
+.calendar-wrapper{
+  margin: 20px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f8fafc;         
+  border: 1px solid #e5e7eb;     
+  border-radius: 8px;
+}
+
+.left-controls,
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Osnovno dugme */
+.btn {
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #334155;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #1d4ed8;
+}
+
+/* animacija na dugme */
+.btn:active {
+  transform: translateY(1px); 
+}
+
+/* Ikonica dugme (strelice) */
+.btn-icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.btn.active {
+  background: #e0e7ff;
+  border-color: #a5b4fc;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+/* Naslov meseca */
+.current-period {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}

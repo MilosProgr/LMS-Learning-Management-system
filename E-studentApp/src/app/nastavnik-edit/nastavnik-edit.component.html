@@ -1,0 +1,89 @@
+<div class="edit-container" *ngIf="nastavnik">
+    <h2>Uredi profil od nastavnika: {{ nastavnik.korisnik?.ime }}</h2>
+    <form #editNastavnikForm="ngForm" (ngSubmit)="onSubmit(editNastavnikForm)">
+      <div class="form-group">
+        <label for="korisnickoIme">Korisničko Ime</label>
+        <input
+          type="text"
+          id="korisnickoIme"
+          class="form-control"
+          name="korisnickoIme"
+          [(ngModel)]="nastavnik.korisnik!.korisnickoIme"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="jmbg">JMBG</label>
+        <input
+          type="text"
+          id="jmbg"
+          class="form-control"
+          name="jmbg"
+          [(ngModel)]="nastavnik.jmbg"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="biografija">Biografija</label>
+        <textarea
+          id="biografija"
+          class="form-control"
+          name="biografija"
+          [(ngModel)]="nastavnik.biografija"
+          rows="4"
+        ></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="fakultet">Fakultet</label>
+        <input
+          type="text"
+          id="fakultet"
+          class="form-control"
+          name="fakultet"
+          [(ngModel)]="nastavnik.fakultet"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="roles">Roles</label>
+        <input
+          type="text"
+          id="roles"
+          class="form-control"
+          name="roles"
+          [(ngModel)]="nastavnik.roles"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="zvanja">Zvanja</label>
+        <input
+          type="text"
+          id="zvanja"
+          class="form-control"
+          name="zvanja"
+          [(ngModel)]="nastavnik.zvanja"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="naucneOblasti">Naučne Oblasti</label>
+        <input
+          type="text"
+          id="naucneOblasti"
+          class="form-control"
+          name="naucneOblasti"
+          [(ngModel)]="nastavnik.naucneOblasti"
+        />
+      </div>
+  
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Sačuvaj</button>
+        <a [routerLink]="['/nastavnik-profile']" class="btn btn-secondary">Otkaži</a>
+      </div>
+    </form>
+  </div>
+  

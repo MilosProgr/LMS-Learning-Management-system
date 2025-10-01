@@ -1,0 +1,145 @@
+<div class="container">
+  <div class="title">Zahtevi za nastavni materijal - Trebovanje inventara</div>
+
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Pretraži zahteve (naziv materijala)..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterRequests()"
+    />
+    <span class="search-icon">&#128269;</span>
+  </div>
+
+  <div class="form-toggle-container">
+    <button class="btn-submit" (click)="showForm = !showForm">Novi zahtev</button>
+  </div>
+
+  <div class="form-container" *ngIf="showForm">
+    <div class="form-group">
+      <label for="naziv">Naziv materijala:</label>
+      <input
+        type="text"
+        id="naziv"
+        class="search-input"
+        [(ngModel)]="newRequest.naziv"
+        placeholder="Unesite naziv materijala"
+      />
+    </div>
+    <div class="form-group">
+      <label for="kolicina">Količina:</label>
+      <input
+        type="number"
+        id="kolicina"
+        class="search-input"
+        [(ngModel)]="newRequest.kolicina"
+        placeholder="Unesite količinu"
+      />
+    </div>
+    <button class="btn-submit" (click)="createRequest()">Podnesi zahtev</button>
+  </div>
+
+  <!-- <div class="results-summary" *ngIf="!isLoading && !error">
+    <span>Prikazano {{ filteredRequests.length }} od {{ materijali.length }} zahteva</span>
+  </div> -->
+
+  <div class="loading-container" *ngIf="isLoading">
+    <p>Učitavanje zahteva...</p>
+  </div>
+
+  <div class="error-container" *ngIf="error && !isLoading">
+    <p class="error-message">{{ error }}</p>
+    <button type="button" class="retry-btn" (click)="refreshData()">Pokušaj ponovo</button>
+  </div>
+
+  <div class="table-container" *ngIf="!isLoading && !error">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID trebovanja</th>
+          <th>Naziv</th>
+          <th>Količina</th>
+          <th>Status</th>
+          <th *ngIf="isRole('ROLE_ADMIN')">Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let request of filteredRequests | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"
+          [hidden]="request.odobreno !== null"
+        >
+          <td>{{ request.id }}</td>
+          <td>{{ request.naziv }}</td>
+          <td>{{ request.kolicina }}</td>
+          <td><span class="status-pending">Na čekanju</span></td>
+
+          <td *ngIf="isRole('ROLE_ADMIN')">
+            <ng-container *ngIf="request.odobreno === null">
+              <button class="btn-approve" (click)="approveRequest(request, true)">Odobri</button>
+              <button class="btn-reject" (click)="approveRequest(request, false)" style="margin-left: 8px;">Odbij</button>
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr *ngIf="filteredRequests.length === 0 && materijali.length > 0">
+          <td colspan="5" class="no-data">Nema zahteva koji odgovaraju pretrazi.</td>
+        </tr>
+        <tr *ngIf="materijali.length === 0">
+          <td colspan="5" class="no-data">Nema registrovanih zahteva.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="filteredRequests.length > itemsPerPage">
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+        previousLabel="Prethodna"
+        nextLabel="Sledeća"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <mat-accordion class="accordion-container" *ngIf="hasProcessedRequests">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Obrađeni zahtevi</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="table-container">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>ID trebovanja</th>
+              <th>Naziv</th>
+              <th>Količina</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let req of materijali" [hidden]="req.odobreno === null">
+              <td>{{ req.id }}</td>
+              <td>{{ req.naziv }}</td>
+              <td>{{ req.kolicina }}</td>
+              <td>
+                <span
+                  [ngClass]="{
+                    'status-approved': req.odobreno === true,
+                    'status-rejected': req.odobreno === false
+                  }"
+                >
+                  {{ req.odobreno ? 'Odobreno' : 'Odbijeno' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <ng-template [ngIf]="hasNoProcessedRequests">
+    <p class="text-muted">Nema obrađenih zahteva.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,38 @@
+<h2 class="dialog-naslov">
+  {{ data.mode === 'edit' ? 'Izmena instrumenta evaluacije' : 'Dodavanje instrumenta evaluacije' }}
+</h2>
+
+<div class="dialog-content-scroll">
+  <form [formGroup]="form" class="univerzitet-form" (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Opis</mat-label>
+        <input matInput type="text" formControlName="opis" />
+        <mat-error *ngIf="form.get('opis')?.hasError('maxlength')">
+          Maksimalno 255 karaktera
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>URL</mat-label>
+        <input matInput type="text" placeholder="https://..." formControlName="url" />
+        <mat-error *ngIf="form.get('url')?.hasError('required')">Polje je obavezno</mat-error>
+        <mat-error *ngIf="form.get('url')?.hasError('maxlength')">Maksimalno 2048 karaktera</mat-error>
+        <mat-error *ngIf="form.get('url')?.hasError('pattern')">
+          Unesite validan URL (počinje sa http:// ili https://)
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="text-end mt-3">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sačuvaj</button>
+      <button mat-button type="button" (click)="onCancel()">Otkaži</button>
+    </div>
+  </form>
+
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+    {{ errorMessage }}
+  </div>
+</div>

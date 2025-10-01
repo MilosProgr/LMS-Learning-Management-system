@@ -1,0 +1,65 @@
+<!-- <table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naslov</th>
+            <th>Trajanje</th>
+            <th>Oznaka</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let kurs of kursevi">
+            <td>{{kurs.id}}</td>
+            <td>{{kurs.naziv}}</td>
+            <td>{{kurs.trajanje}}</td>
+            <td>{{kurs.oznaka}}</td>
+        </tr>
+    </tbody>
+</table> -->
+
+<div class="container d-flex flex-column align-items-center">
+    <div class="card">
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <app-generic-reusable-table naslov="Spisak kurseva" [kljucevi]="kljucevi" [podaci]="kursevi" [editRoute]="'/kurs/edit'" (obrisiEvent)="deleteKurs($event)"></app-generic-reusable-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Dodaj kurs
+    </button>
+
+
+    <!-- <button class="btn btn-primary mx-auto my-3" type="button" data-bs-toggle="collapse"
+    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Dodaj kurs
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div>
+            <h3>Dodaj Kurs</h3>
+            <app-generic-form [fields]="formFieldsKurs" (ngSubmit)="addKurs($event)"></app-generic-form>
+        </div>
+    </div> -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content modal-scroll">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Dodavanje kurseva
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <app-generic-form [fields]="formFieldsKurs" (ngSubmit)="addKurs($event)"></app-generic-form>
+            
+          </div>
+            <div *ngIf="errorMessage"  class="alert alert-secondary mt-3" role="banner">
+                {{ errorMessage }}
+            </div>
+          </div>
+        </div>
+</div>

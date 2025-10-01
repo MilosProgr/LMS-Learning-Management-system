@@ -1,0 +1,39 @@
+<div *ngIf="loading">Učitavam…</div>
+<div *ngIf="errorMsg">{{ errorMsg }}</div>
+
+<div *ngIf="!loading && !errorMsg">
+  <h3>Evaluacije znanja</h3>
+
+  <div *ngIf="(evaluacijeZaPrijavljenog?.length ?? 0) === 0" class="muted">
+    Nema evaluacija.
+  </div>
+<br>
+  <table class="tabela" *ngIf="(evaluacijeZaPrijavljenog?.length ?? 0) > 0">
+    <thead>
+      <tr>
+        <th>Predmet</th>
+        <th>Tip evaluacije</th>
+        <th>Bodovi</th>
+        <th>Ishod</th>
+        <th>Početak</th>
+        <th>Završetak</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let e of evaluacijeZaPrijavljenog; trackBy: trackById">
+        
+        <td>{{ predmetNazivForEval(e) }}</td>
+
+        <td>{{ e.tipEvaluacije?.naziv || '—' }}</td>
+
+        <td>{{ e.ostvareniBodovi ?? '—' }}</td>
+
+        <td>{{e.ishod?.polozeno === true ? 'Polozeno' : (e.ishod?.polozeno === false ? 'Nije polozeno' : '—')}}</td>
+
+        <td>{{ e.vremePocetka   | date:'dd.MM.yyyy HH:mm' }}</td>
+        <td>{{ e.vremeZavrsetka | date:'dd.MM.yyyy HH:mm' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

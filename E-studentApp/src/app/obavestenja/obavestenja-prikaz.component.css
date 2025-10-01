@@ -1,0 +1,24 @@
+.datum-vreme-div{
+    display: block;
+}
+
+.div:hover{
+    border: solid 1px black;
+}
+.div1{
+    /* background-color: rgb(224, 248, 246); */
+    border-radius: 10px;
+    width: 49%;
+}
+
+.div-poruka{
+    background-color: rgb(224, 248, 246);
+    border-radius: 10px;
+}
+
+.scrollable-text {
+  max-height: 150px;
+  overflow-y: auto;
+  white-space: normal;
+  word-wrap: break-word; /* lomi duge reči */
+}

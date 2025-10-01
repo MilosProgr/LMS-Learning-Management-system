@@ -1,0 +1,110 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Prijava ispita</h2>
+  <div class="mb-3 text-end">
+    <strong>Stanje na računu: </strong>
+    <span>{{ stanjeNaRacunu != null ? (stanjeNaRacunu | number:'1.2-2') : '—' }} RSD</span>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <ng-container *ngFor="let prog of programi; trackBy: trackByProg">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h5 class="mb-0">Program: {{ prog.naziv }}</h5>
+      </div>
+
+      <div class="card-body">
+        <ng-container *ngFor="let g of getGodineZaProgram(prog.id); trackBy: trackByGodina">
+          <h6 class="mt-2 mb-2">Godina studija: {{ g.label }}</h6>
+
+          <table class="table table-sm table-striped align-middle">
+            <thead>
+              <tr>
+                <th>Naziv predmeta</th>
+                <th style="width: 100px;">ESPB</th>
+                <th>Obavezan</th>
+                <th>Akcije</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="
+                  let p of getPredmetiZaProgramIGodinu(prog.id, g.id)
+                    | paginate: {
+                        id: 'prog-' + prog.id + '-god-' + (g.id ?? 'none'),
+                        itemsPerPage: itemsPerPage,
+                        currentPage: (currentPageByProgram[prog.id] || 1)
+                      };
+                  trackBy: trackByPredmet
+                ">
+                <td>{{ p.naziv }}</td>
+                <td>{{ getEspFromPredmet(p) }}</td>
+                <td>{{ p.obavezan ? 'Da' : 'Ne' }}</td>
+                <td><button class="dugme" (click)="openDialog(p)">Prijavi</button></td>
+
+              </tr>
+
+              <tr *ngIf="getPredmetiZaProgramIGodinu(prog.id, g.id).length === 0">
+                <td colspan="5" class="text-muted">Nema predmeta za ovu sekciju.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <pagination-controls *ngIf="getPredmetiZaProgramIGodinu(prog.id, g.id).length > itemsPerPage"
+            [id]="'prog-' + prog.id + '-god-' + (g.id ?? 'none')" (pageChange)="currentPageByProgram[prog.id] = $event">
+          </pagination-controls>
+
+          <hr class="my-3" />
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="programi.length === 0 && !errorMessage" class="text-muted">
+    Nema dostupnih studijskih programa za prikaz.
+  </div>
+</div>
+
+
+<div class="card mt-4 shadow-sm">
+  <div class="card-header">
+    <h5 class="mb-0">Moje prijave</h5>
+  </div>
+
+  <div class="card-body">
+    <table class="table table-sm table-striped align-middle" *ngIf="prijavljeniIspiti.length; else nemaPrijava">
+      <thead>
+        <tr>
+          <th>Naziv predmeta</th>
+          <th>ESPB</th>
+          <th>Obavezan</th>
+          <th>Ispitni rok</th>
+          <th style="width: 130px;">Broj prijava</th>
+          <th style="width: 120px;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="
+      let pr of prijavljeniIspiti
+        | paginate: { id: 'prijave', itemsPerPage: itemsPerPage, currentPage: pagePrijava };
+      trackBy: trackByPrijava
+    ">
+          <td>{{ pr.predmet.naziv }}</td>
+          <td>{{pr?.predmet?.esbn}}</td>
+          <td>{{ pr.predmet.obavezan ? 'Da' : 'Ne' }}</td>
+          <td>{{ pr.ispitniRok?.naziv}}</td>
+          <td>{{ pr?.brojPrijava != null ? pr.brojPrijava : 1 }}</td>
+          <td>{{ pr?.prijavljen ? 'Prijavljen' : '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #nemaPrijava>
+      <div class="text-muted">Nema prijavljenih ispita.</div>
+    </ng-template>
+
+    <pagination-controls *ngIf="prijavljeniIspiti.length > itemsPerPage" id="prijave"
+      (pageChange)="pagePrijava = $event">
+    </pagination-controls>
+  </div>
+</div>

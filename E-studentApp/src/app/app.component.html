@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <ng-container *ngIf="loginService.loggedIn; else userLoggedOut">
+    <app-nav-bar></app-nav-bar>
+  </ng-container>
+
+  <ng-template #userLoggedOut>
+    <app-nav-bar-neregistrovani></app-nav-bar-neregistrovani>
+  </ng-template>
+
+  <div class="main-div">
+
+    <div class="side-bar-div" *ngIf="!isUniverzitetHomeRoute() && loginService.loggedIn">
+      <app-side-bar></app-side-bar>
+    </div>
+
+    <div class="ruta-div">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</body>

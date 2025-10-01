@@ -1,0 +1,64 @@
+<h2 class="dialog-naslov">
+  {{ data.mode === 'edit' ? 'Izmena ispitnog roka' : 'Dodavanje ispitnog roka' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-content-scroll">
+
+  <mat-form-field appearance="outline" class="w-100 mb-3">
+    <mat-label>Naziv</mat-label>
+    <input matInput formControlName="naziv" />
+    <mat-error *ngIf="form.get('naziv')?.hasError('required')">Polje je obavezno</mat-error>
+    <mat-error *ngIf="form.get('naziv')?.hasError('firstUppercase') && !form.get('naziv')?.hasError('required')">
+      Naziv mora počinjati velikim slovom.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="redovan" class="mb-3">Redovan rok</mat-checkbox>
+
+  <div class="row">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Početak - datum</mat-label>
+      <input matInput [matDatepicker]="dp1" formControlName="datumPocetak">
+      <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1></mat-datepicker>
+      <mat-error *ngIf="form.get('datumPocetak')?.hasError('required')">Polje je obavezno</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Početak - vreme</mat-label>
+      <input matInput type="time" formControlName="vremePocetak">
+      <mat-error *ngIf="form.get('vremePocetak')?.hasError('required')">Polje je obavezno</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Kraj - datum</mat-label>
+      <input matInput [matDatepicker]="dp2" formControlName="datumKraj">
+      <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+      <mat-datepicker #dp2></mat-datepicker>
+      <mat-error *ngIf="form.get('datumKraj')?.hasError('required')">Polje je obavezno</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Kraj - vreme</mat-label>
+      <input matInput type="time" formControlName="vremeKraj">
+      <mat-error *ngIf="form.get('vremeKraj')?.hasError('required')">Polje je obavezno</mat-error>
+    </mat-form-field>
+  </div>
+
+<div *ngIf="form.errors?.['rangeInvalid']" class="text-danger">
+  Kraj mora biti posle početka.
+</div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div class="d-flex justify-content-end gap-2 mt-3">
+    <button mat-stroked-button type="button" (click)="onCancel()">Otkaži</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+      {{ data.mode === 'edit' ? 'Sačuvaj' : 'Dodaj' }}
+    </button>
+  </div>
+</form>

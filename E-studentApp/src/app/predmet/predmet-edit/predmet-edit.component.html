@@ -1,0 +1,99 @@
+<h2 class="mb-2">
+  {{ data.mode === 'edit' ? 'Izmena predmeta' : 'Dodavanje predmeta' }}
+</h2>
+
+<div class="dialog-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-layout">
+
+    <!-- Naziv -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Naziv</mat-label>
+      <input matInput formControlName="naziv" />
+    </mat-form-field>
+
+    <div class="grid-2">
+
+    <!-- ESBN -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>ESBN</mat-label>
+      <input matInput type="number" formControlName="esbn" />
+    </mat-form-field>
+    
+      <!-- Broj predavanja -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Broj predavanja</mat-label>
+        <input matInput type="number" formControlName="brojPredavanja" />
+      </mat-form-field>
+
+      <!-- Broj vežbi -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Broj vežbi</mat-label>
+        <input matInput type="number" formControlName="brojVezbi" />
+      </mat-form-field>
+
+      <!-- Drugi oblici nastave -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Drugi oblici nastave</mat-label>
+        <input matInput type="number" formControlName="drugiObliciNastave" />
+      </mat-form-field>
+
+      <!-- Istraživački rad -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Istraživački rad</mat-label>
+        <input matInput type="number" formControlName="istrazivackiRad" />
+      </mat-form-field>
+
+      <!-- Ostali časovi -->
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Ostali časovi</mat-label>
+        <input matInput type="number" formControlName="ostaliCasovi" />
+      </mat-form-field>
+      <!-- Obavezan -->
+      <mat-checkbox formControlName="obavezan">Obavezan</mat-checkbox>
+    </div>
+    <!-- Šifra predmeta -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Šifra predmeta</mat-label>
+      <input matInput [matAutocomplete]="autoSifra" [formControl]="sifraCtrl" />
+      <mat-autocomplete #autoSifra="matAutocomplete" [displayWith]="displaySifra">
+        <mat-option [value]="null">Nema šifri</mat-option>
+        <mat-option *ngFor="let s of filteredSifre$ | async" [value]="s">
+          {{ s.tekst || ('ID: ' + s.id) }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Godina studija -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Godina studija</mat-label>
+      <input matInput [matAutocomplete]="autoGodina" [formControl]="godinaCtrl" />
+      <mat-autocomplete #autoGodina="matAutocomplete" [displayWith]="displayGodina">
+        <mat-option [value]="null">Nema godina</mat-option>
+        <mat-option *ngFor="let g of filteredGodine$ | async" [value]="g">
+          {{ g.godina || ('ID: ' + g.id) }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Multi-select: studijski programi -->
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Studijski programi</mat-label>
+      <mat-select formControlName="studijskiProgramIds" multiple>
+        <mat-option *ngFor="let sp of data.programi" [value]="sp.id">
+          {{ sp.naziv || ('ID: ' + sp.id) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Greška -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Dugmad -->
+    <div class="form-actions">
+      <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Sačuvaj</button>
+      <button mat-button type="button" (click)="dialogRef.close(false)">Otkaži</button>
+    </div>
+  </form>
+</div>

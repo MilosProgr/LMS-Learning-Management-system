@@ -1,0 +1,32 @@
+<div class="container d-flex flex-column align-items-center">
+    <div class="card">
+        <app-generic-reusable-table naslov="Spisak registrovanih korisnika" [kljucevi]="kljuceviRegistrovaniKorisnik"
+            [editRoute]="'/registrovaniKorisnik/edit'" [podaci]="registrovaniKorisnici"
+            (obrisiEvent)="deleteRegistrovaniKorisnik($event)">
+        </app-generic-reusable-table>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-scroll">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Kreiranje novog korisnika
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <app-generic-form [fields]="formFieldsRegistrovaniKorisnik"
+                        (ngSubmit)="addRegistrovaniKorisnik($event)"></app-generic-form>
+
+                </div>
+                <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+                    {{ errorMessage }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Kreiraj novog korisnika
+    </button>
+</div>

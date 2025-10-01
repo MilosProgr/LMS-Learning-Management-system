@@ -1,0 +1,38 @@
+.obavestenja-table {
+  width: 100%;
+  table-layout: auto; /* bitno: dozvoljava koloni Tekst da upije ostatak */
+}
+
+/* Fiksne/uske kolone */
+.col-index { width: 50px; }
+.col-datum { width: 140px; }
+.col-vreme { width: 90px; }
+.col-akcije { width: 180px; }
+
+.col-naslov { width: 1%; }
+
+/* Tekst uzima sav ostatak prostora */
+.col-tekst { width: auto; }
+
+/* Veće ćelije */
+.obavestenja-table th,
+.obavestenja-table td {
+  vertical-align: top;
+  padding: 0.8rem 0.75rem;
+}
+
+.tekst-scroll {
+  max-height: 160px;
+  overflow: auto;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  word-break: break-word;
+  padding-right: 4px;
+}
+
+
+.text-center { text-align: center; }
+.my-3 { margin-top: 1rem; margin-bottom: 1rem; }
+
+.actions { white-space: nowrap; }
+.me-1 { margin-right: .25rem; }

@@ -1,0 +1,13 @@
+footer {
+    background-color: #0d6efd;
+    text-align: center;
+    padding: 10px;
+}
+
+footer div {
+    display: inline-block;
+}
+
+footer p {
+    margin: 0;
+}

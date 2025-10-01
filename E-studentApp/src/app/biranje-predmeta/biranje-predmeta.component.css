@@ -1,0 +1,78 @@
+.biranje-wrapper {
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 20px;
+  background: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.naslov {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5; /* Material primary */
+  font-weight: 600;
+}
+
+.error-msg {
+  background: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.predmeti-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.predmet-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.predmet-item:hover {
+  background: #f5f5f5;
+  border-color: #c5cae9;
+}
+
+.predmet-naziv {
+  font-weight: 500;
+}
+
+.predmet-esbn {
+  color: #666;
+  font-size: 13px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.brojac {
+  font-size: 13px;
+  color: #555;
+}
+
+.prazno {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+  margin-top: 20px;
+}
+
+.errorMessage{
+  text-align: center;
+}

@@ -1,0 +1,32 @@
+.container {
+    max-width: 900px;
+}
+
+.card {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    text-align: left;
+    background: #f7f7f7;
+    border-bottom: 1px solid #e9e9e9;
+    padding: 10px;
+}
+
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+button {
+    margin-right: 8px;
+}

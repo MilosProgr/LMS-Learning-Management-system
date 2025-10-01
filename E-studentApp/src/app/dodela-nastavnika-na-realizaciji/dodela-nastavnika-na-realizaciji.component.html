@@ -1,0 +1,57 @@
+<h2 class="naslov">Dodela nastavnika na realizaciji</h2>
+<br>
+
+<mat-card class="dodela-card">
+  <mat-card-header>
+    <mat-card-title>Dodela Realizacije</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="dodeli()" class="form-grid">
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Nastavnik</mat-label>
+        <input type="text" matInput formControlName="nastavnik" [matAutocomplete]="auto"
+          placeholder="Unesite ime ili prezime" />
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayNastavnik">
+          <mat-option *ngFor="let n of (filteredNastavnici$ | async) ?? []" [value]="n">
+            {{ displayNastavnik(n) }}
+          </mat-option>
+          <mat-option *ngIf="(filteredNastavnici$ | async)?.length === 0">
+            Nema rezultata
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.controls.nastavnik.hasError('required')">
+          Nastavnik je obavezan.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Broj časova</mat-label>
+        <input matInput type="number" formControlName="brojCasova" placeholder="npr. 30" />
+        <mat-error *ngIf="form.controls.brojCasova.hasError('required')">Polje je obavezno.</mat-error>
+        <mat-error *ngIf="form.controls.brojCasova.hasError('min')">Minimalno 1.</mat-error>
+        <mat-error *ngIf="form.controls.brojCasova.hasError('max')">Maksimalno 240.</mat-error>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+          Dodeli
+        </button>
+        <button mat-stroked-button type="button" (click)="reset()">
+          Reset
+        </button>
+      </div>
+    </form>
+    <br>
+    <div>
+      <button mat-flat-button color="primary" [routerLink]="['/dodela-predmeta']">
+        Dodela predmeta
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+      {{ errorMessage }}
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,46 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+        <h1 class="navbar-brand me-4">E-Student Portal</h1>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav-ui navbar-nav me-2 mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/obavestenja">E-Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="/univerzitet-home">Univerzitet</a>
+                </li>
+
+                <div class="btn-group nav-item">
+                    <button type="button" class="btn dropdown-toggle dugme" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Fakulteti
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li *ngFor="let fakultet of fakulteti">
+                            <a class="dropdown-item" [routerLink]="['univerzitet-home/fakulteti', fakultet.id]">{{
+                                fakultet.naziv }}</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item button-prijava">
+                    <a class="nav-link active mx-1 px-1" role="button" (click)="navigateToProfile()">
+                      <i class="bi bi-person-circle"></i>
+                    </a>
+                </li>
+                                  
+                  
+
+                <li class="nav-item button-prijava" routerLink="/prijava">
+                    <a class="nav-link active" role="button">
+                        Prijavi se
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav> -->
+
+<app-nav-bar-generic [navItems]="navItems"></app-nav-bar-generic>

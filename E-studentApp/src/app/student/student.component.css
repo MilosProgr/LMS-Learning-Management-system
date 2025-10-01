@@ -1,0 +1,69 @@
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+  }
+  
+  .styled-table thead th {
+    background-color: #f1f1f1;
+    color: #0d6efd;
+    padding: 8px;
+  }
+  
+  .styled-table tbody td {
+    padding: 8px;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #555;
+    font-size: 1.2em;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 34px;
+    font-weight: bold;
+    color: #4287f5;
+  }
+  
+  h2 {
+    color: #4287f5;
+    text-align: center;
+    font-size: 34px;
+  }
+  
+  .search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%; /* Make sure container spans across the page */
+    max-width: 600px; /* Set max width for wider input */
+    margin: 0 auto 20px; /* Center container and add spacing below */
+  }
+  
+  .search-input {
+    padding: 10px 40px 10px 20px; /* Adjusted padding for the icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* Make input fill the container */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-icon {
+    position: absolute;
+    right: 15px; /* Adjusted position */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #aaa;
+  }
+  
+  

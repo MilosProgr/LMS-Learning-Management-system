@@ -1,0 +1,38 @@
+<h2 class="naslov">Kalendar ispitnih rokova</h2>
+<div class="calendar-wrapper">
+    <div class="toolbar">
+        <div class="left-controls">
+            <button class="btn btn-icon" (click)="prev()" aria-label="Prethodni">&lt;</button>
+            <button class="btn btn-icon" (click)="next()" aria-label="Sledeći">&gt;</button>
+            <button class="btn" (click)="today()">Danas</button>
+        </div>
+
+        <h3 class="current-period">{{ viewDate | date:'LLLL yyyy' }}</h3>
+
+        <div class="right-controls">
+            <button class="btn" [class.active]="view === 'month'" (click)="setView('month')">Mesec</button>
+            <button class="btn" [class.active]="view === 'week'" (click)="setView('week')">Nedelja</button>
+            <button class="btn" [class.active]="view === 'day'" (click)="setView('day')">Dan</button>
+        </div>
+    </div>
+    <br>
+    <ng-container [ngSwitch]="view">
+        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [weekStartsOn]="1"
+            (beforeViewRender)="onBeforeMonthViewRender($event)" [cellTemplate]="customCell">
+        </mwl-calendar-month-view>
+
+        <ng-template #customCell let-day="day">
+            <div [matTooltip]="getDayTooltip(day)">
+                {{ day.date | date:'d' }}
+            </div>
+        </ng-template>
+
+
+        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [weekStartsOn]="1"
+            (beforeViewRender)="onBeforeWeekViewRender($event)">
+        </mwl-calendar-week-view>
+
+        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events">
+        </mwl-calendar-day-view>
+    </ng-container>
+</div>

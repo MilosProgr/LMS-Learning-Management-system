@@ -1,0 +1,42 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista instrumenata evaluacije</h2>
+    <br />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Opis</th>
+          <th>Url</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let ie of instrumenti
+                    | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ie.opis}}</td>
+          <td>{{ie.url}}</td>
+          <td>
+            <button (click)="deleteInstrument(ie.id!)">Obriši</button>
+            <button (click)="openEditDialog(ie)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <!-- Prikaz greške -->
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Dugme za dodavanje -->
+  <button class="btn btn-primary btn-sm mt-3" (click)="openAddDialog()">
+    Dodaj instrument evaluacije
+  </button>
+</div>

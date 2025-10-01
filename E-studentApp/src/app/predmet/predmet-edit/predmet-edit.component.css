@@ -1,0 +1,13 @@
+.dialog-content {
+  padding: 20px
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dve kolone */
+  gap: 16px; /* razmak između polja */
+}

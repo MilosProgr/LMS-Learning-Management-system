@@ -1,0 +1,50 @@
+<!-- <div class="container">
+    <h1>Raspored Nastave</h1>
+
+
+    <div class="form-group">
+        <label for="studijskiProgramSelect">Odaberite Studijski Program:</label>
+        <select id="studijskiProgramSelect" class="form-control" (change)="onProgramSelect($event)">
+            <option *ngFor="let program of studijskiProgrami" [value]="program.id">{{ program.naziv }}</option>
+        </select>
+    </div>
+
+
+    <div *ngIf="realizacijaPredmeta && realizacijaPredmeta.length > 0">
+        <h2>Predmeti za Odabrani Studijski Program</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Naziv</th>
+                    <th>ESBN</th>
+                    <th>Termin</th>
+                    <th>Tip Nastave</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let realizacija of realizacijaPredmeta">
+                    <td>{{ realizacija.predmet!.id }}</td>
+                    <td>{{ realizacija.predmet!.naziv }}</td>
+                    <td>{{ realizacija.predmet!.esbn }}</td>
+
+
+
+                    <td>
+                        <div *ngFor="let termin of realizacija.terminNastave">
+                            {{ termin.vremePocetka }} - {{ termin.vremeKraja }}
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngFor="let termin of realizacija.terminNastave">
+                            {{ termin.tipNasstave.naziv }}<br>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="realizacijaPredmeta && realizacijaPredmeta.length === 0">
+        <p>Nema predmeta za odabrani studijski program.</p>
+    </div>
+</div> -->

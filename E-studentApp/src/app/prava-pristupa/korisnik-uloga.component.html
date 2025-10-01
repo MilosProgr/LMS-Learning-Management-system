@@ -1,0 +1,82 @@
+<div class="container mt-4 mb-4">
+  <div>
+    <h2>Tabela korisnika i uloga</h2>
+  </div>
+  <br>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Korisničko ime</th>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Uloge</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let korisnik of korisnikSaUlogomDataList">
+        <td class="text-center">{{ korisnik.korisnik.id }}</td>
+        <td class="text-center">{{ korisnik.korisnik.korisnickoIme }}</td>
+        <td class="text-center">{{ korisnik.korisnik.ime }}</td>
+        <td class="text-center">{{ korisnik.korisnik.prezime }}</td>
+        <td class="text-center">
+          <ng-container *ngFor="let uloga of korisnik.listaUloga; let last = last">
+            {{ uloga.ime }}<span *ngIf="!last">, </span>
+          </ng-container>
+        </td>
+        <td>
+          <button
+            class="btn btn-primary btn-sm"
+            (click)="openModal(korisnik)"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Izmeni
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content modal-scroll" *ngIf="selektovaniKorisnik as sel">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">
+            Izmena uloga za korisnika: {{ sel?.korisnik?.korisnickoIme }}
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <h5 class="px-3 pt-2">Izmeni uloge</h5>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th *ngFor="let uloga of uloge">{{ uloga.ime }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td *ngFor="let uloga of uloge">
+                <input
+                  type="checkbox"
+                  [ngModel]="isUlogaSelektovana(uloga.id)"
+                  (ngModelChange)="promenaUloge(uloga, $event)"
+                  [disabled]="uloga.ime === 'ROLE_KORISNIK'">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="errorMessage" class="alert alert-secondary m-3 mt-0" role="banner">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

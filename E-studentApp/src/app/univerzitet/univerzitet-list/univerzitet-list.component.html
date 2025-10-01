@@ -1,0 +1,42 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista dostupnih univerziteta</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>Datum Osnivanja</th>
+          <th>Adresa</th>
+          <th>Rektor</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let u of univerziteti | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ u.id }}</td>
+          <td>{{ u.naziv }}</td>
+          <td>{{ u.datumOsnivanja ? (u.datumOsnivanja | date:'dd.MM.yyyy') : 'N/A' }}</td>
+          <td>{{u.adresa.ulica + " " + u.adresa.broj}}</td>
+          <td>{{u.rektor.korisnik?.ime + " " + u.rektor.korisnik?.prezime}}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"(click)="izbrisiUniverzitet(u.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm"(click)="openEditDialog(u)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+      {{ errorMessage }}
+    </div>
+
+          
+  <button class="btn btn-primary btn-sm" (click)="openAddDialog()">
+    Dodaj univerzitet
+  </button>
+</div>

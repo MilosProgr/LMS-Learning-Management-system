@@ -1,0 +1,50 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista dostupnih fakulteta</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>Kontakt</th>
+          <th>Univerzitet</th>
+          <th>Adresa</th>
+          <th>Dekan</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="(fakulteti?.length || 0) > 0; else noRows">
+        <tr
+          *ngFor="let f of fakulteti | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ f.id }}</td>
+          <td>{{ f.naziv }}</td>
+          <td>{{ f.univerzitet.naziv }}</td>
+          <td>{{ f.kontakt }}</td>
+          <td>{{ f.adresa.ulica + ' ' + f.adresa.broj }}</td>
+          <td>{{ f.dekan.korisnik?.ime + ' ' + f.dekan.korisnik?.prezime }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="izbrisiFakultet(f.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm" (click)="openEditDialog(f)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+      <ng-template #noRows>
+        <tbody>
+          <tr>
+            <td colspan="6" class="text-center">Nema dostupnih fakulteta</td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="banner">
+    {{ errorMessage }}
+  </div>
+  <br>
+  <button class="btn btn-primary btn-sm" (click)="openAddDialog()">
+    Dodaj fakultet
+  </button>
+</div>

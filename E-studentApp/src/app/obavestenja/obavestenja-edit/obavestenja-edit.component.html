@@ -1,0 +1,35 @@
+<h2 class="dialog-naslov">
+  {{ data.mode === 'edit' ? 'Izmena obaveštenja' : 'Dodavanje obaveštenja' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-content-scroll">
+
+  <mat-form-field appearance="outline" class="w-100 mb-3">
+    <mat-label>Naslov</mat-label>
+    <input matInput formControlName="naslov" />
+    <mat-error *ngIf="form.get('naslov')?.hasError('required')">Polje je obavezno</mat-error>
+    <mat-error *ngIf="form.get('naslov')?.hasError('firstUppercase') && !form.get('naslov')?.hasError('required')">
+      Naslov mora počinjati velikim slovom.
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-100 mb-3">
+    <mat-label>Tekst</mat-label>
+    <textarea matInput rows="4" formControlName="tekst"></textarea>
+    <mat-error *ngIf="form.get('tekst')?.hasError('required')">Polje je obavezno</mat-error>
+    <mat-error *ngIf="form.get('tekst')?.hasError('firstUppercase') && !form.get('tekst')?.hasError('required')">
+      Tekst mora počinjati velikim slovom.
+    </mat-error>
+  </mat-form-field>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+  <div class="d-flex justify-content-end gap-2 mt-3">
+    <button mat-stroked-button type="button" (click)="onCancel()">Otkaži</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">
+      {{ data.mode === 'edit' ? 'Sačuvaj' : 'Dodaj' }}
+    </button>
+  </div>
+</form>

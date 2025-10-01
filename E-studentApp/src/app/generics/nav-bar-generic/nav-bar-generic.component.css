@@ -1,0 +1,21 @@
+.nav-item:hover {
+    background-color: #0755C9;
+    border-radius: 10%;
+}
+.button-prijava{
+    border: solid 1px black;
+    border-radius: 10%;
+}
+
+.dialog-div{
+    width: 250px;;
+    height: auto;
+}
+
+.nav-item .dugme{
+    color: black;
+}
+
+.text-student {
+  color: #FFA500;
+}

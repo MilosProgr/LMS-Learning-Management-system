@@ -1,0 +1,44 @@
+<div class="container" *ngIf="univerzitet; else noData">
+
+  <div class="logo-header">
+    <!-- <img class="logo" src="assets/i18n/univerzitet.png" alt="Univerzitet Logo" /> -->
+    <div class="name-container">
+      <h1>{{ univerzitet.naziv }}</h1>
+      <p class="subtitle">Detalji univerziteta</p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">📅 Datum osnivanja</div>
+    <div class="card-content">
+      {{ univerzitet.datumOsnivanja ? (univerzitet.datumOsnivanja | date:'dd.MM.yyyy') : 'N/A' }}
+    </div>
+  </div>
+
+
+  <div class="info-card">
+    <div class="card-title">📍 Adresa</div>
+    <div class="card-content">{{ univerzitet.adresa.ulica }} {{ univerzitet.adresa.broj }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">📝 Opis univerziteta</div>
+    <div class="card-content">{{ univerzitet.opis }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">👤 Rektor</div>
+    <div class="card-content">{{ univerzitet.rektor.korisnik?.ime }} {{ univerzitet.rektor.korisnik?.prezime }}</div>
+  </div>
+
+  <div class="button-container">
+    <button class="btn-back" (click)="goBack()">← Nazad</button>
+  </div>
+
+</div>
+
+<ng-template #noData>
+  <div class="no-data">
+    <p>Univerzitet nije pronađen.</p>
+  </div>
+</ng-template>

@@ -1,0 +1,85 @@
+<div class="container py-4 py-xl-5">
+  <div class="row mb-5">
+    <div class="col-md-8 col-xl-6 text-center mx-auto div1">
+      <h2>Obaveštenja</h2>
+    </div>
+  </div>
+
+  <!-- Ako nema nijednog obaveštenja -->
+  <div class="col-12 text-center div-poruka" *ngIf="(!listaObavestenja || listaObavestenja.length === 0) 
+           && (!listaObavestenjaAktivnosti || listaObavestenjaAktivnosti.length === 0)">
+    <p class="text-muted">Trenutno nema obaveštenja!</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <!-- Opšta obaveštenja -->
+    <div class="col" *ngFor="let obavestenje of listaObavestenja">
+      <div class="card border-primary shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ obavestenje.naslov }}</h5>
+          <p class="card-text scrollable-text">{{ obavestenje.tekst }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center text-muted">
+          <small>
+            {{ (obavestenje.datum + 'T' + obavestenje.vreme) | date:'dd.MM.yyyy HH:mm' }}
+          </small>
+          <button class="btn btn-danger btn-sm" *ngIf="loginService.validateRoles(['ROLE_ADMIN', 'ROLE_SLUZBA'])"
+            (click)="obrisiObavestenje(obavestenje.id)">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Obaveštenja aktivnosti -->
+    <div class="col" *ngFor="let obavestenje of listaObavestenjaAktivnosti">
+      <div class="card border-success shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ obavestenje.naslov }}</h5>
+          <p class="card-text scrollable-text">{{ obavestenje.sadrzaj }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between align-items-center text-muted">
+          <small>
+            {{ obavestenje.vremePostavljanja | date:'dd.MM.yyyy HH:mm' }}
+          </small>
+          <button class="btn btn-outline-primary btn-sm ms-auto" (click)="oznaciProcitano(obavestenje)">
+            <i class="bi bi-check2"></i> Pročitano
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- pročitanа obaveštenja -->
+  <div *ngIf="prijavljeniKorisnik">
+    <div *ngIf="procitanaObavestenjaAktivnosti.length > 0">
+      <hr>
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Pročitana obaveštenja
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div *ngIf="procitanaObavestenjaAktivnosti.length > 0; else nemaProcitanih">
+            <ul class="list-group">
+              <li class="list-group-item" *ngFor="let obavestenje of procitanaObavestenjaAktivnosti">
+                <strong>{{ obavestenje.naslov }}</strong><br>
+                <small class="text-muted">
+                  {{ obavestenje.vremePostavljanja | date:'dd.MM.yyyy HH:mm' }}
+                </small>
+                <p class="mb-0 scrollable-text">{{ obavestenje.sadrzaj }}</p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Ako nema pročitanih -->
+          <ng-template #nemaProcitanih>
+            <p class="text-muted">Nema pročitanih obaveštenja.</p>
+          </ng-template>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

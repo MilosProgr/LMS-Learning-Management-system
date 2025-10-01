@@ -1,0 +1,14 @@
+<div class="ishodi-list-container">
+    <h1 class="page-title">Uređivanje opisa predmeta</h1>
+    <div *ngFor="let ishod of ishodi" class="ishod-card">
+      <h2>{{ ishod.predmet.naziv }}</h2>
+      
+      <p *ngIf="!ishod.editMode"><strong>Opis:</strong> {{ ishod.opis }}</p>
+      <textarea *ngIf="ishod.editMode" [(ngModel)]="ishod.opis" rows="3"></textarea>
+  
+      <button *ngIf="!ishod.editMode" (click)="ishod.editMode = true">Uredi opis predmeta</button>
+      <button *ngIf="ishod.editMode" style="margin-right: 10px;" (click)="saveOpis(ishod)">Sačuvaj</button>
+      <button *ngIf="ishod.editMode" (click)="ishod.editMode = false">Obustavi</button>      
+    </div>
+  </div>
+  

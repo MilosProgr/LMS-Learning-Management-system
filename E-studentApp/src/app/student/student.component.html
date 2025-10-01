@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="title">Spisak i pretraga studenata</div>
+
+  <div class="search-container">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Pretraži studente (ime, prezime, JMBG, indeks, program)..." 
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterStudents()" 
+    />
+    <span class="search-icon">&#128269;</span>
+  </div>
+
+  <div class="actions-container">
+    <button type="button" class="refresh-btn" (click)="refreshData()" [disabled]="isLoading">
+      <span *ngIf="!isLoading">🔄 Osveži</span>
+      <span *ngIf="isLoading">⏳ Učitavanje...</span>
+    </button>
+  </div>
+
+  <div class="results-summary" *ngIf="!isLoading && !error">
+    <span>Prikazano {{ filteredStudents.length }} od {{ students.length }} studenata</span>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <p>Učitavanje studenata...</p>
+  </div>
+
+  <div class="error-container" *ngIf="error && !isLoading">
+    <p class="error-message">{{ error }}</p>
+    <button type="button" class="retry-btn" (click)="refreshData()">Pokušaj ponovo</button>
+  </div>
+
+  <div class="table-container" *ngIf="!isLoading && !error">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Ime</th>
+          <th>Prezime</th>
+          <th>JMBG</th>
+          <th>Kontakt</th>
+          <th>Adresa</th>
+          <th>Broj Indeksa</th>
+          <th>Studijski Program</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of filteredStudents | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; 
+                let i = index">
+          <td>{{ getNestedProperty(student, 'korisnik.ime', 'N/A') }}</td>
+          <td>{{ getNestedProperty(student, 'korisnik.prezime', 'N/A') }}</td>
+          <td>{{ student.jmbg || 'N/A' }}</td>
+          <td>{{ student.telefon || 'N/A' }}</td>
+          <td>{{ getFormattedAddress(student) }}</td>
+          <td>{{ getNestedProperty(student, 'studentNaGodini.brojIndeksa', 'N/A') }}</td>
+          <td>{{ getNestedProperty(student, 'studijskiProgram.naziv', 'N/A') }}</td>
+        </tr>
+        
+        <tr *ngIf="filteredStudents.length === 0 && students.length > 0">
+          <td colspan="7" class="no-data">Nema studenata koji odgovaraju pretrazi.</td>
+        </tr>
+        
+        <tr *ngIf="students.length === 0">
+          <td colspan="7" class="no-data">Nema registrovanih studenata.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="filteredStudents.length > itemsPerPage">
+      <pagination-controls 
+        (pageChange)="onPageChange($event)"
+        previousLabel="Prethodna"
+        nextLabel="Sledeća">
+      </pagination-controls>
+    </div>
+  </div>
+</div>

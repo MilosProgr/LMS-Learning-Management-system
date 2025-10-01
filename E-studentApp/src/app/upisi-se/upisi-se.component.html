@@ -1,0 +1,105 @@
+<div class="container mt-4 mb-4" style="min-width: 500px;">
+  <form [formGroup]="form" (ngSubmit)="addStudent()" class="p-4 x-4"
+    style="background-color: #f8f9fa; border-radius: 0.5rem;">
+
+    <!-- JMBG -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Jedinstveni matični broj</mat-label>
+      <input matInput type="text" formControlName="jmbg">
+      <mat-hint *ngIf="form.get('jmbg')?.errors?.['jmbgInvalid']">JMBG mora imati 13 cifara</mat-hint>
+      <mat-error *ngIf="form.get('jmbg')?.errors?.['required']">Polje mora biti popunjeno!</mat-error>
+    </mat-form-field>
+
+    <!-- Telefon -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Kontakt</mat-label>
+      <input matInput type="text" formControlName="telefon">
+      <mat-error *ngIf="form.get('telefon')?.errors?.['required']">Polje mora biti popunjeno!</mat-error>
+      <mat-error *ngIf="form.get('telefon')?.errors?.['pattern']">Kontakt mora biti u formatu 000/123456</mat-error>
+    </mat-form-field>
+
+    <!-- Ulica -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Ulica</mat-label>
+      <input type="text" matInput formControlName="ulica" [matAutocomplete]="autoUlica">
+      <mat-autocomplete #autoUlica="matAutocomplete">
+        <mat-option *ngFor="let option of filteredUlice | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="form.get('ulica')?.hasError('required')">Polje mora biti popunjeno!</mat-error>
+      <mat-error *ngIf="form.get('ulica')?.hasError('naziv')">
+        Dozvoljena su samo slova i razmaci, i mora početi velikim slovom.
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- Broj -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Broj</mat-label>
+      <input type="text" matInput formControlName="broj" [matAutocomplete]="autoBroj">
+      <mat-autocomplete #autoBroj="matAutocomplete">
+        <mat-option *ngFor="let option of filteredBrojevi | async" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+    <!-- Mesto -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Mesto</mat-label>
+      <input type="text" matInput formControlName="mesto" [matAutocomplete]="autoMesto">
+      <mat-autocomplete #autoMesto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredMesta | async" [value]="option.naziv">
+          {{ option.naziv }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="form.get('mesto')?.hasError('required')">Polje mora biti popunjeno!</mat-error>
+      <mat-error *ngIf="form.get('mesto')?.hasError('naziv')">
+        Dozvoljena su samo slova i razmaci, i mora početi velikim slovom.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Mesto prebivališta -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Mesto prebivališta</mat-label>
+      <input type="text" matInput formControlName="mestoPrebivalista" [matAutocomplete]="autoMestoPreb">
+      <mat-autocomplete #autoMestoPreb="matAutocomplete">
+        <mat-option *ngFor="let option of filteredMestaPreb | async" [value]="option.naziv">
+          {{ option.naziv }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="form.get('mestoPrebivalista')?.hasError('required')">Polje mora biti popunjeno!</mat-error>
+      <mat-error *ngIf="form.get('mestoPrebivalista')?.hasError('naziv')">
+        Dozvoljena su samo slova i razmaci, i mora početi velikim slovom.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Država -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Država</mat-label>
+      <input type="text" matInput formControlName="drzava" [matAutocomplete]="autoDrzava">
+      <mat-autocomplete #autoDrzava="matAutocomplete">
+        <mat-option *ngFor="let option of filteredDrzave | async" [value]="option.naziv">
+          {{ option.naziv }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="form.get('drzava')?.hasError('required')">Polje mora biti popunjeno!</mat-error>
+      <mat-error *ngIf="form.get('drzava')?.hasError('naziv')">
+        Dozvoljena su samo slova i razmaci, i mora početi velikim slovom.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Submit -->
+    <div class="d-flex justify-content-between">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || formaZakljucana">
+        Pošalji
+      </button>
+    </div>
+  </form>
+
+  <div *ngIf="errorMessage" class="mt-3 alert alert-info">
+    {{ errorMessage }}
+  </div>
+</div>

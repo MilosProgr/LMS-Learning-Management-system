@@ -1,0 +1,51 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista ispitnih rokova</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>Početak</th>
+          <th>Kraj</th>
+          <th>Redovan</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngIf="(rokovi?.length ?? 0) > 0; else nemaRokova">
+          <tr *ngFor="
+              let r of rokovi
+              | paginate: { id: 'rokovi', itemsPerPage: itemsPerPage, currentPage: currentPage };
+              trackBy: trackById">
+            <td>{{ r.id }}</td>
+            <td>{{ r.naziv }}</td>
+            <td>{{ r.pocetak | date:'dd.MM.yyyy HH:mm' }}</td>
+            <td>{{ r.kraj | date:'dd.MM.yyyy HH:mm' }}</td>
+            <td>{{ r.redovan ? 'Da' : 'Ne' }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm"(click)="izbrisiRok(r.id!)">Obriši</button>
+              <button class="btn btn-primary btn-sm"(click)="openEditDialog(r)">Izmeni</button>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #nemaRokova>
+          <tr>
+            <td colspan="6" class="text-center">Nema ispitnih rokova</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+
+    <pagination-controls
+      *ngIf="(rokovi?.length ?? 0) > 0"
+      [id]="'rokovi'"
+      (pageChange)="currentPage = $event">
+    </pagination-controls>
+  </div>
+
+  <button class="btn btn-primary btn-sm" (click)="openAddDialog()">Dodaj ispitni rok</button>
+</div>

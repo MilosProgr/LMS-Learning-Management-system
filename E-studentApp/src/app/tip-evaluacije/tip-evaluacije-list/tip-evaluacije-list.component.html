@@ -1,0 +1,38 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista tipova evaluacije</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of tipovi | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ t.id }}</td>
+          <td>{{ t.naziv }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"(click)="deleteTip(t.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm"(click)="openEditDialog(t)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <!-- Prikaz greške -->
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Dugme za dodavanje -->
+  <button class="btn btn-primary btn-sm mt-3" (click)="openAddDialog()">
+    Dodaj tip evaluacije
+  </button>
+</div>

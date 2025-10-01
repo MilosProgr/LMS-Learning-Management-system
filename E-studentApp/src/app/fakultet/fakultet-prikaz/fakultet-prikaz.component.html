@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fakulteti</title>
+</head>
+
+<body>
+    <div class="container d-flex flex-column align-items-center">
+        <h2>Lista dostupnih fakulteta</h2>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Univerzitet</th>
+                    <th>Adresa</th>
+                    <th>Dekan</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let f of fakulteti | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+                    <td>{{ f.naziv }}</td>
+                    <td>{{ f.univerzitet.naziv }}</td>
+                    <td>{{ f.adresa.ulica + ' ' + f.adresa.broj }}</td>
+                    <td>{{ f.dekan.korisnik?.ime + ' ' + f.dekan.korisnik?.prezime }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm"[routerLink]="['fakulteti', f.id]">Detalji</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Paginacija -->
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+    </div>
+</body>
+
+</html>

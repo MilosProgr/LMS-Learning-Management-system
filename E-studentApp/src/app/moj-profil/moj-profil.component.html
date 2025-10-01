@@ -1,0 +1,98 @@
+<div class="profile-container">
+
+  <div class="profile-card" *ngIf="adminData || nastavnikData || studentData || korisnikData; else nemaPodataka">
+    <h1>Moj profil</h1>
+    <div>
+      <p><strong>Uloge korisnika:</strong> {{ userRoles.map(formatirajUlogu).join(', ') }}</p>
+    </div>
+
+    <!-- Sekcija: Opsta -->
+    <div *ngIf="korisnikData">
+      <p><strong>Korisničko ime:</strong> {{ korisnikData.korisnickoIme }}</p>
+      <p><strong>Ime i Prezime:</strong> {{ korisnikData.imePrezime }}</p>
+      <p><strong>E-mail:</strong> {{ korisnikData.email }}</p>
+      <!-- Opšti prikaz podataka na jednom mestu -->
+      <p *ngIf="prikazaniJMBG">
+        <strong>JMBG:</strong> {{ prikazaniJMBG }}
+      </p>
+
+      <p *ngIf="jedinstveniEmailovi.length">
+        <strong>Poslovni e-mail:</strong> {{ jedinstveniEmailovi.join(', ') }}
+      </p>
+
+      <p *ngIf="jedinstveniTelefoni.length">
+        <strong>Brojevi telefona:</strong> {{ jedinstveniTelefoni.join(', ') }}
+      </p>
+
+      <hr>
+    </div>
+
+    <!-- Sekcija: Admin -->
+    <div *ngIf="adminData">
+      <!-- <p><strong>Telefon:</strong> {{ adminData.telefon }}</p>
+      <p><strong>JMBG:</strong> {{ adminData.jmbg }}</p>
+      <p><strong>Poslovni e-mail:</strong> {{ adminData.poslovniEmail }}</p> -->
+      <p><strong>Datum kreiranja naloga:</strong> {{ adminData.datumKreiranjaNaloga }}</p>
+      <p><strong>Aktivnost naloga:</strong> {{ adminData.nalogAktivan }}</p>
+      <hr>
+    </div>
+
+    <!-- Sekcija: Nastavnik -->
+    <div *ngIf="nastavnikData">
+      <!-- <p><strong>Telefon:</strong> {{ nastavnikData.telefon }}</p>
+      <p><strong>JMBG:</strong> {{ nastavnikData.jmbg }}</p>
+      <p><strong>Poslovni e-mail:</strong> {{ nastavnikData.poslovniEmail }}</p> -->
+      <p><strong>Biografija:</strong> {{ nastavnikData.biografija }}</p>
+      <p><strong>Broj slobodnih dana:</strong> {{ nastavnikData.brojSlobodnihDana }}</p>
+      <p><strong>Broj iskoriscenih dana:</strong> {{ nastavnikData.brojIskoriscenihDana }}</p>
+      <!-- <p><strong>Fakultet:</strong> {{ nastavnikData.fakultet }}</p> -->
+      <hr>
+    </div>
+
+    <!-- Sekcija: Student -->
+    <div *ngIf="studentData">
+      <!-- <p><strong>Telefon:</strong> {{ studentData.telefon }}</p>
+      <p><strong>JMBG:</strong> {{ studentData.jmbg }}</p> -->
+      <p><strong>Status studiranja:</strong> {{ studentData.statusStudiranja }}</p>
+      <p><strong>Mesto prebivalista:</strong> {{ studentData.mestoPrebivalista.naziv }}</p>
+      <p><strong>Adresa:</strong> {{ studentData.adresa.ulica + " " + studentData.adresa.broj}} </p>
+      <p><strong>Drzava:</strong> {{ studentData.drzava.naziv }}</p>
+      <p> <strong>Stanje na racunu:</strong> {{ studentData.stanjeNaRacunu}}</p>
+      <hr>
+      <h5 class="mt-3">Upisi studenta:</h5>
+      <div *ngIf="studentNaGodiniData?.length > 0; else nemaUpisa">
+        <div *ngFor="let upis of studentNaGodiniData" class="mb-3 p-2 border rounded bg-light">
+          <p class="mb-1"> <strong>Program:</strong> {{ upis.studijskiProgram }}</p>
+          <p class="mb-1"> <strong>Datum upisa:</strong> {{ upis.datumUpisa | date:'dd.MM.yyyy' }}</p>
+          <p class="mb-1"> <strong>Indeks:</strong> {{ upis.brojIndeksa }}</p>
+          <p class="mb-0"> <strong>Godina:</strong> {{ upis.godinaStudija }}</p>
+          <p class="mb-0"> <strong>Prosek:</strong> {{ upis.prosek }}</p>
+        </div>
+      </div>
+
+      <ng-template #nemaUpisa>
+        <p><em>Nema evidentiranih upisa.</em></p>
+      </ng-template>
+    </div>
+
+    <div *ngIf="sluzbenikData">
+      <!-- <p><strong>Telefon:</strong> {{ sluzbenikData.telefon }}</p>
+      <p><strong>JMBG:</strong> {{ sluzbenikData.jmbg }}</p> -->
+      <p><strong>Aktivnost naloga:</strong> {{ adminData.nalogAktivan }}</p>
+      <hr>
+    </div>
+
+    <div class="button-container">
+      <button class="btn-back" (click)="goBack()">← Nazad</button>
+    </div>
+
+  </div>
+
+  <!-- Ako nijedan podatak nije dostupan -->
+  <ng-template #nemaPodataka>
+    <div class="profile-card">
+      <p class="text-danger">Nema dostupnih podataka za prikaz profila.</p>
+    </div>
+  </ng-template>
+
+</div>

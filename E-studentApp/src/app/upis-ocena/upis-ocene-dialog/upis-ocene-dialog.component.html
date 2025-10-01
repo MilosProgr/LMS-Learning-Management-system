@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Upis konačne ocene</h2>
+
+<mat-dialog-content>
+  <div class="mb-2">Ukupno bodova: <strong>{{ data?.totalBodovi ?? 0 }}</strong></div>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Konačna ocena</mat-label>
+      <input matInput formControlName="konacnaOcena" readonly class="readonly-ocena" />
+    </mat-form-field>
+  </form>
+    <div class="text-sm text-red-600" *ngIf="errorMessage">{{ errorMessage }}</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button type="button" (click)="cancel()">Otkaži</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || !mozeUpis" (click)="submit()">
+    Sačuvaj
+  </button>
+</mat-dialog-actions>

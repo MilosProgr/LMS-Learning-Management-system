@@ -1,0 +1,39 @@
+<div>
+  <h2>Generisanje dokumenata za studente</h2>
+  <br>
+
+  <div class="search-container">
+    <input type="text" placeholder="Pretraži studente..." [(ngModel)]="searchTerm" (input)="filterStudents()"
+      class="search-input" />
+    <span class="search-icon">&#128269;</span>
+  </div>
+
+  <table class="students-table">
+    <thead>
+      <tr>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>JMBG</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of filterStudents() | paginate: { itemsPerPage: itemsPerPage, currentPage: page }"
+        (click)="toggleExpandedRow(student.id)">
+        <td>{{ student.korisnik.ime }}</td>
+        <td>{{ student.korisnik.prezime }}</td>
+        <!-- <td>{{ student.korisnik.jmbg }}</td> -->
+        <td>
+          <button class="styled-button" (click)="generatePDF('punomoc', student)">Punomoć</button>
+          <button class="styled-button" (click)="generatePDF('ugovor', student)">Ugovor</button>
+          <button class="styled-button" (click)="generatePDF('sporazum', student)">Sporazum</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <pagination-controls previousLabel="Prethodni" nextLabel="Sledeći" (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+  </div>
+</div>

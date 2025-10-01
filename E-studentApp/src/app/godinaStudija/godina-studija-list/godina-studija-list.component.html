@@ -1,0 +1,37 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista dostupnih godina studija</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Godina</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of godine | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ g.id }}</td>
+          <td>{{ g.godina }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"(click)="deleteGodina(g.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm"(click)="openEditDialog(g)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <!-- Prikaz greške -->
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Dugme za dodavanje -->
+  <button class="btn btn-primary btn-sm mt-3" (click)="openAddDialog()">
+    Dodaj godinu studija
+  </button>
+</div>

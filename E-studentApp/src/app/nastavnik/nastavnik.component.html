@@ -1,0 +1,25 @@
+<div class="profile-container" *ngIf="nastavnik">
+  <div class="profile-header">
+    <div class="profile-picture">
+      <i class="bi bi-person-circle"></i>
+    </div>
+    <div class="profile-info">
+      <h1>Profil od nastavnika: {{ nastavnik.korisnik?.ime }}</h1>
+    </div>
+  </div>
+
+  <div class="profile-info-details">
+    <p><strong>Username:</strong> {{ nastavnik.korisnik?.korisnickoIme }}</p>
+    <p><strong>JMBG:</strong> {{ nastavnik.jmbg }}</p>
+  </div>
+
+  <div class="profile-details">
+    <p><strong>Biografija:</strong> {{ nastavnik.biografija }}</p>
+    <p><strong>Prezime:</strong> {{ nastavnik.korisnik?.prezime }}</p>
+    <p><strong>Fakultet:</strong> {{ nastavnik.fakultet || 'N/A' }}</p>
+  </div>
+
+  <div class="profile-edit">
+    <button class="btn btn-primary" (click)="editProfile()">Uredi profil</button>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<h2 class="naslov">Uplata na studentski racun</h2>
+<br>
+<mat-card class="uplata-card">
+    <mat-card-header>
+        <mat-card-title>Uplata na račun</mat-card-title>
+        <mat-card-subtitle>
+            Trenutno stanje:
+            <strong>{{ stanje == null ? '—' : (stanje | number:'1.2-2') }} RSD</strong>
+        </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="uplati()" class="form-grid">
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Student</mat-label>
+                <input type="text" matInput formControlName="student" [matAutocomplete]="auto"
+                    placeholder="Unesite ime ili prezime" />
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayStudent">
+                    <mat-option *ngFor="let s of filteredStudents$ | async" [value]="s">
+                        {{ getFullName(s) }} &nbsp; • ID: {{ s.id }}
+                    </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="form.controls.student.hasError('required')">
+                    Student je obavezan.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Iznos (RSD)</mat-label>
+                <input matInput type="number" min="1" formControlName="iznos" placeholder="npr. 1200" />
+                <mat-error *ngIf="form.controls.iznos.hasError('required')">
+                    Iznos je obavezan.
+                </mat-error>
+                <mat-error *ngIf="form.controls.iznos.hasError('min')">
+                    Minimalan iznos je 1 RSD.
+                </mat-error>
+            </mat-form-field>
+
+
+            <div class="actions">
+                <button mat-flat-button color="primary" type="submit" [disabled]="loading || form.invalid">
+                    <ng-container *ngIf="!loading">
+                        Uplati
+                    </ng-container>
+                    <ng-container *ngIf="loading">
+                        &nbsp;Uplaćujem...
+                    </ng-container>
+                </button>
+
+                <button mat-stroked-button type="button" (click)="reset()" [disabled]="loading">
+                    Reset
+                </button>
+            </div>
+        </form>
+        <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+            {{ errorMessage }}
+        </div>
+    </mat-card-content>
+</mat-card>

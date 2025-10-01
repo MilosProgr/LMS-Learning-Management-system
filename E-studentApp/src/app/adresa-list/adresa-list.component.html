@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="container d-flex flex-column align-items-center">
+        <h2>Lista dostupnih adresa</h2>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ulica</th>
+                    <th>Broj</th>
+                    <th>Mesto</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let a of adrese | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+                    <td>{{ a.id }}</td>
+                    <td>{{ a.ulica }}</td>
+                    <td>{{a.broj}}</td>
+                    <td>{{a.mesto.naziv}}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm"(click)="deleteAdresa(a.id!)">Obriši</button>
+                        <button class="btn btn-primary btn-sm"[routerLink]="'/adresa/edit/' + a.id">Izmeni</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <tr>{{errorMessage}}</tr>
+          <!-- Paginacija -->
+        <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+        
+    </div>
+
+    <br><hr>
+    <div class="container d-flex flex-column align-items-center">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-drzava-tab" data-bs-toggle="pill" data-bs-target="#pills-drzava"
+                    type="button" role="tab" aria-controls="pills-drzava" aria-selected="false">Drzava</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-mesto-tab" data-bs-toggle="pill" data-bs-target="#pills-mesto"
+                    type="button" role="tab" aria-controls="pills-mesto" aria-selected="false">Mesto</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-adresa-tab" data-bs-toggle="pill"
+                    data-bs-target="#pills-adresa" type="button" role="tab" aria-controls="pills-adresa"
+                    aria-selected="false">Adresa</button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-lista-drzava-tab" data-bs-toggle="pill" data-bs-target="#pills-lista-drzava"
+                    type="button" role="tab" aria-controls="pills-lista-drzava" aria-selected="false">Lista Drzava</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-lista-mesta-tab" data-bs-toggle="pill" data-bs-target="#pills-lista-mesta"
+                    type="button" role="tab" aria-controls="pills-lista-mesta" aria-selected="false">Lista Mesta</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-drzava" role="tabpanel" aria-labelledby="pills-drzava-tab"
+                tabindex="0">
+                <app-generic-form [fields]="formFieldsDrzava" (ngSubmit)="addDrzava($event)"></app-generic-form>
+            </div>
+
+            <div class="tab-pane fade" id="pills-mesto" role="tabpanel" aria-labelledby="pills-mesto-tab" tabindex="0">
+                <app-generic-form [fields]="formFieldsMesto" (ngSubmit)="addMesto($event)"></app-generic-form>
+            </div>
+            <div class="tab-pane fade show active" id="pills-adresa" role="tabpanel" aria-labelledby="pills-adresa-tab"
+                tabindex="0">
+                <app-generic-form [fields]="formFieldsAdresa" (ngSubmit)="addAdresa($event)"></app-generic-form>
+            </div>
+            <div class="tab-pane fade" id="pills-lista-drzava" role="tabpanel" aria-labelledby="pills-lista-drzava-tab" tabindex="0">
+                <app-drzava-list></app-drzava-list>
+            </div>
+
+            <div class="tab-pane fade" id="pills-lista-mesta" role="tabpanel" aria-labelledby="pills-lista-mesta-tab" tabindex="0">
+                <app-mesto-list></app-mesto-list>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="container d-flex flex-column align-items-center">
+    <button class="btn btn-primary mx-auto my-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseAdresa" aria-expanded="false" aria-controls="collapseAdresa">
+        Dodaj Adresu
+    </button>
+    <div class="collapse" id="collapseAdresa">
+        <div>
+            <h3>Dodaj Adresu</h3>
+            <app-generic-form [fields]="formFieldsAdresa" (ngSubmit)="addAdresa($event)"></app-generic-form>
+        </div>
+    </div>
+
+    <button class="btn btn-primary mx-auto my-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseDrzava" aria-expanded="false" aria-controls="collapseDrzava">
+        Dodaj Drzavu
+    </button>
+    <div class="collapse" id="collapseDrzava">
+        <div>
+            <h3>Dodaj Drzavu</h3>
+            <app-generic-form [fields]="formFieldsDrzava" (ngSubmit)="addDrzava($event)"></app-generic-form>
+        </div>
+        <app-generic-reusable-table naslov="Lista dostupnih drzava" [kljucevi]="kljuceviDrzava"
+            [editRoute]="'/drzava/edit'" [podaci]="drzave" (obrisiEvent)="deleteDrzava($event)"
+            (izmeniEvent)="editDrzava($event)">
+        </app-generic-reusable-table>
+    </div>
+
+    <button class="btn btn-primary mx-auto my-3" type="button" data-bs-toggle="collapse"
+        data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Dodaj Mesto
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div>
+            <h3>Dodaj Mesto</h3>
+            <app-generic-form [fields]="formFieldsMesto" (ngSubmit)="addMesto($event)"></app-generic-form>
+        </div>
+        <app-generic-reusable-table naslov="Lista dostupnih mesta" [kljucevi]="kljuceviMesto"
+            [editRoute]="'/mesto/edit'" [podaci]="mestosadrzavom" (obrisiEvent)="deleteMesto($event)"
+            (izmeniEvent)="editMesto($event)">
+        </app-generic-reusable-table>
+    </div>
+</div> -->

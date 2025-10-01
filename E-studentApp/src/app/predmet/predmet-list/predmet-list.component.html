@@ -1,0 +1,54 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista predmeta</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>ESBN</th>
+          <th>Obavezan</th>
+          <th>Šifra</th>
+          <th>Godina</th>
+          <th>Programi</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngIf="(predmeti?.length ?? 0) > 0; else nemaPredmeta">
+          <tr *ngFor="
+            let p of predmeti
+              | paginate: { id: 'predmeti', itemsPerPage: itemsPerPage, currentPage: currentPage };
+            trackBy: trackById">
+            <td>{{ p.id }}</td>
+            <td>{{ p.naziv }}</td>
+            <td>{{ p.esbn }}</td>
+            <td>{{ p.obavezan ? 'Da' : 'Ne' }}</td>
+            <td>{{ p.sifra?.tekst || 'N/A' }}</td>
+            <td>{{ p.godinaStudija?.godina }}</td>
+            <td>
+              <span *ngFor="let sp of p.studijskiProgrami; let last = last">
+                {{ sp.naziv || ('ID: ' + sp.id) }}<span *ngIf="!last">, </span>
+              </span>
+            </td>
+            <td>
+              <button class="btn btn-primary btn-sm"(click)="izbrisiPredmet(p.id!)">Obriši</button>
+              <button class="btn btn-primary btn-sm"(click)="openEditDialog(p)">Izmeni</button>
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-template #nemaPredmeta>
+          <tr>
+            <td colspan="6" class="text-center">Nema predmeta</td>
+          </tr>
+        </ng-template>
+      </tbody>
+    </table>
+
+    <pagination-controls *ngIf="(predmeti?.length ?? 0) > 0" [id]="'predmeti'" (pageChange)="currentPage = $event">
+    </pagination-controls>
+  </div>
+  <button class="btn btn-primary btn-sm" (click)="openAddDialog()">Dodaj predmet</button>

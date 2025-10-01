@@ -1,0 +1,49 @@
+<h2 class="dialog-naslov">
+    {{ data.mode === 'edit' ? 'Izmena obaveštenja aktivnosti' : 'Dodavanje obaveštenja aktivnosti' }}
+</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-content-scroll">
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Naslov</mat-label>
+        <input matInput formControlName="naziv" />
+        <mat-error *ngIf="form.get('naziv')?.hasError('required')">Polje je obavezno</mat-error>
+        <mat-error *ngIf="form.get('naziv')?.hasError('firstUppercase') && !form.get('naslov')?.hasError('required')">
+            Naslov mora počinjati velikim slovom.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Sadržaj</mat-label>
+        <textarea matInput rows="4" formControlName="sadrzaj"></textarea>
+        <mat-error *ngIf="form.get('sadrzaj')?.hasError('required')">Polje je obavezno</mat-error>
+        <mat-error *ngIf="form.get('sadrzaj')?.hasError('firstUppercase') && !form.get('naslov')?.hasError('required')">
+            Sadrzaj mora počinjati velikim slovom.
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Registrovani korisnik</mat-label>
+        <input type="text" matInput formControlName="korisnik" [matAutocomplete]="autoKorisnik" />
+        <mat-autocomplete #autoKorisnik="matAutocomplete">
+            <mat-option>Izaberi korisnika</mat-option>
+            <mat-option *ngFor="let k of filteredKorisnici | async" [value]="k.korisnickoIme">
+                {{ k.korisnickoIme }}
+                <small *ngIf="k.ime || k.prezime"> — {{ k.ime }} {{ k.prezime }}</small>
+            </mat-option>
+            <mat-option *ngIf="(filteredKorisnici | async)?.length === 0" disabled>
+                Nema dostupnih korisnika
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="form.get('korisnik')?.hasError('required')">Polje je obavezno</mat-error>
+        <mat-error *ngIf="form.get('korisnik')?.hasError('invalidSelection')">Izaberi korisnika iz liste.</mat-error>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <div class="d-flex justify-content-end gap-2 mt-3">
+        <button mat-stroked-button type="button" (click)="onCancel()">Otkaži</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid || isSaving">
+            {{ data.mode === 'edit' ? 'Sačuvaj' : 'Dodaj' }}
+        </button>
+    </div>
+</form>

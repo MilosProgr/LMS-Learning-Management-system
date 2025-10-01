@@ -1,0 +1,29 @@
+.div1{
+    min-height: 100vh;
+}
+
+li:hover{
+    background-color: #0d6efd;
+}
+.d-flex {
+    position: relative;
+    width: 100%; 
+  }
+  
+  .custom-letter-icon {
+    position: absolute;
+    top: 50%;
+    right: 0; 
+    transform: translateY(-50%); 
+    font-size: 1.5rem; 
+    color: #ff6347; 
+  }
+  
+  .nav-link.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  cursor: default;
+}
+  
+  
+  

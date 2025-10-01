@@ -1,0 +1,61 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista realizacija predmeta</h2>
+    <br>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>ESBN</th>
+          <th>Obavezan</th>
+          <th>Predavanja</th>
+          <th>Vežbe</th>
+          <th>Ostali časovi</th>
+          <th>Semestri</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngIf="(mojeRealizacije?.length ?? 0) > 0; else prazno">
+          <tr
+            *ngFor="let r of mojeRealizacije
+                      | paginate: { id: 'real', itemsPerPage: itemsPerPage, currentPage: currentPage };
+                    trackBy: trackById">
+
+            <td>{{ r?.id }}</td>
+            <td>{{ r?.predmet?.naziv || '—' }}</td>
+            <td>{{ r?.predmet?.esbn || '—' }}</td>
+            <td>{{ r?.predmet?.obavezan ? 'Da' : 'Ne' }}</td>
+            <td>{{ r?.predmet?.brojPredavanja ?? '—' }}</td>
+            <td>{{ r?.predmet?.brojVezbi ?? '—' }}</td>
+            <td>{{ r?.predmet?.ostaliCasovi ?? '—' }}</td>
+
+            <td>
+              <ng-container *ngIf="r?.semestri?.length! > 0; else nemaSemestara">
+                <div *ngFor="let s of r.semestri">
+                  {{ s?.tip || ('Sem ' + (s?.id ?? '')) }}
+                  <span *ngIf="s?.datumPocetka && s?.datumKraja">
+                    ({{ s.datumPocetka | date:'dd.MM.yyyy' }} – {{ s.datumKraja | date:'dd.MM.yyyy' }})
+                  </span>
+                </div>
+              </ng-container>
+              <ng-template #nemaSemestara>—</ng-template>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    <!-- Paginacija -->
+    <pagination-controls id="real" (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <!-- Prazno stanje -->
+  <ng-template #prazno>
+    <div class="alert alert-secondary mt-3" role="alert">
+      Nema realizacija za prikaz.
+    </div>
+  </ng-template>
+</div>

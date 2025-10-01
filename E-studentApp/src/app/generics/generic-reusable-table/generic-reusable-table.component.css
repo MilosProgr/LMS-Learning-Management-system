@@ -1,0 +1,28 @@
+table {
+    border-collapse: collapse;
+    border-spacing: 0 15px;
+
+}
+
+
+
+td {
+    width: 250px;
+    text-align: center;
+    /* border: 1px solid black; */
+    padding: 5px;
+}
+
+.header {
+    font-weight: bold;
+}
+
+h2 {
+    color: #4287f5;
+}
+
+th {
+    background-color: #4287f5;
+    text-align: center;
+    /* border: 1px solid black; */
+}

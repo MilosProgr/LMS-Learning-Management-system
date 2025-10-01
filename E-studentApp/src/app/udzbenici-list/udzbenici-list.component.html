@@ -1,0 +1,81 @@
+<div class="container d-flex flex-column align-items-center my-4">
+  <div class="card card-no-border p-4 shadow-sm" style="width: 100%; max-width: 900px;">
+    <h2 class="text-center mb-4">Lista udžbenika</h2>
+
+    <table class="table table-striped mb-4">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Naziv</th>
+          <th>Predmet</th>
+          <th>Godina Studija</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let udz of udzbenici">
+          <td>{{ udz.id }}</td>
+          <td>{{ udz.naziv }}</td>
+          <td>{{ udz.predmet?.naziv }}</td>
+          <td>{{ udz.predmet?.godinaStudija?.godina ?? 'Nepoznato' }}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteUdzbenik(udz.id!)">Obriši</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="errorMessage" class="alert alert-secondary mt-3">{{ errorMessage }}</div>
+
+    <div class="d-flex justify-content-center mt-3 mb-4">
+      <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModalUdzbenik">
+        Dodaj udžbenik
+      </button>
+    </div>
+
+    <div class="modal fade" id="exampleModalUdzbenik" tabindex="-1" aria-labelledby="exampleModalLabelUdzbenik" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-scroll">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Dodaj udžbenik</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <form [formGroup]="newUdzbenikForm" (ngSubmit)="addUdzbenik()" class="px-3 py-2">
+            <div class="form-group mb-3">
+            <label for="program">Studijski program:</label>
+            <select id="program" class="form-select"
+                    [(ngModel)]="selectedProgramId"
+                    (change)="onProgramChange()"
+                    name="program"
+                    [ngModelOptions]="{standalone: true}">
+                <option [ngValue]="null">Izaberite program</option>
+                <option *ngFor="let program of programi" [ngValue]="program.id">{{ program.naziv }}</option>
+            </select>
+            </div>
+
+            <div class="form-group mb-3">
+            <label for="predmet">Predmet:</label>
+            <select id="predmet" class="form-select" formControlName="predmetId">
+                <option [ngValue]="null">Izaberite predmet</option>
+                <option *ngFor="let predmet of predmetList" [ngValue]="predmet.id">{{ predmet.naziv }}</option>
+            </select>
+            </div>
+
+            <div class="form-group mb-3">
+            <label for="naziv">Naziv udžbenika:</label>
+            <input id="naziv" type="text" class="form-control" formControlName="naziv" placeholder="Unesite naziv udžbenika">
+            </div>
+
+            <div class="form-actions text-center mt-2">
+            <button class="btn btn-primary btn-sm" type="submit" [disabled]="newUdzbenikForm.invalid">Dodaj udžbenik</button>
+            <div *ngIf="errorMessage" class="alert alert-secondary mt-2">
+                {{ errorMessage }}
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+  </div>
+</div>

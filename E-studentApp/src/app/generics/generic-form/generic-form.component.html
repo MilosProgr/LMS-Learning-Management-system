@@ -1,0 +1,139 @@
+<div class="container mt-4 mb-4" style="min-width: 500px;">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="p-4 x-4"
+    style="background-color: #f8f9fa; border-radius: 0.5rem;">
+    <div *ngFor="let field of fields" class="mb-3">
+
+      <div *ngIf="field.type === 'text'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <input type="text" class="form-control" [formControlName]="field.name">
+        <div *ngIf="form.get(field.name)!.invalid && form.get(field.name)!.touched">
+          <div *ngIf="form.get(field.name)!.errors?.['required']" class="form-text text-danger">Polje mora biti popunjeno!</div>
+          <div *ngIf="form.get(field.name)!.errors?.['minlength']" class="form-text text-danger">Minimalna dužina je {{form.get(field.name)!.errors?.['minlength'].requiredLength }}.</div>
+          <div *ngIf="form.get(field.name)!.errors?.['usernameInvalid']" class="form-text text-danger">Korisničko ime mora sadržati barem jedno veliko slovo i jedan broj.</div>
+
+          <div *ngIf="field.name === 'jmbg' && form.get(field.name)!.errors?.['jmbgInvalid']" class="form-text text-danger">JMBG mora biti u formatu 13 cifara.</div>
+          <div *ngIf="field.name === 'kontakt' && form.get(field.name)!.errors?.['pattern']" class="form-text text-danger">Kontakt mora biti u formatu ###/######...</div>
+          <div *ngIf="field.name === 'ulica' && form.get(field.name)!.errors?.['pattern']" class="form-text text-danger">Ulica mora početi velikim slovom!</div>
+          <div *ngIf="field.name === 'naziv' && form.get(field.name)!.errors?.['pattern']" class="form-text text-danger">Naziv mora početi velikim slovom!</div>
+          <div *ngIf="field.name === 'naslov' && form.get(field.name)!.errors?.['pattern']" class="form-text text-danger">Naslov mora početi velikim slovom!</div>
+          <div *ngIf="field.name === 'ime' && form.get(field.name)!.errors?.['pattern']" class="form-text text-danger">Ime mora početi velikim slovom!</div>
+          
+          <!-- Dodaj druge validacione poruke po potrebi -->
+        </div>
+      </div>
+      <div *ngIf="field.type === 'password'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <input type="password" class="form-control" [formControlName]="field.name">
+        <div *ngIf="form.get(field.name)!.invalid && form.get(field.name)!.touched">
+
+          <div *ngIf="form.get(field.name)!.errors?.['usernameInvalid']" class="form-text text-danger">Lozinka mora sadržati barem jedno veliko slovo i jedan broj.</div>
+
+          <div *ngIf="form.get(field.name)!.errors?.['required']" class="form-text text-danger">Polje mora biti
+            popunjeno!</div>
+          <div *ngIf="form.get(field.name)!.errors?.['minlength']" class="form-text text-danger">Minimalna dužina je {{
+            form.get(field.name)!.errors?.['minlength'].requiredLength }}.</div>
+        </div>
+      </div>
+
+      <div *ngIf="field.type === 'selectWithAdd'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <select class="form-select" [formControlName]="field.name" (change)="onSelectChange($event)">
+          <option *ngFor="let option of field.options" [value]="option.key">{{ option.value }}</option>
+          <option [value]="'addNew'">Dodaj</option>
+        </select>
+
+        <!-- Prikaz podforme odmah ispod ovog select polja -->
+        <div *ngIf="prikaziUnutrasnjuFormu">
+          <hr>
+          <h3 style="color: #0d6efd;">Dodavanje novog entiteta</h3>
+
+          <div class="p-4" style="background-color: #f8f9fa; border-radius: 0.5rem;">
+            <form [formGroup]="miniForm" (ngSubmit)="onNewEntitySubmit()">
+              <div *ngFor="let field of poljaUnutrasnjeForme" class="mb-3">
+                <!-- Prikaz za 'text' polje -->
+                <div *ngIf="field.type === 'text'">
+                  <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+                  <input type="text" class="form-control" [formControlName]="field.name" [id]="field.name">
+                </div>
+
+                <!-- Prikaz za 'select' polje -->
+                <div *ngIf="field.type === 'select'">
+                  <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+                  <select class="form-select" [formControlName]="field.name">
+                    <option *ngFor="let option of field.options" [value]="option.key">{{ option.value }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary" style="background-color: #0d6efd; border-color: #0d6efd;">Dodaj novi entitet</button>
+                <button type="button" class="btn btn-secondary" (click)="closeNewEntityForm()">Otkaži</button>
+              </div>
+              <div *ngIf="!isSubmittedMiniForm"><p>Uneti podaci nesu validni! Proverite da li su uneti podaci ispravni. </p></div>
+            </form>
+          </div>
+          <hr>
+        </div>
+      </div>
+
+      <div *ngIf="field.type === 'select'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <select class="form-select" [formControlName]="field.name" (change)="onSelectChange($event)">
+          <option *ngFor="let option of field.options" [value]="option.key">{{ option.value }}</option>
+        </select>
+      </div>
+      <div *ngIf="field.type === 'multiselect'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <select multiple class="form-select" [formControlName]="field.name">
+          <option *ngFor="let option of field.options" [value]="option.key">{{ option.value }}</option>
+        </select>
+      </div>
+      <div *ngIf="field.type === 'checkbox'">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" [formControlName]="field.name">
+          <label class="form-check-label" style="color: #0d6efd;">{{ field.label }}</label>
+        </div>
+      </div>
+      <div *ngIf="field.type === 'textarea'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <textarea class="form-control" rows="3" [formControlName]="field.name"></textarea>
+        <div *ngIf="form.get(field.name)!.invalid && form.get(field.name)!.touched">
+          <div *ngIf="form.get(field.name)!.errors?.['required']" class="form-text text-danger">Polje mora biti
+            popunjeno!</div>
+          <div *ngIf="form.get(field.name)!.errors?.['minlength']" class="form-text text-danger">Minimalna dužina je {{
+            form.get(field.name)!.errors?.['minlength'].requiredLength }}.</div>
+          <!-- Dodaj druge validacione poruke po potrebi -->
+        </div>
+      </div>
+      <div *ngIf="field.type === 'file'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <input type="file" class="form-control" [formControlName]="field.name">
+      </div>
+      <div *ngIf="field.type === 'date'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <input type="date" class="form-control" [formControlName]="field.name">
+        <div *ngIf="form.get(field.name)!.invalid && form.get(field.name)!.touched">
+          <div *ngIf="form.get(field.name)!.errors?.['required']" class="form-text text-danger">Polje mora biti
+            popunjeno!</div>
+        </div>
+      </div>
+      <div *ngIf="field.type === 'datetime-local'">
+        <label class="form-label" style="color: #0d6efd;">{{ field.label }}</label>
+        <input type="datetime-local" class="form-control" [formControlName]="field.name" placeholder="yyyy-MM-ddTHH:mm">
+        <div *ngIf="form.get(field.name)!.invalid && form.get(field.name)!.touched">
+          <div *ngIf="form.get(field.name)!.errors?.['required']" class="form-text text-danger">Polje mora biti
+            popunjeno!</div>
+        </div>
+      </div>
+      <!-- Dodaj druge tipove polja po potrebi -->
+    </div>
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary"
+        style="background-color: #0d6efd; border-color: #0d6efd;">Pošalji</button>
+      <!-- <button type="button" class="btn btn-secondary" (click)="onCancel()">Poništi</button> -->
+    </div>
+
+    <!-- <div *ngIf="isSubmitted" class="alert alert-success mt-3" role="alert">
+      Uspešno dodato!
+    </div> -->
+  </form>
+</div>

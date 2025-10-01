@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Prijava ispita</h2>
+
+<div mat-dialog-content>
+  <div class="mb-2"><strong>Predmet:</strong> {{ data.predmet?.naziv }}</div>
+  <!-- <div class="mb-2"><strong>Broj prijava:</strong> {{ data.brojPrijava ?? 'N/A' }}</div> -->
+  <div class="mb-3" *ngIf="data.cenaPrijave != null">
+    <strong>Cena prijave:</strong> {{ data.cenaPrijave }} RSD
+  </div>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" style="width:100%">
+      <mat-label>Ispitni rok</mat-label>
+      <mat-select formControlName="rokId">
+        <mat-option *ngFor="let rok of ispitniRokovi" [value]="rok.id">
+          {{ rok.naziv || ('Rok #' + rok.id) }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  <div *ngIf="!ispitniRokovi.length" class="text-muted">
+    Nema aktivnih ispitnih rokova.
+  </div>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Otkaži</button>
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="form.invalid || !ispitniRokovi.length">
+    Potvrdi
+  </button>
+</div>

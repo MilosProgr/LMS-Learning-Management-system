@@ -1,0 +1,392 @@
+<div class="div1 d-flex flex-column flex-shrink-0 p-3 bg-light justify-content-start">
+
+    <hr>
+    <ul class="nav flex-column mb-auto">
+        <!-- POCETNA SEKCIJA OPSTA -->
+        <li class="position-relative">
+            <a href="obavestenja" class="nav-link link-dark d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center position-relative">
+                    <i class="bi bi-bell me-3"></i>
+                    <span class="text">Obaveštenja</span>
+                </div>
+            </a>
+        </li>
+
+        <li>
+            <!-- ako NIJE izabrao predmete: normalan link -->
+            <a *ngIf="!mojStudent; else upisiSeDisabled" [routerLink]="'/upisi-se'"
+                class="nav-link link-dark">
+                <i class="bi bi-check-square me-3"></i>
+                <span class="text">Upiši se</span>
+            </a>
+
+            <!-- kad JE već izabrao predmete: onemogući -->
+            <ng-template #upisiSeDisabled>
+                <span class="nav-link link-dark disabled" title="Student je vec upisan.">
+                    <i class="bi bi-check-square me-3"></i>
+                    <span class="text">Upiši se</span>
+                </span>
+            </ng-template>
+        </li>
+
+
+
+        <!-- <li>
+            <a href="upisi-se" class="nav-link link-dark">
+                <i class="bi bi-bell me-3"></i>
+                <span class="text">Upiši se</span>
+            </a>
+        </li> -->
+        <li *ngIf="proveraUloge('ROLE_NASTAVNIK') || proveraUloge('ROLE_ADMIN') || proveraUloge('ROLE_SLUZBA')">
+            <a routerLink="/zahtev-za-godisnji" class="nav-link link-dark">
+                <i class="bi bi-calendar-check me-3"></i>
+                <span class="text">Zahtev za godisnji odmor</span>
+            </a>
+        </li>
+
+        <!-- SEKCIJA ZA STUDENTA -->
+        <ng-container *ngIf="proveraUloge('ROLE_STUDENT') || proveraUloge('ROLE_ADMIN')">
+            <hr>
+            <li>
+                <a routerLink="/student-predmeti" class="nav-link link-dark">
+                    <i class="bi bi-table me-3"></i>
+                    <span class="text">Moji predmeti</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/aktivnosti" class="nav-link link-dark">
+                    <i class="bi bi-activity me-3"></i>
+                    <span class="text">Aktivnosti</span>
+                    <!-- Predmeti koji se slusaju i upisane ocene -->
+                </a>
+            </li>
+            <li>
+                <a routerLink="/predmeti/ispiti" class="nav-link link-dark">
+                    <i class="bi bi-collection me-3"></i>
+                    <span class="text">Ispiti</span>
+                    <!-- Polozeni ispiti  -->
+                </a>
+            </li>
+            <li>
+                <a routerLink="/prijava-ispita" class="nav-link link-dark">
+                    <i class="bi bi-grid me-3"></i>
+                    <span class="text">Prijava ispita</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a routerLink="#" class="nav-link link-dark">
+                    <i class="bi bi-card-list me-3"></i>
+                    <span class="text">Istorija upisa</span>
+                </a>
+            </li> -->
+            <li>
+                <a routerLink="/raspored-predavanja" class="nav-link link-dark">
+                    <i class="bi bi-card-list me-3"></i>
+                    <span class="text">Raspored predavanja</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/raspored-rokova" class="nav-link link-dark">
+                    <i class="bi bi-card-list me-3"></i>
+                    <span class="text">Raspored ispitnih rokova</span>
+                </a>
+            </li>
+            <li>
+                <!-- ako NIJE izabrao predmete: normalan link -->
+                <a *ngIf="!mojStudent?.predmetiIzabrani; else upisiSeDisabled" [routerLink]="'/biranje-predmeta'"
+                    class="nav-link link-dark">
+                    <i class="bi bi-hand-index me-3"></i>
+                    <span class="text">Biranje predmeta</span>
+                </a>
+                <!-- kad JE već izabrao predmete: onemogući -->
+                <ng-template #upisiSeDisabled>
+                    <span class="nav-link link-dark disabled" title="Predmeti su već izabrani.">
+                        <i class="bi bi-hand-index me-3"></i>
+                        <span class="text">Biranje predmeta</span>
+                    </span>
+                </ng-template>
+            </li>
+            <li>
+                <a routerLink="/izdavanjeUdzbenika" class="nav-link link-dark">
+                    <i class="bi bi-book-half me-3"></i>
+                    <span class="text">Izdavanje udžbenika</span>
+                </a>
+            </li>
+            <hr>
+        </ng-container>
+
+        <!-- SEKCIJA ZA NASTAVNIKA -->
+        <ng-container *ngIf="proveraUloge('ROLE_ADMIN') || proveraUloge('ROLE_NASTAVNIK')">
+            <li>
+                <a routerLink="/predmeti-angazovani" class="nav-link link-dark">
+                    <i class="bi bi-journal-bookmark me-3"></i>
+                    <span class="text">Predmeti na kojima sam angažovan</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/uredjivanje-silabusa" class="nav-link link-dark">
+                    <i class="bi bi-pencil-square me-3"></i>
+                    <span class="text">Uređivanje silabusa</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/upis-ocena" class="nav-link link-dark">
+                    <i class="bi bi-pencil-square me-3"></i>
+                    <span class="text">Upis ocena</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/instrument-evaluacije-list" class="nav-link link-dark">
+                    <i class="bi bi-plus-square me-3"></i>
+                    <span class="text">Definisanje instrumenta evaluacije</span>
+                </a>
+            </li>
+
+
+
+            <!-- <li>
+            <a routerLink="/raspored-ishoda" class="nav-link link-dark">
+                <i class="bi bi-calendar-check me-3"></i>
+                <span class="text">Raspored ishoda</span>
+            </a>
+        </li> -->
+            <!-- <li>
+            <a routerLink="/evaluacioni-instrumenti" class="nav-link link-dark">
+                <i class="bi bi-clipboard-data me-3"></i>
+                <span class="text">Upravljanje obavezama studenata</span>
+            </a>
+        </li> -->
+            <li>
+                <a routerLink="/obavestenja-aktivnosti-list" class="nav-link link-dark">
+                    <i class="bi bi-bell-fill me-3"></i>
+                    <span class="text">Upravljanje obaveštenjima aktivnosti</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/student-lista" class="nav-link link-dark">
+                    <i class="bi bi-people-fill me-3"></i>
+                    <span class="text">Spisak i pretraga studenata</span>
+                </a>
+            </li>
+            <!-- <li>
+            <a routerLink="/unos-ocena" class="nav-link link-dark">
+                <i class="bi bi-pencil-fill me-3"></i>
+                <span class="text">Unos ocena</span>
+            </a>
+        </li> -->
+            <hr>
+        </ng-container>
+
+        <!-- Sekcija za osoblje studentske službe -->
+        <ng-container *ngIf="proveraUloge('ROLE_ADMIN') || proveraUloge('ROLE_SLUZBA')">
+            <li>
+                <a routerLink="/dodela-indeksa" class="nav-link link-dark">
+                    <i class="bi bi-person-plus-fill me-3"></i>
+                    <span class="text">Dodela indeksa</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/izdavanje-dokumenata" class="nav-link link-dark">
+                    <i class="bi bi-file-earmark-text-fill me-3"></i>
+                    <span class="text">Izdavanje dokumenata</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/formiranje-rasporeda" class="nav-link link-dark">
+                    <i class="bi bi-calendar3 me-3"></i>
+                    <span class="text">Formiranje rasporeda</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/obavestenja-list" class="nav-link link-dark">
+                    <i class="bi bi-megaphone-fill me-3"></i>
+                    <span class="text">Objavljivanje obaveštenja</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/izdavanjeUdzbenika" class="nav-link link-dark">
+                    <i class="bi bi-book-half me-3"></i>
+                    <span class="text">Izdavanje udžbenika</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/trebovanje-inventara" class="nav-link link-dark">
+                    <i class="bi bi-basket-fill me-3"></i>
+                    <span class="text">Trebovanje inventara</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/uplata-na-racun" class="nav-link link-dark">
+                    <i class="bi bi-cash-stack me-3"></i>
+                    <span class="text">Uplata na studentski racun</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/ispitni-rok-list" class="nav-link link-dark">
+                    <i class="bi bi-plus-square me-3"></i>
+                    <span class="text">Kreiranje ispitnog roka</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a routerLink="/semestar-list" class="nav-link link-dark">
+                    <i class="bi bi-plus-square-fill me-3"></i>
+                    <span class="text">Dodavanje semestra</span>
+                </a>
+            </li> -->
+        </ng-container>
+        <hr>
+        <!-- SEKCIJA ZA ADMINISTRATORA -->
+        <ng-container *ngIf="proveraUloge('ROLE_ADMIN')">
+            <li>
+                <a routerLink="/sifarnik-list" class="nav-link link-dark">
+                    <i class="bi bi-list-check me-3"></i>
+                    <span class="text">Administracija šifarnika</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/registrovaniKorisnik-list" class="nav-link link-dark">
+                    <i class="bi bi-person-badge-fill me-3"></i>
+                    <span class="text">Administracija korisnika</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="uloga/dodajUlogu" class="nav-link link-dark">
+                    <i class="bi bi-plus me-2"></i>
+                    <span class="text">Dodela uloga</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/uloga-list" class="nav-link link-dark">
+                    <i class="bi bi-key me-3"></i>
+                    <span class="text">Administracija uloga</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/studijskiProgram-list" class="nav-link link-dark">
+                    <i class="bi bi-journal-text me-3"></i>
+                    <span class="text">Administracija studijskih programa</span>
+                </a>
+            </li>
+
+            <!-- AUTORIZACIJA GODISNJIH ODMORA -->
+            <li>
+                <a routerLink="/prikaz-rezervacija" class="nav-link link-dark">
+                    <i class="bi bi-person-plus-fill me-3"></i>
+                    <span class="text">Autorizacija godišnjih odmora</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/dodela-realizacije" class="nav-link link-dark">
+                    <i class="bi bi-person-plus-fill me-3"></i>
+                    <span class="text">Dodela realizacije nastavniku</span>
+                </a>
+            </li>
+
+
+
+            <hr>
+            <li>
+                <a routerLink="/adresa-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija adrese, drzave i mesta</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/univerzitet-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija univerziteta</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/fakultet-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija fakulteta</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/kurs-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija kurseva</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/predmet-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija predmeta</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/godinaStudija-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija godinama studija</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/semestar-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija semestara</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/udzbenici-list" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija udžbenika</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/tipEvaluacije" class="nav-link link-dark">
+                    <i class="bi bi-plus"></i>
+                    <span class="text">Administracija tipova evaluacije</span>
+                </a>
+            </li>
+
+            <hr>
+        </ng-container>
+    </ul>
+
+</div>
+
+<!-- <li>
+            <a routerLink="univerziteti-list" class="nav-link link-dark">
+                <i class="bi bi-house-door-fill me-3"></i>
+                Univerziteti
+            </a>
+        </li>
+        <li>
+            <a routerLink="fakultet-list" class="nav-link link-dark">
+                <i class="bi bi-house-door me-3"></i>
+                Fakulteti
+            </a>
+        </li>
+        <li>
+            <a routerLink="adresa-list" class="nav-link link-dark">
+                <i class="bi bi-collection me-3"></i>
+                Adrese
+            </a>
+        </li> -->
+<!-- <li>
+            <a href="#" class="nav-link link-dark">
+                <i class="bi bi-cash me-3"></i>
+                <span class="text">Školarine i uplate</span>
+            </a>
+        </li> -->
+
+<!-- <hr>
+    <div class="dropdown">
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+            <strong>mdo</strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
+    </div>
+</div> -->

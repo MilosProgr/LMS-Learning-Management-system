@@ -1,0 +1,39 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista dostupnih semestara</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Naziv</th>
+          <th>Datum početka</th>
+          <th>Datum kraja</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let s of semestri | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ s.id }}</td>
+          <td>{{ s.tip }}</td>
+          <td>{{ s.datumPocetka | date:'dd.MM.yyyy HH:mm' }}</td>
+          <td>{{ s.datumKraja | date:'dd.MM.yyyy HH:mm' }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"(click)="deleteSemestar(s.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm"(click)="openEditDialog(s)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <button class="btn btn-primary btn-sm mt-3" (click)="openAddDialog()">
+    Dodaj semestar
+  </button>

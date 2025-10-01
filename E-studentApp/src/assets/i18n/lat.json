@@ -1,0 +1,13 @@
+{
+    "studentList": {
+      "title": "Spisak studenata",
+      "searchPlaceholder": "Pretraži studente..."
+    },
+    "student": {
+      "korisnickoIme": "Korisničko ime",
+      "jmbg": "JMBG",
+      "brojIndeksa": "Broj indeksa",
+      "godinaStudija": "Godina studija"
+    }
+  }
+  

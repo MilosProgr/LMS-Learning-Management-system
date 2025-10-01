@@ -1,0 +1,32 @@
+.semestar-form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 12px 12px 12px;
+  min-width: 350px;
+  max-width: 100%;
+}
+
+.dialog-content-scroll {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 10px 8px 12px 8px;
+  box-sizing: border-box;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.text-end {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.dialog-naslov {
+  margin: 0 0 14px 0;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #3f51b5;
+}

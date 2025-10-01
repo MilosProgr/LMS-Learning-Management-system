@@ -1,0 +1,40 @@
+<ng-container class="table-container">
+  
+  <h2>Autorizacija zahteva za godišnji odmor</h2>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Ime Nastavnika</th>
+        <th>Datum Od:</th>
+        <th>Datum Do:</th>
+        <th>Opis</th>
+        <th>Status Odmora</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rezervacija of rezervacijeWithNastavnik; let i = index">
+        <td>{{ rezervacija.nastavnikIme }} {{ rezervacija.nastavnikPrezime }}</td>
+        <td>{{ rezervacija.datumOd | date:'dd-MM-yyyy' }}</td>
+        <td>{{ rezervacija.datumDo | date:'dd-MM-yyyy' }}</td>
+        <td>{{ rezervacija.opis }}</td>
+        <td>
+          <span [ngClass]="{
+            'text-success': rezervacija.statusOdmora === 'APPROVED',
+            'text-danger': rezervacija.statusOdmora === 'DENIED',
+            'text-warning': rezervacija.statusOdmora === 'PENDING'
+          }">
+            {{ rezervacija.statusOdmora }}
+          </span>
+        </td>
+        <td>
+          <ng-container *ngIf="rezervacija.statusOdmora === 'PENDING'">
+            <button (click)="handleOdobri(rezervacija.id, rezervacija)" class="btn-approve">Odobri</button>
+            <button (click)="handleOdbi(rezervacija.id, rezervacija)" class="btn-reject">Odbi</button>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

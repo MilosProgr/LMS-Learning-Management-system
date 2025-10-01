@@ -1,0 +1,46 @@
+<div class="container" *ngIf="fakultet; else noData">
+
+  <div class="logo-header">
+    <!-- <img class="logo" src="assets/i18n/singi.png" alt="Fakultet Logo" /> -->
+    <div class="name-container">
+      <h1>{{ fakultet.naziv }}</h1>
+      <p class="subtitle">Detalji fakulteta</p>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">📍 Adresa</div>
+    <div class="card-content">{{ fakultet.adresa.ulica }} {{ fakultet.adresa.broj }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">🏛️ Univerzitet</div>
+    <div class="card-content">{{ fakultet.univerzitet.naziv }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">📞 Kontakt fakulteta</div>
+    <div class="card-content">{{ fakultet.kontakt }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">📝 Opis fakulteta</div>
+    <div class="card-content">{{ fakultet.opis }}</div>
+  </div>
+
+  <div class="info-card">
+    <div class="card-title">👤 Dekan</div>
+    <div class="card-content">{{ fakultet.dekan.korisnik?.ime }} {{ fakultet.dekan.korisnik?.prezime }}</div>
+  </div>
+
+    <div class="button-container">
+      <button class="btn-back" (click)="goBack()">← Nazad</button>
+    </div>
+
+</div>
+
+<ng-template #noData>
+  <div class="no-data">
+    <p>Fakultet nije pronađen.</p>
+  </div>
+</ng-template>

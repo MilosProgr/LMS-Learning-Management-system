@@ -1,0 +1,24 @@
+.dodela-card {
+  max-width: 520px;
+  margin: 24px auto;
+}
+
+.form-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.naslov {
+  margin-left: 50px;
+  color: #4a89f5;
+}

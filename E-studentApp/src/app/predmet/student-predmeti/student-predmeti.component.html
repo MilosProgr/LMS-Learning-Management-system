@@ -1,0 +1,70 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Moji predmeti po studijskim programima</h2>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <ng-container *ngFor="let prog of programi; trackBy: trackByProg">
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header">
+        <h5 class="mb-0">Program: {{ prog.naziv }}</h5>
+      </div>
+
+      <div class="card-body">
+        <ng-container *ngFor="let g of getGodineZaProgram(prog.id); trackBy: trackByGodina">
+          <h6 class="mt-2 mb-2">Godina studija: {{ g.label }}</h6>
+
+          <table class="table table-sm table-striped align-middle">
+            <thead>
+              <tr>
+                <th>Naziv</th>
+                <th>Obavezan</th>
+                <th style="width: 100px;">ESPB</th>
+                <th style="width: 140px;">Konačna ocena</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let p of getPredmetiZaProgramIGodinu(prog.id, g.id)
+                    | paginate: {
+                        id: 'prog-' + prog.id + '-god-' + (g.id ?? 'none'),
+                        itemsPerPage: itemsPerPage,
+                        currentPage: (currentPageByProgram[prog.id] || 1)
+                      };
+                  trackBy: trackByPredmet
+                "
+              >
+                <td>{{ p.naziv }}</td>
+                <td>{{ p.obavezan ? 'Da' : 'Ne' }}</td>
+                <td>{{ getEspFromPredmet(p) }}</td>
+                <td>{{ getOcenaForPredmet(p.id!) ?? '—' }}</td>
+              </tr>
+
+              <tr *ngIf="getPredmetiZaProgramIGodinu(prog.id, g.id).length === 0">
+                <td colspan="5" class="text-muted">Nema predmeta za ovu sekciju.</td>
+              </tr>
+
+              <tr class="fw-bold">
+                <td colspan="3" class="text-end">Ukupno ostvareno ESPB bodova</td>
+                <td colspan="2">{{ sumEspZaSekciju(prog.id, g.id) }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <pagination-controls
+            *ngIf="getPredmetiZaProgramIGodinu(prog.id, g.id).length > itemsPerPage"
+            [id]="'prog-' + prog.id + '-god-' + (g.id ?? 'none')"
+            (pageChange)="currentPageByProgram[prog.id] = $event"
+          >
+          </pagination-controls>
+
+          <hr class="my-3" />
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="programi.length === 0 && !errorMessage" class="text-muted">
+    Nema dostupnih studijskih programa za prikaz.
+  </div>
+</div>

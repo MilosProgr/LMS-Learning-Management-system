@@ -1,0 +1,38 @@
+<div class="container d-flex flex-column align-items-center">
+  <div class="card">
+    <h2>Lista šifarnika</h2>
+    <br>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Tekst</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of sifre | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; index as i">
+          <td>{{ s.id }}</td>
+          <td>{{ s.tekst }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm"(click)="deleteSifra(s.id!)">Obriši</button>
+            <button class="btn btn-primary btn-sm"(click)="openEditDialog(s)">Izmeni</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginacija -->
+    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+
+  <!-- Prikaz greške -->
+  <div *ngIf="errorMessage" class="alert alert-secondary mt-3" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Dugme za dodavanje -->
+  <button class="btn btn-primary btn-sm mt-3" (click)="openAddDialog()">
+    Dodaj šifru
+  </button>
+</div>

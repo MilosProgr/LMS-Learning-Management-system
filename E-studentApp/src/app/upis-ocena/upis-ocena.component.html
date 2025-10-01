@@ -1,0 +1,55 @@
+<ng-container>
+  <h3>Sve prijave ispita</h3>
+  <br>
+
+  <ng-container *ngIf="(filtriraniPrijavljeniIspiti?.length ?? 0) > 0; else prazno">
+    <table class="table table-striped table-sm w-100">
+      <thead>
+        <tr>
+          <th>Predmet</th>
+          <th>ESBN</th>
+          <th>Ispitni rok</th>
+          <th>Trajanje roka</th>
+          <th>Broj prijava</th>
+          <th>Indeks</th>
+          <th>Prijavljen</th>
+          <th>Ukupno osvojenih bodovi</th>
+          <th>Akcije</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let p of filtriraniPrijavljeniIspiti
+                      | paginate: { id: 'prijave', itemsPerPage: itemsPerPage, currentPage: currentPage }">
+          <td>{{ p.predmet.naziv || ('#' + p.predmet.id) }}</td>
+          <td>{{ p.predmet.esbn ?? '—' }}</td>
+          <td>{{ p.ispitniRok?.naziv || ('ID: ' + (p.ispitniRok?.id ?? '—')) }}</td>
+          <td>
+            <span *ngIf="p.ispitniRok?.pocetak as poc">{{ poc | date:'dd.MM.yyyy HH:mm' }}</span>
+            <span *ngIf="p.ispitniRok?.pocetak && p.ispitniRok?.kraj"> — </span>
+            <span *ngIf="p.ispitniRok?.kraj as kraj">{{ kraj | date:'dd.MM.yyyy HH:mm' }}</span>
+          </td>
+          <td>{{ p.brojPrijava ?? '—' }}</td>
+          <td>{{ p.studentNaGodini.brojIndeksa ?? ('ID: ' + (p.studentNaGodini.id)) }}</td>
+          <td>{{ p.prijavljen ? 'DA' : 'NE' }}</td>
+          <!-- Treba da budu ukupni osvojeni bodovi koje student ima sabiranjem svih evaluacija -->
+          <td>{{ ukupnoBodova(p) }}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="upisiBodove(p)">Upisi bodove</button>
+            <button type="button" class="btn btn-primary" [disabled]="!mozeOcena(p)" (click)="upisiOcenu(p)">Upisi
+              ocenu</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <pagination-controls id="prijave" (pageChange)="currentPage = $event" previousLabel="Prethodna" nextLabel="Sledeća">
+    </pagination-controls>
+  </ng-container>
+
+  <ng-template #prazno>
+    <div class="alert alert-info m-0">
+      Nema prijava za predmete koje predajete.
+    </div>
+  </ng-template>
+</ng-container>

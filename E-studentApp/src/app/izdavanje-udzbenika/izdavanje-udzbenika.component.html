@@ -1,0 +1,106 @@
+<div class="container">
+  <div class="title">Zahtevi za izdavanje udžbenika</div>
+
+    <h5 *ngIf="!isRole('ROLE_ADMIN') && !isRole('ROLE_SLUZBA')">
+      Studijski programi i predmeti koje pratite ove godine:
+    </h5>
+
+  <div class="form-container" *ngIf="isRole('ROLE_STUDENT')">
+    <div *ngFor="let program of studijskiProgrami" class="program-container" style="margin-bottom: 12px;">
+      <div class="program-header" style="display: flex; align-items: center; cursor: pointer;" (click)="program.expanded = !program.expanded">
+        <input type="checkbox" [(ngModel)]="program.selected" (click)="$event.stopPropagation()" />
+        <span style="margin-left: 8px;">{{ program.naziv }}</span>
+        <span style="margin-left:auto;">{{ program.expanded ? '▲' : '▼' }}</span>
+      </div>
+
+      <div class="predmet-list" *ngIf="program.expanded" style="margin-left: 24px; margin-top: 8px;">
+        <div *ngFor="let predmet of program.predmeti" class="predmet-container" style="margin-bottom: 6px;">
+          <strong>{{ predmet.naziv }}</strong>
+          <ul class="udzbenici-list" style="margin-left: 16px; margin-top: 4px;">
+            <li *ngFor="let book of predmet.udzbenici">{{ book.naziv }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions" style="margin-top: 16px;">
+      <button class="btn-submit" (click)="submitRequest()" [disabled]="!hasSelectedPrograms()">
+        Podnesi zahtev
+      </button>
+    </div>
+  </div>
+
+  <div class="loading-container" *ngIf="isLoading">
+    <p>Učitavanje zahteva...</p>
+  </div>
+  <div class="error-container" *ngIf="error && !isLoading">
+    <p class="error-message">{{ error }}</p>
+  </div>
+
+  <div class="filters-container">
+    <input
+      type="text"
+      placeholder="Pretraži po studentu..."
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterIzdavanja()"
+    />
+    <select [(ngModel)]="statusFilter" (ngModelChange)="filterIzdavanja()">
+      <option value="all">Svi</option>
+      <option value="pending">Na čekanju</option>
+      <option value="approved">Odobreno</option>
+      <option value="rejected">Odbijeno</option>
+    </select>
+  </div>
+
+  <div class="table-container" *ngIf="!isLoading && !error && izdavanja.length">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID zahteva</th>
+          <th>Podnosilac</th>
+          <th>Studijski program</th>
+          <th>Status</th>
+          <th *ngIf="isRole('ROLE_ADMIN') || isRole('ROLE_SLUZBA')">Akcije</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of filteredIzdavanja | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }">
+          <td>{{ request.id }}</td>
+          <td>{{ request.podnosilac_zahteva_id }}</td>
+          <td>{{ getProgramName(request) }}</td>
+          <td>
+            <span [ngClass]="getStatusClass(request)">
+              {{ getStatusText(request) }}
+            </span>
+          </td>
+          <td>{{ request }}</td>
+          <td *ngIf="isRole('ROLE_ADMIN')">
+            <ng-container *ngIf="request.odobreno === null">
+              <button class="btn-approve" (click)="approveAdmin(request, true)">Odobri</button>
+              <button class="btn-reject" (click)="approveAdmin(request, false)" style="margin-left: 8px;">Odbij</button>
+            </ng-container>
+          </td>
+        </tr>
+
+        <tr *ngIf="filteredIzdavanja.length === 0">
+          <td [attr.colspan]="(isRole('ROLE_ADMIN') || isRole('ROLE_SLUZBA')) ? 5 : 4" class="no-data">
+            Nema registrovanih zahteva.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination-container" *ngIf="filteredIzdavanja.length > itemsPerPage">
+      <pagination-controls
+        (pageChange)="onPageChange($event)"
+        previousLabel="Prethodna"
+        nextLabel="Sledeća"
+        [autoHide]="false"
+      ></pagination-controls>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !error && izdavanja.length === 0" class="no-requests-container">
+    <p class="text-muted">Nema registrovanih zahteva.</p>
+  </div>
+</div>

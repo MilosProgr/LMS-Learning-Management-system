@@ -1,0 +1,88 @@
+.ishodi-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+.ishod-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 15px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: left;
+}
+
+.ishod-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.ishod-card h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+.ishod-card p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.ishod-card p strong {
+    display: inline-block;
+    width: 140px;
+    font-weight: 600;
+    color: #333;
+}
+
+.ishod-card button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.ishod-card button:hover {
+    background-color: #0056b3;
+}
+
+.ishod-card textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .ishod-card {
+        padding: 15px;
+    }
+    .ishod-card h2 {
+        font-size: 20px;
+    }
+    .ishod-card p {
+        font-size: 14px;
+    }
+    .ishod-card p strong {
+        width: 120px;
+    }
+}

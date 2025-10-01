@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="message signup" #message>
+    <div class="btn-wrapper">
+      <button class="button" (click)="onSignupClick()">Registruj se</button>
+      <button class="button" (click)="onLoginClick()"> Prijavi se</button>
+    </div>
+  </div>
+
+  <div class="form form--signup">
+    <div *ngIf="errorMessageRegister" class="alert alert-secondary mt-3" role="alert">
+      {{ errorMessageRegister }}
+    </div>
+
+    <div class="form--heading">Dobro došao! Registruj se </div>
+    <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
+      <input type="text" placeholder="Ime" formControlName="ime">
+      <div *ngIf="registerForm.get('ime')?.invalid && registerForm.get('ime')?.touched">
+        <small *ngIf="registerForm.get('ime')?.errors?.['required']">Ime je obavezno.</small>
+        <small *ngIf="registerForm.get('ime')?.errors?.['pattern']">Ime mora početi velikim slovom i može sadržati samo
+          slova.</small>
+      </div>
+
+      <input type="text" placeholder="Prezime" formControlName="prezime">
+      <div *ngIf="registerForm.get('prezime')?.invalid && registerForm.get('prezime')?.touched">
+        <small *ngIf="registerForm.get('prezime')?.errors?.['required']">Prezime je obavezno.</small>
+        <small *ngIf="registerForm.get('prezime')?.errors?.['pattern']">Ime mora početi velikim slovom i može sadržati
+          samo slova.</small>
+      </div>
+
+      <input type="text" placeholder="Korisnicko ime" formControlName="korisnickoIme">
+      <div *ngIf="registerForm.get('korisnickoIme')?.invalid && registerForm.get('korisnickoIme')?.touched">
+        <small *ngIf="registerForm.get('korisnickoIme')?.errors?.['required']">Korisničko ime je obavezno.</small>
+        <small *ngIf="registerForm.get('korisnickoIme')?.errors?.['minlength']">Korisničko ime mora imati najmanje 8
+          karaktera.</small>
+        <small *ngIf="registerForm.get('korisnickoIme')?.errors?.['usernameInvalid']">Korisničko ime mora imati bar
+          jedno veliko slovo i jedan broj.</small>
+      </div>
+
+      <input type="password" placeholder="Lozinka" formControlName="lozinka">
+      <div *ngIf="registerForm.get('lozinka')?.invalid && registerForm.get('lozinka')?.touched">
+        <small *ngIf="registerForm.get('lozinka')?.errors?.['required']">Lozinka je obavezna.</small>
+        <small *ngIf="registerForm.get('lozinka')?.errors?.['minlength']">Lozinka mora imati najmanje 8
+          karaktera.</small>
+        <small *ngIf="registerForm.get('lozinka')?.errors?.['usernameInvalid']">Lozinka mora imati bar jedno veliko
+          slovo i jedan broj.</small>
+      </div>
+
+      <input type="email" placeholder="email" formControlName="email">
+      <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        <small *ngIf="registerForm.get('email')?.errors?.['required']">Email je obavezan.</small>
+        <small *ngIf="registerForm.get('email')?.errors?.['email']">Neispravan format email adrese.</small>
+      </div>
+
+      <button class="button" type="submit">Registruj se</button>
+    </form>
+  </div>
+
+  <div class="form form--login">
+    <div *ngIf="errorMessageLogin" class="alert alert-secondary mt-3" role="alert">
+      {{ errorMessageLogin }}
+    </div>
+    <div class="form--heading">Dobro došao nazad! </div>
+    <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+      <input type="text" placeholder="Korisnicko ime" formControlName="korisnickoIme">
+      <input type="password" placeholder="Lozinka" formControlName="lozinka">
+      <button class="button" type="submit">Prijavi se</button>
+    </form>
+  </div>
+</div>
