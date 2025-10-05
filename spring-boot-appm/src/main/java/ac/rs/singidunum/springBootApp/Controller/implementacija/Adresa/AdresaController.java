@@ -18,19 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
 import ac.rs.singidunum.springBootApp.DTO.Adresa.AdresaDTO;
-import ac.rs.singidunum.springBootApp.Model.Adresa.Adresa;
+import ac.rs.singidunum.springBootApp.DTO.Adresa.AdresaDTO.AdresaDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Adresa;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Adresa.AdresaService;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping("/api/adrese")
-public class AdresaController extends GenericCrudController<AdresaDTO, Adresa, Long> {
+public class AdresaController extends GenericCrudController<AdresaDTORecord, Adresa, Long> {
 	@Autowired
 	private AdresaService adresaService;
 
 	@Override
-	protected CrudService<AdresaDTO, Adresa, Long> getService() {
+	protected CrudService<AdresaDTORecord, Adresa, Long> getService() {
 		// TODO Auto-generated method stub
 		return adresaService;
 	}

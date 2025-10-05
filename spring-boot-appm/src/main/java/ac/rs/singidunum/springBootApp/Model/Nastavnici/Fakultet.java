@@ -5,7 +5,7 @@ package ac.rs.singidunum.springBootApp.Model.Nastavnici;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.Model.Adresa.Adresa;
+import ac.rs.singidunum.springBootApp.Features.Adresa;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.CascadeType;

@@ -21,7 +21,7 @@ import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudControll
 import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.UpisStudentaRequest;
-import ac.rs.singidunum.springBootApp.Model.Adresa.Adresa;
+import ac.rs.singidunum.springBootApp.Features.Adresa;
 import ac.rs.singidunum.springBootApp.Model.Adresa.Drzava;
 import ac.rs.singidunum.springBootApp.Model.Adresa.Mesto;
 import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;

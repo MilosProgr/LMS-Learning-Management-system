@@ -1,39 +1,36 @@
 package ac.rs.singidunum.springBootApp.Mapper.implementacija.Adresa;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Adresa.DrzavaDTO;
-import ac.rs.singidunum.springBootApp.DTO.Adresa.MestoDTO;
+import ac.rs.singidunum.springBootApp.DTO.Adresa.DrzavaDTO.DrzavaDTORecord;
+import ac.rs.singidunum.springBootApp.DTO.Adresa.MestoDTO.MestoDTORecord;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Adresa.Drzava;
 
 @Component
-public class DrzavaMapper implements Mapper<DrzavaDTO, Drzava> {
+public class DrzavaMapper implements Mapper<DrzavaDTORecord, Drzava> {
 
-	@Override
-	public DrzavaDTO map(Drzava e) {
-		if(e == null) {
-			return null;
-		}
-		DrzavaDTO d = 
-				new DrzavaDTO(e.getId(), e.getNaziv());
-		
-		if (e.getMesta() != null) {
-            d.setMesta(
-                e.getMesta().stream()
-                .map(mesto -> new MestoDTO(mesto.getId(), mesto.getNaziv()))
-                .collect(Collectors.toSet())
-            );
+    @Override
+    public DrzavaDTORecord map(Drzava e) {
+        if (e == null) {
+            return null;
         }
-        return d;
-	}
 
-//	@Override
-//	public List<DrzavaDTO> map(List<Drzava> e) {
-//		return e.stream().map(this::map).collect(Collectors.toList());
-//	}
+        Set<MestoDTORecord> mestaDTO = null;
+        if (e.getMesta() != null) {
+            mestaDTO = e.getMesta().stream()
+                    .map(mesto -> new MestoDTORecord(mesto.getId(), mesto.getNaziv(), null))
+                    .collect(Collectors.toSet());
+        }
 
+        return new DrzavaDTORecord(e.getId(), e.getNaziv(), mestaDTO);
+    }
+
+//    @Override
+//    public List<DrzavaDTO> map(List<Drzava> e) {
+//        return e.stream().map(this::map).collect(Collectors.toList());
+//    }
 }

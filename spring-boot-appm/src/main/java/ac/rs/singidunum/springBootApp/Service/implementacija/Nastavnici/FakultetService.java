@@ -8,9 +8,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.DTO.Nastavnici.FakultetDTO;
 import ac.rs.singidunum.springBootApp.DTO.Nastavnici.FakultetRequest;
+import ac.rs.singidunum.springBootApp.Features.Adresa;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Mapper.implementacija.Nastavnici.FakultetMapper;
-import ac.rs.singidunum.springBootApp.Model.Adresa.Adresa;
 import ac.rs.singidunum.springBootApp.Model.Adresa.Drzava;
 import ac.rs.singidunum.springBootApp.Model.Adresa.Mesto;
 import ac.rs.singidunum.springBootApp.Model.Nastavnici.Fakultet;

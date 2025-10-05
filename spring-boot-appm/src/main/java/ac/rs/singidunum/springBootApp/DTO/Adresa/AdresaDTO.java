@@ -1,5 +1,6 @@
 package ac.rs.singidunum.springBootApp.DTO.Adresa;
 
+import ac.rs.singidunum.springBootApp.DTO.Adresa.MestoDTO.MestoDTORecord;
 
 public class AdresaDTO {
 	private Long id;
@@ -49,9 +50,11 @@ public class AdresaDTO {
 		this.mesto = mesto;
 	}
 	
-	
-	
-	
+	public record AdresaDTORecord(
+	 Long id,
+	 String ulica,
+	 String broj,
+	 MestoDTORecord mesto){}
 	
 	
 }

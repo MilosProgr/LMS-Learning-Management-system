@@ -1,5 +1,6 @@
-package ac.rs.singidunum.springBootApp.Model.Adresa;
+package ac.rs.singidunum.springBootApp.Features;
 
+import ac.rs.singidunum.springBootApp.Model.Adresa.Mesto;
 import ac.rs.singidunum.springBootApp.Model.Nastavnici.Univerzitet;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.CascadeType;

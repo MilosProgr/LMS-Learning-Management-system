@@ -3,6 +3,7 @@ package ac.rs.singidunum.springBootApp.DTO.Adresa;
 import java.util.ArrayList;
 import java.util.List;
 
+import ac.rs.singidunum.springBootApp.DTO.Adresa.DrzavaDTO.DrzavaDTORecord;
 import jakarta.persistence.Column;
 
 public class MestoDTO {
@@ -76,6 +77,12 @@ public class MestoDTO {
 		this.adrese = adrese;
 	}
 	
+	
+	public record MestoDTORecord(
+	Long id,
+	String naziv,
+	DrzavaDTORecord drzava
+	) {}
 	
 	
 	

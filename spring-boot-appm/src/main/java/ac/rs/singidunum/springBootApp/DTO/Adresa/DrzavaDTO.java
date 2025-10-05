@@ -3,6 +3,8 @@ package ac.rs.singidunum.springBootApp.DTO.Adresa;
 import java.util.HashSet;
 import java.util.Set;
 
+import ac.rs.singidunum.springBootApp.DTO.Adresa.MestoDTO.MestoDTORecord;
+
 public class DrzavaDTO {
 	private Long id;
 	private String naziv;
@@ -52,5 +54,11 @@ public class DrzavaDTO {
 		this.mesta = mesta;
 	}
 	
+	public record DrzavaDTORecord(
+			 Long id,
+			 String naziv,
+			
+			 Set<MestoDTORecord> mesta
+			) {}
 	
 }
