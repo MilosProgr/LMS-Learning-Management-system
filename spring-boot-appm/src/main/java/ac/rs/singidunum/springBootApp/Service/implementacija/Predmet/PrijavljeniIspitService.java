@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.DTO.Student.PrijavljeniIspitDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetRepository;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.IspitniRok;
-import ac.rs.singidunum.springBootApp.Model.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Predmet.PrijavljeniIspit;
 import ac.rs.singidunum.springBootApp.Model.Student.Student;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 import ac.rs.singidunum.springBootApp.Repository.Predmet.IspitniRokRepository;
-import ac.rs.singidunum.springBootApp.Repository.Predmet.PredmetRepository;
 import ac.rs.singidunum.springBootApp.Repository.Predmet.PrijavljeniIspitRepository;
 import ac.rs.singidunum.springBootApp.Repository.Student.StudentNaGodiniRepository;
 import ac.rs.singidunum.springBootApp.Repository.Student.StudentRepository;

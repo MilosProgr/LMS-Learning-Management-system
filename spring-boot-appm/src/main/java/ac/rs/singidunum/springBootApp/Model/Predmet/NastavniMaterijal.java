@@ -2,8 +2,8 @@ package ac.rs.singidunum.springBootApp.Model.Predmet;
 
 
 
-import ac.rs.singidunum.springBootApp.Model.Nastavnici.Nastavnik;
-import ac.rs.singidunum.springBootApp.Model.SluzbenikStudentske.SluzbenikStudentske;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentske;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

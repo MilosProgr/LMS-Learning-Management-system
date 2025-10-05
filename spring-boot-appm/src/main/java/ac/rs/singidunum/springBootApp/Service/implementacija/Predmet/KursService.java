@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.KursDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.KursDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Mapper.implementacija.Predmet.KursMapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.Kurs;

@@ -2,8 +2,8 @@ package ac.rs.singidunum.springBootApp.DTO.Student;
 
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.RealizacijaPredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 
 public class PohadjanjePredmetaDTO {
 	private Long id;

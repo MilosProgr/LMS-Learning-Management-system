@@ -3,6 +3,8 @@ package ac.rs.singidunum.springBootApp.Model.Predmet;
 import java.util.ArrayList;
 import java.util.List;
 
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanja;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.Column;

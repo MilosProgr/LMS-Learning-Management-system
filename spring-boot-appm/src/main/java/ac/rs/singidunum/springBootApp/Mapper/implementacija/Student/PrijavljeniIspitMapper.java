@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import ac.rs.singidunum.springBootApp.DTO.Predmet.IspitniRokDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.PrijavljeniIspitDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentNaGodiniDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.EvaluacijaZnanjaDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.IspitniRokDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.PrijavljeniIspit;
 

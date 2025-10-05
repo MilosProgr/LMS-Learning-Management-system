@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Nastavnici.FakultetDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.GodinaStudijaDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Model.Student.Student;

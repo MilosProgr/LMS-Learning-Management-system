@@ -3,9 +3,9 @@ package ac.rs.singidunum.springBootApp.DTO.Udzbenici;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.DTO.SluzbenikStudentske.SluzbenikStudentskeDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentNaGodiniDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
 
 public class IzdavanjeUdzbenikaDTO {
 	private Long id;

@@ -19,16 +19,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
-import ac.rs.singidunum.springBootApp.DTO.PravaPristupa.UserPermissionDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikOsnovniPodaciDTO;
-import ac.rs.singidunum.springBootApp.Model.PravaPristupa.Permission;
-import ac.rs.singidunum.springBootApp.Model.PravaPristupa.UserPermission;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.Permission;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionService;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionService;
 import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Details.UserDetailsService;
-import ac.rs.singidunum.springBootApp.Service.implementacija.PravaPristupa.PermissionService;
-import ac.rs.singidunum.springBootApp.Service.implementacija.PravaPristupa.UserPermissionService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Student.RegistrovanKorisnikService;
 import ac.rs.singidunum.springBootApp.Utils.TokenUtils;
 

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.DTO.Student.PohadjanjePredmetaDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentNaGodiniDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.RealizacijaPredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Student.PohadjanjePredmeta;
 

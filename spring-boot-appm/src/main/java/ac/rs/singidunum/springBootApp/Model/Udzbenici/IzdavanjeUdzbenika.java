@@ -3,8 +3,8 @@ package ac.rs.singidunum.springBootApp.Model.Udzbenici;
 import java.util.ArrayList;
 import java.util.List;
 
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentske;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
-import ac.rs.singidunum.springBootApp.Model.SluzbenikStudentske.SluzbenikStudentske;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.*;

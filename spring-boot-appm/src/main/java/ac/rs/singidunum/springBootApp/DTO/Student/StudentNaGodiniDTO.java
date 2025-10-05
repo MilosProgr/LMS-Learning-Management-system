@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Model.Predmet.PrijavljeniIspit;
 import ac.rs.singidunum.springBootApp.Model.Student.PohadjanjePredmeta;
 

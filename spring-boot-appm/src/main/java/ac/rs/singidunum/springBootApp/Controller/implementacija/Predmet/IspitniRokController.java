@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
-import ac.rs.singidunum.springBootApp.DTO.predmet.IspitniRokDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.IspitniRokDTO;
 import ac.rs.singidunum.springBootApp.Model.Predmet.IspitniRok;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Predmet.IspitniRokService;

@@ -5,18 +5,18 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.AdminDTO.AdministratorDTO;
-import ac.rs.singidunum.springBootApp.DTO.Nastavnici.NastavnikDTO;
-import ac.rs.singidunum.springBootApp.DTO.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
-import ac.rs.singidunum.springBootApp.DTO.PravaPristupa.PermissionDTO;
-import ac.rs.singidunum.springBootApp.DTO.PravaPristupa.UserPermissionDTO;
-import ac.rs.singidunum.springBootApp.DTO.SluzbenikStudentske.SluzbenikStudentskeDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikOsnovniPodaciDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentNaGodiniDTO;
+import ac.rs.singidunum.springBootApp.Features.Admin.Administrator;
+import ac.rs.singidunum.springBootApp.Features.Admin.AdministratorDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Model.Admin.Administrator;
 import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
 
 @Component

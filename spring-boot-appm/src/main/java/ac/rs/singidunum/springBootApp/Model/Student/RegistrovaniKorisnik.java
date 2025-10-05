@@ -3,12 +3,12 @@ package ac.rs.singidunum.springBootApp.Model.Student;
 import java.util.HashSet;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.PravaPristupa.UserPermissionDTO;
-import ac.rs.singidunum.springBootApp.Model.Admin.Administrator;
-import ac.rs.singidunum.springBootApp.Model.Nastavnici.Nastavnik;
-import ac.rs.singidunum.springBootApp.Model.ObavestenjeAktivnosti.ObavestenjeAktivnosti;
-import ac.rs.singidunum.springBootApp.Model.PravaPristupa.UserPermission;
-import ac.rs.singidunum.springBootApp.Model.SluzbenikStudentske.SluzbenikStudentske;
+import ac.rs.singidunum.springBootApp.Features.Admin.Administrator;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentske;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;

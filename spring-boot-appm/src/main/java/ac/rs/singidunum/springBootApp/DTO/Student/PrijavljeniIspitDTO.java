@@ -3,9 +3,9 @@ package ac.rs.singidunum.springBootApp.DTO.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.EvaluacijaZnanjaDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.IspitniRokDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.IspitniRokDTO;
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 
 public class PrijavljeniIspitDTO {
 	private Long id;

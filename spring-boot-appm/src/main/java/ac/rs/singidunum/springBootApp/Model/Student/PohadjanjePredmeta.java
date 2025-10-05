@@ -1,7 +1,7 @@
 package ac.rs.singidunum.springBootApp.Model.Student;
 
 
-import ac.rs.singidunum.springBootApp.Model.Predmet.Predmet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

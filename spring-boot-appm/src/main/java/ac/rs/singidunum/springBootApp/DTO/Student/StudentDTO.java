@@ -2,10 +2,10 @@ package ac.rs.singidunum.springBootApp.DTO.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.DTO.Adresa.AdresaDTO;
-import ac.rs.singidunum.springBootApp.DTO.Adresa.DrzavaDTO;
-import ac.rs.singidunum.springBootApp.DTO.Adresa.MestoDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
+import ac.rs.singidunum.springBootApp.Features.Drzava.DrzavaDTO;
+import ac.rs.singidunum.springBootApp.Features.Mesto.MestoDTO;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 
 public class StudentDTO  {

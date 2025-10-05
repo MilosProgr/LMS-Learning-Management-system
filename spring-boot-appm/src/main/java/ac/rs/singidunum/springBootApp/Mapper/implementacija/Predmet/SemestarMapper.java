@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.SemestarDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.SemestarDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.Semestar;
 

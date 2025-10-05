@@ -2,7 +2,7 @@ package ac.rs.singidunum.springBootApp.Model.Udzbenici;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ac.rs.singidunum.springBootApp.Model.Predmet.Predmet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Student.GodinaStudija;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.*;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.DTO.Student.GodinaStudijaDTO;
 import ac.rs.singidunum.springBootApp.DTO.Udzbenici.UdzbenikDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Udzbenici.Udzbenik;
 

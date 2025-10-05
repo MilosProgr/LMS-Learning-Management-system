@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.Model.Predmet.Predmet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.Entity;

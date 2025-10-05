@@ -3,9 +3,9 @@ package ac.rs.singidunum.springBootApp.Model.Student;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.Features.Adresa;
-import ac.rs.singidunum.springBootApp.Model.Adresa.Drzava;
-import ac.rs.singidunum.springBootApp.Model.Adresa.Mesto;
+import ac.rs.singidunum.springBootApp.Features.Adresa.Adresa;
+import ac.rs.singidunum.springBootApp.Features.Drzava.Drzava;
+import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
 import jakarta.persistence.Column;

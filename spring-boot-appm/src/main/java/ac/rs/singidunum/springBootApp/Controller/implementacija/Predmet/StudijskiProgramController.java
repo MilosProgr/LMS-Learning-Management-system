@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Predmet.StudijskiProgramService;

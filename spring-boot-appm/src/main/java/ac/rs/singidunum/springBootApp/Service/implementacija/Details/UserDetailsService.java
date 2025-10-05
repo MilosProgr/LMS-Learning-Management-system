@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ac.rs.singidunum.springBootApp.Model.PravaPristupa.UserPermission;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
 import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
 import ac.rs.singidunum.springBootApp.Security.CustomUserDetails;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Student.RegistrovanKorisnikService;

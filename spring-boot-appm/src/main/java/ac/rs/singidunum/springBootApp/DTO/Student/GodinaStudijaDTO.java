@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 
 public class GodinaStudijaDTO {
 	private Long id;

@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.Model.Nastavnici.Fakultet;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.Fakultet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Student.GodinaStudija;
 import ac.rs.singidunum.springBootApp.Model.Student.Student;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;

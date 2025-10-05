@@ -6,16 +6,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Nastavnici.NastavnikDTO;
-import ac.rs.singidunum.springBootApp.DTO.Nastavnici.NastavnikNaRealizacijiDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.GodinaStudijaDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.PohadjanjePredmetaDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.PrijavljeniIspitDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.DTO.Student.StudentNaGodiniDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.RealizacijaPredmetaDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 

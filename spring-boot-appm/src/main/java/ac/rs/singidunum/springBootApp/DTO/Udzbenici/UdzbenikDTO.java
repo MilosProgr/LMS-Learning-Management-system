@@ -1,7 +1,7 @@
 package ac.rs.singidunum.springBootApp.DTO.Udzbenici;
 
 import ac.rs.singidunum.springBootApp.DTO.Student.GodinaStudijaDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 
 public class UdzbenikDTO {
 	private Long id;

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.KursDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.KursDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.Kurs;
 

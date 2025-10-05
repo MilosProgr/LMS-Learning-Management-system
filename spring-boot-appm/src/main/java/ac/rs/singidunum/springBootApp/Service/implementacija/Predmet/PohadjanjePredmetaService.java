@@ -10,19 +10,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.DTO.Student.PohadjanjePredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjaAktivnostiService;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetRepository;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Mapper.implementacija.Student.PohadjanjePredmetaMapper;
-import ac.rs.singidunum.springBootApp.Model.ObavestenjeAktivnosti.ObavestenjeAktivnosti;
-import ac.rs.singidunum.springBootApp.Model.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Model.Student.PohadjanjePredmeta;
 import ac.rs.singidunum.springBootApp.Model.Student.Student;
 import ac.rs.singidunum.springBootApp.Model.Student.StudentNaGodini;
 import ac.rs.singidunum.springBootApp.Repository.Predmet.PohadjanjePredmetaRepository;
-import ac.rs.singidunum.springBootApp.Repository.Predmet.PredmetRepository;
 import ac.rs.singidunum.springBootApp.Repository.Student.StudentNaGodiniRepository;
 import ac.rs.singidunum.springBootApp.Repository.Student.StudentRepository;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
-import ac.rs.singidunum.springBootApp.Service.implementacija.ObavestenjaAktivnost.ObavestenjaAktivnostiService;
 import jakarta.transaction.Transactional;
 
 @Service

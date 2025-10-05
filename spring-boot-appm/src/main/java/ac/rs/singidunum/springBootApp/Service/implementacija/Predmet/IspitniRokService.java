@@ -10,11 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import ac.rs.singidunum.springBootApp.DTO.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
-import ac.rs.singidunum.springBootApp.DTO.predmet.IspitniRokDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.IspitniRokDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Mapper.implementacija.Predmet.IspitniRokMapper;
-import ac.rs.singidunum.springBootApp.Model.ObavestenjeAktivnosti.ObavestenjeAktivnosti;
 import ac.rs.singidunum.springBootApp.Model.Predmet.IspitniRok;
 import ac.rs.singidunum.springBootApp.Repository.Predmet.IspitniRokRepository;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;

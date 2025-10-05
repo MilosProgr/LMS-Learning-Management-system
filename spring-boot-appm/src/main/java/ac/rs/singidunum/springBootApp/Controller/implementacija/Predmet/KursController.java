@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
-import ac.rs.singidunum.springBootApp.DTO.predmet.KursDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.KursDTO;
 import ac.rs.singidunum.springBootApp.Model.Predmet.Kurs;
 import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Predmet.KursService;

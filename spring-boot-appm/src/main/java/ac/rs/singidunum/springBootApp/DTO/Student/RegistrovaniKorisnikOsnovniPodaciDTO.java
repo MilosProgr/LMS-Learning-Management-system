@@ -3,7 +3,7 @@ package ac.rs.singidunum.springBootApp.DTO.Student;
 import java.util.HashSet;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 
 public class RegistrovaniKorisnikOsnovniPodaciDTO {
 	

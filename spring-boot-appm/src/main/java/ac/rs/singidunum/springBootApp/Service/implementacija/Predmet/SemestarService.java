@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import ac.rs.singidunum.springBootApp.DTO.predmet.SemestarDTO;
+import ac.rs.singidunum.springBootApp.DTO.Predmet.SemestarDTO;
 import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
 import ac.rs.singidunum.springBootApp.Model.Predmet.Semestar;
 import ac.rs.singidunum.springBootApp.Repository.Predmet.SemestarRepository;
