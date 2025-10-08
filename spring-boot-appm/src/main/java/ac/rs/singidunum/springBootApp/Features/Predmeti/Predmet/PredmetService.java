@@ -1,11 +1,9 @@
 package ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -13,11 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
-import ac.rs.singidunum.springBootApp.Repository.Predmet.StudijskiProgramRepository;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramRepository;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.transaction.Transactional;
 
 @Service

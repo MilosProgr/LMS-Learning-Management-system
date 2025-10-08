@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Drzava.DrzavaDTO.DrzavaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoDTO.MestoDTORecord;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class DrzavaMapper implements Mapper<DrzavaDTORecord, Drzava> {

@@ -1,14 +1,14 @@
 package ac.rs.singidunum.springBootApp.Features.Adresa;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.Collections;
+//import java.util.List;
+//import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoDTO.MestoDTORecord;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class AdresaMapper implements Mapper<AdresaDTORecord, Adresa> {

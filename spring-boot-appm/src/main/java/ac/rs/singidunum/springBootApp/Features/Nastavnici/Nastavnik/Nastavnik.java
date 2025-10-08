@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 
 import java.util.Set;
 
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.NaucnaOblast.NaucnaOblast;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.Zvanje;
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 
 @Entity
 public class Nastavnik implements BaseEntity<Long> {

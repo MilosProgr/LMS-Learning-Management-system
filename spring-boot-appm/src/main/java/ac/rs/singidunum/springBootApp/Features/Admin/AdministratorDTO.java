@@ -2,7 +2,8 @@ package ac.rs.singidunum.springBootApp.Features.Admin;
 
 import java.util.Date;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+
 
 public class AdministratorDTO {
     private Long id;

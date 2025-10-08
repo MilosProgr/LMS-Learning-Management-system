@@ -17,8 +17,8 @@ import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikRepository;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.Univerzitet;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetRepository;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 

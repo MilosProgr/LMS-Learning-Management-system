@@ -3,7 +3,6 @@ package ac.rs.singidunum.springBootApp.Features.Rezervacija;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import ac.rs.singidunum.springBootApp.Model.Rezervacija.StatusOdmora;
 
 public class RezervacijaDTO {
     private Long id;

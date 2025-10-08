@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class FakultetMapper implements Mapper<FakultetDTO, Fakultet> {

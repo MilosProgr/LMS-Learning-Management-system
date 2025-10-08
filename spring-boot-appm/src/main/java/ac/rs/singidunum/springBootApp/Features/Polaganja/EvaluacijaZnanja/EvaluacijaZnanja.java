@@ -5,17 +5,15 @@ import java.time.LocalDateTime;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.File;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacije;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.Ishod;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspit;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmeta;
-import ac.rs.singidunum.springBootApp.Model.Predmet.PrijavljeniIspit;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class EvaluacijaZnanja implements BaseEntity<Long> {

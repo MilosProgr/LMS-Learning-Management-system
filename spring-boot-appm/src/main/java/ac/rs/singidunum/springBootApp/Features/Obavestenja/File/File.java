@@ -1,12 +1,10 @@
 package ac.rs.singidunum.springBootApp.Features.Obavestenja.File;
 
-import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 //seminarski,projekat, elektronski test, praktican zadatak

@@ -3,9 +3,9 @@ package ac.rs.singidunum.springBootApp.Features.Fakultet;
 import java.util.ArrayList;
 import java.util.List;
 
-import ac.rs.singidunum.springBootApp.DTO.Predmet.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
 
 public class FakultetDTO {

@@ -3,7 +3,7 @@ package ac.rs.singidunum.springBootApp.Features.Zvanje.TipZvanja;
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.Zvanje;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 import java.util.List;
 import java.util.Set;

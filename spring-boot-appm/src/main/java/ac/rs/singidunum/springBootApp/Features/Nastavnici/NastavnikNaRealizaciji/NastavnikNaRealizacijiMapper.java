@@ -12,7 +12,7 @@ import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class NastavnikNaRealizacijiMapper implements Mapper<NastavnikNaRealizacijiDTO, NastavnikNaRealizaciji> {

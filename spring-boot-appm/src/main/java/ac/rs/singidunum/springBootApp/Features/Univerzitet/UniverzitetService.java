@@ -1,8 +1,6 @@
 package ac.rs.singidunum.springBootApp.Features.Univerzitet;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
@@ -11,21 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.Adresa;
-import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
-import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaMapper;
+
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaRepository;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaService;
 import ac.rs.singidunum.springBootApp.Features.Drzava.Drzava;
 import ac.rs.singidunum.springBootApp.Features.Drzava.DrzavaRepository;
-import ac.rs.singidunum.springBootApp.Features.Fakultet.Fakultet;
-import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetRepository;
 import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoRepository;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikRepository;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 

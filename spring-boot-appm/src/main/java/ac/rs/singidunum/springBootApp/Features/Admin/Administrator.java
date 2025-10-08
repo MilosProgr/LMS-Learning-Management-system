@@ -3,8 +3,8 @@ package ac.rs.singidunum.springBootApp.Features.Admin;
 import jakarta.persistence.*;
 import java.util.Date;
 
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 
 @Entity
 public class Administrator implements BaseEntity<Long> {

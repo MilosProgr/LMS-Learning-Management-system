@@ -6,7 +6,7 @@ import java.util.Set;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmeta;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

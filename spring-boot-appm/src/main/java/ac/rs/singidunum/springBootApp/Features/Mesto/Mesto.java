@@ -5,7 +5,7 @@ import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.Adresa;
 import ac.rs.singidunum.springBootApp.Features.Drzava.Drzava;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

@@ -7,7 +7,7 @@ import java.util.Date;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.NaucnaOblast.NaucnaOblast;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.TipZvanja.TipZvanja;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 
 @Entity
 public class Zvanje implements BaseEntity<Long> {

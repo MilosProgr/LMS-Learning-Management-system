@@ -1,7 +1,6 @@
 package ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 
 public class SluzbenikStudentskeDTO  {
 	

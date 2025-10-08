@@ -8,32 +8,30 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import ac.rs.singidunum.springBootApp.DTO.Predmet.CreateEvaluacijaZnanjaRequest;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.File;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileRepository;
-import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjaAktivnostiService;
-import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnosti;
+//import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjaAktivnostiService;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacije;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeRepository;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.Ishod;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodRepository;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodService;
+//import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodService;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetRepository;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspit;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitRepository;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmeta;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaRepository;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Model.Predmet.PrijavljeniIspit;
-import ac.rs.singidunum.springBootApp.Repository.Predmet.PrijavljeniIspitRepository;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
 public class EvaluacijaZnanjaService extends GenericCrudService<EvaluacijaZnanjaDTO, EvaluacijaZnanja, Long> {
 
-	@Autowired private IshodService ishodService;
-	@Autowired private ObavestenjaAktivnostiService obavestenjaAktivnostiService;
+//	@Autowired private IshodService ishodService;
+//	@Autowired private ObavestenjaAktivnostiService obavestenjaAktivnostiService;
     @Autowired private TipEvaluacijeRepository tipEvaluacijeRepository;
     @Autowired private FileRepository fileReporepository;
     @Autowired private PrijavljeniIspitRepository prijavljeniIspitRepository;

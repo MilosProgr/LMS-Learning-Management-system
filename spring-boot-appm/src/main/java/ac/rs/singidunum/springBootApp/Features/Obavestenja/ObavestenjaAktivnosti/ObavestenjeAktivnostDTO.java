@@ -2,7 +2,8 @@ package ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnost
 
 import java.time.LocalDateTime;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+
 
 
 

@@ -2,7 +2,7 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod;
 
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.Predmet.NastavniMaterijalDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.NastavniMaterijal.NastavniMaterijalDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 
 public class IshodDTO {

@@ -1,18 +1,14 @@
 package ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
-import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.Permission;
-import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionRepository;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.NaucnaOblast.NaucnaOblastDTO;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.ZvanjeDTO;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class NastavnikMapper implements Mapper<NastavnikDTO, Nastavnik> {

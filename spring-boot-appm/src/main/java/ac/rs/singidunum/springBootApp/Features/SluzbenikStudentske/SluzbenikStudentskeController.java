@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import ac.rs.singidunum.springBootApp.Aspect.Logged;
-import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
-import ac.rs.singidunum.springBootApp.Model.Student.Student;
-import ac.rs.singidunum.springBootApp.Repository.Student.RegistrovanKorisnikRepository;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovanKorisnikRepository;
+import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
+import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
+
 
 @Controller
 @RequestMapping("/api/sluzbenici")

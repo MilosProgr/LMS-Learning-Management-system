@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.PrijavljeniIspitDTO;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
 public class EvaluacijaZnanjaMapper implements Mapper<EvaluacijaZnanjaDTO, EvaluacijaZnanja> {

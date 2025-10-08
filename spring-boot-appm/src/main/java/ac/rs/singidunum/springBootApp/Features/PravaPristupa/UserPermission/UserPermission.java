@@ -3,8 +3,8 @@ package ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission;
 import java.io.Serializable;
 
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.Permission;
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

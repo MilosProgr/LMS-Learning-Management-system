@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaMapper;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaRepository;
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
+
 
 @Service
 public class TerminNastaveService extends GenericCrudService<TerminNastaveDTO, TerminNastave, Long> {

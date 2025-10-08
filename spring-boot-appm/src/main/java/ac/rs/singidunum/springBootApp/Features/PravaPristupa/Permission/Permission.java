@@ -3,10 +3,10 @@ package ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

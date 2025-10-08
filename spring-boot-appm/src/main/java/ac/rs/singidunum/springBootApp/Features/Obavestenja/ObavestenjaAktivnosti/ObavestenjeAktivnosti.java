@@ -2,8 +2,8 @@ package ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnost
 
 import java.time.LocalDateTime;
 
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

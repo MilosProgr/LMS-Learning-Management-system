@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import ac.rs.singidunum.springBootApp.Controller.deklaracija.GenericCrudController;
-import ac.rs.singidunum.springBootApp.DTO.Predmet.CreateEvaluacijaZnanjaRequest;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.CrudService;
+import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
+import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
+
+
 
 @Controller
 @RequestMapping("/api/evaluacijaZnanja")

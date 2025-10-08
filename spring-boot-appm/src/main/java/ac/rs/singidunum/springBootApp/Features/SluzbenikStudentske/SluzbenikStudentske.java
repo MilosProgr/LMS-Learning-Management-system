@@ -1,7 +1,8 @@
 package ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske;
 
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;

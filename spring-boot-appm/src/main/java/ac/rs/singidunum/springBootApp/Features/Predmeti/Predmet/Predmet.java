@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.Ishod;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.Kurs;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmeta;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.Sifra;
-import ac.rs.singidunum.springBootApp.Model.Predmet.Kurs;
-import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
-import ac.rs.singidunum.springBootApp.Model.Student.GodinaStudija;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudija;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.*;
 
 @Entity

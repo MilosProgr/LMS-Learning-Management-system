@@ -3,7 +3,6 @@ package ac.rs.singidunum.springBootApp.Features.Admin;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import ac.rs.singidunum.springBootApp.Model.Student.RegistrovaniKorisnik;
 
 @Repository
 public interface AdministratorRepository  extends CrudRepository<Administrator, Long> {

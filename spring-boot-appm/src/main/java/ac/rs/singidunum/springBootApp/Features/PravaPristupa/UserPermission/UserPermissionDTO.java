@@ -3,8 +3,8 @@ package ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission;
 import java.util.HashSet;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 
 public class UserPermissionDTO {
 	private Long id;

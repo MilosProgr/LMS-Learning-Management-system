@@ -2,7 +2,7 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod;
 
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.*;
 
 @Entity

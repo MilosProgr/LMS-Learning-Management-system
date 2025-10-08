@@ -1,6 +1,6 @@
 package ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave;
 
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

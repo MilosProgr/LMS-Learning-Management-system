@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.Zvanje;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 
 @Entity
 public class TipZvanja implements BaseEntity<Long> {

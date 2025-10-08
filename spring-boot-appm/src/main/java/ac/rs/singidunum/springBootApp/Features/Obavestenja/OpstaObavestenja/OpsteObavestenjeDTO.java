@@ -2,7 +2,6 @@ package ac.rs.singidunum.springBootApp.Features.Obavestenja.OpstaObavestenja;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class OpsteObavestenjeDTO {
 

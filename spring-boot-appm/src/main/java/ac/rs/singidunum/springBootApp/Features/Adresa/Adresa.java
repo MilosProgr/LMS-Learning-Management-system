@@ -1,9 +1,7 @@
 package ac.rs.singidunum.springBootApp.Features.Adresa;
 
 import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
-import ac.rs.singidunum.springBootApp.Features.Univerzitet.Univerzitet;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
-import jakarta.persistence.CascadeType;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Transient;
+
 
 @Entity
 public class Adresa implements BaseEntity<Long> {

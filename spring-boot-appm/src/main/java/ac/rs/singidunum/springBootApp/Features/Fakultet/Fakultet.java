@@ -7,9 +7,9 @@ import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.Adresa;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgram;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.Univerzitet;
-import ac.rs.singidunum.springBootApp.Model.Predmet.StudijskiProgram;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -22,10 +22,6 @@ public class Logger {
 	LogService logService;
 
 
-   
-    
-   
-
     @Before("@annotation(ac.rs.singidunum.springBootApp.Aspect.Logged)")
     public void logPocetakIzvrsavanjaAnotacija(JoinPoint jp) {
         System.out.println("Pre izvrsavanja metode. [Logged]");

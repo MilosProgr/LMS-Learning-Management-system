@@ -2,7 +2,7 @@ package ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik;
 
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.DTO.Student.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.NaucnaOblast.NaucnaOblastDTO;
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.ZvanjeDTO;
 

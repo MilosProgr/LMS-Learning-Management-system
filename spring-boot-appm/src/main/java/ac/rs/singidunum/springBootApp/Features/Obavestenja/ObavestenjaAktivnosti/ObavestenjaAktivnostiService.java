@@ -1,8 +1,6 @@
 package ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import ac.rs.singidunum.springBootApp.Mapper.deklaracija.Mapper;
-import ac.rs.singidunum.springBootApp.Service.deklaracija.GenericCrudService;
+import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
+
+
 
 @Service
 public class ObavestenjaAktivnostiService extends GenericCrudService<ObavestenjeAktivnostDTO, ObavestenjeAktivnosti, Long>{

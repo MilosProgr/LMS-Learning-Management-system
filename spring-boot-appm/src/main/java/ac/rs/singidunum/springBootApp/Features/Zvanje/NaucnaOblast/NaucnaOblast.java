@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
-import ac.rs.singidunum.springBootApp.Model.base.BaseEntity;
+import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 
 @Entity
 public class NaucnaOblast implements BaseEntity<Long> {
