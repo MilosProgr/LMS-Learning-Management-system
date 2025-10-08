@@ -10,6 +10,7 @@ import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO;
+import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO.SifraDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
@@ -65,7 +66,7 @@ public class PredmetMapper implements Mapper<PredmetDTO, Predmet> {
 		}
 		if(e.getSifra() != null) {
 			predmetDTO.setSifra(
-					new SifraDTO(e.getSifra().getId(), e.getSifra().getTekst())
+					new SifraDTORecord(e.getSifra().getId(), e.getSifra().getTekst())
 					);
 		}
         if (e.getGodinaStudija() != null) {

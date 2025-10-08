@@ -5,7 +5,6 @@ public class SifraDTO {
 	private Long id;
 	private String tekst;
 	
-	
 	public SifraDTO(Long id, String tekst) {
 		super();
 		this.id = id;
@@ -14,7 +13,6 @@ public class SifraDTO {
 	public SifraDTO() {
 		super();
 	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -27,6 +25,8 @@ public class SifraDTO {
 	public void setTekst(String tekst) {
 		this.tekst = tekst;
 	}
+	
+public record SifraDTORecord(Long id,String tekst) {}
 	
 	
 	

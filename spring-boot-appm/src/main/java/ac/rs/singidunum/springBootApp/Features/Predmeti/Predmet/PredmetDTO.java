@@ -9,6 +9,7 @@ import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO;
+import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO.SifraDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
 
 
@@ -25,7 +26,8 @@ public class PredmetDTO {
 	private Integer istrazivackiRad;
 	private Integer ostaliCasovi;
 	private Set<IshodDTO> silabus;
-	private SifraDTO sifra;
+//	private SifraDTO sifra;
+	private SifraDTORecord sifra;
 	
 	private Set<StudijskiProgramDTO> studijskiProgrami = new HashSet<>();
 	
@@ -137,10 +139,10 @@ public class PredmetDTO {
 	public void setStudijskiProgrami(Set<StudijskiProgramDTO> studijskiProgrami) {
 		this.studijskiProgrami = studijskiProgrami;
 	}
-	public SifraDTO getSifra() {
+	public SifraDTORecord getSifra() {
 		return sifra;
 	}
-	public void setSifra(SifraDTO sifra) {
+	public void setSifra(SifraDTORecord sifra) {
 		this.sifra = sifra;
 	}
 	
