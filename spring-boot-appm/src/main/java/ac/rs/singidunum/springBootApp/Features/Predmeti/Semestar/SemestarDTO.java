@@ -2,58 +2,24 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 public class SemestarDTO {
-	private Long id;
-	private LocalDateTime datumPocetka;
-	private LocalDateTime datumKraja;
-	//zimski ili letnji
-	private String tip;
+
 	
-	public SemestarDTO(Long id, String tip,LocalDateTime datumPocetka, 
-			LocalDateTime datumKraja) {
-		super();
-		this.id = id;
-		this.datumPocetka = datumPocetka;
-		this.datumKraja = datumKraja;
-		this.tip = tip;
-	}
-
-	public SemestarDTO() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public LocalDateTime getDatumPocetka() {
-		return datumPocetka;
-	}
-
-	public void setDatumPocetka(LocalDateTime datumPocetka) {
-		this.datumPocetka = datumPocetka;
-	}
-
-	public LocalDateTime getDatumKraja() {
-		return datumKraja;
-	}
-
-	public void setDatumKraja(LocalDateTime datumKraja) {
-		this.datumKraja = datumKraja;
-	}
-
-	public String getTip() {
-		return tip;
-	}
-
-	public void setTip(String tip) {
-		this.tip = tip;
-	}
+	public record SemestarDTORecord(
+			@Id
+			@GeneratedValue(strategy = GenerationType.IDENTITY)
+			Long id,
+			@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+			LocalDateTime datumPocetka,
+			@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+			LocalDateTime datumKraja,
+			String tip) {}
 	
 	
 	

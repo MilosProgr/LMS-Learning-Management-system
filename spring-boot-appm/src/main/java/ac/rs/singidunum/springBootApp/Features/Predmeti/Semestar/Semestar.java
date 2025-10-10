@@ -2,6 +2,8 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import ac.rs.singidunum.springBootApp.Generics.base.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -61,6 +63,8 @@ public class Semestar implements BaseEntity<Long>{
 	public void setTip(String tip) {
 		this.tip = tip;
 	}
+	
+	
 	
 	
 	

@@ -12,6 +12,7 @@ import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO.SemestarDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
@@ -75,11 +76,11 @@ public class RealizacijaPredmetaMapper implements Mapper<RealizacijaPredmetaDTO,
 	        if (e.getSemestri() != null) {
 	            rDto.setSemestri(
 	                    e.getSemestri().stream()
-	                            .map(s -> new SemestarDTO(
+	                            .map(s -> new SemestarDTORecord(
 	                                    s.getId(),
-	                                    s.getTip(),
 	                                    s.getDatumPocetka(),
-	                                    s.getDatumKraja()
+	                                    s.getDatumKraja(),
+	                                    s.getTip()
 	                            ))
 	                            .collect(Collectors.toSet())
 	            );

@@ -6,23 +6,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO.SemestarDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service
-public class SemestarService extends GenericCrudService<SemestarDTO, Semestar, Long> {
+public class SemestarService extends GenericCrudService<SemestarDTORecord, Semestar, Long> {
 	
 	@Autowired
 	private SemestarRepository semestarRepository;
 	
 
-	protected SemestarService(CrudRepository<Semestar, Long> repository, Mapper<SemestarDTO, Semestar> mapper) {
+	protected SemestarService(CrudRepository<Semestar, Long> repository, Mapper<SemestarDTORecord, Semestar> mapper) {
 		super(repository, mapper);
 	}
 	
     @Override
-    public SemestarDTO save(Semestar entity) {
+    public SemestarDTORecord save(Semestar entity) {
         if (semestarRepository.existsByTip(entity.getTip())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Semestar sa imenom '" + entity.getTip() + "' već postoji!");
         }
@@ -30,7 +31,7 @@ public class SemestarService extends GenericCrudService<SemestarDTO, Semestar, L
     }
     
     @Override
-    public SemestarDTO update(Semestar entity) {
+    public SemestarDTORecord update(Semestar entity) {
         if (!semestarRepository.existsById(entity.getId())) {
             throw new EntityNotFoundException("Semestar sa ID: " + entity.getId() + " nije pronađen!");
         }

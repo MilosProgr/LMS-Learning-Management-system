@@ -10,6 +10,7 @@ import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO.SemestarDTORecord;
 
 public class RealizacijaPredmetaDTO {
 	Long id;
@@ -25,7 +26,7 @@ public class RealizacijaPredmetaDTO {
 	private List<TerminNastaveDTO> terminNastave = new ArrayList<>();;
 	
 //	private IspitniRokDTO rok;
-    private Set<SemestarDTO> semestri = new HashSet<>();
+    private Set<SemestarDTORecord> semestri = new HashSet<>();
 
 	public RealizacijaPredmetaDTO(Long id, PredmetDTO predmet, NastavnikNaRealizacijiDTO nastavnikNaRealizacijiDTO) {
 		super();
@@ -88,11 +89,11 @@ public class RealizacijaPredmetaDTO {
 		this.nastavnikNaRealizaciji = nastavnikNaRealizaciji;
 	}
 
-	public Set<SemestarDTO> getSemestri() {
+	public Set<SemestarDTORecord> getSemestri() {
 		return semestri;
 	}
 
-	public void setSemestri(Set<SemestarDTO> semestri) {
+	public void setSemestri(Set<SemestarDTORecord> semestri) {
 		this.semestri = semestri;
 	}
 
