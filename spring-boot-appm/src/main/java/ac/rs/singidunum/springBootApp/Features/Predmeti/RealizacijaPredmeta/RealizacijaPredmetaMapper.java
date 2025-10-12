@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNastaveDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO.TipNastaveDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
@@ -65,7 +66,7 @@ public class RealizacijaPredmetaMapper implements Mapper<RealizacijaPredmetaDTO,
 	                                t.getVremePocetka(),
 	                                t.getVremeZavrsetka(),
 	                                t.getTipNastave() != null
-	                                        ? new TipNastaveDTO(
+	                                        ? new TipNastaveDTORecord(
 	                                                t.getTipNastave().getId(),
 	                                                t.getTipNastave().getNaziv())
 	                                        : null

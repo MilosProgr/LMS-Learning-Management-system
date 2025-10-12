@@ -8,23 +8,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO.FileDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class FileService extends GenericCrudService<FileDTO, File, Long> {
+public class FileService extends GenericCrudService<FileDTORecord, File, Long> {
 
 	@Autowired
 	FileRepository fileRepository;
 	
-	protected FileService(CrudRepository<File, Long> repository, Mapper<FileDTO, File> mapper) {
+	protected FileService(CrudRepository<File, Long> repository, Mapper<FileDTORecord, File> mapper) {
 		super(repository, mapper);
 	}
 	
 	 @Override
-	    public FileDTO save(File entity) {
+	    public FileDTORecord save(File entity) {
 	        // Provera jedinstvenosti po opisu
 	        Optional<File> byOpis = fileRepository.findByOpis(entity.getOpis());
 	        if (byOpis.isPresent()) {
@@ -43,7 +44,7 @@ public class FileService extends GenericCrudService<FileDTO, File, Long> {
 	    }
 
 	    @Override
-	    public FileDTO update(File entity) {
+	    public FileDTORecord update(File entity) {
 	        Long id = entity.getId();
 
 	        // Provera po opisu (da ne postoji drugi sa istim opisom)

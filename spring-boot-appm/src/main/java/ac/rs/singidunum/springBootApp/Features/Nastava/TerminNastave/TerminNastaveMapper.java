@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO.TipNastaveDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
@@ -25,7 +26,7 @@ public class TerminNastaveMapper implements Mapper<TerminNastaveDTO, TerminNasta
 						e.getVremePocetka(),
 						e.getVremePocetka(), null);
 		tDto.setTipNasstave(
-				new TipNastaveDTO(e.getTipNastave().getId(), e.getTipNastave().getNaziv())
+				new TipNastaveDTORecord(e.getTipNastave().getId(), e.getTipNastave().getNaziv())
 				);
 		tDto.setRealizacijaPredmeta(
 				new RealizacijaPredmetaDTO(e.getId(),

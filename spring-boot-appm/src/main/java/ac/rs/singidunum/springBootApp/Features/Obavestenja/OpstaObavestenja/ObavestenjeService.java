@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.OpstaObavestenja.OpsteObavestenjeDTO.OpsteObavestenjeDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
@@ -16,18 +17,18 @@ import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 @Service
-public class ObavestenjeService extends GenericCrudService<OpsteObavestenjeDTO, OpsteObavestenje, Long>{
+public class ObavestenjeService extends GenericCrudService<OpsteObavestenjeDTORecord, OpsteObavestenje, Long>{
 	@Autowired
 	private OpsteObavestenjeRepository opsteObavestenjeRepository;
 
 	protected ObavestenjeService(CrudRepository<OpsteObavestenje, Long> repository,
-			Mapper<OpsteObavestenjeDTO, OpsteObavestenje> mapper) {
+			Mapper<OpsteObavestenjeDTORecord, OpsteObavestenje> mapper) {
 		super(repository, mapper);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-    public OpsteObavestenjeDTO save(OpsteObavestenje o) {
+    public OpsteObavestenjeDTORecord save(OpsteObavestenje o) {
         final String naslov = o.getNaslov() != null ? o.getNaslov().trim() : null;
         final String tekst  = o.getTekst()  != null ? o.getTekst().trim()  : null;
 
@@ -67,7 +68,7 @@ public class ObavestenjeService extends GenericCrudService<OpsteObavestenjeDTO, 
     }
 	
 	@Override
-	public OpsteObavestenjeDTO update(OpsteObavestenje o) {
+	public OpsteObavestenjeDTORecord update(OpsteObavestenje o) {
 	    if (o.getId() == null) {
 	        throw new ResponseStatusException(
 	            HttpStatus.BAD_REQUEST, "ID je obavezan za izmenu obaveštenja."

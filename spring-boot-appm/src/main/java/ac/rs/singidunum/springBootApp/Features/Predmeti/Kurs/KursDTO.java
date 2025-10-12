@@ -89,6 +89,8 @@ public class KursDTO {
 		this.datumKraja = datumKraja;
 	}
 	
+
+	
 	
 
 	

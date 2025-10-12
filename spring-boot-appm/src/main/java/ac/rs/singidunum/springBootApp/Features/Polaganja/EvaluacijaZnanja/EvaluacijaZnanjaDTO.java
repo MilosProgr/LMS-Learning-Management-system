@@ -3,6 +3,7 @@ package ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja;
 import java.time.LocalDateTime;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO.FileDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
@@ -15,7 +16,7 @@ public class EvaluacijaZnanjaDTO {
 	private Long ostvareniBodovi;
 	
 	private IshodDTO ishod;
-	private FileDTO instrumentEvaluacije;
+	private FileDTORecord instrumentEvaluacije;
 	
 	private TipEvaluacijeDTO tipEvaluacije;
 	
@@ -100,11 +101,11 @@ public class EvaluacijaZnanjaDTO {
 		this.ishod = ishod;
 	}
 
-	public FileDTO getInstrumentEvaluacije() {
+	public FileDTORecord getInstrumentEvaluacije() {
 		return instrumentEvaluacije;
 	}
 
-	public void setInstrumentEvaluacije(FileDTO instrumentEvaluacije) {
+	public void setInstrumentEvaluacije(FileDTORecord instrumentEvaluacije) {
 		this.instrumentEvaluacije = instrumentEvaluacije;
 	}
 	

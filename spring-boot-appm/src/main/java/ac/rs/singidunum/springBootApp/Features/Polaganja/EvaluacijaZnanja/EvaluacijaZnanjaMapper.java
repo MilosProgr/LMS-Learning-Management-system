@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO.FileDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
@@ -56,7 +57,7 @@ public class EvaluacijaZnanjaMapper implements Mapper<EvaluacijaZnanjaDTO, Evalu
 		
 		if(e.getInstrumentEvaluacije() != null) {
 			
-			eDto.setInstrumentEvaluacije(new FileDTO(e.getInstrumentEvaluacije().getId(), e.getInstrumentEvaluacije().getOpis(), e.getInstrumentEvaluacije().getUrl()));
+			eDto.setInstrumentEvaluacije(new FileDTORecord(e.getInstrumentEvaluacije().getId(), e.getInstrumentEvaluacije().getOpis(), e.getInstrumentEvaluacije().getUrl()));
 		}
 		
 		return eDto;

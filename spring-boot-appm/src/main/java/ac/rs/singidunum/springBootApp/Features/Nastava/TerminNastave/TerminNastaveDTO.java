@@ -3,6 +3,7 @@ package ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave;
 import java.time.LocalDateTime;
 
 import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO.TipNastaveDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 
@@ -13,7 +14,7 @@ public class TerminNastaveDTO {
 	
 	private IshodDTO ishod;
 	
-	private TipNastaveDTO tipNasstave;
+	private TipNastaveDTORecord tipNasstave;
 	
 	private RealizacijaPredmetaDTO realizacijaPredmeta;
 
@@ -22,7 +23,7 @@ public class TerminNastaveDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TerminNastaveDTO(Long id, LocalDateTime vremePocetka, LocalDateTime vremeKraja,TipNastaveDTO tipNastave) {
+	public TerminNastaveDTO(Long id, LocalDateTime vremePocetka, LocalDateTime vremeKraja,TipNastaveDTORecord tipNastave) {
 		super();
 		this.id = id;
 		this.vremePocetka = vremePocetka;
@@ -54,11 +55,11 @@ public class TerminNastaveDTO {
 		this.vremeKraja = vremeKraja;
 	}
 
-	public TipNastaveDTO getTipNasstave() {
+	public TipNastaveDTORecord getTipNasstave() {
 		return tipNasstave;
 	}
 
-	public void setTipNasstave(TipNastaveDTO tipNasstave) {
+	public void setTipNasstave(TipNastaveDTORecord tipNasstave) {
 		this.tipNasstave = tipNasstave;
 	}
 

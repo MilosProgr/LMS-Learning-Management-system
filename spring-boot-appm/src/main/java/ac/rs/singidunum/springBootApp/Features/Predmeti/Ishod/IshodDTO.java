@@ -70,6 +70,7 @@ public class IshodDTO {
 		this.nastavniMaterijali = nastavniMaterijali;
 	}
 
+	public record IshodDTORecord() {}
 	
 	
 	

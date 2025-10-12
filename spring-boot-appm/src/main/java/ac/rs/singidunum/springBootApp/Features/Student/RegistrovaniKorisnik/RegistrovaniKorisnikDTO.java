@@ -17,14 +17,6 @@ public class RegistrovaniKorisnikDTO {
     private String lozinka;
     private String email;
     
-//    private StudentDTO student;
-//
-//    private NastavnikDTO nastavnik;
-//
-//    private AdministratorDTO administrator;
-//    
-//    private SluzbenikStudentskeDTO sluzbenik;
-    
     private Set<UserPermissionDTO> pravaPristupa = new HashSet<>();
     
     private Set<ObavestenjeAktivnostDTO> obavestenjaAktivnosti = new HashSet<>();
@@ -94,30 +86,6 @@ public class RegistrovaniKorisnikDTO {
 	public void setObavestenjaAktivnosti(Set<ObavestenjeAktivnostDTO> obavestenjaAktivnosti) {
 		this.obavestenjaAktivnosti = obavestenjaAktivnosti;
 	}
-//	public StudentDTO getStudent() {
-//		return student;
-//	}
-//	public void setStudent(StudentDTO student) {
-//		this.student = student;
-//	}
-//	public NastavnikDTO getNastavnik() {
-//		return nastavnik;
-//	}
-//	public void setNastavnik(NastavnikDTO nastavnik) {
-//		this.nastavnik = nastavnik;
-//	}
-//	public AdministratorDTO getAdministrator() {
-//		return administrator;
-//	}
-//	public void setAdministrator(AdministratorDTO administrator) {
-//		this.administrator = administrator;
-//	}
-//	public SluzbenikStudentskeDTO getSluzbenik() {
-//		return sluzbenik;
-//	}
-//	public void setSluzbenik(SluzbenikStudentskeDTO sluzbenik) {
-//		this.sluzbenik = sluzbenik;
-//	}
-	
+
 	
 }
