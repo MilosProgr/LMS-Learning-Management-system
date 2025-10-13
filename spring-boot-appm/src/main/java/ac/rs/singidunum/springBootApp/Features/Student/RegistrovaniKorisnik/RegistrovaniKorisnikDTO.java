@@ -6,6 +6,7 @@ import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 
 
 public class RegistrovaniKorisnikDTO {
@@ -87,5 +88,17 @@ public class RegistrovaniKorisnikDTO {
 		this.obavestenjaAktivnosti = obavestenjaAktivnosti;
 	}
 
+	public record RegistrovaniKorisnikDTORecord(
+			 Long id,
+			 String ime,
+			 String prezime,
+		     String korisnickoIme,
+		     String lozinka,
+		     String email,
+		     Set<UserPermissionDTORecord> pravaPristupa,
+		     Set<ObavestenjeAktivnostDTO> obavestenjaAktivnosti
+			) {
+		
+	}
 	
 }

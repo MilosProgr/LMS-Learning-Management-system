@@ -7,13 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class RegistrovanKorisnikService extends GenericCrudService<RegistrovaniKorisnikDTO, RegistrovaniKorisnik, Long> {
+public class RegistrovanKorisnikService extends GenericCrudService<RegistrovaniKorisnikDTORecord, RegistrovaniKorisnik, Long> {
 	private RegistrovanKorisnikRepository kRepos;
 	
 	@Autowired
@@ -21,7 +22,7 @@ public class RegistrovanKorisnikService extends GenericCrudService<RegistrovaniK
 	
 	
 	protected RegistrovanKorisnikService(CrudRepository<RegistrovaniKorisnik, Long> repository,
-			Mapper<RegistrovaniKorisnikDTO, RegistrovaniKorisnik> mapper) {
+			Mapper<RegistrovaniKorisnikDTORecord, RegistrovaniKorisnik> mapper) {
 		super(repository, mapper);
 		this.kRepos = (RegistrovanKorisnikRepository) repository;
 	} 

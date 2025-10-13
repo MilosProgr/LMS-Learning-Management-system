@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO.ObavestenjeAktivnostiDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -14,12 +15,12 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("api/obavestenjaAktivnost")
-public class ObavestenjeAktivnostController extends GenericCrudController<ObavestenjeAktivnostDTO, ObavestenjeAktivnosti, Long> {
+public class ObavestenjeAktivnostController extends GenericCrudController<ObavestenjeAktivnostiDTORecord, ObavestenjeAktivnosti, Long> {
 	@Autowired
 	private ObavestenjaAktivnostiService obavestenjaAktivnostiService;
 
 	@Override
-	protected CrudService<ObavestenjeAktivnostDTO, ObavestenjeAktivnosti, Long> getService() {
+	protected CrudService<ObavestenjeAktivnostiDTORecord, ObavestenjeAktivnosti, Long> getService() {
 		// TODO Auto-generated method stub
 		return obavestenjaAktivnostiService;
 	}

@@ -23,7 +23,9 @@ import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.Permissi
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionService;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionService;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Details.UserDetailsService;
@@ -41,7 +43,7 @@ import jakarta.transaction.Transactional;
 @CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping("/api")
-public class RegistrovaniKorisnikController extends GenericCrudController<RegistrovaniKorisnikDTO, RegistrovaniKorisnik, Long> {
+public class RegistrovaniKorisnikController extends GenericCrudController<RegistrovaniKorisnikDTORecord, RegistrovaniKorisnik, Long> {
 	
 	@Autowired
 	RegistrovanKorisnikService korisnikService;
@@ -66,14 +68,14 @@ public class RegistrovaniKorisnikController extends GenericCrudController<Regist
 	
 	
 	@Override
-	protected CrudService<RegistrovaniKorisnikDTO, RegistrovaniKorisnik, Long> getService() {
+	protected CrudService<RegistrovaniKorisnikDTORecord, RegistrovaniKorisnik, Long> getService() {
 		// TODO Auto-generated method stub
 		return korisnikService;
 	}
 	
 	@Secured({"ROLE_ADMIN","ROLE_SLUZBA", "ROLE_NASTAVNIK"})
 	@RequestMapping(path = "/korisnici",method = RequestMethod.GET)
-    public ResponseEntity<List<RegistrovaniKorisnikDTO>> findAll() throws IllegalAccessException, InstantiationException {
+    public ResponseEntity<List<RegistrovaniKorisnikDTORecord>> findAll() throws IllegalAccessException, InstantiationException {
         return super.getAll();
     }
 	
@@ -120,7 +122,7 @@ public class RegistrovaniKorisnikController extends GenericCrudController<Regist
 	
 	@PostMapping("/register/{role}")
     @Transactional
-    public ResponseEntity<RegistrovaniKorisnikDTO> register(@PathVariable("role") String role, @RequestBody RegistrovaniKorisnik korisnik) {
+    public ResponseEntity<RegistrovaniKorisnikDTORecord> register(@PathVariable("role") String role, @RequestBody RegistrovaniKorisnik korisnik) {
         //List<Permission> permissions = permissionService.findPermissionByName(role);
 		// 409 — korisničko ime već postoji
 	    Optional<RegistrovaniKorisnik> postojeciKorisnik =
@@ -142,37 +144,45 @@ public class RegistrovaniKorisnikController extends GenericCrudController<Regist
         }
         
         korisnik.setLozinka(passwordEncoder.encode(korisnik.getLozinka()));
-        RegistrovaniKorisnikDTO savedKorisnik = korisnikService.save(korisnik);
+        RegistrovaniKorisnikDTORecord savedKorisnik = korisnikService.save(korisnik);
 
         
-        UserPermissionDTO uDto = userPermissionService.save(new UserPermission(permission.get(),korisnik));
-        Set<UserPermissionDTO> skupPravaPristupa = new HashSet<>();
+        UserPermissionDTORecord uDto = userPermissionService.save(new UserPermission(permission.get(),korisnik));
+        Set<UserPermissionDTORecord> skupPravaPristupa = new HashSet<>();
         skupPravaPristupa.add(uDto);
-        savedKorisnik.setPravaPristupa(skupPravaPristupa);
+        
+        savedKorisnik = new RegistrovaniKorisnikDTORecord(savedKorisnik.id(),
+        		savedKorisnik.ime(),
+        		savedKorisnik.prezime(),
+        		savedKorisnik.korisnickoIme(),
+        		savedKorisnik.lozinka(),
+        		savedKorisnik.email(),
+        		skupPravaPristupa, null);
+//        savedKorisnik.setPravaPristupa(skupPravaPristupa);
         
        
-        System.out.println("Korisnik uspesno registrovan! " + savedKorisnik.getId());
+        System.out.println("Korisnik uspesno registrovan! " + savedKorisnik.id());
         return new ResponseEntity<>(savedKorisnik, HttpStatus.CREATED);
         
     }
 	
 //	 @Secured("ROLE_ADMIN")
 	 @RequestMapping(path = "/korisnici/{id}",method = RequestMethod.GET)
-	    public ResponseEntity<RegistrovaniKorisnikDTO> getById(Long id) {
+	    public ResponseEntity<RegistrovaniKorisnikDTORecord> getById(Long id) {
 	        return super.getById(id);
 	 }
 	
 	 @Override
 	 @Secured("ROLE_ADMIN")
 	 @RequestMapping(path = "/korisnici",method = RequestMethod.POST)
-	 public ResponseEntity<RegistrovaniKorisnikDTO> create(RegistrovaniKorisnik korisnik) {
+	 public ResponseEntity<RegistrovaniKorisnikDTORecord> create(RegistrovaniKorisnik korisnik) {
 		 return super.create(korisnik);
 	 }
 
     @Override
     @Secured("ROLE_ADMIN")
     @RequestMapping(path = "/korisnici/{id}",method = RequestMethod.PUT)
-    public ResponseEntity<RegistrovaniKorisnikDTO> update(@PathVariable("id") Long id,@RequestBody RegistrovaniKorisnik korisnik) {
+    public ResponseEntity<RegistrovaniKorisnikDTORecord> update(@PathVariable("id") Long id,@RequestBody RegistrovaniKorisnik korisnik) {
         korisnik.setLozinka(passwordEncoder.encode(korisnik.getLozinka()));
     	return super.update(id,korisnik);
     }
@@ -180,7 +190,7 @@ public class RegistrovaniKorisnikController extends GenericCrudController<Regist
     @Override
     @Secured("ROLE_ADMIN")
     @RequestMapping(path = "/korisnici/{id}",method = RequestMethod.DELETE)
-    public ResponseEntity<RegistrovaniKorisnikDTO> delete(Long id) {
+    public ResponseEntity<RegistrovaniKorisnikDTORecord> delete(Long id) {
         return super.delete(id);
     }
 

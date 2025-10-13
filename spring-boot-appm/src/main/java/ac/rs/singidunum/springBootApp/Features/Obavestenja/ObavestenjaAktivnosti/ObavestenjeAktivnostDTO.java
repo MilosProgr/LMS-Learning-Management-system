@@ -1,8 +1,11 @@
 package ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 
 
 
@@ -77,5 +80,14 @@ public class ObavestenjeAktivnostDTO {
 	public void setRegistrovaniKorisnik(RegistrovaniKorisnikDTO registrovaniKorisnik) {
 		this.registrovaniKorisnik = registrovaniKorisnik;
 	}
+	
+	public record ObavestenjeAktivnostiDTORecord(
+			Long id,
+	        LocalDateTime vremePostavljanja,
+	        String sadrzaj,
+	        String naslov,
+	        Boolean procitano,
+	        RegistrovaniKorisnikDTORecord registrovaniKorisnik
+			) {}
 	
 }

@@ -9,24 +9,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO.ObavestenjeAktivnostiDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class ObavestenjaAktivnostiService extends GenericCrudService<ObavestenjeAktivnostDTO, ObavestenjeAktivnosti, Long>{
+public class ObavestenjaAktivnostiService extends GenericCrudService<ObavestenjeAktivnostiDTORecord, ObavestenjeAktivnosti, Long>{
 	
 	@Autowired
 	private ObavestenjeAktivnostiRepository obaveseAktivnostiRepository;
 
 	protected ObavestenjaAktivnostiService(CrudRepository<ObavestenjeAktivnosti, Long> repository,
-			Mapper<ObavestenjeAktivnostDTO, ObavestenjeAktivnosti> mapper) {
+			Mapper<ObavestenjeAktivnostiDTORecord, ObavestenjeAktivnosti> mapper) {
 		super(repository, mapper);
 	}
 	
 	@Override
-    public ObavestenjeAktivnostDTO save(ObavestenjeAktivnosti o) {
+    public ObavestenjeAktivnostiDTORecord save(ObavestenjeAktivnosti o) {
 
         final String naslov = o.getNaslov() != null ? o.getNaslov().trim() : null;
         final String sadrzaj  = o.getSadrzaj()  != null ? o.getSadrzaj().trim()  : null;
@@ -67,7 +68,7 @@ public class ObavestenjaAktivnostiService extends GenericCrudService<Obavestenje
     }
 	
 	@Override
-	public ObavestenjeAktivnostDTO update(ObavestenjeAktivnosti o) {
+	public ObavestenjeAktivnostiDTORecord update(ObavestenjeAktivnosti o) {
 	    if (o.getId() == null) {
 	        throw new ResponseStatusException(
 	            HttpStatus.BAD_REQUEST, "ID je obavezan za izmenu obaveštenja aktivnosti."

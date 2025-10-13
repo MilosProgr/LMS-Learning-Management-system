@@ -4,18 +4,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO;
+import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO.PermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 
 public class UserPermissionDTO {
 	private Long id;
 
-    private PermissionDTO permission;
+    private PermissionDTORecord permission;
 
-    private RegistrovaniKorisnikDTO korisnik;
+    private RegistrovaniKorisnikDTORecord korisnik;
     
-    private Set<PermissionDTO> listaUloga = new HashSet<>();
+    private Set<PermissionDTORecord> listaUloga = new HashSet<>();
 
-	public UserPermissionDTO(Long id, PermissionDTO permission, RegistrovaniKorisnikDTO korisnik) {
+	public UserPermissionDTO(Long id, PermissionDTORecord permission, RegistrovaniKorisnikDTORecord korisnik) {
 		super();
 		this.id = id;
 		this.permission = permission;
@@ -34,29 +36,35 @@ public class UserPermissionDTO {
 		this.id = id;
 	}
 
-	public PermissionDTO getPermission() {
+	public PermissionDTORecord getPermission() {
 		return permission;
 	}
 
-	public void setPermission(PermissionDTO permission) {
+	public void setPermission(PermissionDTORecord permission) {
 		this.permission = permission;
 	}
 
-	public RegistrovaniKorisnikDTO getKorisnik() {
+	public RegistrovaniKorisnikDTORecord getKorisnik() {
 		return korisnik;
 	}
 
-	public void setKorisnik(RegistrovaniKorisnikDTO korisnik) {
+	public void setKorisnik(RegistrovaniKorisnikDTORecord korisnik) {
 		this.korisnik = korisnik;
 	}
 
-	public Set<PermissionDTO> getListaUloga() {
+	public Set<PermissionDTORecord> getListaUloga() {
 		return listaUloga;
 	}
 
-	public void setListaUloga(Set<PermissionDTO> listaUloga) {
+	public void setListaUloga(Set<PermissionDTORecord> listaUloga) {
 		this.listaUloga = listaUloga;
 	}
     		
+	public record UserPermissionDTORecord(
+	        Long id,
+	        PermissionDTORecord permission,
+	        RegistrovaniKorisnikDTORecord korisnik,
+	        Set<PermissionDTORecord> listaUloga
+	) {}
 
 }
