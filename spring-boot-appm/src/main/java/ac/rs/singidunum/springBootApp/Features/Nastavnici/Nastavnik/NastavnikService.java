@@ -6,13 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovanKorisnikRepository;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 @Service
-public class NastavnikService extends GenericCrudService<NastavnikDTO, Nastavnik, Long> {
+public class NastavnikService extends GenericCrudService<NastavnikDTORecord, Nastavnik, Long> {
 
 	@Autowired
 	private NastavnikMapper nastavnikMapper;
@@ -23,16 +24,16 @@ public class NastavnikService extends GenericCrudService<NastavnikDTO, Nastavnik
 	@Autowired
 	private RegistrovanKorisnikRepository rRepository;
 	
-	protected NastavnikService(CrudRepository<Nastavnik, Long> repository, Mapper<NastavnikDTO, Nastavnik> mapper) {
+	protected NastavnikService(CrudRepository<Nastavnik, Long> repository, Mapper<NastavnikDTORecord, Nastavnik> mapper) {
 		super(repository, mapper);
 		this.nastavnikMapper = nastavnikMapper;
 	}
 	
-	public List<NastavnikDTO> slobodniNastavniciFakultet(){
+	public List<NastavnikDTORecord> slobodniNastavniciFakultet(){
 		return nastavnikMapper.map(nRepository.findNastavniciWithoutFakultet());
 	}
 	
-	public List<NastavnikDTO> slobodniNastavniciUniverzitet(){
+	public List<NastavnikDTORecord> slobodniNastavniciUniverzitet(){
 		return nastavnikMapper.map(nRepository.findNastavniciWithoutUniverzitet());
 	}
 	

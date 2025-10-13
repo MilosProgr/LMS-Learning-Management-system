@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.ZvanjeDTO.ZvanjeDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -11,13 +12,13 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/zvanje")
-public class ZvanjeController extends GenericCrudController<ZvanjeDTO, Zvanje, Long> {
+public class ZvanjeController extends GenericCrudController<ZvanjeDTORecord, Zvanje, Long> {
 
     @Autowired
     private ZvanjeService zvanjeService;
 
     @Override
-    protected CrudService<ZvanjeDTO, Zvanje, Long> getService() {
+    protected CrudService<ZvanjeDTORecord, Zvanje, Long> getService() {
         return zvanjeService;
     }
 }

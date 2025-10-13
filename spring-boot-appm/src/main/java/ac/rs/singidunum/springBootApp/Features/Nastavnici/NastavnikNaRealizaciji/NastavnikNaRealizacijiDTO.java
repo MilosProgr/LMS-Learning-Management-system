@@ -5,6 +5,7 @@ import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 
@@ -12,7 +13,7 @@ public class NastavnikNaRealizacijiDTO {
 	private Long id;
 	private Long brojCasova;
 	
-	private NastavnikDTO nastavnik;
+	private NastavnikDTORecord nastavnik;
 	
 	private Set<RealizacijaPredmetaDTO> realizacijaPredmeta = new HashSet<>();
 	
@@ -27,7 +28,7 @@ public class NastavnikNaRealizacijiDTO {
 		this.brojCasova = brojCasova;
 	}
 	
-	public NastavnikNaRealizacijiDTO(Long id, Long brojCasova,NastavnikDTO nastavnik) {
+	public NastavnikNaRealizacijiDTO(Long id, Long brojCasova,NastavnikDTORecord nastavnik) {
 		super();
 		this.id = id;
 		this.brojCasova = brojCasova;
@@ -50,11 +51,11 @@ public class NastavnikNaRealizacijiDTO {
 		this.brojCasova = brojCasova;
 	}
 
-	public NastavnikDTO getNastavnik() {
+	public NastavnikDTORecord getNastavnik() {
 		return nastavnik;
 	}
 
-	public void setNastavnik(NastavnikDTO nastavnik) {
+	public void setNastavnik(NastavnikDTORecord nastavnik) {
 		this.nastavnik = nastavnik;
 	}
 

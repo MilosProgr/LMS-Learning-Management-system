@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
@@ -61,14 +62,14 @@ public class FakultetMapper implements Mapper<FakultetDTO, Fakultet> {
 					);
 		}
         if (e.getDekan() != null) {
-            NastavnikDTO dekanDto = new NastavnikDTO(
+        	NastavnikDTORecord dekanDto = new NastavnikDTORecord(
                 e.getDekan().getId(),
                 e.getDekan().getBiografija(),
                 e.getDekan().getJmbg(),
                 e.getDekan().getTelefon(),
                 e.getDekan().getPoslovniMail(),
                 e.getDekan().getBrojSlobodnihDana(),
-                e.getDekan().getBrojIskoristenihDana()
+                e.getDekan().getBrojIskoristenihDana(), null, null, null
             );
 
             if (e.getDekan().getKorisnik() != null) {
@@ -80,10 +81,10 @@ public class FakultetMapper implements Mapper<FakultetDTO, Fakultet> {
                     null,
                     e.getDekan().getKorisnik().getEmail()
                 );
-                dekanDto.setKorisnik(korisnikDto);
+//                dekanDto.setKorisnik(korisnikDto);
             }
 
-            fakultetDTO.setDekan(dekanDto);
+//            fakultetDTO.setDekan(dekanDto);
         }
         
         return fakultetDTO;

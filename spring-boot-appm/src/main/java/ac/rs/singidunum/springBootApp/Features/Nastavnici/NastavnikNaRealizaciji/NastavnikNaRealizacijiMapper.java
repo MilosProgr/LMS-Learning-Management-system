@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNastaveDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
@@ -26,13 +27,13 @@ public class NastavnikNaRealizacijiMapper implements Mapper<NastavnikNaRealizaci
 				new NastavnikNaRealizacijiDTO(e.getId(), e.getBrojCasova());
 		
 		nrDto.setNastavnik(
-				new NastavnikDTO(e.getNastavnik().getId(),
-						e.getNastavnik().getBiografija(),
+				new NastavnikDTORecord(e.getNastavnik().getId(),
+						e.getNastavnik().getBiografija(),	
 						e.getNastavnik().getJmbg(),
 						e.getNastavnik().getTelefon(),
 						e.getNastavnik().getPoslovniMail(),
 						e.getNastavnik().getBrojSlobodnihDana(),
-						e.getNastavnik().getBrojIskoristenihDana()
+						e.getNastavnik().getBrojIskoristenihDana(), null, null, null
 						)
 
 				);
@@ -61,10 +62,10 @@ public class NastavnikNaRealizacijiMapper implements Mapper<NastavnikNaRealizaci
 		return nrDto;
 	}
 
-	@Override
-	public List<NastavnikNaRealizacijiDTO> map(List<NastavnikNaRealizaciji> e) {
-		// TODO Auto-generated method stub
-		return e.stream().map(this::map).collect(Collectors.toList());
-	}
+//	@Override
+//	public List<NastavnikNaRealizacijiDTO> map(List<NastavnikNaRealizaciji> e) {
+//		// TODO Auto-generated method stub
+//		return e.stream().map(this::map).collect(Collectors.toList());
+//	}
 
 }

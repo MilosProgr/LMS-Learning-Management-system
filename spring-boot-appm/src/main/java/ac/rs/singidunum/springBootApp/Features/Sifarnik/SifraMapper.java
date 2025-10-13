@@ -1,10 +1,7 @@
 package ac.rs.singidunum.springBootApp.Features.Sifarnik;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -27,11 +24,5 @@ public class SifraMapper implements Mapper<Map<String, Object>, Sifra> {
 		return sifraMap;
 	}
 
-//	@Override
-//	public List<Map<String, Object>> map(List<Sifra> e) {
-//		if(e == null) {
-//			return Collections.emptyList();
-//		}
-//		return e.stream().map(this::map).collect(Collectors.toList());
-//	}
+
 }

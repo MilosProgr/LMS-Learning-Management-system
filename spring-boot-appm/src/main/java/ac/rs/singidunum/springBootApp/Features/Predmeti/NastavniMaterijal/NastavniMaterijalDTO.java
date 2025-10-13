@@ -1,6 +1,7 @@
 package ac.rs.singidunum.springBootApp.Features.Predmeti.NastavniMaterijal;
 
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
 
 public class NastavniMaterijalDTO {
@@ -8,7 +9,7 @@ public class NastavniMaterijalDTO {
 	private String naziv;
 	private Boolean odobreno;
 	private Integer kolicina;
-	private NastavnikDTO autorizator;
+	private NastavnikDTORecord autorizator;
 	private SluzbenikStudentskeDTO podnosilacZahteva;
 
 
@@ -49,11 +50,11 @@ public class NastavniMaterijalDTO {
 		this.odobreno = odobreno;
 	}
 
-	public NastavnikDTO getAutorizator() {
+	public NastavnikDTORecord getAutorizator() {
 		return autorizator;
 	}
 
-	public void setAutorizator(NastavnikDTO autorizator) {
+	public void setAutorizator(NastavnikDTORecord autorizator) {
 		this.autorizator = autorizator;
 	}
 

@@ -39,4 +39,10 @@ public class NaucnaOblastDTO {
     public void setNastavniciIds(Set<Long> nastavniciIds) {
         this.nastavniciIds = nastavniciIds;
     }
+    
+    public record NaucnaOblastDTORecord(
+    		 Long id,
+    	     String naziv,
+    	     Set<Long> nastavniciIds
+    		) {}
 }

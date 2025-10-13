@@ -69,4 +69,13 @@ public class ZvanjeDTO {
     public void setTipZvanjaId(Long tipZvanjaId) {
         this.tipZvanjaId = tipZvanjaId;
     }
+    
+    public record ZvanjeDTORecord(
+    		  Long id,
+    		  Date datumIzbora,
+    		  Date datumPrestanka,
+    		  Long nastavnikId,
+    		  Long naucnaOblastId,
+    		  Long tipZvanjaId
+    		) {}
 }

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
@@ -33,14 +34,14 @@ public class NastavniMaterijalMapper implements Mapper<NastavniMaterijalDTO, Nas
 		if(e.getAutorizator() != null) {
 			
 			nDto.setAutorizator(
-					new NastavnikDTO(
+					new NastavnikDTORecord(
 							e.getAutorizator().getId(),
 							e.getAutorizator().getBiografija(),
 							e.getAutorizator().getJmbg(),
 							e.getAutorizator().getTelefon(),
 							e.getAutorizator().getPoslovniMail(),
 							e.getAutorizator().getBrojSlobodnihDana(),
-							e.getAutorizator().getBrojIskoristenihDana()
+							e.getAutorizator().getBrojIskoristenihDana(), null, null, null
 
 							
 							)

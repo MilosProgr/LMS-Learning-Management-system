@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
+import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 
 public class UniverzitetDTO {
 	private Long id;
@@ -86,6 +88,16 @@ public class UniverzitetDTO {
 		this.opis = opis;
 	}
 	
+	
+	public record UniverzitetDTORecord(
+			 Long id,
+			 String naziv,
+			 String opis,
+			 LocalDate datumOsnivanja,
+			 List<FakultetDTO> fakultet,
+			 AdresaDTORecord adresa,
+			 NastavnikDTORecord rektor
+			) {}
 	
 	
 	
