@@ -71,7 +71,13 @@ public class IshodDTO {
 		this.nastavniMaterijali = nastavniMaterijali;
 	}
 
-	public record IshodDTORecord() {}
+	public record IshodDTORecord(
+			 Long id,
+			 String opis,
+			 boolean polozeno,
+			 PredmetDTO predmet,
+			 Set<NastavniMaterijalDTORecord> nastavniMaterijali
+			) {}
 	
 	
 	

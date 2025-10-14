@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikRepository;
+import ac.rs.singidunum.springBootApp.Features.Rezervacija.RezervacijaDTO.RezervacijaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
@@ -13,12 +14,12 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 @Service
-public class RezervacijaService extends GenericCrudService<RezervacijaDTO, Rezervacija, Long> {
+public class RezervacijaService extends GenericCrudService<RezervacijaDTORecord, Rezervacija, Long> {
 
     @Autowired
     private NastavnikRepository nastavnikRepository;
 
-    protected RezervacijaService(CrudRepository<Rezervacija, Long> repository, Mapper<RezervacijaDTO, Rezervacija> mapper) {
+    protected RezervacijaService(CrudRepository<Rezervacija, Long> repository, Mapper<RezervacijaDTORecord, Rezervacija> mapper) {
         super(repository, mapper);
     }
 

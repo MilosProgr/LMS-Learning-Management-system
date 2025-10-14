@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.File;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileRepository;
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO.EvaluacijaZnanjaDTORecord;
 //import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjaAktivnostiService;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacije;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeRepository;
@@ -28,7 +29,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class EvaluacijaZnanjaService extends GenericCrudService<EvaluacijaZnanjaDTO, EvaluacijaZnanja, Long> {
+public class EvaluacijaZnanjaService extends GenericCrudService<EvaluacijaZnanjaDTORecord, EvaluacijaZnanja, Long> {
 
 //	@Autowired private IshodService ishodService;
 //	@Autowired private ObavestenjaAktivnostiService obavestenjaAktivnostiService;
@@ -40,11 +41,11 @@ public class EvaluacijaZnanjaService extends GenericCrudService<EvaluacijaZnanja
     @Autowired private PredmetRepository predmetRepository;
     
 	protected EvaluacijaZnanjaService(CrudRepository<EvaluacijaZnanja, Long> repository,
-			Mapper<EvaluacijaZnanjaDTO, EvaluacijaZnanja> mapper) {
+			Mapper<EvaluacijaZnanjaDTORecord, EvaluacijaZnanja> mapper) {
 		super(repository, mapper);
 	}
 	
-	public EvaluacijaZnanjaDTO save(EvaluacijaZnanja e) {
+	public EvaluacijaZnanjaDTORecord save(EvaluacijaZnanja e) {
 		e.setVremePocetka(LocalDateTime.now());
 		e.setVremeZavrsetka(LocalDateTime.now().plusHours(2));
 		
@@ -59,7 +60,7 @@ public class EvaluacijaZnanjaService extends GenericCrudService<EvaluacijaZnanja
 	}
 	
 	@Transactional
-    public EvaluacijaZnanjaDTO kreiraj(CreateEvaluacijaZnanjaRequest req) {
+    public EvaluacijaZnanjaDTORecord kreiraj(CreateEvaluacijaZnanjaRequest req) {
         // --- VALIDACIJE UNOSA ---
         if (req.getPrijavljeniIspitId() == null)
             throw new IllegalArgumentException("prijavljeniIspitId je obavezan.");

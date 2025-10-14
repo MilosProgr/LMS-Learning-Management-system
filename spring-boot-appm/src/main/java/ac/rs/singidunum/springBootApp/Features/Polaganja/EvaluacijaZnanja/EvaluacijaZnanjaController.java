@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO.EvaluacijaZnanjaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -15,18 +16,18 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/evaluacijaZnanja")
-public class EvaluacijaZnanjaController extends GenericCrudController<EvaluacijaZnanjaDTO, EvaluacijaZnanja, Long> {
+public class EvaluacijaZnanjaController extends GenericCrudController<EvaluacijaZnanjaDTORecord, EvaluacijaZnanja, Long> {
 	@Autowired
 	private EvaluacijaZnanjaService evaluacijaZnanjaService;
 	@Override
-	protected CrudService<EvaluacijaZnanjaDTO, EvaluacijaZnanja, Long> getService() {
+	protected CrudService<EvaluacijaZnanjaDTORecord, EvaluacijaZnanja, Long> getService() {
 		// TODO Auto-generated method stub
 		return evaluacijaZnanjaService;
 	}
 	
     @PostMapping("/upis-bodova")
-    public ResponseEntity<EvaluacijaZnanjaDTO> kreiraj(@RequestBody CreateEvaluacijaZnanjaRequest req) {
-        EvaluacijaZnanjaDTO dto = evaluacijaZnanjaService.kreiraj(req);
+    public ResponseEntity<EvaluacijaZnanjaDTORecord> kreiraj(@RequestBody CreateEvaluacijaZnanjaRequest req) {
+    	EvaluacijaZnanjaDTORecord dto = evaluacijaZnanjaService.kreiraj(req);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 

@@ -11,6 +11,7 @@ import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaRepository;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaService;
 import ac.rs.singidunum.springBootApp.Features.Drzava.Drzava;
 import ac.rs.singidunum.springBootApp.Features.Drzava.DrzavaRepository;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoRepository;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
@@ -23,7 +24,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class FakultetService extends GenericCrudService<FakultetDTO, Fakultet, Long> {
+public class FakultetService extends GenericCrudService<FakultetDTORecord, Fakultet, Long> {
 
     @Autowired private AdresaService adresaService;
     @Autowired private FakultetRepository fakultetRepository;
@@ -36,14 +37,14 @@ public class FakultetService extends GenericCrudService<FakultetDTO, Fakultet, L
     
     @Autowired private FakultetMapper fakultetMapper;
 	
-	protected FakultetService(CrudRepository<Fakultet, Long> repository, Mapper<FakultetDTO, Fakultet> mapper) {
+	protected FakultetService(CrudRepository<Fakultet, Long> repository, Mapper<FakultetDTORecord, Fakultet> mapper) {
 		super(repository, mapper);
 		// TODO Auto-generated constructor stub
 	}
 	
 	
     @Transactional
-    public FakultetDTO save(Fakultet f) {
+    public FakultetDTORecord save(Fakultet f) {
         //Provera jedinstvenog naziva
         if (fakultetRepository.existsByNazivIgnoreCase(f.getNaziv().trim())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -58,7 +59,7 @@ public class FakultetService extends GenericCrudService<FakultetDTO, Fakultet, L
     }
     
     @Transactional
-    public FakultetDTO update(Fakultet f) {
+    public FakultetDTORecord update(Fakultet f) {
         String key = f.getNaziv().trim().replaceAll("\\s+", " ");
         if (f.getId() != null &&
             fakultetRepository.existsByNazivIgnoreCaseAndIdNot(key, f.getId())) {
@@ -73,7 +74,7 @@ public class FakultetService extends GenericCrudService<FakultetDTO, Fakultet, L
     /* ================== TRANSAKCIONI UPSERT ================== */
 
     @Transactional
-    public FakultetDTO upSetFakultet(FakultetRequest req) {
+    public FakultetDTORecord upSetFakultet(FakultetRequest req) {
         // --- VALIDACIJE (400) ---
         if (isBlank(req.getNaziv()))         throw badReq("Naziv je obavezan.");
         if (isBlank(req.getUlica()))         throw badReq("Ulica je obavezna.");

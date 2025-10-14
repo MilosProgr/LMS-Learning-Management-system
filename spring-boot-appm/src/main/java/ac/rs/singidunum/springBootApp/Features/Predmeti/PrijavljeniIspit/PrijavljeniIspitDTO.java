@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
+import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO.EvaluacijaZnanjaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.IspitniRok.IspitniRokDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
@@ -101,7 +102,15 @@ public class PrijavljeniIspitDTO {
 	}
 	
 	
-	
+	public record PrijavljeniIspitDTORecord(
+			 Long id,	
+			 Boolean prijavljen,		
+			 Integer brojPrijava,		
+			 List<EvaluacijaZnanjaDTORecord> evaluacijeZnanja,	
+			 StudentNaGodiniDTO StudentNaGodini,
+			 PredmetDTO predmet,
+			 IspitniRokDTO ispitniRok
+			) {}
 	
 	
 	

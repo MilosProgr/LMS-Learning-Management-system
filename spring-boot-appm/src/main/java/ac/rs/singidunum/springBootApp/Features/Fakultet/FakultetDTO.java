@@ -8,6 +8,7 @@ import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 
@@ -19,16 +20,16 @@ public class FakultetDTO {
 	
 	private NastavnikDTO dekan;
 	
-	private String kontakt;
+//	private String kontakt;
 	private String opis;
 	
 	private List<StudijskiProgramDTO> programi = new ArrayList<>();
 	
-	public FakultetDTO(Long id, String naziv,String kontakt, String opis) {
+	public FakultetDTO(Long id, String naziv, String opis) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
-		this.kontakt = kontakt;
+//		this.kontakt = kontakt;
 		this.opis = opis;
 		
 	}
@@ -78,13 +79,13 @@ public class FakultetDTO {
 	}
 
 
-	public String getKontakt() {
-		return kontakt;
-	}
-
-	public void setKontakt(String kontakt) {
-		this.kontakt = kontakt;
-	}
+//	public String getKontakt() {
+//		return kontakt;
+//	}
+//
+//	public void setKontakt(String kontakt) {
+//		this.kontakt = kontakt;
+//	}
 
 	public NastavnikDTO getDekan() {
 		return dekan;
@@ -110,10 +111,9 @@ public class FakultetDTO {
 			
 			 NastavnikDTORecord dekan,
 			
-			 String kontakt,
 			 String opis,
 			
-			 List<StudijskiProgramDTO> programi
+			 List<StudijskiProgramDTORecord> programi
 			) {}
 	
 	

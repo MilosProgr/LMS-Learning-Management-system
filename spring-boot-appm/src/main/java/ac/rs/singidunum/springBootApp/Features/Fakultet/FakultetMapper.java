@@ -1,29 +1,80 @@
 package ac.rs.singidunum.springBootApp.Features.Fakultet;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
+import ac.rs.singidunum.springBootApp.Features.Adresa.Adresa;
+import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Mesto.MestoDTO.MestoDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
-import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
+import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
-public class FakultetMapper implements Mapper<FakultetDTO, Fakultet> {
+public class FakultetMapper implements Mapper<FakultetDTORecord, Fakultet> {
 
 	@Override
-	public FakultetDTO map(Fakultet e) {
-		FakultetDTO fakultetDTO =
-				new FakultetDTO(
+	public FakultetDTORecord map(Fakultet e) {
+		if(e == null) {
+			return null;
+		}
+		MestoDTORecord mestoDTO = null;
+        if (e.getAdresa().getMesto() != null) {
+            mestoDTO = new MestoDTORecord(e.getAdresa().getMesto().getId(), e.getAdresa().getMesto().getNaziv(), null);
+        }
+		AdresaDTORecord adresaDTO = null;
+		if(e.getAdresa() != null) {
+			adresaDTO = new AdresaDTORecord(
+					e.getAdresa().getId(),
+					e.getAdresa().getUlica(),
+					e.getAdresa().getBroj(),
+					mestoDTO
+					);
+		}
+		UniverzitetDTORecord univerzitetDTO = null;
+		AdresaDTORecord adresaUniverzitetDTO = null;
+		if(e.getUniverzitet() != null){
+			
+			Adresa adresaUniverzitet = e.getUniverzitet().getAdresa();
+			Nastavnik rektor = e.getUniverzitet().getRektor();
+			
+			NastavnikDTORecord rektorDTO = null;
+			
+			rektorDTO = new NastavnikDTORecord(
+					null, null, null, null, rektor.getPoslovniMail(), 0, 0, null, Set.of(), Set.of());
+			
+			adresaUniverzitetDTO = new AdresaDTORecord(
+					adresaUniverzitet.getId(),
+					adresaUniverzitet.getUlica(),
+					adresaUniverzitet.getBroj(),
+					null);
+			
+			univerzitetDTO = new UniverzitetDTORecord(
+					e.getUniverzitet().getId(), 
+					e.getUniverzitet().getNaziv(),
+					e.getUniverzitet().getOpis(),
+					e.getUniverzitet().getDatumOsnivanja(),
+					List.of(),
+					adresaUniverzitetDTO,
+					rektorDTO);
+		}
+		Nastavnik dekan = e.getDekan();
+		
+		NastavnikDTORecord dekanDTO = null;
+		dekanDTO = new NastavnikDTORecord(dekan.getId(), dekan.getBiografija(), null, dekan.getTelefon(), dekan.getPoslovniMail(), 0, 0, null, null, null);
+		FakultetDTORecord fakultetDTO =
+				new FakultetDTORecord(
 						e.getId(),
 						e.getNaziv(),
-						null, null
+						adresaDTO,
+						univerzitetDTO,
+						dekanDTO, 
+						e.getOpis(),
+						null
 						);
 		
 //		if(e.getAdresa() != null) {
@@ -90,11 +141,7 @@ public class FakultetMapper implements Mapper<FakultetDTO, Fakultet> {
         return fakultetDTO;
     }
 
-//	@Override
-//	public List<FakultetDTO> map(List<Fakultet> e) {
-//		return e.stream().map(this::map).collect(Collectors.toList());
-//
-//	}
+
 
 
 }

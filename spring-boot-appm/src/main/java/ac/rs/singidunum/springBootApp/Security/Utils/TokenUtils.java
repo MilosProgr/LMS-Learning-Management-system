@@ -1,4 +1,4 @@
-package ac.rs.singidunum.springBootApp.Utils;
+package ac.rs.singidunum.springBootApp.Security.Utils;
 
 import java.security.Key;
 import java.util.Date;

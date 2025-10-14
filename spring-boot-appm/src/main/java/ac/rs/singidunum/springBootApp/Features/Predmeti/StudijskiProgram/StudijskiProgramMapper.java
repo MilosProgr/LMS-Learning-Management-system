@@ -7,7 +7,9 @@ import org.springframework.stereotype.Component;
 
 
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.Student;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
@@ -15,10 +17,10 @@ import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 
 @Component
-public class StudijskiProgramMapper implements Mapper<StudijskiProgramDTO, StudijskiProgram> {
+public class StudijskiProgramMapper implements Mapper<StudijskiProgramDTORecord, StudijskiProgram> {
 
 	@Override
-	public StudijskiProgramDTO map(StudijskiProgram e) {
+	public StudijskiProgramDTORecord map(StudijskiProgram e) {
 		if(e == null) {
 			return null;
 		}
@@ -33,62 +35,63 @@ public class StudijskiProgramMapper implements Mapper<StudijskiProgramDTO, Studi
 		}
 
 		// Create DTO with godinaStudija
-		StudijskiProgramDTO sDto = new StudijskiProgramDTO(
+		StudijskiProgramDTORecord sDto = new StudijskiProgramDTORecord(
 				e.getId(),
 				e.getNaziv(),
-				new FakultetDTO(
+				new FakultetDTORecord(
 						e.getFakultet().getId(),
 						e.getFakultet().getNaziv(),
-						e.getFakultet().getTelefon(),
-						e.getFakultet().getOpis()
+						null,
+						null,
+						null, e.getFakultet().getOpis(), null
 				),
-				godinaDto
+				null, godinaDto, null
 		);
 
 		// Map predmeti
-		if(e.getPredmeti() != null) {
-			sDto.setPredmeti(
-					e.getPredmeti().stream()
-							.map(predmet -> new PredmetDTO(
-									predmet.getId(),
-									predmet.getNaziv(),
-									predmet.getEsbn(),
-									predmet.getObavezan(),
-									predmet.getBrojPredavanja(),
-									predmet.getBrojVezbi(),
-									predmet.getDrugiObliciNastave(),
-									predmet.getIstrazivackiRad(),
-									predmet.getOstaliCasovi()
-							))
-							.collect(Collectors.toSet())
-			);
-		}
+//		if(e.getPredmeti() != null) {
+//			sDto.setPredmeti(
+//					e.getPredmeti().stream()
+//							.map(predmet -> new PredmetDTO(
+//									predmet.getId(),
+//									predmet.getNaziv(),
+//									predmet.getEsbn(),
+//									predmet.getObavezan(),
+//									predmet.getBrojPredavanja(),
+//									predmet.getBrojVezbi(),
+//									predmet.getDrugiObliciNastave(),
+//									predmet.getIstrazivackiRad(),
+//									predmet.getOstaliCasovi()
+//							))
+//							.collect(Collectors.toSet())
+//			);
+//		}
 
 		// Map studenti
-		if (e.getStudentiNaGodini() != null) {
-			sDto.setStudenti(
-					e.getStudentiNaGodini().stream()
-							.map(studentNaGodini -> {
-								Student s = studentNaGodini.getStudent();
-								return new StudentDTO(
-										s.getId(),
-										s.getJmbg(),
-										s.getTelefon(),
-										s.getStatusStudiranja(),
-										s.getStanjeNaRacunu(),
-										s.isPredmetiIzabrani()
-								);
-							})
-							.distinct()
-							.collect(Collectors.toList())
-			);
-		}
+//		if (e.getStudentiNaGodini() != null) {
+//			sDto.setStudenti(
+//					e.getStudentiNaGodini().stream()
+//							.map(studentNaGodini -> {
+//								Student s = studentNaGodini.getStudent();
+//								return new StudentDTO(
+//										s.getId(),
+//										s.getJmbg(),
+//										s.getTelefon(),
+//										s.getStatusStudiranja(),
+//										s.getStanjeNaRacunu(),
+//										s.isPredmetiIzabrani()
+//								);
+//							})
+//							.distinct()
+//							.collect(Collectors.toList())
+//			);
+//		}
 
 		return sDto;
 	}
 
-	@Override
-	public List<StudijskiProgramDTO> map(List<StudijskiProgram> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());
-	}
+//	@Override
+//	public List<StudijskiProgramDTORecord> map(List<StudijskiProgram> e) {
+//		return e.stream().map(this::map).collect(Collectors.toList());
+//	}
 }

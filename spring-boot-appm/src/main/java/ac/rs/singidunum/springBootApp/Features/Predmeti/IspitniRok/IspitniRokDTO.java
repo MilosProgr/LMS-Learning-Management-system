@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO.PrijavljeniIspitDTORecord;
 
 
 public class IspitniRokDTO {
@@ -80,6 +81,15 @@ public class IspitniRokDTO {
 	public void setPrijavljeniIspiti(List<PrijavljeniIspitDTO> prijavljeniIspiti) {
 		this.prijavljeniIspiti = prijavljeniIspiti;
 	}
+	
+	public record IspitniRokDTORecord(
+			 Long id,
+			 String naziv,
+			 LocalDateTime pocetak,
+			 LocalDateTime kraj,
+			 Boolean redovan,
+			 List<PrijavljeniIspitDTORecord> prijavljeniIspiti 
+			) {}
 	
 	
 	

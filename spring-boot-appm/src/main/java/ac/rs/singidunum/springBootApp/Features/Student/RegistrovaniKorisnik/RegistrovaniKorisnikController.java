@@ -22,14 +22,13 @@ import org.springframework.web.server.ResponseStatusException;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.Permission;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionService;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermission;
-import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionService;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 import ac.rs.singidunum.springBootApp.Service.implementacija.Details.UserDetailsService;
-import ac.rs.singidunum.springBootApp.Utils.TokenUtils;
+import ac.rs.singidunum.springBootApp.Security.Utils.TokenUtils;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.AuthenticationManager;

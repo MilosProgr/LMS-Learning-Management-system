@@ -7,8 +7,10 @@ import java.util.Set;
 
 
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
 
 public class StudijskiProgramDTO {
@@ -103,13 +105,13 @@ public class StudijskiProgramDTO {
 			
 			 String naziv,
 			
-			 FakultetDTO fakultet,
+			 FakultetDTORecord fakultet,
 			
 			 Set<PredmetDTO> predmeti,
 			
 			 GodinaStudijaDTO godinaStudija,
 			
-			 List<StudentDTO> studenti
+			 List<StudentDTORecord> studenti
 			) 
 	{
 		

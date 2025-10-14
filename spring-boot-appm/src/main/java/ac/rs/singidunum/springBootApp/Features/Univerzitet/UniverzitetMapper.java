@@ -75,7 +75,6 @@ public class UniverzitetMapper implements Mapper<UniverzitetDTORecord, Univerzit
                             null,
                             null,
                             f.getTelefon(),
-                            f.getOpis(),
                             null
                     ))
                     .collect(Collectors.toList());

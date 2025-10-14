@@ -8,6 +8,7 @@ import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO.SifraDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
@@ -145,6 +146,26 @@ public class PredmetDTO {
 	public void setSifra(SifraDTORecord sifra) {
 		this.sifra = sifra;
 	}
+	
+	public record PredmetDTORecord(
+			 Long id,
+			 String naziv,
+			 Integer esbn,
+			 Boolean obavezan,
+			 Integer brojPredavanja,
+			 Integer brojVezbi,
+			 Integer drugiObliciNastave,
+			 Integer istrazivackiRad,
+			 Integer ostaliCasovi,
+			 Set<IshodDTO> silabus,
+//			private SifraDTO sifra;
+			 SifraDTORecord sifra,
+			
+			 Set<StudijskiProgramDTORecord> studijskiProgrami,
+			
+			 GodinaStudijaDTO godinaStudija,
+			 RealizacijaPredmetaDTO realizacijaPredmeta
+			) {}
 	
 	
 	
