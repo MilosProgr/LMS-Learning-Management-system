@@ -1,37 +1,39 @@
 package ac.rs.singidunum.springBootApp.Features.Zvanje.TipZvanja;
 
 import org.springframework.stereotype.Component;
-
 import ac.rs.singidunum.springBootApp.Features.Zvanje.Zvanje.Zvanje;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
+import ac.rs.singidunum.springBootApp.Features.Zvanje.TipZvanja.TipZvanjaDTO.TipZvanjaDTORecord;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class TipZvanjaMapper implements Mapper<TipZvanjaDTO, TipZvanja> {
+public class TipZvanjaMapper implements Mapper<TipZvanjaDTORecord, TipZvanja> {
 
     @Override
-    public TipZvanjaDTO map(TipZvanja tipZvanja) {
-        if(tipZvanja == null) {
+    public TipZvanjaDTORecord map(TipZvanja tipZvanja) {
+        if (tipZvanja == null) {
             return null;
         }
-        TipZvanjaDTO dto = new TipZvanjaDTO();
-        dto.setId(tipZvanja.getId());
-        dto.setNaziv(tipZvanja.getNaziv());
 
+        Set<Long> zvanjaIds = null;
         if (tipZvanja.getZvanja() != null) {
-            Set<Long> zvanjaIds = tipZvanja.getZvanja().stream()
+            zvanjaIds = tipZvanja.getZvanja().stream()
                     .map(Zvanje::getId)
                     .collect(Collectors.toSet());
-            dto.setZvanjaIds(zvanjaIds);
         }
-        return dto;
+
+        return new TipZvanjaDTORecord(
+                tipZvanja.getId(),
+                tipZvanja.getNaziv(),
+                zvanjaIds
+        );
     }
 
     @Override
-    public List<TipZvanjaDTO> map(List<TipZvanja> entities) {
+    public List<TipZvanjaDTORecord> map(List<TipZvanja> entities) {
         return entities.stream()
                 .map(this::map)
                 .collect(Collectors.toList());

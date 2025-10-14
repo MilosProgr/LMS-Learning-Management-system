@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -24,24 +25,24 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 //@CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping("/api/univerziteti")
-public class UniverzitetController extends GenericCrudController<UniverzitetDTO, Univerzitet, Long> {
+public class UniverzitetController extends GenericCrudController<UniverzitetDTORecord, Univerzitet, Long> {
 	@Autowired
 	private UniverzitetService univerzitetService;
 
 	@Override
-	protected CrudService<UniverzitetDTO, Univerzitet, Long> getService() {
+	protected CrudService<UniverzitetDTORecord, Univerzitet, Long> getService() {
 		// TODO Auto-generated method stub
 		return univerzitetService;
 	}
 	
     @PostMapping("/univeriztetAdd")
-    public ResponseEntity<UniverzitetDTO> createUniverzitet(@RequestBody UniverzitetRequest req) {
+    public ResponseEntity<UniverzitetDTORecord> createUniverzitet(@RequestBody UniverzitetRequest req) {
         req.setId(null);
         return ResponseEntity.ok(univerzitetService.upSetUniverzitet(req));
     }
 
     @PutMapping("/univerzitetEdit/{id}")
-    public ResponseEntity<UniverzitetDTO> updateUniverzitet(@PathVariable Long id,
+    public ResponseEntity<UniverzitetDTORecord> updateUniverzitet(@PathVariable Long id,
                                                     @RequestBody UniverzitetRequest req) {
         req.setId(id);
         return ResponseEntity.ok(univerzitetService.upSetUniverzitet(req));

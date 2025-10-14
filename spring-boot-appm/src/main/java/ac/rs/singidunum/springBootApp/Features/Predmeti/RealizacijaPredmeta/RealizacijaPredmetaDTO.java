@@ -9,7 +9,6 @@ import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNasta
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Semestar.SemestarDTO.SemestarDTORecord;
 
 public class RealizacijaPredmetaDTO {

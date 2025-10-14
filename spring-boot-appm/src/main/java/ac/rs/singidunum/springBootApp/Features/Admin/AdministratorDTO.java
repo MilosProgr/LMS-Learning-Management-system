@@ -3,6 +3,7 @@ package ac.rs.singidunum.springBootApp.Features.Admin;
 import java.util.Date;
 
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 
 
 public class AdministratorDTO {
@@ -73,5 +74,17 @@ public class AdministratorDTO {
 	public void setKorisnik(RegistrovaniKorisnikDTO korisnik) {
 		this.korisnik = korisnik;
 	}
+	
+	public record AdministratorDTORecord(
+			 Long id,
+		     String jmbg,
+		     String telefon,
+		     String poslovniEmail,
+		     Date datumkreiranjaNaloga,
+		     boolean nalogAktivan,
+		    
+
+		     RegistrovaniKorisnikDTORecord korisnik
+			) {}
 
 }

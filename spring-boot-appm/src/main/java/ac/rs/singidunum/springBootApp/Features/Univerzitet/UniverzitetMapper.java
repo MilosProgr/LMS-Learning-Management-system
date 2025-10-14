@@ -5,54 +5,96 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
-import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
-public class UniverzitetMapper implements Mapper<UniverzitetDTO, Univerzitet> {
+public class UniverzitetMapper implements Mapper<UniverzitetDTORecord, Univerzitet> {
 
-	@Override
-	public UniverzitetDTO map(Univerzitet e) {
-		if (e == null) {
-			return null;
-		}
-		UniverzitetDTO uDto = new UniverzitetDTO(e.getId(), e.getNaziv(), e.getDatumOsnivanja(), e.getOpis());
+    @Override
+    public UniverzitetDTORecord map(Univerzitet e) {
+        if (e == null) {
+            return null;
+        }
 
-		if (e.getAdresa() != null) {
-			uDto.setAdresa(new AdresaDTO(e.getAdresa().getId(), e.getAdresa().getUlica(), e.getAdresa().getBroj()));
-		}
+        // 🔹 mapiranje adrese
+        AdresaDTORecord adresaDto = null;
+        if (e.getAdresa() != null) {
+            adresaDto = new AdresaDTORecord(
+                    e.getAdresa().getId(),
+                    e.getAdresa().getUlica(),
+                    e.getAdresa().getBroj(),
+                    null // ako ima MestoDTORecord, tu se može dodati
+            );
+        }
 
-		if (e.getRektor() != null) {
-			NastavnikDTORecord nastavnikDto = new NastavnikDTORecord(e.getRektor().getId(),
-					e.getRektor().getBiografija(), e.getRektor().getJmbg(), e.getRektor().getTelefon(),
-					e.getRektor().getPoslovniMail(), e.getRektor().getBrojSlobodnihDana(),
-					e.getRektor().getBrojIskoristenihDana(), null, null, null);
+        // 🔹 mapiranje rektora
+        NastavnikDTORecord rektorDto = null;
+        if (e.getRektor() != null) {
 
-			if (e.getRektor().getKorisnik() != null) {
-				RegistrovaniKorisnikDTO korisnikDto = new RegistrovaniKorisnikDTO(e.getRektor().getKorisnik().getId(),
-						e.getRektor().getKorisnik().getIme(), e.getRektor().getKorisnik().getPrezime(),
-						e.getRektor().getKorisnik().getKorisnickoIme(), null, e.getRektor().getKorisnik().getEmail());
-//	            nastavnikDto.setKorisnik(korisnikDto);
-			}
+            RegistrovaniKorisnikDTORecord korisnikDto = null;
+            if (e.getRektor().getKorisnik() != null) {
+                korisnikDto = new RegistrovaniKorisnikDTORecord(
+                        e.getRektor().getKorisnik().getId(),
+                        e.getRektor().getKorisnik().getIme(),
+                        e.getRektor().getKorisnik().getPrezime(),
+                        e.getRektor().getKorisnik().getKorisnickoIme(),
+                        e.getRektor().getKorisnik().getLozinka(),
+                        e.getRektor().getKorisnik().getEmail(),
+                        null,
+                        null
+                );
+            }
 
-//	        uDto.setRektor(nastavnikDto);
-		}
+            rektorDto = new NastavnikDTORecord(
+                    e.getRektor().getId(),
+                    e.getRektor().getBiografija(),
+                    e.getRektor().getJmbg(),
+                    e.getRektor().getTelefon(),
+                    e.getRektor().getPoslovniMail(),
+                    e.getRektor().getBrojSlobodnihDana(),
+                    e.getRektor().getBrojIskoristenihDana(),
+                    korisnikDto,
+                    null,
+                    null
+            );
+        }
 
-		if (e.getFakulteti() != null) {
-			uDto.setFakultet(e.getFakulteti().stream().map(fakulteti -> new FakultetDTO(fakulteti.getId(),
-					fakulteti.getNaziv(), fakulteti.getTelefon(), fakulteti.getOpis())).collect(Collectors.toList()));
-		}
+        // 🔹 mapiranje fakulteta
+        List<FakultetDTORecord> fakultetiDto = null;
+        if (e.getFakulteti() != null) {
+            fakultetiDto = e.getFakulteti().stream()
+                    .map(f -> new FakultetDTORecord(
+                            f.getId(),
+                            f.getNaziv(),
+                            null,
+                            null,
+                            null,
+                            f.getTelefon(),
+                            f.getOpis(),
+                            null
+                    ))
+                    .collect(Collectors.toList());
+        }
 
-		return uDto;
-	}
+        // 🔹 kreiranje univerziteta recorda
+        return new UniverzitetDTORecord(
+                e.getId(),
+                e.getNaziv(),
+                e.getOpis(),
+                e.getDatumOsnivanja(),
+                fakultetiDto,
+                adresaDto,
+                rektorDto
+        );
+    }
 
-	@Override
-	public List<UniverzitetDTO> map(List<Univerzitet> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());
-
-	}
-
+//    @Override
+//    public List<UniverzitetDTORecord> map(List<Univerzitet> e) {
+//        return e.stream().map(this::map).collect(Collectors.toList());
+//    }
 }

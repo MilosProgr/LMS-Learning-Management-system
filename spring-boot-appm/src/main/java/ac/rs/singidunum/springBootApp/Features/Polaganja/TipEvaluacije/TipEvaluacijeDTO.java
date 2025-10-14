@@ -34,6 +34,10 @@ public class TipEvaluacijeDTO {
 		this.naziv = naziv;
 	}
 
+	public record TipEvaluacijeDTORecord(
+			Long id,
+			String naziv
+			) {}
 
 	
 	

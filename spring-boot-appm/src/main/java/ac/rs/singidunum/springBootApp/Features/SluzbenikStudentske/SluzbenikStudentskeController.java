@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ac.rs.singidunum.springBootApp.Aspect.Logged;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO.SluzbenikStudentskeDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovanKorisnikRepository;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
@@ -20,7 +21,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/sluzbenici")
-public class SluzbenikStudentskeController extends GenericCrudController<SluzbenikStudentskeDTO, SluzbenikStudentske, Long>{
+public class SluzbenikStudentskeController extends GenericCrudController<SluzbenikStudentskeDTORecord, SluzbenikStudentske, Long>{
 
      @Autowired
      private SluzbenikStudentskeService sluzbenikStudentskeService;
@@ -32,7 +33,7 @@ public class SluzbenikStudentskeController extends GenericCrudController<Sluzben
      private SluzbenikStudentskeRepository sluzbenikStudentskeRepository;
 
      @Override
-     protected CrudService<SluzbenikStudentskeDTO, SluzbenikStudentske, Long> getService() {
+     protected CrudService<SluzbenikStudentskeDTORecord, SluzbenikStudentske, Long> getService() {
 		// TODO Auto-generated method stub
 		return sluzbenikStudentskeService;
 	}
@@ -40,31 +41,31 @@ public class SluzbenikStudentskeController extends GenericCrudController<Sluzben
     @Override
 // 	@Logged
 // 	@Secured({"ROLE_ADMIN"})
- 	public ResponseEntity<List<SluzbenikStudentskeDTO>> getAll(){
+ 	public ResponseEntity<List<SluzbenikStudentskeDTORecord>> getAll(){
  		return super.getAll();
  	}
  	
  	@Override
 // 	@Secured({"ROLE_ADMIN"})
- 	public ResponseEntity<SluzbenikStudentskeDTO> getById(Long id){
+ 	public ResponseEntity<SluzbenikStudentskeDTORecord> getById(Long id){
  		return super.getById(id);
  	}
  	
  	@Override
 // 	@Secured({"ROLE_ADMIN"})
- 	public ResponseEntity<SluzbenikStudentskeDTO> create (SluzbenikStudentske n){
+ 	public ResponseEntity<SluzbenikStudentskeDTORecord> create (SluzbenikStudentske n){
  		return super.create(n);
  	}
  	
  	@Override
 // 	@Secured({"ROLE_ADMIN"})
- 	public ResponseEntity<SluzbenikStudentskeDTO> update(Long id,SluzbenikStudentske n){
+ 	public ResponseEntity<SluzbenikStudentskeDTORecord> update(Long id,SluzbenikStudentske n){
  		return super.update(id, n);
  	}
  	
  	@Override
 // 	@Secured({"ROLE_ADMIN"})
- 	public ResponseEntity<SluzbenikStudentskeDTO> delete(Long id){
+ 	public ResponseEntity<SluzbenikStudentskeDTORecord> delete(Long id){
  		return super.delete(id);
  	}
     

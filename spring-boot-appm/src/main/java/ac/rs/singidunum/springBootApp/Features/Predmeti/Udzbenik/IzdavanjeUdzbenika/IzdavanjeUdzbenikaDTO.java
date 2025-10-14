@@ -4,13 +4,14 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.IzdavanjeUdzbe
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.UdzbenikDTO;
 import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO.SluzbenikStudentskeDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
 
 public class IzdavanjeUdzbenikaDTO {
 	private Long id;
 	private Integer kolicina;
 	private StudentNaGodiniDTO podnosilacZahteva;
-	private SluzbenikStudentskeDTO autorizator;
+	private SluzbenikStudentskeDTORecord autorizator;
 	private UdzbenikDTO udzbenik;
 	private Boolean odobreno;
 	private Long podnosilacZahtevaId;
@@ -67,12 +68,12 @@ public class IzdavanjeUdzbenikaDTO {
 	}
 
 
-	public SluzbenikStudentskeDTO getAutorizator() {
+	public SluzbenikStudentskeDTORecord getAutorizator() {
 		return autorizator;
 	}
 
 
-	public void setAutorizator(SluzbenikStudentskeDTO autorizator) {
+	public void setAutorizator(SluzbenikStudentskeDTORecord autorizator) {
 		this.autorizator = autorizator;
 	}
 

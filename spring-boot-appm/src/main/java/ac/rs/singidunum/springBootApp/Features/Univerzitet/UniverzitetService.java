@@ -20,13 +20,14 @@ import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoRepository;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.Nastavnik;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikRepository;
+import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class UniverzitetService extends GenericCrudService<UniverzitetDTO, Univerzitet, Long> {
+public class UniverzitetService extends GenericCrudService<UniverzitetDTORecord, Univerzitet, Long> {
 
 	
 	@Autowired private AdresaService adresaService;
@@ -41,13 +42,13 @@ public class UniverzitetService extends GenericCrudService<UniverzitetDTO, Unive
 	
 	
 	protected UniverzitetService(CrudRepository<Univerzitet, Long> repository,
-			Mapper<UniverzitetDTO, Univerzitet> mapper) {
+			Mapper<UniverzitetDTORecord, Univerzitet> mapper) {
 		super(repository, mapper);
 		// TODO Auto-generated constructor stub
 	}
 	
     @Transactional
-    public UniverzitetDTO save(Univerzitet u) {
+    public UniverzitetDTORecord save(Univerzitet u) {
         //Provera jedinstvenog naziva
         if (univerzitetRepository.existsByNazivIgnoreCase(u.getNaziv().trim())) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,
@@ -62,7 +63,7 @@ public class UniverzitetService extends GenericCrudService<UniverzitetDTO, Unive
     }
     
     @Transactional
-    public UniverzitetDTO update(Univerzitet u) {
+    public UniverzitetDTORecord update(Univerzitet u) {
         String key = u.getNaziv().trim().replaceAll("\\s+", " ");
         if (u.getId() != null &&
             univerzitetRepository.existsByNazivIgnoreCaseAndIdNot(key, u.getId())) {
@@ -78,7 +79,7 @@ public class UniverzitetService extends GenericCrudService<UniverzitetDTO, Unive
     /* ------------------ TRANSAKCIONO DODAVANJE SVEGA ------------------ */
 
     @Transactional
-    public UniverzitetDTO upSetUniverzitet(UniverzitetRequest req) {
+    public UniverzitetDTORecord upSetUniverzitet(UniverzitetRequest req) {
         // --- VALIDACIJE ---
 
     	if (isBlank(req.getNaziv())) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Naziv je obavezan.");

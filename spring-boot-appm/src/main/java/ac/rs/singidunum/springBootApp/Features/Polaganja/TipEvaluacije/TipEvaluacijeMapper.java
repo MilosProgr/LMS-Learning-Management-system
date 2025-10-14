@@ -5,27 +5,28 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeDTO.TipEvaluacijeDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
-public class TipEvaluacijeMapper implements Mapper<TipEvaluacijeDTO, TipEvaluacije>{
+public class TipEvaluacijeMapper implements Mapper<TipEvaluacijeDTORecord, TipEvaluacije>{
 
 	@Override
-	public TipEvaluacijeDTO map(TipEvaluacije e) {
+	public TipEvaluacijeDTORecord map(TipEvaluacije e) {
 		if(e == null) {
 			return null;
 		}
-		TipEvaluacijeDTO tEvDto = 
-				new TipEvaluacijeDTO(e.getId(), e.getNaziv());
+		TipEvaluacijeDTORecord tEvDto = 
+				new TipEvaluacijeDTORecord(e.getId(), e.getNaziv());
 		
 		
 		return tEvDto;
 	}
 
-	@Override
-	public List<TipEvaluacijeDTO> map(List<TipEvaluacije> e) {
-		// TODO Auto-generated method stub
-		return e.stream().map(this::map).collect(Collectors.toList());
-	}
+//	@Override
+//	public List<TipEvaluacijeDTORecord> map(List<TipEvaluacije> e) {
+//		// TODO Auto-generated method stub
+//		return e.stream().map(this::map).collect(Collectors.toList());
+//	}
 
 }

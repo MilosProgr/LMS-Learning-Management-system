@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import ac.rs.singidunum.springBootApp.Features.Admin.AdministratorDTO.AdministratorDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovanKorisnikRepository;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
@@ -11,7 +12,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 @Service
-public class AdministratorService extends GenericCrudService<AdministratorDTO, Administrator, Long> {
+public class AdministratorService extends GenericCrudService<AdministratorDTORecord, Administrator, Long> {
 	
 	@Autowired
 	private RegistrovanKorisnikRepository korisnikRepository;
@@ -23,13 +24,13 @@ public class AdministratorService extends GenericCrudService<AdministratorDTO, A
 	private AdministratorMapper administratorMapper;
 
 	
-	protected AdministratorService(CrudRepository<Administrator, Long> repository, Mapper<AdministratorDTO, Administrator> mapper) {
+	protected AdministratorService(CrudRepository<Administrator, Long> repository, Mapper<AdministratorDTORecord, Administrator> mapper) {
         super(repository, mapper);
         this.administratorMapper = administratorMapper;
     }
 	
 	
-	public AdministratorDTO promoteToAdministratora(Administrator administrator) {
+	public AdministratorDTORecord promoteToAdministratora(Administrator administrator) {
 	    Long korisnikId = administrator.getId(); // Preuzimamo ID korisnika iz objekta administrator
 
 	    // Provera da li korisnik sa tim ID postoji

@@ -98,8 +98,22 @@ public class StudijskiProgramDTO {
 		this.studenti = studenti;
 	}
 	
-	
-
+	public record StudijskiProgramDTORecord(
+			 Long id,
+			
+			 String naziv,
+			
+			 FakultetDTO fakultet,
+			
+			 Set<PredmetDTO> predmeti,
+			
+			 GodinaStudijaDTO godinaStudija,
+			
+			 List<StudentDTO> studenti
+			) 
+	{
+		
+	}
 
 	
 	

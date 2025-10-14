@@ -39,4 +39,10 @@ public class TipZvanjaDTO {
     public void setZvanjaIds(Set<Long> zvanjaIds) {
         this.zvanjaIds = zvanjaIds;
     }
+    
+    public record TipZvanjaDTORecord(
+    		  Long id,
+    		  String naziv,
+    		  Set<Long> zvanjaIds
+    		) {}
 }

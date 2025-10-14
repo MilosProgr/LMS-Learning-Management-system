@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.UdzbenikDTO;
 import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
+import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO.SluzbenikStudentskeDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
@@ -35,11 +36,11 @@ public class IzdavanjeUdzbenikaMapper implements Mapper<IzdavanjeUdzbenikaDTO, I
 
 		if (e.getAutorizator() != null) {
 			iDto.setAutorizator(
-					new SluzbenikStudentskeDTO(
+					new SluzbenikStudentskeDTORecord(
 							e.getAutorizator().getId(),
 							e.getAutorizator().getJmbg(),
 							e.getAutorizator().getTelefon(),
-							e.getAutorizator().getNalogAktivan()
+							e.getAutorizator().getNalogAktivan(), null
 					)
 			);
 		}

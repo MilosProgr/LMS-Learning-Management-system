@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
+import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO;
+import ac.rs.singidunum.springBootApp.Features.Univerzitet.UniverzitetDTO.UniverzitetDTORecord;
 
 public class FakultetDTO {
 	private Long id;
@@ -98,6 +101,20 @@ public class FakultetDTO {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
+	
+	public record FakultetDTORecord(
+			 Long id,
+			 String naziv,
+			 AdresaDTORecord adresa,
+			 UniverzitetDTORecord univerzitet,
+			
+			 NastavnikDTORecord dekan,
+			
+			 String kontakt,
+			 String opis,
+			
+			 List<StudijskiProgramDTO> programi
+			) {}
 	
 	
 

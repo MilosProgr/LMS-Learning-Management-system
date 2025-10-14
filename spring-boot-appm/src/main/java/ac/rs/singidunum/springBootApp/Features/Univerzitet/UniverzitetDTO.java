@@ -7,6 +7,7 @@ import java.util.List;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO;
 import ac.rs.singidunum.springBootApp.Features.Adresa.AdresaDTO.AdresaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
+import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 
@@ -94,7 +95,7 @@ public class UniverzitetDTO {
 			 String naziv,
 			 String opis,
 			 LocalDate datumOsnivanja,
-			 List<FakultetDTO> fakultet,
+			 List<FakultetDTORecord> fakultet,
 			 AdresaDTORecord adresa,
 			 NastavnikDTORecord rektor
 			) {}
