@@ -1,4 +1,4 @@
-package ac.rs.singidunum.springBootApp.Model.Asocijacija;
+package ac.rs.singidunum.springBootApp.Asocijacija;
 
 import java.io.Serializable;
 
@@ -6,6 +6,10 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class predmet_Kurs implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Long predmet_id;
 	private Long kurs_id;
 	public predmet_Kurs(Long predmet_id, Long kurs_id) {

@@ -27,7 +27,7 @@ import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.User
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
-import ac.rs.singidunum.springBootApp.Service.implementacija.Details.UserDetailsService;
+import ac.rs.singidunum.springBootApp.Security.UserDetailsService;
 import ac.rs.singidunum.springBootApp.Security.Utils.TokenUtils;
 
 import org.springframework.security.access.annotation.Secured;

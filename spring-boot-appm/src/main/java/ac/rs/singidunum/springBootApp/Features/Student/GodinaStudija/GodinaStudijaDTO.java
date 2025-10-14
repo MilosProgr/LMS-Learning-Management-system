@@ -7,6 +7,7 @@ import java.util.Set;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 
 public class GodinaStudijaDTO {
 	private Long id;
@@ -15,7 +16,7 @@ public class GodinaStudijaDTO {
 	
 	private Set<StudentNaGodiniDTO> studentiNaGodini;
 	
-	private List<PredmetDTO> predmeti;
+	private List<PredmetDTORecord> predmeti;
 
 	public GodinaStudijaDTO() {
 		super();
@@ -54,11 +55,11 @@ public class GodinaStudijaDTO {
 		this.studentiNaGodini = studentiNaGodini;
 	}
 
-	public List<PredmetDTO> getPredmeti() {
+	public List<PredmetDTORecord> getPredmeti() {
 		return predmeti;
 	}
 
-	public void setPredmeti(List<PredmetDTO> predmeti) {
+	public void setPredmeti(List<PredmetDTORecord> predmeti) {
 		this.predmeti = predmeti;
 	}
 	
@@ -68,7 +69,7 @@ public class GodinaStudijaDTO {
 			 Integer godina,
 			
 			
-			 Set<StudentNaGodiniDTO> studentiNaGodini,
+			 Set<StudentNaGodiniDTORecord> studentiNaGodini,
 			
 			 List<PredmetDTORecord> predmeti
 			) {}
