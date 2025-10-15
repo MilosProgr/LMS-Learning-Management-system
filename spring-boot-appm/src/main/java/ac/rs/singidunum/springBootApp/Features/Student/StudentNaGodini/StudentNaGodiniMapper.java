@@ -5,87 +5,98 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-
-
-import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO;
-import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
-import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO.PrijavljeniIspitDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO.GodinaStudijaDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO.PohadjanjePredmetaDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
-
 @Component
-public class StudentNaGodiniMapper implements Mapper<StudentNaGodiniDTO, StudentNaGodini> {
+public class StudentNaGodiniMapper implements Mapper<StudentNaGodiniDTORecord, StudentNaGodini> {
 
-	@Override
-	public StudentNaGodiniDTO map(StudentNaGodini e) {
-		if(e == null) {
-			
-			return null;
-		}
-		StudentNaGodiniDTO sGodiniDTO =
-				new StudentNaGodiniDTO(e.getId(),
-						e.getDatumUpisa(),
-						e.getBrojIndeksa(),
-						e.getProsek());
-		if(e.getGodinaStudija()!=null) {
-		sGodiniDTO.setGodinaStudija(
-				new GodinaStudijaDTO(e.getGodinaStudija().getId(),
-						e.getGodinaStudija().getGodina())
-				);
-		}
-		if(e.getStudent()!=null) {
-			
-		
-		sGodiniDTO.setStudent(
-				new StudentDTO(
-						e.getStudent().getId(),
-						e.getStudent().getJmbg(),
-						e.getStudent().getTelefon(),
-						e.getStudent().getStatusStudiranja(),
-						e.getStudent().getStanjeNaRacunu(),
-						e.getStudent().isPredmetiIzabrani())
-				);
-		}
-		
-		if(e.getStudijskiProgram() != null) {
-		sGodiniDTO.setStudijskiProgram(
-				new StudijskiProgramDTO(e.getStudijskiProgram().getId(),
-						e.getStudijskiProgram().getNaziv(), null)
-				);
-	}
-		
-		if(e.getPrijavljenIspit() != null) {
-			sGodiniDTO.setPrijavljenIspit(
-					e.getPrijavljenIspit().stream()
-							.map(
-									prijavljenIspit ->
-											new PrijavljeniIspitDTO(prijavljenIspit.getId(),
-													prijavljenIspit.isPrijavljen(),
-													prijavljenIspit.getBrojPrijava())
-							).collect(Collectors.toList())
-			);
-		}
-		
-		if (e.getPohadjanja() != null) {
-			sGodiniDTO.setPohadjanja(
-					e.getPohadjanja().stream().map(
-							pohadjanja ->
-							new PohadjanjePredmetaDTO(
-									pohadjanja.getId(),
-									pohadjanja.getKonacnaOcena())
-							).collect(Collectors.toList())
-					);
-		}
-		return sGodiniDTO;
-	}
+    @Override
+    public StudentNaGodiniDTORecord map(StudentNaGodini e) {
+        if (e == null) {
+            return null;
+        }
 
-	@Override
-	public List<StudentNaGodiniDTO> map(List<StudentNaGodini> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());
-	}
-	
-	
+        // ✅ Mapiranje osnovnih veza
+        GodinaStudijaDTORecord godinaStudija = null;
+        if (e.getGodinaStudija() != null) {
+            godinaStudija = new GodinaStudijaDTORecord(
+                    e.getGodinaStudija().getId(),
+                    e.getGodinaStudija().getGodina(), null, null
+            );
+        }
 
+        StudentDTORecord student = null;
+        if (e.getStudent() != null) {
+            student = new StudentDTORecord(
+                    e.getStudent().getId(),
+                    e.getStudent().getJmbg(),
+                    e.getStudent().getTelefon(),
+                    e.getStudent().getStatusStudiranja(),
+                    e.getStudent().isPredmetiIzabrani(),
+                    e.getStudent().getStanjeNaRacunu(),
+                    null,
+                    null,
+                    null,
+                    null, 
+                    null
+            );
+        }
+
+        StudijskiProgramDTORecord studijskiProgram = null;
+        if (e.getStudijskiProgram() != null) {
+            studijskiProgram = new StudijskiProgramDTORecord(
+                    e.getStudijskiProgram().getId(),
+                    e.getStudijskiProgram().getNaziv(),
+                    null, null, null, null
+            );
+        }
+
+        // ✅ Kolekcije
+        List<PrijavljeniIspitDTORecord> prijavljeniIspit = null;
+        if (e.getPrijavljenIspit() != null) {
+            prijavljeniIspit = e.getPrijavljenIspit().stream()
+                    .map(pi -> new PrijavljeniIspitDTORecord(
+                            pi.getId(),
+                            pi.isPrijavljen(),
+                            pi.getBrojPrijava(), null, null, null, null
+                    ))
+                    .collect(Collectors.toList());
+        }
+
+        List<PohadjanjePredmetaDTORecord> pohadjanja = null;
+        if (e.getPohadjanja() != null) {
+            pohadjanja = e.getPohadjanja().stream()
+                    .map(p -> new PohadjanjePredmetaDTORecord(
+                            p.getId(),
+                            p.getKonacnaOcena(), null, null
+                    ))
+                    .collect(Collectors.toList());
+        }
+
+        // ✅ Kreiranje finalnog record DTO objekta
+        return new StudentNaGodiniDTORecord(
+                e.getId(),
+                e.getDatumUpisa(),
+                e.getBrojIndeksa(),
+                student,
+                godinaStudija,
+                e.getProsek(),
+                prijavljeniIspit,
+                studijskiProgram,
+                pohadjanja
+        );
+    }
+
+//    @Override
+//    public List<StudentNaGodiniDTORecord> map(List<StudentNaGodini> lista) {
+//        return lista.stream()
+//                .map(this::map)
+//                .collect(Collectors.toList());
+//    }
 }

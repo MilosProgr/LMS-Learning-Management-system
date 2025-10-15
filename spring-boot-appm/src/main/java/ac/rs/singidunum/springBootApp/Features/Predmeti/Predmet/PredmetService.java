@@ -11,13 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramRepository;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.transaction.Transactional;
 
 @Service
-public class PredmetService extends GenericCrudService<PredmetDTO, Predmet, Long> {
+public class PredmetService extends GenericCrudService<PredmetDTORecord, Predmet, Long> {
 
 	@Autowired
 	private PredmetRepository predmetRepository;
@@ -28,14 +29,14 @@ public class PredmetService extends GenericCrudService<PredmetDTO, Predmet, Long
 	@Autowired
 	private PredmetMapper predmetMapper;
 	
-	protected PredmetService(CrudRepository<Predmet, Long> repository, Mapper<PredmetDTO, Predmet> mapper) {
+	protected PredmetService(CrudRepository<Predmet, Long> repository, Mapper<PredmetDTORecord, Predmet> mapper) {
 		super(repository, mapper);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	@Transactional
-	public PredmetDTO save(Predmet entity) {
+	public PredmetDTORecord save(Predmet entity) {
 	    // Provera šifre i naziva
 	    validateSifra(entity);
 	    validateNaziv(entity);
@@ -45,7 +46,7 @@ public class PredmetService extends GenericCrudService<PredmetDTO, Predmet, Long
 
 	@Override
 	@Transactional
-	public PredmetDTO update(Predmet entity) {
+	public PredmetDTORecord update(Predmet entity) {
 	    if (entity.getId() == null || !predmetRepository.existsById(entity.getId())) {
 	        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Predmet sa ID: " + entity.getId() + " ne postoji!");
 	    }

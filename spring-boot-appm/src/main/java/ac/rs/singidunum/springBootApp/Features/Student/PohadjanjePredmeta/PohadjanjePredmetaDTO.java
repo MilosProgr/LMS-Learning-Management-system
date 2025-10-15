@@ -2,7 +2,9 @@ package ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta;
 
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 
 public class PohadjanjePredmetaDTO {
 	private Long id;
@@ -60,7 +62,13 @@ public class PohadjanjePredmetaDTO {
 		this.studentNaGodini = studentNaGodini;
 	}
 	
-	
+	public record PohadjanjePredmetaDTORecord(
+			 Long id,
+			 Long konacnaOcena,
+			
+			 PredmetDTORecord predmet,
+			 StudentNaGodiniDTORecord studentNaGodini
+			) {}
 //	public RealizacijaPredmetaDTO getRealizacijaPredmeta() {
 //		return realizacijaPredmeta;
 //	}

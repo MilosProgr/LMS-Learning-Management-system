@@ -8,6 +8,7 @@ import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO.RealizacijaPredmetaDTORecord;
 
 public class NastavnikNaRealizacijiDTO {
 	private Long id;
@@ -66,6 +67,15 @@ public class NastavnikNaRealizacijiDTO {
 	public void setRealizacijaPredmeta(Set<RealizacijaPredmetaDTO> realizacijaPredmeta) {
 		this.realizacijaPredmeta = realizacijaPredmeta;
 	}
+	
+	public record NastavnikNaRealizacijiDTORecord(
+			 Long id,
+			 Long brojCasova,
+			
+			 NastavnikDTORecord nastavnik,
+			
+			 Set<RealizacijaPredmetaDTORecord> realizacijaPredmeta
+			) {}
 	
 	
 	

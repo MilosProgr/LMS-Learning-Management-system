@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO.PrijavljeniIspitDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO.GodinaStudijaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO.PohadjanjePredmetaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
 
 
@@ -119,9 +121,9 @@ public class StudentNaGodiniDTO {
 			 GodinaStudijaDTORecord godinaStudija,
 			 Double prosek,
 			
-			 List<PrijavljeniIspitDTO> prijavljenIspit,
+			 List<PrijavljeniIspitDTORecord> prijavljenIspit,
 			 StudijskiProgramDTORecord studijskiProgram,
-			 List<PohadjanjePredmetaDTO> pohadjanja
+			 List<PohadjanjePredmetaDTORecord> pohadjanja
 			) {}
 	
 	

@@ -17,12 +17,13 @@ import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.User
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionRepository;
 import ac.rs.singidunum.springBootApp.Features.Student.Student;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentRepository;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.transaction.Transactional;
 
 @Service
-public class StudentNaGodiniService extends GenericCrudService<StudentNaGodiniDTO, StudentNaGodini, Long> {
+public class StudentNaGodiniService extends GenericCrudService<StudentNaGodiniDTORecord, StudentNaGodini, Long> {
 
 	@Autowired
 	private StudentNaGodiniRepository sNaGodRepos;
@@ -40,13 +41,13 @@ public class StudentNaGodiniService extends GenericCrudService<StudentNaGodiniDT
 	private UserPermissionRepository userPermissionRepository;
 	
 	protected StudentNaGodiniService(CrudRepository<StudentNaGodini, Long> repository,
-			Mapper<StudentNaGodiniDTO, StudentNaGodini> mapper) {
+			Mapper<StudentNaGodiniDTORecord, StudentNaGodini> mapper) {
 		super(repository, mapper);
 	}
     
     @Override
     @Transactional
-    public StudentNaGodiniDTO save(StudentNaGodini entity) {
+    public StudentNaGodiniDTORecord save(StudentNaGodini entity) {
     	
     	Long studentId = entity.getStudent().getId(); // Preuzimamo ID korisnika iz objekta StudentNaGodini
         Long programId = entity.getStudijskiProgram().getId();

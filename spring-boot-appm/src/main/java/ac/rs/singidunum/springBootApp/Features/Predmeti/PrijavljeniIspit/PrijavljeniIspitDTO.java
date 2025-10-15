@@ -6,8 +6,11 @@ import java.util.List;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO;
 import ac.rs.singidunum.springBootApp.Features.Polaganja.EvaluacijaZnanja.EvaluacijaZnanjaDTO.EvaluacijaZnanjaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.IspitniRok.IspitniRokDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.IspitniRok.IspitniRokDTO.IspitniRokDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 
 public class PrijavljeniIspitDTO {
 	private Long id;
@@ -107,9 +110,9 @@ public class PrijavljeniIspitDTO {
 			 Boolean prijavljen,		
 			 Integer brojPrijava,		
 			 List<EvaluacijaZnanjaDTORecord> evaluacijeZnanja,	
-			 StudentNaGodiniDTO StudentNaGodini,
-			 PredmetDTO predmet,
-			 IspitniRokDTO ispitniRok
+			 StudentNaGodiniDTORecord StudentNaGodini,
+			 PredmetDTORecord predmet,
+			 IspitniRokDTORecord ispitniRok
 			) {}
 	
 	

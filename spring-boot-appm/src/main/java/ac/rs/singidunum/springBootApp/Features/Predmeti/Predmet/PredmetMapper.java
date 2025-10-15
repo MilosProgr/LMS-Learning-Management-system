@@ -1,93 +1,80 @@
 package ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
 
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO.IshodDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO.SifraDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO.GodinaStudijaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
-public class PredmetMapper implements Mapper<PredmetDTO, Predmet> {
+public class PredmetMapper implements Mapper<PredmetDTORecord, Predmet> {
 
 	@Override
-	public PredmetDTO map(Predmet e) {
-		PredmetDTO predmetDTO =
-				new PredmetDTO(
-						e.getId(),
-						e.getNaziv(),
-						e.getEsbn(),
-						e.getObavezan(),
-						e.getBrojPredavanja(),
-						e.getBrojVezbi(),
-						e.getDrugiObliciNastave(),
-						e.getIstrazivackiRad(),
-						e.getOstaliCasovi()
-						);
-		if(e.getKursevi() != null) {
-			
-			predmetDTO.setKursevi(
-					e.getKursevi().stream()
-					.map(kursevi -> 
-					new KursDTO(
-							kursevi.getId(),
-							kursevi.getNaziv(),
-							kursevi.getTrajanje(),
-							kursevi.getOznaka(),
-							kursevi.getDatumPocetka(),
-							kursevi.getDatumKraja()
-							)
-							).collect(Collectors.toSet()));
-		}
-		if(e.getSilabus() != null) {
-			
-			predmetDTO.setSilabus(
-					e.getSilabus().stream()
-					.map(silabusi ->
-					new IshodDTO(silabusi.getId(), silabusi.getOpis(), silabusi.isPolozeno(), null)
-							).collect(Collectors.toSet())
-					);
-		}
-		if(e.getStudijskiProgrami() != null) {
-			predmetDTO.setStudijskiProgrami(
-					e.getStudijskiProgrami().stream()
-					.map(
-							programi -> 
-							new StudijskiProgramDTO(programi.getId(), programi.getNaziv(), null)
-							).collect(Collectors.toSet())
-					);
-		}
-		if(e.getSifra() != null) {
-			predmetDTO.setSifra(
-					new SifraDTORecord(e.getSifra().getId(), e.getSifra().getTekst())
-					);
-		}
-        if (e.getGodinaStudija() != null) {
-            predmetDTO.setGodinaStudija(
-                    new GodinaStudijaDTO(
-                            e.getGodinaStudija().getId(),
-                            e.getGodinaStudija().getGodina()
-                    )
-            );
-        }
-		
-		
-		
-		return predmetDTO;
-	}	
+	public PredmetDTORecord map(Predmet e) {
+		if (e == null) return null;
 
-	@Override
-	public List<PredmetDTO> map(List<Predmet> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());	
+        SifraDTORecord sifra = e.getSifra() != null
+                ? new SifraDTORecord(e.getSifra().getId(), e.getSifra().getTekst())
+                : null;
 
-	}
+        GodinaStudijaDTORecord godinaStudija = e.getGodinaStudija() != null
+                ? new GodinaStudijaDTORecord(e.getGodinaStudija().getId(), e.getGodinaStudija().getGodina(), null, null)
+                : null;
+
+        Set<IshodDTORecord> silabus = e.getSilabus() != null
+                ? e.getSilabus().stream()
+                    .map(i -> new IshodDTORecord(i.getId(), i.getOpis(), i.isPolozeno(), null, null))
+                    .collect(Collectors.toSet())
+                : null;
+
+        Set<StudijskiProgramDTORecord> studijskiProgrami = e.getStudijskiProgrami() != null
+                ? e.getStudijskiProgrami().stream()
+                    .map(sp -> new StudijskiProgramDTORecord(sp.getId(), sp.getNaziv(), null, null, null, null))
+                    .collect(Collectors.toSet())
+                : null;
+
+//        RealizacijaPredmetaDTORecord realizacijaPredmeta = e.getRealizacijaPredmeta() != null
+//                ? new RealizacijaPredmetaDTORecord(
+//                        e.getRealizacijaPredmeta().getId(),
+//                        e.getRealizacijaPredmeta().getDatumPocetka(),
+//                        e.getRealizacijaPredmeta().getDatumZavrsetka(),
+//                        null,
+//                        null,
+//                        null
+//                )
+//                : null;
+
+        return new PredmetDTORecord(
+                e.getId(),
+                e.getNaziv(),
+                e.getEsbn(),
+                e.getObavezan(),
+                e.getBrojPredavanja(),
+                e.getBrojVezbi(),
+                e.getDrugiObliciNastave(),
+                e.getIstrazivackiRad(),
+                e.getOstaliCasovi(),
+                silabus,
+                sifra,
+                studijskiProgrami,
+                godinaStudija,
+                null
+        );
+    }
+
+//	@Override
+//	public List<PredmetDTORecord> map(List<Predmet> e) {
+//		return e.stream().map(this::map).collect(Collectors.toList());	
+//
+//	}
 
 
 }

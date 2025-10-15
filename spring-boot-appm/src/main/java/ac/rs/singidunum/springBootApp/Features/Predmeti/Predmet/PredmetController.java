@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -24,7 +25,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 @CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping(path = "/api/predmeti")
-public class PredmetController extends GenericCrudController<PredmetDTO, Predmet, Long> {
+public class PredmetController extends GenericCrudController<PredmetDTORecord, Predmet, Long> {
 	
 	@Autowired
 	private PredmetService predmetService;
@@ -33,13 +34,13 @@ public class PredmetController extends GenericCrudController<PredmetDTO, Predmet
 	private PredmetMapper pMapper;
 
 	@Override
-	protected CrudService<PredmetDTO, Predmet, Long> getService() {
+	protected CrudService<PredmetDTORecord, Predmet, Long> getService() {
 		// TODO Auto-generated method stub
 		return predmetService;
 	}
 	
 	@GetMapping("/program/{programId}")
-    public ResponseEntity<List<PredmetDTO>> getPredmetiByProgram(@PathVariable Long programId) {
+    public ResponseEntity<List<PredmetDTORecord>> getPredmetiByProgram(@PathVariable Long programId) {
         List<Predmet> predmeti = predmetService.findPredmetiByProgramId(programId);
         
         if (predmeti.isEmpty()) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -20,13 +21,13 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/studentNaGodini")
-public class StudentNaGodiniController extends GenericCrudController<StudentNaGodiniDTO, StudentNaGodini, Long> {
+public class StudentNaGodiniController extends GenericCrudController<StudentNaGodiniDTORecord, StudentNaGodini, Long> {
 	
 	@Autowired
 	private StudentNaGodiniService sgService;
 	
 	@Override
-	protected CrudService<StudentNaGodiniDTO, StudentNaGodini, Long> getService() {
+	protected CrudService<StudentNaGodiniDTORecord, StudentNaGodini, Long> getService() {
 		// TODO Auto-generated method stub
 		return sgService;
 	}
