@@ -57,6 +57,7 @@ public class GodinaStudijaMapper implements Mapper<GodinaStudijaDTORecord, Godin
 	                            null, // studijski programi
 	                            null, // godinaStudija
 	                            null  // realizacijaPredmeta
+, null
 	                    ))
 	                    .collect(Collectors.toList());
 	        }

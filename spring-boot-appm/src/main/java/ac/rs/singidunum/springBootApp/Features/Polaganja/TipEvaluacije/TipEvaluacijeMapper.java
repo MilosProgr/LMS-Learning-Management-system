@@ -1,8 +1,5 @@
 package ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Polaganja.TipEvaluacije.TipEvaluacijeDTO.TipEvaluacijeDTORecord;

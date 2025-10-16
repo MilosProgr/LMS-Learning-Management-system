@@ -34,7 +34,7 @@ public class TerminNastaveMapper implements Mapper<TerminNastaveDTORecord, Termi
                         e.getIshod().getId(),
                         e.getIshod().getOpis(),
                         e.getIshod().isPolozeno(),
-                        null, null
+                        null
                 )
                 : null;
 
@@ -54,7 +54,7 @@ public class TerminNastaveMapper implements Mapper<TerminNastaveDTORecord, Termi
                             rp.getPredmet().getDrugiObliciNastave(),
                             rp.getPredmet().getIstrazivackiRad(),
                             rp.getPredmet().getOstaliCasovi(),
-                            null, null, null, null, null
+                            null, null, null, null, null,null
                     )
                     : null;
 

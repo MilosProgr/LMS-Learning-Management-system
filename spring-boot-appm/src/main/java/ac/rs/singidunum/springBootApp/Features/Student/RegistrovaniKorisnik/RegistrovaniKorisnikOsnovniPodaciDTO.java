@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO.ObavestenjeAktivnostiDTORecord;
 
 public class RegistrovaniKorisnikOsnovniPodaciDTO {
 	
@@ -73,6 +74,15 @@ public class RegistrovaniKorisnikOsnovniPodaciDTO {
 		this.obavestenjaAktivnosti = obavestenjaAktivnosti;
 	}
     
+	public record RegistrovaniKorisnikOsnovniPodaciDTORecord(
+			 Long id,
+			 String ime,
+			 String prezime,
+		     String korisnickoIme,
+		     String email,
+		    
+		     Set<ObavestenjeAktivnostiDTORecord> obavestenjaAktivnosti
+			) {}
 	
     
 }

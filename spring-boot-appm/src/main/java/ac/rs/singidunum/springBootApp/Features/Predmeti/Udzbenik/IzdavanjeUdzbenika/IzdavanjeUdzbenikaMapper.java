@@ -5,73 +5,77 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.UdzbenikDTO;
-import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.UdzbenikDTO.UdzbenikDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.IzdavanjeUdzbenika.IzdavanjeUdzbenikaDTO.IzdavanjeUdzbenikaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.SluzbenikStudentske.SluzbenikStudentskeDTO.SluzbenikStudentskeDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniDTO.StudentNaGodiniDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
-
 @Component
-public class IzdavanjeUdzbenikaMapper implements Mapper<IzdavanjeUdzbenikaDTO, IzdavanjeUdzbenika> {
+public class IzdavanjeUdzbenikaMapper implements Mapper<IzdavanjeUdzbenikaDTORecord, IzdavanjeUdzbenika> {
 
-	@Override
-	public IzdavanjeUdzbenikaDTO map(IzdavanjeUdzbenika e) {
-		if (e == null) {
-			return null;
-		}
+    @Override
+    public IzdavanjeUdzbenikaDTORecord map(IzdavanjeUdzbenika e) {
+        if (e == null) return null;
 
-		IzdavanjeUdzbenikaDTO iDto = new IzdavanjeUdzbenikaDTO(e.getId(), e.getKolicina());
+        // Map podnosilac zahteva
+        StudentNaGodiniDTORecord podnosilacDTO = e.getPodnosilacZahteva() != null
+                ? new StudentNaGodiniDTORecord(
+                        e.getPodnosilacZahteva().getId(),
+                        e.getPodnosilacZahteva().getDatumUpisa(),
+                        e.getPodnosilacZahteva().getBrojIndeksa(),
+                        null, null, e.getPodnosilacZahteva().getProsek(), null, null, null
+                )
+                : null;
 
-		iDto.setOdobreno(e.getOdobreno());
+        // Map autorizator
+        SluzbenikStudentskeDTORecord autorizatorDTO = e.getAutorizator() != null
+                ? new SluzbenikStudentskeDTORecord(
+                        e.getAutorizator().getId(),
+                        e.getAutorizator().getJmbg(),
+                        e.getAutorizator().getTelefon(),
+                        e.getAutorizator().getNalogAktivan(),
+                        null
+                )
+                : null;
 
-		if (e.getPodnosilacZahteva() != null) {
-			iDto.setPodnosilacZahtevaId(e.getPodnosilacZahteva().getId());
-		}
+        // Map udzbenik
+        UdzbenikDTORecord udzbenikDTO = e.getUdzbenik() != null
+                ? new UdzbenikDTORecord(
+                        e.getUdzbenik().getId(),
+                        null, // godinaStudija ako je potrebno
+                        e.getUdzbenik().getNaziv(),
+                        null  // predmet ako je potrebno
+                )
+                : null;
 
-		if (e.getUdzbenik() != null) {
-			iDto.setUdzbenik(new UdzbenikDTO(e.getUdzbenik().getId(), e.getUdzbenik().getNaziv()));
-		}
+        // Map studijski program
+        StudijskiProgramDTORecord programDTO = e.getStudijskiProgram() != null
+                ? new StudijskiProgramDTORecord(
+                        e.getStudijskiProgram().getId(),
+                        e.getStudijskiProgram().getNaziv(),
+                        null, null, null, null
+                )
+                : null;
 
-		if (e.getAutorizator() != null) {
-			iDto.setAutorizator(
-					new SluzbenikStudentskeDTORecord(
-							e.getAutorizator().getId(),
-							e.getAutorizator().getJmbg(),
-							e.getAutorizator().getTelefon(),
-							e.getAutorizator().getNalogAktivan(), null
-					)
-			);
-		}
+        Long podnosilacId = e.getPodnosilacZahteva() != null ? e.getPodnosilacZahteva().getId() : null;
 
-		if (e.getStudijskiProgram() != null) {
-			iDto.setStudijskiProgram(
-					new StudijskiProgramDTO(
-							e.getStudijskiProgram().getId(),
-							e.getStudijskiProgram().getNaziv()
-					)
-			);
-		}
+        return new IzdavanjeUdzbenikaDTORecord(
+                e.getId(),
+                e.getKolicina(),
+                podnosilacDTO,
+                autorizatorDTO,
+                udzbenikDTO,
+                e.getOdobreno(),
+                podnosilacId,
+                programDTO
+        );
+    }
 
-
-		if (e.getPodnosilacZahteva() != null) {
-			iDto.setPodnosilacZahteva(
-					new StudentNaGodiniDTO(
-							e.getPodnosilacZahteva().getId(),
-							e.getPodnosilacZahteva().getDatumUpisa(),
-							e.getPodnosilacZahteva().getBrojIndeksa(),
-							e.getPodnosilacZahteva().getProsek()
-					)
-			);
-		}
-
-		return iDto;
-	}
-
-	@Override
-	public List<IzdavanjeUdzbenikaDTO> map(List<IzdavanjeUdzbenika> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());
-	}
+    @Override
+    public List<IzdavanjeUdzbenikaDTORecord> map(List<IzdavanjeUdzbenika> e) {
+        if (e == null) return null;
+        return e.stream().map(this::map).collect(Collectors.toList());
+    }
 }
-

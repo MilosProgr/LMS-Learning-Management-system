@@ -8,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikOsnovniPodaciDTO.RegistrovaniKorisnikOsnovniPodaciDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
@@ -36,7 +37,7 @@ public class RegistrovanKorisnikService extends GenericCrudService<RegistrovaniK
 	}
 	
 	//METODA ZA MAPIRANJE IZ RegistrovaniKorisnikDTO u RegistrovaniKorisnikOsnovniPodaciDTO
-	public List<RegistrovaniKorisnikOsnovniPodaciDTO> findAllOsnovniPodaci() {
+	public List<RegistrovaniKorisnikOsnovniPodaciDTORecord> findAllOsnovniPodaci() {
 	    List<RegistrovaniKorisnik> korisnici = (List<RegistrovaniKorisnik>) kRepos.findAll();
 	    return korisnikMapper.mapToOsnovniDTO(korisnici);
 	}

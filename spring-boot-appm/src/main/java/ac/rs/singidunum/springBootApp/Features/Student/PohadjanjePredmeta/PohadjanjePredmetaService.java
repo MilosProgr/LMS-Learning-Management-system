@@ -15,6 +15,7 @@ import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetRepository;
 import ac.rs.singidunum.springBootApp.Features.Student.Student;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentRepository;
+import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO.PohadjanjePredmetaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodini;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodiniRepository;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
@@ -22,7 +23,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.transaction.Transactional;
 
 @Service
-public class PohadjanjePredmetaService extends GenericCrudService<PohadjanjePredmetaDTO, PohadjanjePredmeta, Long> {
+public class PohadjanjePredmetaService extends GenericCrudService<PohadjanjePredmetaDTORecord, PohadjanjePredmeta, Long> {
 
 	@Autowired
 	private StudentNaGodiniRepository studentNaGodiniRepository;
@@ -44,12 +45,12 @@ public class PohadjanjePredmetaService extends GenericCrudService<PohadjanjePred
 
 	
 	protected PohadjanjePredmetaService(CrudRepository<PohadjanjePredmeta, Long> repository,
-			Mapper<PohadjanjePredmetaDTO, PohadjanjePredmeta> mapper) {
+			Mapper<PohadjanjePredmetaDTORecord, PohadjanjePredmeta> mapper) {
 		super(repository, mapper);
 	}
 	
 	@Transactional
-	public List<PohadjanjePredmetaDTO> dodajPredmeteZaStudenta(Long studentNaGodiniId, List<Long> predmetiIds) {
+	public List<PohadjanjePredmetaDTORecord> dodajPredmeteZaStudenta(Long studentNaGodiniId, List<Long> predmetiIds) {
         StudentNaGodini sng = studentNaGodiniRepository.findById(studentNaGodiniId)
                 .orElseThrow(() -> new RuntimeException("Student na godini nije pronađen"));
 
@@ -87,7 +88,7 @@ public class PohadjanjePredmetaService extends GenericCrudService<PohadjanjePred
     }
 	
 	@Transactional
-	public PohadjanjePredmetaDTO upisiKonacnuOcenuById(Long ppId, Long konacnaOcena) {
+	public PohadjanjePredmetaDTORecord upisiKonacnuOcenuById(Long ppId, Long konacnaOcena) {
 	    if (konacnaOcena == null || konacnaOcena < 6 || konacnaOcena > 10) {
 	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Konacna ocena mora biti u opsegu 6–10.");
 	    }
@@ -126,7 +127,7 @@ public class PohadjanjePredmetaService extends GenericCrudService<PohadjanjePred
 	}
 
 
-	public List<PohadjanjePredmetaDTO> getByStudentNaGodiniId(Long studentNaGodiniId) {
+	public List<PohadjanjePredmetaDTORecord> getByStudentNaGodiniId(Long studentNaGodiniId) {
 		
 	    return pohadjanjePredmetaRepository.findByStudentNaGodiniId(studentNaGodiniId)
 	            .stream()

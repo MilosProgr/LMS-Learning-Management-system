@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNastaveDTO.TerminNastaveDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaMapper;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaRepository;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
@@ -13,7 +14,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 @Service
-public class TerminNastaveService extends GenericCrudService<TerminNastaveDTO, TerminNastave, Long> {
+public class TerminNastaveService extends GenericCrudService<TerminNastaveDTORecord, TerminNastave, Long> {
 
 
     @Autowired
@@ -23,7 +24,7 @@ public class TerminNastaveService extends GenericCrudService<TerminNastaveDTO, T
     private RealizacijaPredmetaMapper rMapper;
     
 	protected TerminNastaveService(CrudRepository<TerminNastave, Long> repository,
-			Mapper<TerminNastaveDTO, TerminNastave> mapper) {
+			Mapper<TerminNastaveDTORecord, TerminNastave> mapper) {
 		super(repository, mapper);
 	}
 	

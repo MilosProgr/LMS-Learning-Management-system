@@ -9,9 +9,11 @@ import java.util.Set;
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO;
 import ac.rs.singidunum.springBootApp.Features.Fakultet.FakultetDTO.FakultetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO;
+import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO.GodinaStudijaDTORecord;
 
 public class StudijskiProgramDTO {
 	
@@ -107,9 +109,9 @@ public class StudijskiProgramDTO {
 			
 			 FakultetDTORecord fakultet,
 			
-			 Set<PredmetDTO> predmeti,
+			 Set<PredmetDTORecord> predmeti,
 			
-			 GodinaStudijaDTO godinaStudija,
+			 GodinaStudijaDTORecord godinaStudija,
 			
 			 List<StudentDTORecord> studenti
 			) 

@@ -7,6 +7,7 @@ import java.util.Set;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO.IshodDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO.KursDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO.RealizacijaPredmetaDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO;
@@ -167,7 +168,8 @@ public class PredmetDTO {
 			 Set<StudijskiProgramDTORecord> studijskiProgrami,
 			
 			 GodinaStudijaDTORecord godinaStudija,
-			 RealizacijaPredmetaDTORecord realizacijaPredmeta
+			 RealizacijaPredmetaDTORecord realizacijaPredmeta,
+			 Set<KursDTORecord> kursevi
 			) {}
 	
 	

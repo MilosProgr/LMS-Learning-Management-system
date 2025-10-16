@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNastaveDTO.TerminNastaveDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 
 @Controller
 @RequestMapping("/api/tNastave")
-public class TerminNastaveController extends GenericCrudController<TerminNastaveDTO, TerminNastave, Long> {
+public class TerminNastaveController extends GenericCrudController<TerminNastaveDTORecord, TerminNastave, Long> {
 	@Autowired
 	private TerminNastaveService tnService;
 	
@@ -24,7 +25,7 @@ public class TerminNastaveController extends GenericCrudController<TerminNastave
 	private TerminNastaveMapper tMapper;
 
 	@Override
-	protected CrudService<TerminNastaveDTO, TerminNastave, Long> getService() {
+	protected CrudService<TerminNastaveDTORecord, TerminNastave, Long> getService() {
 		// TODO Auto-generated method stub
 		return tnService;
 	}

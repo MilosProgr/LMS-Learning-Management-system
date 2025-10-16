@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
+import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.UpisStudentaRequest;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
@@ -22,7 +21,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/studenti")
-public class StudentController extends GenericCrudController<StudentDTO, Student, Long> {
+public class StudentController extends GenericCrudController<StudentDTORecord, Student, Long> {
 	@Autowired
 	private StudentService studentService;
 	
@@ -30,40 +29,40 @@ public class StudentController extends GenericCrudController<StudentDTO, Student
     
 
 	@Override
-	protected CrudService<StudentDTO, Student, Long> getService() {
+	protected CrudService<StudentDTORecord, Student, Long> getService() {
 		// TODO Auto-generated method stub
 		return studentService;
 	}
 	
 	 @RequestMapping(path = "/{id}",method = RequestMethod.GET)
-	    public ResponseEntity<StudentDTO> getById(@PathVariable Long id) {
+	    public ResponseEntity<StudentDTORecord> getById(@PathVariable Long id) {
 	        return super.getById(id);
 	 }
 	
 	 @Override
 //	 @Secured("ROLE_ADMIN")
 	 @RequestMapping(path = "",method = RequestMethod.POST)
-	 public ResponseEntity<StudentDTO> create(@RequestBody Student student) {
+	 public ResponseEntity<StudentDTORecord> create(@RequestBody Student student) {
 		 return super.create(student);
 	 }
 
 	 @Override
 	 // @Secured("ROLE_ADMIN")
 	 @RequestMapping(path = "/{id}",method = RequestMethod.PUT)
-	 public ResponseEntity<StudentDTO> update(@PathVariable("id") Long id,@RequestBody Student student) {
+	 public ResponseEntity<StudentDTORecord> update(@PathVariable("id") Long id,@RequestBody Student student) {
 	 	return super.update(id,student);
 	 }
 	
 	 @Override
 //	 @Secured("ROLE_ADMIN")
 	 @RequestMapping(path = "/{id}",method = RequestMethod.DELETE)
-	 public ResponseEntity<StudentDTO> delete(@PathVariable Long id) {
+	 public ResponseEntity<StudentDTORecord> delete(@PathVariable Long id) {
 	     return super.delete(id);
 	 }
 	 
 	 @PatchMapping("/{id}/stanje")
 	 @ResponseBody
-	 public ResponseEntity<StudentDTO> patchUvecajStanje(
+	 public ResponseEntity<StudentDTORecord> patchUvecajStanje(
 	         @PathVariable("id") Long studentId,
 	         @RequestBody Map<String, Object> body) {
 	     try {
@@ -73,7 +72,7 @@ public class StudentController extends GenericCrudController<StudentDTO, Student
 	         Object v = body.get("iznos");
 	         Double iznos = (v instanceof Number) ? ((Number) v).doubleValue() : null;
 
-	         StudentDTO dto = studentService.uvecajStanjeNaRacunu(studentId, iznos);
+	         StudentDTORecord dto = studentService.uvecajStanjeNaRacunu(studentId, iznos);
 	         return ResponseEntity.ok(dto);
 
 	     } catch (IllegalArgumentException e) {
@@ -82,8 +81,8 @@ public class StudentController extends GenericCrudController<StudentDTO, Student
 	 }
 	 
     @PostMapping("/upis-studenta")
-    public ResponseEntity<StudentDTO> upisiTransakciono(@RequestBody UpisStudentaRequest req) {
-        StudentDTO dto = studentService.upisiStudenta(req);
+    public ResponseEntity<StudentDTORecord> upisiTransakciono(@RequestBody UpisStudentaRequest req) {
+    	StudentDTORecord dto = studentService.upisiStudenta(req);
         return ResponseEntity.ok(dto);
     }
 

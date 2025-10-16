@@ -4,15 +4,16 @@ package ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO.KursDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class KursService extends GenericCrudService<KursDTO, Kurs, Long> {
+public class KursService extends GenericCrudService<KursDTORecord, Kurs, Long> {
 
-	protected KursService(CrudRepository<Kurs, Long> repository, Mapper<KursDTO, Kurs> mapper) {
+	protected KursService(CrudRepository<Kurs, Long> repository, Mapper<KursDTORecord, Kurs> mapper) {
 		super(repository, mapper);
 		// TODO Auto-generated constructor stub
 	}

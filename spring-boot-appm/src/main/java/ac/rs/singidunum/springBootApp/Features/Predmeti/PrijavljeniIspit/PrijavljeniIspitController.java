@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO.PrijavljeniIspitDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -18,18 +19,18 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @RestController 
 @RequestMapping("/api/prijavljeniIspiti")
-public class PrijavljeniIspitController extends GenericCrudController<PrijavljeniIspitDTO, PrijavljeniIspit, Long> {
+public class PrijavljeniIspitController extends GenericCrudController<PrijavljeniIspitDTORecord, PrijavljeniIspit, Long> {
 	@Autowired
 	private PrijavljeniIspitService prService;
 
 	@Override
-	protected CrudService<PrijavljeniIspitDTO, PrijavljeniIspit, Long> getService() {
+	protected CrudService<PrijavljeniIspitDTORecord, PrijavljeniIspit, Long> getService() {
 		// TODO Auto-generated method stub
 		return prService;
 	}
 	
 	 @PostMapping(value = "/prijavi", consumes = "application/json")
-	    public ResponseEntity<PrijavljeniIspitDTO> prijavi(@RequestBody Map<String, Object> body) {
+	    public ResponseEntity<PrijavljeniIspitDTORecord> prijavi(@RequestBody Map<String, Object> body) {
 	        Long studentId         = ((Number) body.get("studentId")).longValue();
 	        Long studentNaGodiniId = ((Number) body.get("studentNaGodiniId")).longValue();
 	        Long predmetId         = ((Number) body.get("predmetId")).longValue();
@@ -38,7 +39,7 @@ public class PrijavljeniIspitController extends GenericCrudController<Prijavljen
 	                                  ? ((Number) body.get("cenaPrijave")).doubleValue()
 	                                  : null;
 
-	        PrijavljeniIspitDTO dto = prService.saveForStudentAndSng(
+	        PrijavljeniIspitDTORecord dto = prService.saveForStudentAndSng(
 	                studentId, studentNaGodiniId, predmetId, ispitniRokId, cenaPrijave
 	        );
 	        return ResponseEntity.status(HttpStatus.CREATED).body(dto);

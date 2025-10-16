@@ -1,71 +1,80 @@
 package ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji;
 
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.Features.Nastava.TerminNastave.TerminNastaveDTO;
-import ac.rs.singidunum.springBootApp.Features.Nastava.TipNastave.TipNastaveDTO;
-import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Nastavnici.Nastavnik.NastavnikDTO.NastavnikDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Obavestenja.File.FileDTO;
-import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
-import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO;
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO.NastavnikNaRealizacijiDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.RealizacijaPredmeta.RealizacijaPredmetaDTO.RealizacijaPredmetaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
-public class NastavnikNaRealizacijiMapper implements Mapper<NastavnikNaRealizacijiDTO, NastavnikNaRealizaciji> {
+public class NastavnikNaRealizacijiMapper implements Mapper<NastavnikNaRealizacijiDTORecord, NastavnikNaRealizaciji> {
 
-	@Override
-	public NastavnikNaRealizacijiDTO map(NastavnikNaRealizaciji e) {
-		if(e == null) {
-			return null;
-		}
-		NastavnikNaRealizacijiDTO nrDto =
-				new NastavnikNaRealizacijiDTO(e.getId(), e.getBrojCasova());
-		
-		nrDto.setNastavnik(
-				new NastavnikDTORecord(e.getNastavnik().getId(),
-						e.getNastavnik().getBiografija(),	
-						e.getNastavnik().getJmbg(),
-						e.getNastavnik().getTelefon(),
-						e.getNastavnik().getPoslovniMail(),
-						e.getNastavnik().getBrojSlobodnihDana(),
-						e.getNastavnik().getBrojIskoristenihDana(), null, null, null
-						)
+    @Override
+    public NastavnikNaRealizacijiDTORecord map(NastavnikNaRealizaciji e) {
+        if (e == null) return null;
 
-				);
-		if(e.getRealizacijaPredmeta() != null) {
-			nrDto.setRealizacijaPredmeta(
-					e.getRealizacijaPredmeta().stream().map(
-							rPredmeti ->
-							new RealizacijaPredmetaDTO(
-									rPredmeti.getId(),
-									new PredmetDTO(rPredmeti.getPredmet().getId(),
-											rPredmeti.getPredmet().getNaziv(),
-											rPredmeti.getPredmet().getEsbn(),
-											rPredmeti.getPredmet().getObavezan(),
-											rPredmeti.getPredmet().getBrojPredavanja(),
-											rPredmeti.getPredmet().getBrojVezbi(),
-											rPredmeti.getPredmet().getDrugiObliciNastave(),
-											rPredmeti.getPredmet().getIstrazivackiRad(),
-											rPredmeti.getPredmet().getOstaliCasovi()),
-									null
-									)
-							).collect(Collectors.toSet())
+        // ✅ Nastavnik
+        NastavnikDTORecord nastavnik = e.getNastavnik() != null
+                ? new NastavnikDTORecord(
+                        e.getNastavnik().getId(),
+                        e.getNastavnik().getBiografija(),
+                        e.getNastavnik().getJmbg(),
+                        e.getNastavnik().getTelefon(),
+                        e.getNastavnik().getPoslovniMail(),
+                        e.getNastavnik().getBrojSlobodnihDana(),
+                        e.getNastavnik().getBrojIskoristenihDana(),
+                        null,
+                        null,
+                        null
+                )
+                : null;
 
-			);
-		}
+        // ✅ Realizacija predmeta (bez evaluacije i termina da se izbegne cikličnost)
+        Set<RealizacijaPredmetaDTORecord> realizacijaPredmeta = e.getRealizacijaPredmeta() != null
+                ? e.getRealizacijaPredmeta().stream()
+                    .map(r -> {
+                        PredmetDTORecord predmet = r.getPredmet() != null
+                                ? new PredmetDTORecord(
+                                        r.getPredmet().getId(),
+                                        r.getPredmet().getNaziv(),
+                                        r.getPredmet().getEsbn(),
+                                        r.getPredmet().getObavezan(),
+                                        r.getPredmet().getBrojPredavanja(),
+                                        r.getPredmet().getBrojVezbi(),
+                                        r.getPredmet().getDrugiObliciNastave(),
+                                        r.getPredmet().getIstrazivackiRad(),
+                                        r.getPredmet().getOstaliCasovi(),
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                )
+                                : null;
+                        return new RealizacijaPredmetaDTORecord(
+                                r.getId(),
+                                predmet,
+                                null, // evaluacijaZnanja
+                                null, // nastavnikNaRealizaciji
+                                null, // terminNastave
+                                null  // semestri
+                        );
+                    })
+                    .collect(Collectors.toSet())
+                : null;
 
-		return nrDto;
-	}
-
-//	@Override
-//	public List<NastavnikNaRealizacijiDTO> map(List<NastavnikNaRealizaciji> e) {
-//		// TODO Auto-generated method stub
-//		return e.stream().map(this::map).collect(Collectors.toList());
-//	}
-
+        // ✅ Glavni DTO record
+        return new NastavnikNaRealizacijiDTORecord(
+                e.getId(),
+                e.getBrojCasova(),
+                nastavnik,
+                realizacijaPredmeta
+        );
+    }
 }

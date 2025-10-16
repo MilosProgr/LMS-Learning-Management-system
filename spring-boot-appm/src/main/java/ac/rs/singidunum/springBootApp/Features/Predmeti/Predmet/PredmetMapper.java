@@ -1,6 +1,5 @@
 package ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Ishod.IshodDTO.IshodDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO.KursDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Sifarnik.SifraDTO.SifraDTORecord;
@@ -31,7 +31,7 @@ public class PredmetMapper implements Mapper<PredmetDTORecord, Predmet> {
 
         Set<IshodDTORecord> silabus = e.getSilabus() != null
                 ? e.getSilabus().stream()
-                    .map(i -> new IshodDTORecord(i.getId(), i.getOpis(), i.isPolozeno(), null, null))
+                    .map(i -> new IshodDTORecord(i.getId(), i.getOpis(), i.isPolozeno(), null))
                     .collect(Collectors.toSet())
                 : null;
 
@@ -51,6 +51,18 @@ public class PredmetMapper implements Mapper<PredmetDTORecord, Predmet> {
 //                        null
 //                )
 //                : null;
+        Set<KursDTORecord> kursevi = e.getKursevi() != null
+        		? e.getKursevi().stream()
+        				.map(ks -> new KursDTORecord(
+        						ks.getId(),
+        						ks.getNaziv(),
+        						ks.getTrajanje(),
+        						ks.getOznaka(),
+        						ks.getDatumPocetka(),
+        						ks.getDatumKraja(),
+        						Set.of()))
+        				.collect(Collectors.toSet())
+        				: null;
 
         return new PredmetDTORecord(
                 e.getId(),
@@ -66,7 +78,8 @@ public class PredmetMapper implements Mapper<PredmetDTORecord, Predmet> {
                 sifra,
                 studijskiProgrami,
                 godinaStudija,
-                null
+                null,
+                kursevi
         );
     }
 

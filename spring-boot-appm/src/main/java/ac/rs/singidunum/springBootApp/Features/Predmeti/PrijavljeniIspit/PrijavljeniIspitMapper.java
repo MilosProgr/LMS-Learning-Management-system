@@ -66,7 +66,7 @@ public class PrijavljeniIspitMapper implements Mapper<PrijavljeniIspitDTORecord,
                     e.getPredmet().getBrojVezbi(),
                     e.getPredmet().getDrugiObliciNastave(),
                     e.getPredmet().getIstrazivackiRad(),
-                    e.getPredmet().getOstaliCasovi(), null, null, null, null, null
+                    e.getPredmet().getOstaliCasovi(), null, null, null, null, null, null
             );
         }
 

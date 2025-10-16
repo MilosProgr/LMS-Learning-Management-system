@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Udzbenik.IzdavanjeUdzbenika.IzdavanjeUdzbenikaDTO.IzdavanjeUdzbenikaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -11,12 +12,12 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @RestController
 @RequestMapping("/api/izdavanjeUdzbenika")
-public class IzdavanjeUdzbenikaController extends GenericCrudController<IzdavanjeUdzbenikaDTO, IzdavanjeUdzbenika, Long> {
+public class IzdavanjeUdzbenikaController extends GenericCrudController<IzdavanjeUdzbenikaDTORecord, IzdavanjeUdzbenika, Long> {
 
 	@Autowired
 	private IzdavanjeUdzbenikaService izdavanjeUdzbenikaService;
 	@Override
-	protected CrudService<IzdavanjeUdzbenikaDTO, IzdavanjeUdzbenika, Long> getService() {
+	protected CrudService<IzdavanjeUdzbenikaDTORecord, IzdavanjeUdzbenika, Long> getService() {
 		// TODO Auto-generated method stub
 		return izdavanjeUdzbenikaService;
 	}

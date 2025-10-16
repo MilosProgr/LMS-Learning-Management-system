@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ac.rs.singidunum.springBootApp.Features.Predmeti.StudijskiProgram.StudijskiProgramDTO.StudijskiProgramDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -12,12 +13,12 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 @CrossOrigin(origins = "http://localhost:4200")
 @Controller
 @RequestMapping("api/programi")
-public class StudijskiProgramController extends GenericCrudController<StudijskiProgramDTO, StudijskiProgram, Long> {
+public class StudijskiProgramController extends GenericCrudController<StudijskiProgramDTORecord, StudijskiProgram, Long> {
 	@Autowired
 	StudijskiProgramService sService;
 
 	@Override
-	protected CrudService<StudijskiProgramDTO, StudijskiProgram, Long> getService() {
+	protected CrudService<StudijskiProgramDTORecord, StudijskiProgram, Long> getService() {
 		return sService;
 	}
 }

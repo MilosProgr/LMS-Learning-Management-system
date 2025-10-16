@@ -1,11 +1,8 @@
 package ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO.PermissionDTORecord;
-import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
 
 public class UserPermissionDTO {

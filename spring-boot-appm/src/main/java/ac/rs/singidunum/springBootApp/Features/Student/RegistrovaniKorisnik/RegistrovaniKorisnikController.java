@@ -25,6 +25,7 @@ import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.User
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionService;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikOsnovniPodaciDTO.RegistrovaniKorisnikOsnovniPodaciDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 import ac.rs.singidunum.springBootApp.Security.UserDetailsService;
@@ -80,7 +81,7 @@ public class RegistrovaniKorisnikController extends GenericCrudController<Regist
 	
 	//endpoint za osnovne podatke registrovanih korisnika
 	@RequestMapping(path = "/korisnici/osnovniPodaci", method = RequestMethod.GET)
-	public ResponseEntity<List<RegistrovaniKorisnikOsnovniPodaciDTO>> getOsnovniPodaci() {
+	public ResponseEntity<List<RegistrovaniKorisnikOsnovniPodaciDTORecord>> getOsnovniPodaci() {
 	    return ResponseEntity.ok(korisnikService.findAllOsnovniPodaci());
 	}
 

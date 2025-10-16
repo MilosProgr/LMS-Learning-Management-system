@@ -1,52 +1,54 @@
 package ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
-import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Kurs.KursDTO.KursDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
-
 @Component
-public class KursMapper implements Mapper<KursDTO, Kurs> {
+public class KursMapper implements Mapper<KursDTORecord, Kurs> {
 
-	@Override
-	public KursDTO map(Kurs e) {
-		KursDTO kursDTO =
-		new KursDTO(
-				e.getId(),
-				e.getNaziv(),
-				e.getTrajanje(),
-				e.getOznaka(),
-				e.getDatumPocetka(),
-				e.getDatumKraja()
-				);
-		kursDTO.setPredmeti(
-				e.getPredmeti().stream()
-				.map(predmeti ->
-				new PredmetDTO(
-						predmeti.getId(),
-						predmeti.getNaziv(),
-						predmeti.getEsbn(),
-						predmeti.getObavezan(),
-						predmeti.getBrojPredavanja(),
-						predmeti.getBrojVezbi(),
-						predmeti.getDrugiObliciNastave(),
-						predmeti.getIstrazivackiRad(),
-						predmeti.getOstaliCasovi()
-						)
-				).collect(Collectors.toSet())
-				);
-		return kursDTO;
-	}
+    @Override
+    public KursDTORecord map(Kurs e) {
+        if (e == null) {
+            return null;
+        }
 
-	@Override
-	public List<KursDTO> map(List<Kurs> e) {
-		return e.stream().map(this::map).collect(Collectors.toList());
+        Set<PredmetDTORecord> predmetiDTO = null;
+        if (e.getPredmeti() != null && !e.getPredmeti().isEmpty()) {
+            predmetiDTO = e.getPredmeti().stream()
+                    .map(p -> new PredmetDTORecord(
+                            p.getId(),
+                            p.getNaziv(),
+                            p.getEsbn(),
+                            p.getObavezan(),
+                            p.getBrojPredavanja(),
+                            p.getBrojVezbi(),
+                            p.getDrugiObliciNastave(),
+                            p.getIstrazivackiRad(),
+                            p.getOstaliCasovi(), null, null, null, null, null,null
+                    ))
+                    .collect(Collectors.toSet());
+        }
 
-	}
+        return new KursDTORecord(
+                e.getId(),
+                e.getNaziv(),
+                e.getTrajanje(),
+                e.getOznaka(),
+                e.getDatumPocetka(),
+                e.getDatumKraja(),
+                predmetiDTO
+        );
+    }
 
-
+    @Override
+    public List<KursDTORecord> map(List<Kurs> e) {
+        return e.stream().map(this::map).collect(Collectors.toList());
+    }
 }

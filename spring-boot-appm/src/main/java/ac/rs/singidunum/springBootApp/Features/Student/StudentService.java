@@ -15,6 +15,7 @@ import ac.rs.singidunum.springBootApp.Features.Drzava.DrzavaRepository;
 
 import ac.rs.singidunum.springBootApp.Features.Mesto.Mesto;
 import ac.rs.singidunum.springBootApp.Features.Mesto.MestoRepository;
+import ac.rs.singidunum.springBootApp.Features.Student.StudentDTO.StudentDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovanKorisnikRepository;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnik;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.UpisStudentaRequest;
@@ -24,7 +25,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
-public class StudentService extends GenericCrudService<StudentDTO, Student, Long> {
+public class StudentService extends GenericCrudService<StudentDTORecord, Student, Long> {
 
 	@Autowired private AdresaService adresaService;
     @Autowired private RegistrovanKorisnikRepository registrovaniKorisnikRepository;
@@ -36,13 +37,13 @@ public class StudentService extends GenericCrudService<StudentDTO, Student, Long
     @Autowired private AdresaRepository adresaRepository;
     
 	
-	protected StudentService(CrudRepository<Student, Long> repository, Mapper<StudentDTO, Student> mapper) {
+	protected StudentService(CrudRepository<Student, Long> repository, Mapper<StudentDTORecord, Student> mapper) {
 		super(repository, mapper);
 		this.studentMapper = studentMapper;
 	}
 	
 	//@Transactional
-	public StudentDTO save(Student s) {
+	public StudentDTORecord save(Student s) {
         
         System.out.println("Ovo je Id:" + s.getId());
         
@@ -54,7 +55,7 @@ public class StudentService extends GenericCrudService<StudentDTO, Student, Long
     }
 	
 	@Transactional
-	public StudentDTO uvecajStanjeNaRacunu(Long studentId, Double iznos) {
+	public StudentDTORecord uvecajStanjeNaRacunu(Long studentId, Double iznos) {
 	    if (studentId == null) {
 	        throw new IllegalArgumentException("studentId je obavezan.");
 	    }
@@ -73,7 +74,7 @@ public class StudentService extends GenericCrudService<StudentDTO, Student, Long
 	}
 	
 	 @Transactional
-	    public StudentDTO upisiStudenta(UpisStudentaRequest req) {
+	    public StudentDTORecord upisiStudenta(UpisStudentaRequest req) {
 	        // --- VALIDACIJE ---
 	        if (isBlank(req.getJmbg()))  throw new IllegalArgumentException("JMBG je obavezan.");
 	        if (isBlank(req.getTelefon())) throw new IllegalArgumentException("Telefon je obavezan.");

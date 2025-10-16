@@ -5,6 +5,7 @@ import java.util.Set;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.NastavniMaterijal.NastavniMaterijalDTO;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.NastavniMaterijal.NastavniMaterijalDTO.NastavniMaterijalDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetDTO.PredmetDTORecord;
 
 public class IshodDTO {
 	private Long id;
@@ -15,7 +16,7 @@ public class IshodDTO {
 	
 	private PredmetDTO predmet;
 	
-	private Set<NastavniMaterijalDTORecord> nastavniMaterijali;
+//	private Set<NastavniMaterijalDTORecord> nastavniMaterijali;
 	
 
 	public IshodDTO() {
@@ -63,20 +64,20 @@ public class IshodDTO {
 		this.predmet = predmet;
 	}
 
-	public Set<NastavniMaterijalDTORecord> getNastavniMaterijali() {
-		return nastavniMaterijali;
-	}
-
-	public void setNastavniMaterijali(Set<NastavniMaterijalDTORecord> nastavniMaterijali) {
-		this.nastavniMaterijali = nastavniMaterijali;
-	}
+//	public Set<NastavniMaterijalDTORecord> getNastavniMaterijali() {
+//		return nastavniMaterijali;
+//	}
+//
+//	public void setNastavniMaterijali(Set<NastavniMaterijalDTORecord> nastavniMaterijali) {
+//		this.nastavniMaterijali = nastavniMaterijali;
+//	}
 
 	public record IshodDTORecord(
 			 Long id,
 			 String opis,
 			 boolean polozeno,
-			 PredmetDTO predmet,
-			 Set<NastavniMaterijalDTORecord> nastavniMaterijali
+			 PredmetDTORecord predmet
+//			 Set<NastavniMaterijalDTORecord> nastavniMaterijali
 			) {}
 	
 	

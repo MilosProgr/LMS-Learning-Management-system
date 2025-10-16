@@ -7,9 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO;
+import ac.rs.singidunum.springBootApp.Features.Obavestenja.ObavestenjaAktivnosti.ObavestenjeAktivnostDTO.ObavestenjeAktivnostiDTORecord;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission.PermissionDTO.PermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikDTO.RegistrovaniKorisnikDTORecord;
+import ac.rs.singidunum.springBootApp.Features.Student.RegistrovaniKorisnik.RegistrovaniKorisnikOsnovniPodaciDTO.RegistrovaniKorisnikOsnovniPodaciDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 
 @Component
@@ -38,14 +40,14 @@ public class RegistrovanKorisnikMapper implements Mapper<RegistrovaniKorisnikDTO
                 : Set.of();
 
         // Mapiranje setova obaveštenja aktivnosti
-        Set<ObavestenjeAktivnostDTO> obavestenjaSet = (korisnik.getObavestenjaAktivnosti() != null) ?
+        Set<ObavestenjeAktivnostiDTORecord> obavestenjaSet = (korisnik.getObavestenjaAktivnosti() != null) ?
                 korisnik.getObavestenjaAktivnosti().stream()
-                        .map(ob -> new ObavestenjeAktivnostDTO(
+                        .map(ob -> new ObavestenjeAktivnostiDTORecord(
                                 ob.getId(),
                                 ob.getVremePostavljanja(),
                                 ob.getSadrzaj(),
                                 ob.getNaslov(),
-                                ob.getProcitano()
+                                ob.getProcitano(), null
                         ))
                         .collect(Collectors.toSet())
                 : Set.of();
@@ -69,35 +71,36 @@ public class RegistrovanKorisnikMapper implements Mapper<RegistrovaniKorisnikDTO
     }
 
     // Mapiranje osnovnih podataka
-    public RegistrovaniKorisnikOsnovniPodaciDTO mapToOsnovniDTO(RegistrovaniKorisnik korisnik) {
+    public RegistrovaniKorisnikOsnovniPodaciDTORecord mapToOsnovniDTO(RegistrovaniKorisnik korisnik) {
         if (korisnik == null) return null;
 
-        RegistrovaniKorisnikOsnovniPodaciDTO dto = new RegistrovaniKorisnikOsnovniPodaciDTO(
+        Set<ObavestenjeAktivnostiDTORecord> obavestenja = null;
+
+        if (korisnik.getObavestenjaAktivnosti() != null && !korisnik.getObavestenjaAktivnosti().isEmpty()) {
+            obavestenja = korisnik.getObavestenjaAktivnosti().stream()
+                    .map(ob -> new ObavestenjeAktivnostiDTORecord(
+                            ob.getId(),
+                            ob.getVremePostavljanja(),
+                            ob.getSadrzaj(),
+                            ob.getNaslov(),
+                            ob.getProcitano(),
+                            null // ako ima korisnik ili dodatne veze, dodaj ih ovde
+                    ))
+                    .collect(Collectors.toSet());
+        }
+
+        return new RegistrovaniKorisnikOsnovniPodaciDTORecord(
                 korisnik.getId(),
                 korisnik.getIme(),
                 korisnik.getPrezime(),
                 korisnik.getKorisnickoIme(),
-                korisnik.getEmail()
+                korisnik.getEmail(),
+                obavestenja
         );
-
-        if (korisnik.getObavestenjaAktivnosti() != null) {
-            dto.setObavestenjaAktivnosti(
-                    korisnik.getObavestenjaAktivnosti().stream()
-                            .map(ob -> new ObavestenjeAktivnostDTO(
-                                    ob.getId(),
-                                    ob.getVremePostavljanja(),
-                                    ob.getSadrzaj(),
-                                    ob.getNaslov(),
-                                    ob.getProcitano()
-                            ))
-                            .collect(Collectors.toSet())
-            );
-        }
-
-        return dto;
     }
 
-    public List<RegistrovaniKorisnikOsnovniPodaciDTO> mapToOsnovniDTO(List<RegistrovaniKorisnik> korisnici) {
+
+    public List<RegistrovaniKorisnikOsnovniPodaciDTORecord> mapToOsnovniDTO(List<RegistrovaniKorisnik> korisnici) {
         return korisnici.stream().map(this::mapToOsnovniDTO).collect(Collectors.toList());
     }
 }

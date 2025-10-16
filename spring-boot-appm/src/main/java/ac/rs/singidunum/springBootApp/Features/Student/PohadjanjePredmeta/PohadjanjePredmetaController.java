@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Student.PohadjanjePredmeta.PohadjanjePredmetaDTO.PohadjanjePredmetaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Controller.GenericCrudController;
 import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
@@ -22,21 +23,21 @@ import ac.rs.singidunum.springBootApp.Generics.Service.CrudService;
 
 @Controller
 @RequestMapping("/api/PohadjanjePredmeta")
-public class PohadjanjePredmetaController extends GenericCrudController<PohadjanjePredmetaDTO, PohadjanjePredmeta, Long> {
+public class PohadjanjePredmetaController extends GenericCrudController<PohadjanjePredmetaDTORecord, PohadjanjePredmeta, Long> {
 	@Autowired
 	private PohadjanjePredmetaService pService;
 
 	@Override
-	protected CrudService<PohadjanjePredmetaDTO, PohadjanjePredmeta, Long> getService() {
+	protected CrudService<PohadjanjePredmetaDTORecord, PohadjanjePredmeta, Long> getService() {
 		// TODO Auto-generated method stub
 		return pService;
 	}
 	
     @PostMapping("/{studentNaGodiniId}")
-    public ResponseEntity<List<PohadjanjePredmetaDTO>> dodajPredmete(
+    public ResponseEntity<List<PohadjanjePredmetaDTORecord>> dodajPredmete(
             @PathVariable Long studentNaGodiniId,
             @RequestBody List<Long> predmetiIds) {
-        List<PohadjanjePredmetaDTO> result =
+        List<PohadjanjePredmetaDTORecord> result =
                 pService.dodajPredmeteZaStudenta(studentNaGodiniId, predmetiIds);
         return ResponseEntity.ok(result);
     }
@@ -44,16 +45,16 @@ public class PohadjanjePredmetaController extends GenericCrudController<Pohadjan
      //Vraca sva pohađanja za datog studenta na godini.
      //Primer: GET /api/PohadjanjePredmeta/student-na-godini/1
     @GetMapping("/student-na-godini/{studentNaGodiniId}")
-    public ResponseEntity<List<PohadjanjePredmetaDTO>> getByStudentNaGodiniId(
+    public ResponseEntity<List<PohadjanjePredmetaDTORecord>> getByStudentNaGodiniId(
             @PathVariable Long studentNaGodiniId) {
-        List<PohadjanjePredmetaDTO> lista = pService.getByStudentNaGodiniId(studentNaGodiniId);
+        List<PohadjanjePredmetaDTORecord> lista = pService.getByStudentNaGodiniId(studentNaGodiniId);
         return ResponseEntity.ok(lista);
     }
     
     
  // PATCH /api/pohadjanje-predmeta/{id}
     @PatchMapping(path = "/{id}", consumes = "application/merge-patch+json")
-    public ResponseEntity<PohadjanjePredmetaDTO> patchKonacnaOcena(
+    public ResponseEntity<PohadjanjePredmetaDTORecord> patchKonacnaOcena(
             @PathVariable Long id,
             @RequestBody Map<String, Object> patch) {
 
@@ -66,7 +67,7 @@ public class PohadjanjePredmetaController extends GenericCrudController<Pohadjan
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "konacnaOcena mora biti broj.");
         }
 
-        PohadjanjePredmetaDTO dto = pService.upisiKonacnuOcenuById(id, konacna);
+        PohadjanjePredmetaDTORecord dto = pService.upisiKonacnuOcenuById(id, konacna);
         return ResponseEntity.ok(dto);
     }
     

@@ -6,24 +6,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Student.GodinaStudija.GodinaStudijaDTO.GodinaStudijaDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class GodinaStudijaService extends GenericCrudService<GodinaStudijaDTO, GodinaStudija, Long> {
+public class GodinaStudijaService extends GenericCrudService<GodinaStudijaDTORecord, GodinaStudija, Long> {
 
 	@Autowired
 	private GodinaStudijaRepository godinaStudijaRepository;
 	
 	protected GodinaStudijaService(CrudRepository<GodinaStudija, Long> repository,
-			Mapper<GodinaStudijaDTO, GodinaStudija> mapper) {
+			Mapper<GodinaStudijaDTORecord, GodinaStudija> mapper) {
 		super(repository, mapper);
 	}
 	
     @Override
-    public GodinaStudijaDTO save(GodinaStudija entity) {
+    public GodinaStudijaDTORecord save(GodinaStudija entity) {
         if (godinaStudijaRepository.existsByGodina(entity.getGodina())) {
         	throw new ResponseStatusException(
                     HttpStatus.CONFLICT, "Godina studija " + entity.getGodina() + " već postoji!");
@@ -32,7 +33,7 @@ public class GodinaStudijaService extends GenericCrudService<GodinaStudijaDTO, G
     }
 
     @Override
-    public GodinaStudijaDTO update(GodinaStudija entity) {
+    public GodinaStudijaDTORecord update(GodinaStudija entity) {
         if (godinaStudijaRepository.existsByGodinaAndIdNot(entity.getGodina(), entity.getId())) {
         	throw new ResponseStatusException(
                     HttpStatus.CONFLICT, "Godina studija " + entity.getGodina() + " već postoji!");

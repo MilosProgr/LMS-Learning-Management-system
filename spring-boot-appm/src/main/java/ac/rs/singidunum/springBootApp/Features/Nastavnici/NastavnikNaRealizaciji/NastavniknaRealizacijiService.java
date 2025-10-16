@@ -8,24 +8,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import ac.rs.singidunum.springBootApp.Features.Nastavnici.NastavnikNaRealizaciji.NastavnikNaRealizacijiDTO.NastavnikNaRealizacijiDTORecord;
 import ac.rs.singidunum.springBootApp.Generics.Mapper.Mapper;
 import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 
 
 
 @Service
-public class NastavniknaRealizacijiService extends GenericCrudService<NastavnikNaRealizacijiDTO, NastavnikNaRealizaciji, Long> {
+public class NastavniknaRealizacijiService extends GenericCrudService<NastavnikNaRealizacijiDTORecord, NastavnikNaRealizaciji, Long> {
 
 	@Autowired
 	private NastavnikNaRealizaacijiRepository nastavnikNaRealizaacijiRepository;
 	
 	protected NastavniknaRealizacijiService(CrudRepository<NastavnikNaRealizaciji, Long> repository,
-			Mapper<NastavnikNaRealizacijiDTO, NastavnikNaRealizaciji> mapper) {
+			Mapper<NastavnikNaRealizacijiDTORecord, NastavnikNaRealizaciji> mapper) {
 		super(repository, mapper);
 	}
 	
 	@Override
-    public NastavnikNaRealizacijiDTO save(NastavnikNaRealizaciji entity) {
+    public NastavnikNaRealizacijiDTORecord save(NastavnikNaRealizaciji entity) {
         final Long nastavnikId = (entity.getNastavnik() != null) ? entity.getNastavnik().getId() : null;
         if (nastavnikId == null) {
             throw new IllegalArgumentException("Nedostaje nastavnik.id");
@@ -38,7 +39,7 @@ public class NastavniknaRealizacijiService extends GenericCrudService<NastavnikN
     }
 
     @Override
-    public NastavnikNaRealizacijiDTO update(NastavnikNaRealizaciji entity) {
+    public NastavnikNaRealizacijiDTORecord update(NastavnikNaRealizaciji entity) {
         final Long nastavnikId = (entity.getNastavnik() != null) ? entity.getNastavnik().getId() : null;
         if (nastavnikId != null) {
             Optional<NastavnikNaRealizaciji> existing = nastavnikNaRealizaacijiRepository.findByNastavnik_Id(nastavnikId);

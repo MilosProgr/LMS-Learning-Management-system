@@ -39,7 +39,7 @@ public class RealizacijaPredmetaMapper implements Mapper<RealizacijaPredmetaDTOR
                         null,
                         null,
                         null,
-                        null
+                        null, null
                 )
                 : null;
 
@@ -78,7 +78,7 @@ public class RealizacijaPredmetaMapper implements Mapper<RealizacijaPredmetaDTOR
                                     t.getIshod().getId(),
                                     t.getIshod().getOpis(),
                                     t.getIshod().isPolozeno(),
-                                    null, null
+                                    null
                             ) : null,
                             t.getTipNastave() != null ? new TipNastaveDTORecord(
                                     t.getTipNastave().getId(),

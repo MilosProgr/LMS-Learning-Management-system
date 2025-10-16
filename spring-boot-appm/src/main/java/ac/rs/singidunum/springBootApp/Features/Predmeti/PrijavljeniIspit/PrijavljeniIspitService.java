@@ -10,6 +10,7 @@ import ac.rs.singidunum.springBootApp.Features.Predmeti.IspitniRok.IspitniRok;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.IspitniRok.IspitniRokRepository;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.Predmet;
 import ac.rs.singidunum.springBootApp.Features.Predmeti.Predmet.PredmetRepository;
+import ac.rs.singidunum.springBootApp.Features.Predmeti.PrijavljeniIspit.PrijavljeniIspitDTO.PrijavljeniIspitDTORecord;
 import ac.rs.singidunum.springBootApp.Features.Student.Student;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentRepository;
 import ac.rs.singidunum.springBootApp.Features.Student.StudentNaGodini.StudentNaGodini;
@@ -19,7 +20,7 @@ import ac.rs.singidunum.springBootApp.Generics.Service.GenericCrudService;
 import jakarta.transaction.Transactional;
 
 @Service
-public class PrijavljeniIspitService extends GenericCrudService<PrijavljeniIspitDTO, PrijavljeniIspit, Long> {
+public class PrijavljeniIspitService extends GenericCrudService<PrijavljeniIspitDTORecord, PrijavljeniIspit, Long> {
 
 	@Autowired
     private StudentRepository studentRepository;
@@ -37,19 +38,19 @@ public class PrijavljeniIspitService extends GenericCrudService<PrijavljeniIspit
 	private PrijavljeniIspitRepository prijavljeniIspitRepository;
     
 	protected PrijavljeniIspitService(CrudRepository<PrijavljeniIspit, Long> repository,
-			Mapper<PrijavljeniIspitDTO, PrijavljeniIspit> mapper) {
+			Mapper<PrijavljeniIspitDTORecord, PrijavljeniIspit> mapper) {
 		super(repository, mapper);
 	}
 	
 	
-	public PrijavljeniIspitDTO save(PrijavljeniIspit p) {
+	public PrijavljeniIspitDTORecord save(PrijavljeniIspit p) {
 		Integer brojPrijava = p.getBrojPrijava() == null ? 0 : p.getBrojPrijava() + 1;
 		p.setBrojPrijava(brojPrijava);
 		return super.save(p);
 	}
 	
 	@Transactional
-	public PrijavljeniIspitDTO saveForStudentAndSng(
+	public PrijavljeniIspitDTORecord saveForStudentAndSng(
 	    Long studentId,
 	    Long studentNaGodiniId,
 	    Long predmetId,

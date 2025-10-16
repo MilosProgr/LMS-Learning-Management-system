@@ -24,7 +24,7 @@ public class EvaluacijaZnanjaMapper implements Mapper<EvaluacijaZnanjaDTORecord,
 	                    e.getIshod().getId(),
 	                    e.getIshod().getOpis(),
 	                    e.getIshod().isPolozeno(),
-	                    null, null
+	                    null
 	            );
 	        }
 

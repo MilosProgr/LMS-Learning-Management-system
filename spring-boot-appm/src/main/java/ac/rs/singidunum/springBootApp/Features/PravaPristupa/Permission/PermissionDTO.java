@@ -1,9 +1,7 @@
 package ac.rs.singidunum.springBootApp.Features.PravaPristupa.Permission;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO;
 import ac.rs.singidunum.springBootApp.Features.PravaPristupa.UserPermission.UserPermissionDTO.UserPermissionDTORecord;
 
 
