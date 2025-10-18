@@ -22,7 +22,7 @@ export class SifarnikListComponent implements OnInit {
   constructor(
     private sifraService: SifraService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadSifre();

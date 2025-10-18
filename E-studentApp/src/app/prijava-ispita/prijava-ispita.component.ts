@@ -31,7 +31,7 @@ import { StudentService } from '../../Services/student/student.service';
     MatButtonModule, MatSnackBarModule, MatDialogModule, MatTooltipModule, MatIconModule
   ],
   templateUrl: './prijava-ispita.component.html',
-  styleUrl: './prijava-ispita.component.css'
+  styleUrls: ['./prijava-ispita.component.css']
 })
 export class PrijavaIspitaComponent implements OnInit {
   studentiNaGodini: StudentNaGodini[] = [];
@@ -116,38 +116,58 @@ export class PrijavaIspitaComponent implements OnInit {
 
   private loadPrijavljeniIspiti(): void {
     const uid = this.prijavljeniKorisnikId;
+
     if (!uid) {
-      console.error("Id prijavljenog korisnika nije učitan!");
+      console.error('❌ Id prijavljenog korisnika nije učitan!');
       this.prijavljeniIspiti = [];
       return;
     }
 
-    // svi id studenata na godini (Upisa)
+    // pronađi sve "studentNaGodini" zapise za tog korisnika
     const sngIds = new Set<number>(
-      this.studentiNaGodini
-        .filter(s => s.student?.id === uid && typeof s.id === 'number')
+      (this.studentiNaGodini ?? [])
+        .filter(s => s?.student?.id === uid && typeof s.id === 'number')
         .map(s => s.id as number)
     );
 
     if (sngIds.size === 0) {
+      console.warn('⚠️ Nema pronađenih upisa (StudentNaGodini) za korisnika', uid);
       this.prijavljeniIspiti = [];
       return;
     }
 
+    // povuci sve prijave
     this.prijavljeniIspitService.getAll().subscribe({
       next: (sve: PrijavljeniIspit[]) => {
-        //filtrira se po vise id jer prijave mogu biti po vise upisa (studenata na godini)
-        this.prijavljeniIspiti = (sve ?? []).filter(pi => {
-          const sid = (pi as any)?.studentNaGodini?.id;
+        if (!Array.isArray(sve)) {
+          console.error('❌ Neočekivan format prijava ispita!', sve);
+          this.prijavljeniIspiti = [];
+          return;
+        }
+
+        // filtriraj samo prijave koje pripadaju ovom korisniku
+        this.prijavljeniIspiti = sve.filter((pi: any) => {
+          const sid =
+            pi?.StudentNaGodini?.id ??
+            pi?.studentNaGodini?.id ??
+            pi?.student_na_godini?.id ??
+            null;
           return typeof sid === 'number' && sngIds.has(sid);
         });
-        console.log('Moje prijave:', this.prijavljeniIspiti);
+
+        console.group('✅ Moje prijave');
+        console.log('Ukupno (sve):', sve.length);
+        console.log('Filtrirane (moje):', this.prijavljeniIspiti);
+        console.log('SNG ID-jevi:', Array.from(sngIds));
+        console.groupEnd();
       },
       error: (err) => {
-        console.error("Greška u učitavanju prijava ispita.", err);
+        console.error('❌ Greška u učitavanju prijava ispita.', err);
+        this.prijavljeniIspiti = [];
       }
     });
   }
+
 
   /**
    * Kreiranje liste programa iz upisa i za svaki program povlacenje predmeta.

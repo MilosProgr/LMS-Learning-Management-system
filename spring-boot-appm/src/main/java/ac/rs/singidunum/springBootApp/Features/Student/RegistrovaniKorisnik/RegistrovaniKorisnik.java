@@ -28,6 +28,7 @@ public class RegistrovaniKorisnik implements BaseEntity<Long> {
     private String ime;
     @NotBlank(message = "Prezime je obavezno")
     private String prezime;
+    @NotBlank(message = "Korisnicko ime je obavezno")
     private String korisnickoIme;
     private String lozinka;
     private String email;
