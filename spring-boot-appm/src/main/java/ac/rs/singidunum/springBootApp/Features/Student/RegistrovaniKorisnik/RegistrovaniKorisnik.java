@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class RegistrovaniKorisnik implements BaseEntity<Long> {
@@ -23,7 +24,9 @@ public class RegistrovaniKorisnik implements BaseEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Ime je obavezno")
     private String ime;
+    @NotBlank(message = "Prezime je obavezno")
     private String prezime;
     private String korisnickoIme;
     private String lozinka;

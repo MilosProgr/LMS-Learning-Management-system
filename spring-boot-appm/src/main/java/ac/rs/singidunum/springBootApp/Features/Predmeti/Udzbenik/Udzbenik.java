@@ -10,6 +10,7 @@ public class Udzbenik implements BaseEntity<Long>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Long id;
 	
 	@ManyToOne
