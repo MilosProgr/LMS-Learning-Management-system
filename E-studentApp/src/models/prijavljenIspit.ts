@@ -11,13 +11,13 @@ export interface PrijavljeniIspit {
         obavezan?: boolean;
     }
     ispitniRok?: {
-            id: number | null;
-            naziv?: string;
-            pocetak?: string;
-            kraj?: string;
-            redovan?: boolean;
+        id: number | null;
+        naziv?: string;
+        pocetak?: string;
+        kraj?: string;
+        redovan?: boolean;
     }
-    studentNaGodini: {
+    StudentNaGodini: {
         id: number | number;
         brojIndeksa?: string;
         pohadjanjePredmeta?: PohadjanjePredmeta[]

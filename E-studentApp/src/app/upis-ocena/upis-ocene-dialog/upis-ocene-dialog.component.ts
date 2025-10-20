@@ -67,7 +67,7 @@ export class UpisOceneDialogComponent implements OnInit {
     }
 
     const ocena = this.form.value.konacnaOcena as number;
-    const sngId = Number(this.data.prijavaIspita?.studentNaGodini?.id);
+    const sngId = Number(this.data.prijavaIspita?.StudentNaGodini?.id);
     const predmetId = Number(this.data.prijavaIspita?.predmet?.id);
 
     const pohadjanja = (this.data.pohadjanjaPredmeta ?? []) as Array<{
@@ -76,11 +76,14 @@ export class UpisOceneDialogComponent implements OnInit {
       predmet?: { id?: number };
     }>;
 
+
     // pronađi pohađanje (student + predmet)
     const pp = pohadjanja.find(p =>
       Number(p.studentNaGodini?.id) === sngId &&
       Number(p.predmet?.id) === predmetId
     );
+
+    console.log("PP: ", pohadjanja);
 
     if (!pp?.id) {
       this.errorMessage = 'Nije pronađen zapis pohađanja za ovog studenta i predmet.';

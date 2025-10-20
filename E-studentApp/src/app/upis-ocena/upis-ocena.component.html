@@ -30,7 +30,7 @@
             <span *ngIf="p.ispitniRok?.kraj as kraj">{{ kraj | date:'dd.MM.yyyy HH:mm' }}</span>
           </td>
           <td>{{ p.brojPrijava ?? '—' }}</td>
-          <td>{{ p.studentNaGodini.brojIndeksa ?? ('ID: ' + (p.studentNaGodini.id)) }}</td>
+          <td>{{ p.StudentNaGodini.brojIndeksa ?? ('ID: ' + (p.StudentNaGodini.id)) }}</td>
           <td>{{ p.prijavljen ? 'DA' : 'NE' }}</td>
           <!-- Treba da budu ukupni osvojeni bodovi koje student ima sabiranjem svih evaluacija -->
           <td>{{ ukupnoBodova(p) }}</td>

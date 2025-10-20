@@ -122,7 +122,7 @@ export class UpisOcenaComponent implements OnInit {
           predmetIds.has(Number(pi?.predmet?.id))
         );
 
-        console.log(this.prijavljeniIspiti);
+        console.log("s", this.prijavljeniIspiti);
         console.log(this.filtriraniPrijavljeniIspiti);
       });
   }

@@ -58,8 +58,8 @@ export class EvaluacijaZnanjaComponent implements OnInit {
 
       // Iterirajte kroz prijavljene ispite i izvučete podatke o studentu na godini
       this.prijavljeniIspiti.forEach(ispit => {
-        if (ispit.studentNaGodini) {
-          console.log("Student na godini: ", ispit.studentNaGodini);
+        if (ispit.StudentNaGodini) {
+          console.log("Student na godini: ", ispit.StudentNaGodini);
         } else {
           console.log("Student na godini nije prisutan");
         }
