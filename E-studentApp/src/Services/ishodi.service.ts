@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Predmet } from '../models/predmetModel';
+//import { Predmet } from '../models/predmetModel';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ishod } from '../models/ishodModel';

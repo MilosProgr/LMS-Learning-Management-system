@@ -16,7 +16,7 @@ import { Drzava } from '../../../../models/drzava';
   templateUrl: './mesto-edit.component.html',
   styleUrl: './mesto-edit.component.css'
 })
-export class MestoEditComponent implements OnInit  {
+export class MestoEditComponent implements OnInit {
   MestoData: Mesto | null = null;
   drzave: Drzava[] = [];
 
@@ -37,7 +37,7 @@ export class MestoEditComponent implements OnInit  {
       validations: [Validators.required],
     }
   ];
-  
+
   constructor(
     private fb: FormBuilder,
     private mestoService: MestoService,
@@ -55,7 +55,7 @@ export class MestoEditComponent implements OnInit  {
         next: (data) => {
           this.MestoData = data;
           console.log("Mesto koje se menja je: ", this.MestoData);
-          
+
           // Ažuriraj vrednosti formFields-a
           this.mestoFormFields = [
             {
@@ -73,7 +73,7 @@ export class MestoEditComponent implements OnInit  {
               options: [] // Inicijalizuj opcije kao prazne
             }
           ];
-  
+
           // Učitaj sve države nakon što je MestoData postavljeno
           this.loadDrzave(); // Pozovi učitavanje država ovde
         },
@@ -84,7 +84,7 @@ export class MestoEditComponent implements OnInit  {
     }
   }
 
-  handleFormSubmit(updatedData: Mesto | any): void {
+  handleFormSubmit(updatedData: Mesto): void {
     console.log("Mesto za izmenu: ", updatedData); // Debug: Check what data is being received
 
     if (updatedData) {
@@ -114,7 +114,7 @@ export class MestoEditComponent implements OnInit  {
           next: () => {
             this.router.navigate(['/adresa-list']); // Navigate to the list after update
             console.log("Mesto uspesno izmenjen!");
-            
+
           },
           error: (err) => console.error('Error updating mesto', err) // Handle errors
         });
@@ -123,7 +123,7 @@ export class MestoEditComponent implements OnInit  {
       }
     }
   }
-    
+
 
   loadDrzave(): void {
     this.drzavaService.getAll().subscribe((data) => {
@@ -138,6 +138,6 @@ export class MestoEditComponent implements OnInit  {
       drzavaField.options = this.drzave.map(drzava => ({ key: drzava.id !== undefined ? drzava.id.toString() : "Nema ID", value: drzava.naziv }));
     }
   }
-  
+
 
 }

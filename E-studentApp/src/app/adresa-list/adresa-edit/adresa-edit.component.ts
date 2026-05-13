@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { GenericFormComponent } from '../../generics/generic-form/generic-form.component';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Mesto } from '../../../models/mesto';
-import { Drzava } from '../../../models/drzava';
+//import { Drzava } from '../../../models/drzava';
 import { Adresa } from '../../../models/adresaModel';
 import { FormField } from '../../generics/generic-form/form-model';
 import { MestoService } from '../../../Services/mesto.service';
-import { DrzavaService } from '../../../Services/drzava.service';
+//import { DrzavaService } from '../../../Services/drzava.service';
 import { AdresaService } from '../../../Services/adresa.service';
 
 @Component({
@@ -45,7 +45,7 @@ export class AdresaEditComponent {
       validations: [Validators.required]
     }
   ];
-  
+
   constructor(
     private fb: FormBuilder,
     private mestoService: MestoService,
@@ -59,7 +59,7 @@ export class AdresaEditComponent {
     console.log("ID izabrane adrese je:", id);
 
     if (id) {
-      
+
       this.adresaService.getOne(id).subscribe({
         next: (data) => {
           this.AdresaData = data;
@@ -96,7 +96,7 @@ export class AdresaEditComponent {
     this.loadMesta();
   }
 
-  handleFormSubmit(updatedData: Mesto | any): void {
+  handleFormSubmit(updatedData: Adresa): void {
     console.log("Adresa za izmenu: ", updatedData); // Debug: Check what data is being received
 
     if (updatedData) {
@@ -118,7 +118,7 @@ export class AdresaEditComponent {
           id: id,
           ulica: updatedData.ulica,
           broj: updatedData.broj,
-          mesto: { id: selectedMesto.id } 
+          mesto: { id: selectedMesto.id }
         };
 
         console.log("Payload for update: ", payload);
@@ -126,7 +126,7 @@ export class AdresaEditComponent {
           next: () => {
             this.router.navigate(['/adresa-list']); // Navigate to the list after update
             console.log("Adresa uspesno izmenjena!");
-            
+
           },
           error: (err) => console.error('Error updating Adresa', err) // Handle errors
         });
@@ -135,7 +135,7 @@ export class AdresaEditComponent {
       }
     }
   }
-    
+
 
   loadMesta(): void {
     this.mestoService.getAll().subscribe((data) => {

@@ -13,8 +13,8 @@ export class PohadjanjePredmetaService extends CrudService<PohadjanjePredmeta> {
         super(http, `${environment.baseUrl}/api/PohadjanjePredmeta`)
     }
 
-    prijaviPredmete(studentNaGodiniId: number, predmetiIds: number[]): Observable<any> {
-        return this.http.post(
+    prijaviPredmete(studentNaGodiniId: number, predmetiIds: number[]): Observable<PohadjanjePredmeta[]> {
+        return this.http.post<PohadjanjePredmeta[]>(
             `${environment.baseUrl}/api/PohadjanjePredmeta/${studentNaGodiniId}`,
             predmetiIds
         );
@@ -27,10 +27,10 @@ export class PohadjanjePredmetaService extends CrudService<PohadjanjePredmeta> {
     }
 
     patchOcenaById(ppId: number, ocena: number) {
-  return this.http.patch(`${this.baseUrl}/${ppId}`,
-    { konacnaOcena: ocena },
-    { headers: { 'Content-Type': 'application/merge-patch+json' } });
-}
+        return this.http.patch(`${this.baseUrl}/${ppId}`,
+            { konacnaOcena: ocena },
+            { headers: { 'Content-Type': 'application/merge-patch+json' } });
+    }
 
 
 

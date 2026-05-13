@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject, of, throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../app/environments/environment';
 import { RegistrovaniKorisnik } from '../models/registrovaniKorisnik';
@@ -15,12 +15,12 @@ export class LoginService {
   private baseUrl = environment.baseUrl;
 
   token: string | null = null;
-  user: any = null;
+  user: { roles: string[] } | null = null;
   rolesSubject: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set([]));
   loggedOut = false;
   loggedIn = false;
 
-  constructor(private client: HttpClient, @Inject(PLATFORM_ID) private platformId: Object, private router: Router, private registrovaniKorisniciService: RegistrovaniKorisnikService) {
+  constructor(private client: HttpClient, @Inject(PLATFORM_ID) private platformId: object, private router: Router, private registrovaniKorisniciService: RegistrovaniKorisnikService) {
     this.initializeUserFromToken();  // Inicijalizuj korisnika pri osvežavanju stranice
   }
 
@@ -45,7 +45,7 @@ export class LoginService {
             };
             this.loggedIn = true;
 
-            const roles = new Set<string>(this.user.roles);
+            const roles = new Set<string>(this.user?.roles);
             this.rolesSubject.next(roles);
 
             console.log('Podaci korisnika:', this.user);
@@ -84,7 +84,7 @@ export class LoginService {
       }),
       catchError(error => {
         // console.error('Register error:', error);
-      return throwError(() => error);
+        return throwError(() => error);
       })
     );
   }
@@ -127,14 +127,14 @@ export class LoginService {
   }
 
   // Method to decode a JWT token and extract the payload
-  decodeToken(token: string): any {
+  decodeToken(token: string): Token {
     try {
       const base64Url = token.split('.')[1]; // Get the payload part of the JWT
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/'); // Replace URL-safe characters
       const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
-      return JSON.parse(jsonPayload);
+      return JSON.parse(jsonPayload) as Token;
     } catch (error) {
       console.error('Greška prilikom dekodiranja JWT tokena:', error);
       throw error; // Re-throw to handle in validateRoles

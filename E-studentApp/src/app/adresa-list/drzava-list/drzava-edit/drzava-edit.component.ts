@@ -72,7 +72,7 @@ export class DrzavaEditComponent implements OnInit {
 
     console.log("ID je Validan", id);
     // Kreirajte payload sa ID-om
-    const payload: any = {
+    const payload = {
         id: id, // Dodajte ID ovde
         naziv: updatedData.naziv // Proverite da li je naziv ispravno postavljen
     };

@@ -20,7 +20,7 @@ export class DrzavaListComponent implements OnInit {
   currentPage: number = 1;  // trenutna stranica
   itemsPerPage: number = 10;  // broj stavki po stranici
 
-  
+
   kljuceviDrzava = [
     { imeKolone: 'Id', kljuc: 'id' },
     { imeKolone: 'Naziv', kljuc: 'naziv' },
@@ -35,7 +35,7 @@ export class DrzavaListComponent implements OnInit {
     }
   ];
 
-  constructor(private drzavaService: DrzavaService, private router: Router) {}
+  constructor(private drzavaService: DrzavaService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadDrzave();
@@ -53,7 +53,7 @@ export class DrzavaListComponent implements OnInit {
     });
   }
 
-  addDrzava(formFieldsDrzava: any) {
+  addDrzava(formFieldsDrzava: Drzava) {
     this.drzavaService.create(formFieldsDrzava).subscribe(response => {
       console.log("Drzava uspesno kreirana:", response);
       this.loadDrzave();
@@ -63,11 +63,11 @@ export class DrzavaListComponent implements OnInit {
     this.drzavaService.delete(id).subscribe(() => {
       this.loadDrzave();
     },
-    (error) => {
-      console.error('Greška prilikom brisanja drzave:', error);
-      this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
-    }
-  );
+      (error) => {
+        console.error('Greška prilikom brisanja drzave:', error);
+        this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
+      }
+    );
   }
   editDrzava(id: number): void {
     // Implement the logic to navigate to the edit form or open a modal for editing

@@ -17,29 +17,29 @@ import { NgFor, NgIf } from '@angular/common';
   styleUrl: './mesto-list.component.css'
 })
 export class MestoListComponent implements OnInit {
-  
+
   currentPage: number = 1;  // trenutna stranica
   itemsPerPage: number = 15;  // broj stavki po stranici\
   mesta: Mesto[] = [];
   drzave: Drzava[] = [];
   errorMessage = ''
 
-    //POLJE ZA MESTO
-    formFieldsMesto: FormField[] = [
-      {
-        type: 'text',
-        label: 'Naziv: ',
-        name: 'naziv',
-        validations: [Validators.required, Validators.pattern('^[A-Z].*')]
-      },
-      {
-        type: 'select',
-        label: 'Drzava: ',
-        name: 'drzava',
-        options: [],
-        validations: [Validators.required]
-      }
-    ];
+  //POLJE ZA MESTO
+  formFieldsMesto: FormField[] = [
+    {
+      type: 'text',
+      label: 'Naziv: ',
+      name: 'naziv',
+      validations: [Validators.required, Validators.pattern('^[A-Z].*')]
+    },
+    {
+      type: 'select',
+      label: 'Drzava: ',
+      name: 'drzava',
+      options: [],
+      validations: [Validators.required]
+    }
+  ];
 
   constructor(private mestoService: MestoService, private drzavaService: DrzavaService, private router: Router) {
   }
@@ -61,14 +61,18 @@ export class MestoListComponent implements OnInit {
     })
   }
 
-  addMesto(formFieldsMesto: any) {
+  addMesto(formFieldsMesto: Mesto): void {
+    const drzavaId = typeof formFieldsMesto.drzava === 'object'
+      ? formFieldsMesto.drzava.id
+      : Number(formFieldsMesto.drzava);
 
     const payload = {
       naziv: formFieldsMesto.naziv,
       drzava: {
-        id: formFieldsMesto.drzava
+        id: drzavaId
       }
-    }
+    };
+
     this.mestoService.create(payload).subscribe(response => {
       console.log("Mesto uspesno kreirano:", response);
       this.loadMesta();
@@ -79,10 +83,10 @@ export class MestoListComponent implements OnInit {
     this.mestoService.delete(id).subscribe(() => {
       this.loadMesta();
     },
-    (error) => {
-      console.error('Greška prilikom brisanja mesta:', error);
-      this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
-    });
+      (error) => {
+        console.error('Greška prilikom brisanja mesta:', error);
+        this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
+      });
   }
 
   editMesto(id: number): void {

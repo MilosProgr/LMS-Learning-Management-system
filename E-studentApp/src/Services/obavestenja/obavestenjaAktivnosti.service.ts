@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CrudService } from "../../app/generics/generic-service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../app/environments/environment";
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ObavestenjeAktivnosti } from "../../models/obavestenja/obavestenjaAktivnostiModel";
 
 @Injectable({

@@ -1,4 +1,4 @@
-import { Drzava } from "./drzava";
+//import { Drzava } from "./drzava";
 
 export interface Mesto {
     id?: number;

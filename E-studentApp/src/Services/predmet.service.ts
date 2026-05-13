@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Predmet } from "../../src/models/predmetModel";
 import { HttpClient } from '@angular/common/http';
 import { CrudService } from '../app/generics/generic-service';

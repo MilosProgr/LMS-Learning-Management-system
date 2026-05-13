@@ -21,7 +21,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AktivnostiComponent implements OnInit {
 
-  prijavljeniKorisnik: RegistrovaniKorisnik = this.loginService.user
+  prijavljeniKorisnik: RegistrovaniKorisnik | null = null;
 
   studenti: Student[] = [];
   studentiNaGodini: StudentNaGodini[] = [];
@@ -70,7 +70,7 @@ export class AktivnostiComponent implements OnInit {
         for (const pi of this.prijavljeniIspiti) {
           const id = pi?.id;
           const naziv =
-            (pi as any)?.predmet?.naziv ??
+            (pi as PrijavljeniIspit)?.predmet?.naziv ??
             null;
           if (typeof id === 'number' && naziv) {
             this.predmetByPrijavljeniId.set(id, naziv);
@@ -92,8 +92,8 @@ export class AktivnostiComponent implements OnInit {
 
   predmetNazivForEval(e: EvaluacijaZnanja): string {
     const prijId =
-      (e as any)?.prijavljeniIspit?.id ??
-      (e as any)?.prijavljeniIspitId;
+      (e as EvaluacijaZnanja)?.prijavljeniIspit?.id ?? (e as EvaluacijaZnanja)?.prijavljeniIspit;
+    // (e as any)?.prijavljeniIspitId;
 
     if (typeof prijId !== 'number') return '—';
     return this.predmetByPrijavljeniId.get(prijId) ?? '—';
@@ -108,7 +108,7 @@ export class AktivnostiComponent implements OnInit {
 
     //studenti prijavljenog korisnika
     const mojiStudenti = this.studenti.filter(s =>
-      (s as any)?.korisnik?.id === regId
+      (s as Student)?.korisnik?.id === regId
     );
 
     const mojiStudentIds = mojiStudenti
@@ -122,7 +122,10 @@ export class AktivnostiComponent implements OnInit {
 
     //tudentiNaGodini za moje studente
     const mojiSng = this.studentiNaGodini.filter(sng => {
-      const sid = (sng as any)?.student?.id ?? (sng as any)?.studentId;
+      const sid = sng?.student?.id;
+
+      if (sid == null) return false; // uklanja null i undefined
+
       return mojiStudentIds.includes(sid);
     });
 
@@ -137,7 +140,7 @@ export class AktivnostiComponent implements OnInit {
 
     //prijavljeni ispiti za moje SNG
     const mojiPrijavljeni = this.prijavljeniIspiti.filter(pi => {
-      const sngId = (pi as any)?.studentNaGodini?.id ?? (pi as any)?.studentNaGodiniId;
+      const sngId = (pi as PrijavljeniIspit)?.StudentNaGodini?.id
       return mojiSngIds.includes(sngId);
     });
 
@@ -152,8 +155,8 @@ export class AktivnostiComponent implements OnInit {
 
     //evaluacije znanja filtrirane po prijavljenim ispitima
     this.evaluacijeZaPrijavljenog = this.evaluacijeZnanja.filter(ev => {
-      const prijIspitId = (ev as any)?.prijavljeniIspit?.id ?? (ev as any)?.prijavljeniIspitId;
-      return mojiPrijavljeniIds.includes(prijIspitId);
+      const prijIspitId = (ev as EvaluacijaZnanja)?.prijavljeniIspit?.id
+      return prijIspitId != null && mojiPrijavljeniIds.includes(prijIspitId);
     });
     console.log(this.evaluacijeZaPrijavljenog);
   }
