@@ -17,14 +17,14 @@ import { DrzavaListComponent } from './drzava-list/drzava-list.component';
 @Component({
   selector: 'app-adresa-list',
   standalone: true,
-  imports: [NgFor, NgIf,RouterLink, ReactiveFormsModule, GenericFormComponent, NgxPaginationModule, CommonModule, DrzavaListComponent, MestoListComponent],
+  imports: [NgFor, NgIf, RouterLink, ReactiveFormsModule, GenericFormComponent, NgxPaginationModule, CommonModule, DrzavaListComponent, MestoListComponent],
   templateUrl: './adresa-list.component.html',
   styleUrl: './adresa-list.component.css'
 })
 export class AdresaListComponent implements OnInit {
   currentPage: number = 1;  // trenutna stranica
   itemsPerPage: number = 10;  // broj stavki po stranici
-    errorMessage = ''
+  errorMessage = ''
   adrese: Adresa[] = [];
 
   // kljuceviDrzava = [
@@ -147,19 +147,20 @@ export class AdresaListComponent implements OnInit {
     });
   }
 
-  addAdresa(formFieldsAdresa: any) {
+  addAdresa(formFieldsAdresa: Adresa) {
     console.log(formFieldsAdresa);
-    const payload = {
+
+    const payload: Adresa = {
       ulica: formFieldsAdresa.ulica,
       broj: formFieldsAdresa.broj,
       mesto: {
-        id: formFieldsAdresa.mesto
+        id: formFieldsAdresa.mesto.id
       }
-    }
+    };
+
     this.adresaService.create(payload).subscribe(response => {
       console.log('Adresa uspešno kreirano:', response);
       this.loadAdrese();
-
     });
   }
 
@@ -169,7 +170,7 @@ export class AdresaListComponent implements OnInit {
     });
   }
 
-  addDrzava(formFieldsDrzava: any) {
+  addDrzava(formFieldsDrzava: Drzava) {
     this.drzavaService.create(formFieldsDrzava).subscribe(response => {
       console.log("Drzava uspesno kreirana:", response);
       this.loadDrzave();
@@ -177,12 +178,13 @@ export class AdresaListComponent implements OnInit {
     });
   }
 
-  addMesto(formFieldsMesto: any) {
+  addMesto(formFieldsMesto: Mesto) {
 
     const payload = {
       naziv: formFieldsMesto.naziv,
       drzava: {
-        id: formFieldsMesto.drzava
+        // id: formFieldsMesto.drzava
+        id: formFieldsMesto.drzava.id
       }
     }
     this.mestoService.create(payload).subscribe(response => {
@@ -196,10 +198,10 @@ export class AdresaListComponent implements OnInit {
     this.mestoService.delete(id).subscribe(() => {
       this.loadMesta();
     },
-    (error) => {
-      console.error('Greška prilikom brisanja adrese:', error);
-      this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
-    });
+      (error) => {
+        console.error('Greška prilikom brisanja adrese:', error);
+        this.errorMessage = "Nije moguće obrisati entitet! Proverite povezane entitete."
+      });
   }
 
   refresh() {

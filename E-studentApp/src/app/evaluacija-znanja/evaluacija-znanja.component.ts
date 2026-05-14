@@ -3,14 +3,13 @@ import { PrijavljeniIspit } from '../../models/prijavljenIspit';
 import { StudentNaGodini } from '../../models/studentNaGodini/studentNaGodini';
 import { PrijavljeniIspitService } from '../../Services/prijavljeniIspit.service';
 import { PohadjanjePredmeta } from '../../models/pohadjanjePredmeta';
-import { PohadjanjePredmetaService } from '../../Services/pohadjanje_predmeta.service';
 import { NgClass, NgFor } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { GenericFormComponent } from '../generics/generic-form/generic-form.component';
 import { TipEvaluacije } from '../../models/tipEvaluacije';
 import { TipEvaluacijeService } from '../../Services/tip-evaluacije.service';
 import { FormsModule } from '@angular/forms';
 import { EvaluacijaZnanjaService } from '../../Services/evaluacija-znanja.service';
+import { EvaluacijaZnanja } from '../../models/evaluacijaZnanja';
 
 @Component({
   selector: 'app-evaluacija-znanja',
@@ -20,23 +19,20 @@ import { EvaluacijaZnanjaService } from '../../Services/evaluacija-znanja.servic
   styleUrl: './evaluacija-znanja.component.css'
 })
 export class EvaluacijaZnanjaComponent implements OnInit {
+
   currentPage: number = 1;
   itemsPerPage: number = 15;
+
   prijavljeniIspiti: PrijavljeniIspit[] = [];
   studentNaGodini: StudentNaGodini[] = [];
   pohadjanjePredmeta: PohadjanjePredmeta[] = [];
-  selectedStudent: any;
+
+  selectedPrijavljeniIspit: PrijavljeniIspit | null = null;
+
   tipoviEvaluacije: TipEvaluacije[] = [];
-  selectedTipEvaluacije: TipEvaluacije | null = null;  // Za praćenje izabrane vrednosti
+  selectedTipEvaluacije: TipEvaluacije | null = null;
 
-
-  // Dodaj bodovi varijablu
   bodovi: number | null = null;
-
-
-
-
-
 
   constructor(
     private prijavljenIspitService: PrijavljeniIspitService,
@@ -45,72 +41,134 @@ export class EvaluacijaZnanjaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.prijavljeiIspiti();
     this.loadTipovi();
+
   }
 
+  prijavljeiIspiti(): void {
 
-  prijavljeiIspiti() {
     this.prijavljenIspitService.getAll().subscribe(data => {
+
       this.prijavljeniIspiti = data;
 
-      console.log("Prijavljeni Ispiti: ", this.prijavljeniIspiti);
+      console.log(
+        'Prijavljeni Ispiti: ',
+        this.prijavljeniIspiti
+      );
 
-      // Iterirajte kroz prijavljene ispite i izvučete podatke o studentu na godini
       this.prijavljeniIspiti.forEach(ispit => {
+
         if (ispit.StudentNaGodini) {
-          console.log("Student na godini: ", ispit.StudentNaGodini);
+
+          console.log(
+            'Student na godini: ',
+            ispit.StudentNaGodini
+          );
+
         } else {
-          console.log("Student na godini nije prisutan");
+
+          console.log(
+            'Student na godini nije prisutan'
+          );
+
         }
+
       });
+
     });
+
   }
 
-  loadTipovi() {
+  loadTipovi(): void {
+
     this.tipEvaluacijeService.getAll().subscribe(data => {
+
       this.tipoviEvaluacije = data;
-      console.log("Tipovi evaluacije: ", this.tipoviEvaluacije)
-    })
+
+      console.log(
+        'Tipovi evaluacije: ',
+        this.tipoviEvaluacije
+      );
+
+    });
+
   }
 
-  openModal(prijavljeniIspit: PrijavljeniIspit) {
-    this.selectedStudent = prijavljeniIspit;
+  openModal(prijavljeniIspit: PrijavljeniIspit): void {
+
+    this.selectedPrijavljeniIspit = prijavljeniIspit;
 
   }
 
-  UpisiBodove() {
-    console.log("Selected Student ID: ", this.selectedStudent?.id);  // Debugging log
+  UpisiBodove(): void {
 
-    if (this.selectedStudent && this.bodovi !== null && this.selectedTipEvaluacije) {
+    console.log(
+      'Selected PrijavljeniIspit ID: ',
+      this.selectedPrijavljeniIspit?.id
+    );
 
-      const evaluacijaZnanja = {
+    const prijavljeniIspitId = this.selectedPrijavljeniIspit?.id;
+    const predmetId = this.selectedPrijavljeniIspit?.predmet?.id;
+    const tipEvaluacijeId = this.selectedTipEvaluacije?.id;
+
+    if (
+      this.selectedPrijavljeniIspit &&
+      this.bodovi !== null &&
+      this.selectedTipEvaluacije &&
+      prijavljeniIspitId != null &&
+      predmetId != null &&
+      tipEvaluacijeId != null
+    ) {
+
+      const evaluacijaZnanja: EvaluacijaZnanja = {
+
         bodovi: this.bodovi,
+
         ishod: {
-          id: this.selectedStudent.predmet.id,
-          predmet: { id: this.selectedStudent.predmet.id }
+
+          id: predmetId,
+
+          predmet: {
+            id: predmetId
+          }
+
         },
+
         tipEvaluacije: {
-          id: this.selectedTipEvaluacije.id
+
+          id: tipEvaluacijeId
+
         },
-        prijavljenIspit: {
-          id: this.selectedStudent.id
+
+        prijavljeniIspit: {
+
+          id: prijavljeniIspitId
+
         }
 
       };
 
-      this.evaluacijaZnanjaService.create(evaluacijaZnanja).subscribe(response => {
-        console.log("Evaluacija znanja kreirana: ", response);
-      });
+      this.evaluacijaZnanjaService
+        .create(evaluacijaZnanja)
+        .subscribe(response => {
+
+          console.log(
+            'Evaluacija znanja kreirana: ',
+            response
+          );
+
+        });
+
     } else {
-      console.log("Nisu uneti svi potrebni podaci");
+
+      console.log(
+        'Nisu uneti svi potrebni podaci'
+      );
+
     }
+
   }
-
-
-
-
-
-
 
 }

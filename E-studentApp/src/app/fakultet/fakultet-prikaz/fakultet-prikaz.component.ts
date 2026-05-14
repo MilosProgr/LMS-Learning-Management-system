@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Fakultet } from '../../../models/fakultetModel';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 import { FakultetService } from '../../../Services/fakultet.service';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -20,7 +20,7 @@ export class FakultetPrikazComponent {
   itemsPerPage: number = 10;
 
   constructor(private fakultetService: FakultetService) { }
-  
+
   ngOnInit(): void {
     this.loadFakulteti();
   }

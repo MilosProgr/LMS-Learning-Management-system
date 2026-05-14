@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../Services/profile-service.service';
-import { CommonModule, NgFor, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LoginService } from '../../Services/login.service';
 import { StudentNaGodiniService } from '../../Services/student/studentNaGodini.service';
 import { Location } from '@angular/common';
@@ -34,7 +34,7 @@ export class MojProfilComponent implements OnInit {
   }
 
   private ucitajUlogeKorisnika(): void {
-    const user = this.loginService.user;
+    const { user } = this.loginService.user;
     if (user && Array.isArray(user.roles)) {
       this.userRoles = user.roles;
       console.log(`Uloge korisnika iz funkcije: ${this.userRoles}`);
@@ -49,7 +49,7 @@ export class MojProfilComponent implements OnInit {
     this.profileService.getKorisnikPodaci().subscribe((data) => {
       if (Array.isArray(data) && data.length > 0) {
 
-        const ulogovaniKorisnikId = this.loginService.user.id
+        const ulogovaniKorisnikId = this.loginService.user?.id
         const korisnik = data.find(a => a.id === ulogovaniKorisnikId);
 
         this.korisnikData = {
@@ -67,7 +67,7 @@ export class MojProfilComponent implements OnInit {
           this.profileService.getAdminProfile().subscribe((data) => {
             if (Array.isArray(data) && data.length > 0) {
 
-              const ulogovaniKorisnikId = this.loginService.user.id
+              const ulogovaniKorisnikId = this.loginService.user?.id
               const admin = data.find(a => a.korisnik?.id === ulogovaniKorisnikId);
 
               this.adminData = {
@@ -114,7 +114,7 @@ export class MojProfilComponent implements OnInit {
         case 'ROLE_STUDENT':
           this.profileService.getStudentProfile().subscribe((data) => {
             if (Array.isArray(data) && data.length > 0) {
-              const ulogovaniKorisnikId = this.loginService.user.id
+              const ulogovaniKorisnikId = this.loginService.user?.id
               const student = data.find(a => a.korisnik?.id === ulogovaniKorisnikId);
               // console.log("Student koji dobijam", student);
               this.studentData = {

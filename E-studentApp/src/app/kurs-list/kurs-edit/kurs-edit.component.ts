@@ -94,28 +94,28 @@ export class KursEditComponent implements OnInit {
     });
   }
 
-  handleFormSubmit(updatedData: Kurs | any): void {
+  handleFormSubmit(updatedData: Kurs): void {
     console.log("Novi uneti podaci: ", updatedData);
 
     if (updatedData) {
-      const id = Number(this.route.snapshot.paramMap.get('id')); 
+      const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        const payload: Kurs = {
-          id: id, 
-          naziv: updatedData.naziv, 
-          trajanje: updatedData.trajanje,
-          oznaka: updatedData.oznaka
-        }
-        console.log("Payload for update: ", payload);
-
-        this.kursService.update(id, payload).subscribe({
-          next: () => {
-            this.router.navigate(['/kurs-list']);
-          },
-          error: (err) => console.error('Error updating kurs', err)
-        });
-      } else {
-        console.error('Selected kurs ID is invalid');
+      const payload: Kurs = {
+        id: id,
+        naziv: updatedData.naziv,
+        trajanje: updatedData.trajanje,
+        oznaka: updatedData.oznaka
       }
+      console.log("Payload for update: ", payload);
+
+      this.kursService.update(id, payload).subscribe({
+        next: () => {
+          this.router.navigate(['/kurs-list']);
+        },
+        error: (err) => console.error('Error updating kurs', err)
+      });
+    } else {
+      console.error('Selected kurs ID is invalid');
     }
+  }
 }

@@ -1,7 +1,7 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { Fakultet } from '../../models/fakultetModel';
+import { Fakultet } from '../../models/fakultet/fakultetModel';
 import { FakultetService } from '../../Services/fakultet.service';
 import { LoginService } from '../../Services/login.service';
 import { NavBarGenericComponent } from '../generics/nav-bar-generic/nav-bar-generic.component';
@@ -17,14 +17,14 @@ import { FakultetListComponent } from '../fakultet/fakultet-list/fakultet-list.c
 })
 export class NavBarComponent implements OnInit {
 
-  navItems: NavItem[] = [  
-      { label: 'E-Student', link: '/obavestenja', isVisible: true },
-      { label: 'Univerziteti', link: '/univerzitet-home', isVisible: true },
-      { label: 'Fakulteti', link: '/fakultet-home', isVisible: true },
+  navItems: NavItem[] = [
+    { label: 'E-Student', link: '/obavestenja', isVisible: true },
+    { label: 'Univerziteti', link: '/univerzitet-home', isVisible: true },
+    { label: 'Fakulteti', link: '/fakultet-home', isVisible: true },
 
-      { label: 'Profil', isButton: true, action: () => this.navigateToProfile(), isVisible: true },
-      { label: 'Odjavi se', isButton: true, action: () => this.odjava(), isVisible: true }
-    ] 
+    { label: 'Profil', isButton: true, action: () => this.navigateToProfile(), isVisible: true },
+    { label: 'Odjavi se', isButton: true, action: () => this.odjava(), isVisible: true }
+  ]
 
   fakulteti: Fakultet[] = [];
 
@@ -32,13 +32,13 @@ export class NavBarComponent implements OnInit {
     private fakultetService: FakultetService,
     public loginService: LoginService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadFakulteti();
   }
 
-  
+
   loadFakulteti(): void {
     this.fakultetService.getAll().subscribe(fakulteti => {
       this.fakulteti = fakulteti;
@@ -54,5 +54,5 @@ export class NavBarComponent implements OnInit {
     this.loginService.logout();
     this.router.navigate(['/']); // Navigacija na login stranicu
   }
-  
+
 }

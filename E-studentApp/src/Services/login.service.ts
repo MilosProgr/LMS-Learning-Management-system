@@ -7,6 +7,7 @@ import { RegistrovaniKorisnik } from '../models/registrovaniKorisnik';
 import { Token } from '../models/token';
 import { Router } from '@angular/router';
 import { RegistrovaniKorisnikService } from './registrovaniKorisnici.service';
+import { JwtUser } from '../models/jwt/jwtUser';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class LoginService {
   private baseUrl = environment.baseUrl;
 
   token: string | null = null;
-  user: { roles: string[] } | null = null;
+  user: JwtUser | null = null;
   rolesSubject: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set([]));
   loggedOut = false;
   loggedIn = false;

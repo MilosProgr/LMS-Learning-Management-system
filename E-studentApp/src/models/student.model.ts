@@ -3,11 +3,11 @@ export interface Student {
   statusStudiranja?: string;
   stanjeNaRacunu?: number;
   predmetiIzabrani?: boolean;
-  
+
   jmbg?: string;
   telefon?: string;
   brojIndeksa?: string;
-  
+
   adresa: {
     id?: number | null;
     ulica: string;
@@ -31,7 +31,7 @@ export interface Student {
     naziv?: string
   },
   korisnik: {
-    id: Number,
+    id: number,
     ime: string,
     prezime: string
   }

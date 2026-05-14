@@ -3,8 +3,9 @@ import { FileInstrumentEvaluacije } from '../../../models/FileInstrumentEvaluaci
 import { InstrumentEvaluacijeEditComponent } from '../instrument-evaluacije-edit/instrument-evaluacije-edit.component';
 import { InstrumentEvaluacijeService } from '../../../Services/fileInstrumentEvaluacije.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-instrument-evaluacije-list',
@@ -22,7 +23,7 @@ export class InstrumentEvaluacijeListComponent implements OnInit {
   constructor(
     private instrumentEvaluacijeService: InstrumentEvaluacijeService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadInstrumenti();
@@ -31,7 +32,7 @@ export class InstrumentEvaluacijeListComponent implements OnInit {
   loadInstrumenti(): void {
     this.instrumentEvaluacijeService.getAll().subscribe({
       next: (res: FileInstrumentEvaluacije[]) => { this.instrumenti = res; },
-      error: (err: any) => console.error(err)
+      error: (err: unknown) => console.error(err)
     });
   }
 
@@ -41,7 +42,7 @@ export class InstrumentEvaluacijeListComponent implements OnInit {
       data: { mode: 'add' }
     });
 
-    dialogRef.afterClosed().subscribe((res: any) => { if (res) this.loadInstrumenti(); });
+    dialogRef.afterClosed().subscribe((res: FileInstrumentEvaluacije) => { if (res) this.loadInstrumenti(); });
   }
 
   openEditDialog(instrument: FileInstrumentEvaluacije): void {
@@ -50,13 +51,13 @@ export class InstrumentEvaluacijeListComponent implements OnInit {
       data: { mode: 'edit', instrument }
     });
 
-    dialogRef.afterClosed().subscribe((res: any) => { if (res) this.loadInstrumenti(); });
+    dialogRef.afterClosed().subscribe((res: FileInstrumentEvaluacije) => { if (res) this.loadInstrumenti(); });
   }
 
   deleteInstrument(id: number): void {
     this.instrumentEvaluacijeService.delete(id).subscribe({
       next: () => this.loadInstrumenti(),
-      error: (err: any) => {
+      error: (err: HttpErrorResponse) => {
         console.error(err);
         this.errorMessage = 'Nije moguće obrisati instrument evaluacije.';
       }

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudijskiProgram } from '../../models/studijskiprogramModel';
 import { StudijskiProgramService } from '../../Services/studijski-program.service';
 import { GenericFormComponent } from '../generics/generic-form/generic-form.component';
-import { Fakultet } from '../../models/fakultetModel';
+import { Fakultet } from '../../models/fakultet/fakultetModel';
 import { FakultetService } from '../../Services/fakultet.service';
 import { Validators } from '@angular/forms';
 import { FormField } from '../generics/generic-form/form-model';
@@ -21,7 +21,7 @@ export class StudijskiprogramComponent implements OnInit {
 
   programi: StudijskiProgram[] = [];
   fakulteti: Fakultet[] = [];
-  errorMessage="";
+  errorMessage = "";
 
   constructor(private programService: StudijskiProgramService, private fakultetService: FakultetService, private router: Router) { }
 
@@ -71,8 +71,8 @@ export class StudijskiprogramComponent implements OnInit {
         univerzitet: formFieldsStudijskiProgram.fakultet.univerzitet
       }
     }
-    console.log("payload",  payload);
-    
+    console.log("payload", payload);
+
     console.log(formFieldsStudijskiProgram);
     this.programService.create(payload).subscribe(response => {
       console.log('Studijski program uspešno kreiran:', response);
@@ -80,20 +80,20 @@ export class StudijskiprogramComponent implements OnInit {
 
       this.router.navigate(['/studijskiProgram-list']);
 
-      this.errorMessage="Studijski program uspesno dodat."
+      this.errorMessage = "Studijski program uspesno dodat."
       // Obrisati poruku nakon 2 sekunde
       setTimeout(() => {
-        this.errorMessage = ''; 
+        this.errorMessage = '';
       }, 2000);
     });
     console.log("Svi kreirani programi su: ", this.programi);
-    
-    }
+
+  }
 
   popuniOpcije(): void {
     const fakultetField = this.formFieldsStudijskiProgram.find(field => field.name === 'fakultet');
     if (fakultetField) {
-      fakultetField.options = this.fakulteti.map(fakultet => ({ key: fakultet.id?.toString()?? '', value: fakultet.naziv}));
+      fakultetField.options = this.fakulteti.map(fakultet => ({ key: fakultet.id?.toString() ?? '', value: fakultet.naziv }));
     }
   }
 

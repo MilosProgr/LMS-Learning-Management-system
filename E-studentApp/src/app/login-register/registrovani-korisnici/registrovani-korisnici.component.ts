@@ -18,15 +18,15 @@ import { NgIf } from '@angular/common';
 })
 export class RegistrovaniKorisniciComponent implements OnInit {
   registrovaniKorisnici: RegistrovaniKorisnik[] = [];
-  errorMessage= "";
+  errorMessage = "";
 
   kljuceviRegistrovaniKorisnik = [
     { imeKolone: 'Korisnicko Ime', kljuc: 'korisnickoIme' },
-    { imeKolone: 'Id', kljuc: 'id'},
+    { imeKolone: 'Id', kljuc: 'id' },
     // { imeKolone: 'Lozinka', kljuc:  'lozinka'}
   ];
 
-  constructor(private registrovaniKorisniciService: RegistrovaniKorisnikService, private loginService: LoginService) {}
+  constructor(private registrovaniKorisniciService: RegistrovaniKorisnikService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.loadRegistrovaniKorisnici();
@@ -37,7 +37,7 @@ export class RegistrovaniKorisniciComponent implements OnInit {
       type: 'text',
       label: 'Korisnicko Ime: ',
       name: 'korisnickoIme',
-      validations: [Validators.required, Validators.minLength(8) ,this.usernameAndPasswordValidator()]
+      validations: [Validators.required, Validators.minLength(8), this.usernameAndPasswordValidator()]
     },
     {
       type: 'password',
@@ -70,13 +70,13 @@ export class RegistrovaniKorisniciComponent implements OnInit {
       this.registrovaniKorisnici = data;
       // if (this.registrovaniKorisnici.length > 0) {
       //   this.kljuceviRegistrovaniKorisnici = Object.keys(this.registrovaniKorisnici[0]);
-        console.log("kljucevi za registrovane korisnike su:", this.kljuceviRegistrovaniKorisnik);
-        console.log("Registrovani korisnici su:", this.registrovaniKorisnici);
+      console.log("kljucevi za registrovane korisnike su:", this.kljuceviRegistrovaniKorisnik);
+      console.log("Registrovani korisnici su:", this.registrovaniKorisnici);
       // }
     });
   }
 
-  addRegistrovaniKorisnik(formFieldsRegistrovaniKorisnik: any) {
+  addRegistrovaniKorisnik(formFieldsRegistrovaniKorisnik: RegistrovaniKorisnik) {
 
     const noviKorisnik: RegistrovaniKorisnik = {
       ime: formFieldsRegistrovaniKorisnik.ime,
@@ -92,10 +92,10 @@ export class RegistrovaniKorisniciComponent implements OnInit {
         console.log('Korisnik uspešno registrovan:', response);
         this.loadRegistrovaniKorisnici();
 
-        this.errorMessage="Studijski program uspesno dodat."
+        this.errorMessage = "Studijski program uspesno dodat."
         // Obrisati poruku nakon 2 sekunde
         setTimeout(() => {
-          this.errorMessage = ''; 
+          this.errorMessage = '';
         }, 2000);
       } else {
         console.error('Došlo je do greške prilikom registracije novog korisnika');
@@ -111,14 +111,14 @@ export class RegistrovaniKorisniciComponent implements OnInit {
 
   // Prilagođeni validator za korisničko ime i lozinku
   usernameAndPasswordValidator(): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const value = control.value;
-    // Proverava da li korisničko ime sadrži barem jedno veliko slovo i jedan broj
-    const hasUpperCase = /[A-Z]/.test(value);
-    const hasNumber = /\d/.test(value);
-    const valid = hasUpperCase && hasNumber;
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      // Proverava da li korisničko ime sadrži barem jedno veliko slovo i jedan broj
+      const hasUpperCase = /[A-Z]/.test(value);
+      const hasNumber = /\d/.test(value);
+      const valid = hasUpperCase && hasNumber;
 
-    return valid ? null : { usernameInvalid: true };
-  };
-}
+      return valid ? null : { usernameInvalid: true };
+    };
+  }
 }

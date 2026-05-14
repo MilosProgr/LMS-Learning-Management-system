@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NastavnikNaRealizacijiService } from '../../../Services/nastavnikNaRealizaciji.service';
-import { LoginService } from '../../../Services/login.service';
 import { Nastavnik } from '../../../models/nastavnik.model';
 import { Predmet } from '../../../models/predmetModel';
 import { forkJoin, map, Observable, startWith } from 'rxjs';
@@ -51,7 +50,7 @@ export class DodelaPredmetaRealizacijaComponent implements OnInit {
   form = this.fb.group({
     nastavnikNaRealizaciji: new FormControl<NastavnikNaRealizaciji | null>(null, { validators: [Validators.required] }),
     predmet: new FormControl<Predmet | null>(null, { validators: [Validators.required] }),
-    semestri: new FormControl<any[]>([], { validators: [Validators.required] })
+    semestri: new FormControl<Semestar[]>([], { validators: [Validators.required] })
   });
 
   constructor(
@@ -122,9 +121,9 @@ export class DodelaPredmetaRealizacijaComponent implements OnInit {
   displayPredmet = (p?: Predmet | null): string => {
     if (!p) return '';
     const naziv = p.naziv?.trim() ?? '';
-    const sifra = (p as any)?.sifra?.tekst ? ` • Šifra: ${(p as any).sifra.tekst}` : '';
-    const godinaStudija = (p as any)?.godinaStudija?.godina
-      ? ` • Godina studija: ${(p as any).godinaStudija.godina}`
+    const sifra = p.sifra?.tekst ? ` • Šifra: ${p.sifra.tekst}` : '';
+    const godinaStudija = p.godinaStudija?.godina
+      ? ` • Godina studija: ${p.godinaStudija.godina}`
       : '';
     return `${naziv}${sifra}${godinaStudija}`;
   };

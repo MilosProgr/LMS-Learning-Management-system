@@ -1,4 +1,4 @@
 export interface GodinaStudija {
-    id: number | null;
+    id?: number | null;
     godina?: number;
 }

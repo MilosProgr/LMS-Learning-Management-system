@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavItem } from '../../generics/nav-bar-model';
-import { Fakultet } from '../../../models/fakultetModel';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 import { FakultetService } from '../../../Services/fakultet.service';
 import { LoginService } from '../../../Services/login.service';
 import { Router, RouterModule } from '@angular/router';
@@ -16,14 +16,14 @@ import { FakultetListComponent } from '../../fakultet/fakultet-list/fakultet-lis
   styleUrl: './nav-bar-neregistrovani.component.css'
 })
 export class NavBarNeregistrovaniComponent {
-  
-  navItems: NavItem[] = [  
+
+  navItems: NavItem[] = [
     // { label: 'E-Student', link: '/obavestenja', isVisible: true },
     { label: 'Univerziteti', link: '/univerzitet-home', isVisible: true },
     { label: 'Fakulteti', link: '/fakultet-home', isVisible: true },
 
     { label: 'Prijavi se', isButton: true, action: () => this.navigateToLogin(), isVisible: true }
-  ] 
+  ]
 
   fakulteti: Fakultet[] = [];
 
@@ -31,13 +31,13 @@ export class NavBarNeregistrovaniComponent {
     private fakultetService: FakultetService,
     public loginService: LoginService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadFakulteti();
   }
 
-  
+
   loadFakulteti(): void {
     this.fakultetService.getAll().subscribe(fakulteti => {
       this.fakulteti = fakulteti;
@@ -49,13 +49,13 @@ export class NavBarNeregistrovaniComponent {
     this.router.navigate(['/moj-profil']);
   }
 
-    // Metod za log out
-    odjava() {
-      this.loginService.logout();
-      this.router.navigate(['/']); // Navigacija na login stranicu
-    }
+  // Metod za log out
+  odjava() {
+    this.loginService.logout();
+    this.router.navigate(['/']); // Navigacija na login stranicu
+  }
 
-    navigateToLogin() {
-      this.router.navigate(['/prijava']);
-    }
+  navigateToLogin() {
+    this.router.navigate(['/prijava']);
+  }
 }

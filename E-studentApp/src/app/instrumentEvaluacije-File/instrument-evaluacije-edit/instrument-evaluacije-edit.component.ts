@@ -35,7 +35,7 @@ export class InstrumentEvaluacijeEditComponent implements OnInit {
   ngOnInit(): void {
     const file = this.data?.instrument;
     console.log(file);
-    
+
 
     this.form = this.fb.group({
       opis: [file?.opis ?? '', [Validators.maxLength(255)]],
@@ -62,7 +62,7 @@ export class InstrumentEvaluacijeEditComponent implements OnInit {
 
     if (this.data?.mode === 'edit' && payload.id != null) {
       this.instrumentEvaluacijeService.update(payload.id as number, payload).subscribe({
-        next: (res: any) => this.dialogRef.close(res),
+        next: (res: FileInstrumentEvaluacije) => this.dialogRef.close(res),
         error: (err: { status: number; error: { message: string; }; }) => {
           if (err.status === 409) {
             this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
@@ -71,7 +71,7 @@ export class InstrumentEvaluacijeEditComponent implements OnInit {
       });
     } else {
       this.instrumentEvaluacijeService.create(payload).subscribe({
-        next: (res: any) => this.dialogRef.close(res),
+        next: (res: FileInstrumentEvaluacije) => this.dialogRef.close(res),
         error: (err: { status: number; error: { message: string; }; }) => {
           if (err.status === 409) {
             this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';

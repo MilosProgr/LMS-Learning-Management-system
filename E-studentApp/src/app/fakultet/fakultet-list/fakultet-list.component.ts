@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
-import { Fakultet } from '../../../models/fakultetModel';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 import { Univerzitet } from '../../../models/univerzitetModel';
 import { Nastavnik } from '../../../models/nastavnik.model';
 import { Adresa } from '../../../models/adresaModel';
@@ -96,6 +96,7 @@ export class FakultetListComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog result:", result);
       this.loadFakulteti();
       this.loadNastavniciBezFakulteta();
     });
@@ -142,6 +143,7 @@ export class FakultetListComponent implements OnInit {
   izbrisiFakultet(id: number): void {
     this.fakultetService.delete(id).subscribe({
       next: (res) => {
+        console.log("Response: ", res);
         this.loadFakulteti();
         console.log("Fakultet uspesno odbrisan.");
 
@@ -151,7 +153,7 @@ export class FakultetListComponent implements OnInit {
 
         if (err.status === 409) {
           this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
-        }else{
+        } else {
           this.errorMessage = "Nije moguće obrisati entitet!";
         }
 

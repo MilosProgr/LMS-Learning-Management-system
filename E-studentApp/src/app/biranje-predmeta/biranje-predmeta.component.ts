@@ -11,6 +11,7 @@ import { PohadjanjePredmetaService } from '../../Services/pohadjanje_predmeta.se
 
 import { Predmet } from '../../models/predmetModel';
 import { StudentNaGodini } from '../../models/studentNaGodini/studentNaGodini';
+import { StudijskiProgram } from '../../models/studijskiprogramModel';
 
 @Component({
   selector: 'app-biranje-predmeta',
@@ -47,7 +48,7 @@ export class BiranjePredmetaComponent implements OnInit {
     private studentNaGodiniService: StudentNaGodiniService,
     private pohadjanjePredmetaService: PohadjanjePredmetaService,
     private router: Router
-  ) {}
+  ) { }
 
   get prijavljeniKorisnikId(): number | null {
     return this.loginService?.user?.id ?? null;
@@ -98,7 +99,7 @@ export class BiranjePredmetaComponent implements OnInit {
         mojiUpisi
           .filter(u => u.studijskiProgram?.id === studProgramId)
           .map(u => {
-            const g = (u as any).godinaStudija;                // broj ili objekat
+            const g = (u as StudijskiProgram).godinaStudija;                // broj ili objekat
             return typeof g === 'number' ? g : g?.id;          // normalizuj na number (id)
           })
           .filter((x): x is number => typeof x === 'number')
@@ -112,7 +113,7 @@ export class BiranjePredmetaComponent implements OnInit {
 
           // filtriranje po godini (po ID-u)
           const filtrirano = Array.from(uniq.values()).filter(p => {
-            const pg = (p as any).godinaStudija;               // broj | objekat | undefined
+            const pg = (p as StudijskiProgram).godinaStudija;               // broj | objekat | undefined
             const pgId = typeof pg === 'number' ? pg : pg?.id;
             return pgId == null || allowedYearIds.has(pgId);
           });
@@ -173,12 +174,36 @@ export class BiranjePredmetaComponent implements OnInit {
   // ===============  POMOĆNE FUNKCIJE ==============
 
   /** Normalizuje "godinaStudija" u { id, label } bez obzira da li je broj ili objekat */
-  private normalizeGodina(val: any): { id: number | null; label: string } {
-    if (val == null) return { id: null, label: 'Bez godine' };
-    if (typeof val === 'number') return { id: val, label: `${val}. godina` };
-    const id = typeof val?.id === 'number' ? val.id : null;
-    const label = (val?.naziv ?? val?.godina ?? (id != null ? `Godina #${id}` : 'Bez godine')) + '';
-    return { id, label };
+  private normalizeGodina(
+    val:
+      | number
+      | { id?: number | null; naziv?: string; godina?: string | number }
+      | null
+      | undefined
+  ): { id: number | null; label: string } {
+
+    if (val == null) {
+      return { id: null, label: 'Bez godine' };
+    }
+
+    if (typeof val === 'number') {
+      return { id: val, label: `${val}. godina` };
+    }
+
+    const id =
+      typeof val.id === 'number'
+        ? val.id
+        : null;
+
+    const label =
+      val.naziv ??
+      val.godina ??
+      (id != null ? `Godina #${id}` : 'Bez godine');
+
+    return {
+      id,
+      label: String(label)
+    };
   }
 
   /** Interni ključ za mapiranje selekcije po godini (null -> 'none') */
@@ -195,14 +220,14 @@ export class BiranjePredmetaComponent implements OnInit {
 
     const set = new Map<number | null, string>();
     for (const u of mojiUpisi) {
-      const g = this.normalizeGodina((u as any).godinaStudija);
+      const g = this.normalizeGodina((u as StudijskiProgram).godinaStudija);
       if (!set.has(g.id)) set.set(g.id, g.label);
     }
 
     // Ako postoje predmeti bez definisane godine, dodaj "Bez godine"
     const listaPredmeta = this.predmetiPoProgramu[programId] || [];
     const imaBezGodine = listaPredmeta.some(p => {
-      const pg = (p as any).godinaStudija;
+      const pg = (p as StudijskiProgram).godinaStudija;
       return this.normalizeGodina(pg).id === null;
     });
     if (imaBezGodine && !set.has(null)) set.set(null, 'Bez godine');
@@ -221,7 +246,7 @@ export class BiranjePredmetaComponent implements OnInit {
   getPredmetiZaProgramIGodinu(programId: number, godinaId: number | null): Predmet[] {
     const lista = this.predmetiPoProgramu[programId] || [];
     return lista.filter(p => {
-      const norm = this.normalizeGodina((p as any).godinaStudija);
+      const norm = this.normalizeGodina((p as StudijskiProgram).godinaStudija);
       return (godinaId == null && norm.id == null) || (godinaId != null && norm.id === godinaId);
     });
   }
@@ -230,7 +255,7 @@ export class BiranjePredmetaComponent implements OnInit {
   isChecked(progId: number, godId: number | null, predmetId: number): boolean {
     const key = this.godKey(godId);
     return this.selectedByProgGod[progId]?.[key]?.includes(predmetId) ?? false;
-    }
+  }
 
   /** Uključi/isključi predmet u konkretnoj sekciji */
   togglePredmet(progId: number, godId: number | null, predmetId: number, checked: boolean): void {

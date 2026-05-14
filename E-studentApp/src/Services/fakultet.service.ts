@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 //import { Observable } from 'rxjs';
-import { Fakultet } from '../models/fakultetModel';
+import { Fakultet } from '../models/fakultet/fakultetModel';
 import { CrudService } from '../app/generics/generic-service';
 import { environment } from '../app/environments/environment';
+import { FakultetUpdateRequest } from '../models/fakultet/fakultetUpdateRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class FakultetService extends CrudService<Fakultet> {
     return this.http.post(`${environment.baseUrl}/api/fakulteti/fakultetAdd`, payload);
   }
 
-  updateFakultet(id: number, payload: Fakultet) {
+  updateFakultet(id: number, payload: FakultetUpdateRequest) {
     return this.http.put(`${environment.baseUrl}/api/fakulteti/fakultetEdit/${id}`, payload);
   }
 

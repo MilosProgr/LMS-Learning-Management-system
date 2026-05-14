@@ -1,6 +1,4 @@
-import { Ishod } from "./ishodModel";
-import { RealizacijaPredmeta } from "./realizacijaPredmetaModel";
-import { TipEvaluacije } from "./tipEvaluacije";
+
 
 export interface EvaluacijaZnanja {
     id?: number,

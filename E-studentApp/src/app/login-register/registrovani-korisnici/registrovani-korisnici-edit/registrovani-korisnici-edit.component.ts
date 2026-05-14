@@ -14,7 +14,7 @@ import { GenericFormComponent } from '../../../generics/generic-form/generic-for
   styleUrl: './registrovani-korisnici-edit.component.css'
 })
 export class RegistrovaniKorisniciEditComponent implements OnInit {
-  
+
   registrovaniKorisnikData: RegistrovaniKorisnik | null = null;
   registrovaniKorisnici: RegistrovaniKorisnik[] = [];
 
@@ -23,7 +23,7 @@ export class RegistrovaniKorisniciEditComponent implements OnInit {
       type: 'text',
       label: 'Korisnicko Ime: ',
       name: 'korisnickoIme',
-      validations: [Validators.required, Validators.minLength(8) ,this.usernameAndPasswordValidator()]
+      validations: [Validators.required, Validators.minLength(8), this.usernameAndPasswordValidator()]
     },
     {
       type: 'password',
@@ -69,13 +69,13 @@ export class RegistrovaniKorisniciEditComponent implements OnInit {
           console.log("Korisnik koji se menja je: ", this.registrovaniKorisnikData);
 
           // Ažuriraj vrednosti formFields-a
-          this.formFieldsRegistrovaniKorisnik= [
+          this.formFieldsRegistrovaniKorisnik = [
             {
               type: 'text',
               label: 'Korisnicko Ime: ',
               name: 'korisnickoIme',
-              validations: [Validators.required, Validators.minLength(8) ,this.usernameAndPasswordValidator()],
-              value: this.registrovaniKorisnikData?.korisnickoIme || '' 
+              validations: [Validators.required, Validators.minLength(8), this.usernameAndPasswordValidator()],
+              value: this.registrovaniKorisnikData?.korisnickoIme || ''
             },
             {
               type: 'password',
@@ -88,21 +88,21 @@ export class RegistrovaniKorisniciEditComponent implements OnInit {
               label: 'Ime: ',
               name: 'ime',
               validations: [Validators.required, Validators.pattern('^[A-Z][a-zA-Z]*')],
-              value: this.registrovaniKorisnikData?.ime || '' 
+              value: this.registrovaniKorisnikData?.ime || ''
             },
             {
               type: 'text',
               label: 'Prezime: ',
               name: 'prezime',
               validations: [Validators.required, Validators.pattern('^[A-Z][a-zA-Z]*')],
-              value: this.registrovaniKorisnikData?.prezime || '' 
+              value: this.registrovaniKorisnikData?.prezime || ''
             },
             {
               type: 'text',
               label: 'Email: ',
               name: 'email',
               validations: [Validators.required, Validators.email],
-              value: this.registrovaniKorisnikData?.email || '' 
+              value: this.registrovaniKorisnikData?.email || ''
             }
           ];
           console.log("Novi podaci za prikaz su: ", this.formFieldsRegistrovaniKorisnik);
@@ -120,14 +120,14 @@ export class RegistrovaniKorisniciEditComponent implements OnInit {
     });
   }
 
-  handleFormSubmit(updatedData: RegistrovaniKorisnik | any): void {
+  handleFormSubmit(updatedData: RegistrovaniKorisnik): void {
     console.log("Novi uneti podaci: ", updatedData);
 
     if (updatedData) {
-      const id = Number(this.route.snapshot.paramMap.get('id')); 
+      const id = Number(this.route.snapshot.paramMap.get('id'));
 
       const payload: RegistrovaniKorisnik = {
-        id: id, 
+        id: id,
         ime: updatedData.ime,
         prezime: updatedData.prezime,
         korisnickoIme: updatedData.korisnickoIme,
@@ -147,16 +147,16 @@ export class RegistrovaniKorisniciEditComponent implements OnInit {
       console.error('ID izabranog korisnika nije validan');
     }
   }
-    // Prilagođeni validator za korisničko ime i lozinku
-    usernameAndPasswordValidator(): ValidatorFn {
-      return (control: AbstractControl): ValidationErrors | null => {
-        const value = control.value;
-        // Proverava da li korisničko ime sadrži barem jedno veliko slovo i jedan broj
-        const hasUpperCase = /[A-Z]/.test(value);
-        const hasNumber = /\d/.test(value);
-        const valid = hasUpperCase && hasNumber;
-    
-        return valid ? null : { usernameInvalid: true };
-      };
-    }
+  // Prilagođeni validator za korisničko ime i lozinku
+  usernameAndPasswordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      // Proverava da li korisničko ime sadrži barem jedno veliko slovo i jedan broj
+      const hasUpperCase = /[A-Z]/.test(value);
+      const hasNumber = /\d/.test(value);
+      const valid = hasUpperCase && hasNumber;
+
+      return valid ? null : { usernameInvalid: true };
+    };
+  }
 }

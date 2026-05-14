@@ -12,13 +12,17 @@ import { Mesto } from '../../../models/mesto';
 import { Drzava } from '../../../models/drzava';
 import { Adresa } from '../../../models/adresaModel';
 import { Univerzitet } from '../../../models/univerzitetModel';
-import { Nastavnik } from '../../../models/nastavnik.model';
+// import { Nastavnik } from '../../../models/nastavnik.model';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { map, Observable, startWith } from 'rxjs';
+import { FakultetUpdateRequest } from '../../../models/fakultet/fakultetUpdateRequest';
+import { Nastavnik } from '../../../models/nastavnik.model';
+import { FakultetDialogData } from '../../../models/fakultet/fakultetDialogData';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 
 @Component({
   selector: 'app-fakultet-edit',
@@ -40,7 +44,7 @@ export class FakultetEditComponent implements OnInit {
   drzave: Drzava[] = [];
   adrese: Adresa[] = [];
   univerziteti: Univerzitet[] = [];
-  nastavniciBezFakulteta: any[] = [];
+  nastavniciBezFakulteta: Nastavnik[] = [];
   form!: FormGroup;
   errorMessage: string = '';
 
@@ -48,8 +52,8 @@ export class FakultetEditComponent implements OnInit {
   filteredUlice!: Observable<string[]>;
   filteredBrojevi!: Observable<string[]>;
   filteredDrzave!: Observable<Drzava[]>;
-  ulice: any[] = [];
-  brojevi: any[] = [];
+  ulice: string[] = [];
+  brojevi: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -59,7 +63,7 @@ export class FakultetEditComponent implements OnInit {
     private adresaService: AdresaService,
     private drzavaService: DrzavaService,
     private univerzitetService: UniverzitetService,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: FakultetDialogData,
     private dialogRef: MatDialogRef<FakultetEditComponent>
   ) { }
 
@@ -87,7 +91,7 @@ export class FakultetEditComponent implements OnInit {
       mesto: [fakultet?.adresa?.mesto?.id || '', [Validators.required, this.NazivValidator()]],
       univerzitet: [fakultet?.univerzitet?.id || '', [Validators.required]],
       dekan: [fakultet?.dekan?.id || '', [Validators.required]],
-      drzava: [fakultet?.adresa?.mesto?.drzava?.id || '', [Validators.required, this.NazivValidator()]],
+      //drzava: [fakultet?.adresa?.mesto?,?.id || '', [Validators.required, this.NazivValidator()]],
       adresaId: [fakultet?.adresa?.id || null]
     });
 
@@ -116,16 +120,19 @@ export class FakultetEditComponent implements OnInit {
     if (this.form.invalid) return;
     const f = this.form.value;
 
-    const payload = {
+    const payload: Fakultet = {
       naziv: f.naziv,
       opis: f.opis,
-      telefon: f.kontakt,
-      dekanId: f.dekan,
-      univerzitetId: f.univerzitet,
-      ulica: f.ulica,
-      broj: f.broj,
-      drzavaNaziv: f.drzava,        // ili drzavaId
-      mestoNaziv: f.mesto           // ili mestoId
+      kontakt: f.kontakt,
+
+      dekan: { id: f.dekan },
+      univerzitet: { id: f.univerzitet },
+
+      adresa: {
+        ulica: f.ulica,
+        broj: f.broj,
+        mesto: { id: f.mesto }
+      }
     };
 
     this.fakultetService.createFakultet(payload).subscribe({
@@ -155,19 +162,19 @@ export class FakultetEditComponent implements OnInit {
     const f = this.form.value;
     const id = this.data?.fakultet?.id;
 
-    const payload = {
+    const payload: FakultetUpdateRequest = {
       naziv: f.naziv,
       opis: f.opis,
-      telefon: f.kontakt,
+      kontakt: f.kontakt,
       dekanId: f.dekan,
       univerzitetId: f.univerzitet,
       ulica: f.ulica,
       broj: f.broj,
-      drzavaNaziv: f.drzava,
-      mestoNaziv: f.mesto
+      //drzavaNaziv: f.drzava,
+      //mestoNaziv: f.mesto
     };
 
-    this.fakultetService.updateFakultet(id, payload).subscribe({
+    this.fakultetService.updateFakultet(id as number, payload).subscribe({
       next: res => this.dialogRef.close(res),
       error: (err) => {
         console.log("MojError", err);
@@ -211,12 +218,12 @@ export class FakultetEditComponent implements OnInit {
     return this.brojevi.filter(broj => broj.toLowerCase().includes(filterValue));
   }
 
-  private _filterMesta(value: string): any[] {
+  private _filterMesta(value: string): Mesto[] {
     const filterValue = value.toLowerCase();
     return this.mesta.filter(mesto => mesto.naziv.toLowerCase().includes(filterValue));
   }
 
-  private _filterDrzave(value: string): any[] {
+  private _filterDrzave(value: string): Drzava[] {
     const filterValue = value.toLowerCase();
     return this.drzave.filter(drzava => drzava.naziv.toLowerCase().includes(filterValue));
   }

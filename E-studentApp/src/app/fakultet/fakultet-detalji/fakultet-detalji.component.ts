@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FakultetService } from '../../../Services/fakultet.service';
-import { Fakultet } from '../../../models/fakultetModel';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -17,7 +17,7 @@ import { Location } from '@angular/common';
 
 })
 export class FakultetDetaljiComponent implements OnInit {
-  
+
   routeSub: Subscription | undefined;
   fakultetSub: Subscription | undefined;
   fakultet: Fakultet | undefined;
@@ -30,18 +30,18 @@ export class FakultetDetaljiComponent implements OnInit {
     this.fakultetService.getAll().subscribe(fakulteti => {
       this.fakulteti = fakulteti;
 
-// Slušajte promene parametara rute
-this.routeSub = this.route.paramMap.subscribe(params => {
-  const id = Number(params.get('id'));
-  // console.log('ID:', id); 
-  this.fakultet = this.fakulteti.find(f => f.id === id);
-  // if (this.fakultet) {
-  //   console.log('Fakultet:', this.fakultet); 
-  // } else {
-  //   console.log('Nema podataka za dati ID');
-  // }
-});
-});
+      // Slušajte promene parametara rute
+      this.routeSub = this.route.paramMap.subscribe(params => {
+        const id = Number(params.get('id'));
+        // console.log('ID:', id); 
+        this.fakultet = this.fakulteti.find(f => f.id === id);
+        // if (this.fakultet) {
+        //   console.log('Fakultet:', this.fakultet); 
+        // } else {
+        //   console.log('Nema podataka za dati ID');
+        // }
+      });
+    });
   }
 
 

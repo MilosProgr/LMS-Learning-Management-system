@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { TabelaKolone } from '../tabela-model';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
@@ -12,60 +11,73 @@ import { NgxPaginationModule } from 'ngx-pagination';
   styleUrls: ['./generic-reusable-table.component.css']
 })
 export class GenericReusableTableComponent {
-  @Input() podaci: any = [];
-  @Input() kljucevi: any[] = [];
+
+  @Input() podaci: unknown[] = [];
+  @Input() kljucevi: { imeKolone: string; kljuc: string }[] = [];
   @Input() kljuceviStringovi: string[] = [];
-  @Input() editRoute: string = '/';
-  @Input() naslov: string = '';
 
-  @Output() obrisiEvent: EventEmitter<number> = new EventEmitter<number>();
-  @Output() izmeniEvent: EventEmitter<any> = new EventEmitter<any>();
+  @Input() editRoute = '/';
+  @Input() naslov = '';
 
-  currentPage: number = 1;  // trenutna stranica
-  itemsPerPage: number = 15;  // broj stavki po stranici
+  @Output() obrisiEvent = new EventEmitter<number>();
+  @Output() izmeniEvent = new EventEmitter<number>();
 
-  ukloni(id: any) {
+  currentPage = 1;
+  itemsPerPage = 15;
+
+  ukloni(id: number): void {
     this.obrisiEvent.emit(id);
   }
 
-  izmena(id: any) {
+  izmena(id: number): void {
     this.izmeniEvent.emit(id);
   }
 
-  isArray(value: any): boolean {
+  isArray(value: unknown): value is unknown[] {
     return Array.isArray(value);
   }
 
-  isObject(value: any): boolean {
+  isObject(value: unknown): value is Record<string, unknown> {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   }
 
-  getObjectKeys(obj: any): string[] {
+  getObjectKeys(obj: Record<string, unknown>): string[] {
     return Object.keys(obj);
   }
 
-  getJoinedValues(value: any): string {
+  getJoinedValues(value: unknown): string {
     if (Array.isArray(value)) {
-      return value.map(obj => obj.korisnik?.korisnickoIme || obj.ime || obj.id).join(', ');
+      return value
+        .map((obj: unknown) => {
+          if (typeof obj !== 'object' || obj === null) {
+            return String(obj);
+          }
+
+          const o = obj as Record<string, unknown>;
+
+          const korisnik = o['korisnik'] as Record<string, unknown> | undefined;
+
+          return (
+            (korisnik?.['korisnickoIme'] as string) ||
+            (o['ime'] as string) ||
+            (o['id'] as string | number) ||
+            ''
+          );
+        })
+        .join(', ');
     }
-    return value;
+
+    return String(value);
   }
 
-  getKljucevi(): any[] {
+  getKljucevi(): { imeKolone: string; kljuc: string }[] {
     if (this.kljucevi.length > 0) {
       return this.kljucevi;
     }
-    return this.kljuceviStringovi.map(k => ({ imeKolone: k, kljuc: k }));
+
+    return this.kljuceviStringovi.map(k => ({
+      imeKolone: k,
+      kljuc: k
+    }));
   }
 }
-
-//PRIMERI ZA LISTU KLJUCEVA 
-// kljuceviUloga = [
-//   { imeKolone: 'Ime', kljuc: 'ime' },
-//   { imeKolone: 'Id', kljuc: 'id' },
-//   { imeKolone: 'Korisnici', kljuc: 'pravaPristupa' },
-// ];
-
-//ILI
-
-

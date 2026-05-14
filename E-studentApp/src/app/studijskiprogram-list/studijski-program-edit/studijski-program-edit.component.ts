@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GenericFormComponent } from '../../generics/generic-form/generic-form.component';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Fakultet } from '../../../models/fakultetModel';
+import { Fakultet } from '../../../models/fakultet/fakultetModel';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FakultetService } from '../../../Services/fakultet.service';
 import { FormField } from '../../generics/generic-form/form-model';
@@ -15,8 +15,8 @@ import { StudijskiProgramService } from '../../../Services/studijski-program.ser
   templateUrl: './studijski-program-edit.component.html',
   styleUrl: './studijski-program-edit.component.css'
 })
-export class StudijskiProgramEditComponent implements OnInit{
-  
+export class StudijskiProgramEditComponent implements OnInit {
+
   fakulteti: Fakultet[] = [];
   studijskiProgramData: StudijskiProgram | null = null;
 
@@ -54,21 +54,21 @@ export class StudijskiProgramEditComponent implements OnInit{
           this.studijskiProgramData = data;
           console.log("Studijski koji se menja je: ", this.studijskiProgramData);
 
-                this.studijskiProgramFormFields = [
-        {
-          type: 'text',
-          label: 'Naziv: ',
-          name: 'naziv',
-          validations: [Validators.required],
-          value: this.studijskiProgramData.naziv
-        },
-        {
-          type: 'select',
-          label: 'Odabir Fakultet: ',
-          name: 'fakultet',
-          validations: [Validators.required]
-        }
-      ];
+          this.studijskiProgramFormFields = [
+            {
+              type: 'text',
+              label: 'Naziv: ',
+              name: 'naziv',
+              validations: [Validators.required],
+              value: this.studijskiProgramData.naziv
+            },
+            {
+              type: 'select',
+              label: 'Odabir Fakultet: ',
+              name: 'fakultet',
+              validations: [Validators.required]
+            }
+          ];
         },
         error: (err) => console.error('Error fetching studijski program data', err)
       });
@@ -82,25 +82,25 @@ export class StudijskiProgramEditComponent implements OnInit{
     console.log("Novi uneti podaci: ", updatedData);
 
     if (updatedData) {
-      const id = Number(this.route.snapshot.paramMap.get('id')); 
+      const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        const payload: StudijskiProgram = {
-          id: id, 
-          naziv: updatedData.naziv, 
-          fakultet: { id: Number(updatedData.fakultet) }
-        }
-        
-        console.log("Payload for update: ", payload);
-
-        this.studijskiprogramService.update(id, payload).subscribe({
-          next: () => {
-            this.router.navigate(['/studijskiProgram-list']);
-          },
-          error: (err) => console.error('Error updating studijski program', err)
-        });
-      } else {
-        console.error('Selected studijski program ID is invalid');
+      const payload: StudijskiProgram = {
+        id: id,
+        naziv: updatedData.naziv,
+        fakultet: { id: Number(updatedData.fakultet) }
       }
+
+      console.log("Payload for update: ", payload);
+
+      this.studijskiprogramService.update(id, payload).subscribe({
+        next: () => {
+          this.router.navigate(['/studijskiProgram-list']);
+        },
+        error: (err) => console.error('Error updating studijski program', err)
+      });
+    } else {
+      console.error('Selected studijski program ID is invalid');
+    }
   }
 
   loadFakulteti(): void {

@@ -7,7 +7,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { IzdavanjeUdzbenikService, IzdavanjeUdzbenika } from '../../Services/izdavanje-udzbenika-service.service';
 import { PredmetService } from '../../Services/predmet.service';
 import { UdzbenikService } from '../../Services/udzbenik.service';
-import { Predmet } from '../../models/predmetModel';
+// import { Predmet } from '../../models/predmetModel';
 import { LoginService } from '../../Services/login.service';
 import { forkJoin } from 'rxjs';
 
@@ -50,7 +50,7 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
     private udzbenikService: UdzbenikService,
     private izdavanjeService: IzdavanjeUdzbenikService,
     private loginService: LoginService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -58,8 +58,9 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
   }
 
   private loadUser() {
-    const user = this.loginService.user;
-    if (user) {
+    const { user } = this.loginService;
+
+    if (user?.id != null) {
       this.userId = user.id;
       this.loadPredmeti();
     } else {
@@ -125,7 +126,7 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
     // collect all selected programs
     const requests: Partial<IzdavanjeUdzbenika>[] = this.studijskiProgrami
       .filter(program => program.selected)
-      .map(program => ({
+      .map(() => ({
         podnosilac_zahteva_id: this.userId,
         odobreno: null
       }));
@@ -155,10 +156,10 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
     this.isLoading = true;
     this.izdavanjeService.getAll().subscribe({
       next: data => {
-      this.izdavanja = data.map(d => ({
-        ...d,
-        odobreno: d.odobreno === null ? null : Boolean(d.odobreno) 
-      }));
+        this.izdavanja = data.map(d => ({
+          ...d,
+          odobreno: d.odobreno === null ? null : Boolean(d.odobreno)
+        }));
 
         this.filteredIzdavanja = [...this.izdavanja];
         this.isLoading = false;
@@ -184,7 +185,7 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
     // find programs where this student has requested
     const programs = this.studijskiProgrami
       .filter(p => request.podnosilac_zahteva_id === this.userId && p.selected);
-    
+
     // combine names if multiple
     return programs.map(p => p.naziv).join(', ') || 'N/A';
   }
@@ -204,11 +205,11 @@ export class IzdavanjeUdzbenikaComponent implements OnInit {
     });
   }
 
-getStatusText(request: IzdavanjeUdzbenika): string {
-  if (request.odobreno === true) return 'Odobreno';
-  if (request.odobreno === false) return 'Odbijeno';
-  return 'Na čekanju';
-}
+  getStatusText(request: IzdavanjeUdzbenika): string {
+    if (request.odobreno === true) return 'Odobreno';
+    if (request.odobreno === false) return 'Odbijeno';
+    return 'Na čekanju';
+  }
 
 
   getStatusClass(request: IzdavanjeUdzbenika): string {
@@ -221,12 +222,13 @@ getStatusText(request: IzdavanjeUdzbenika): string {
     return this.studijskiProgrami.some(program => program.selected);
   }
 
-    filterIzdavanja() {
+  filterIzdavanja() {
     const term = this.searchText.toLowerCase().trim();
 
     this.filteredIzdavanja = this.izdavanja.filter(r => {
-      let matchesSearch = true;
+      const matchesSearch = true;
       let matchesStatus = true;
+      console.log('Term: ', term, 'result: ', matchesSearch);
 
       // filter by status
       if (this.statusFilter === 'pending') matchesStatus = r.odobreno === null;
@@ -243,7 +245,6 @@ getStatusText(request: IzdavanjeUdzbenika): string {
       //     matchesSearch = false;
       //   }
       // }
-
       return matchesSearch && matchesStatus;
     });
   }

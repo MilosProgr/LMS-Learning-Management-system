@@ -7,16 +7,17 @@ import { MatInputModule } from '@angular/material/input';
 import { GodinaStudijaService } from '../../../Services/godinaStudija/godinaStudijaModel.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GodinaStudija } from '../../../models/godinaStudija/godinaStudija';
+import { GodinaStudijaDialogData } from '../../../models/godinaStudija/godinaStudijaDijalogData';
 
 @Component({
   selector: 'app-godina-studija-edit',
   standalone: true,
   imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ],
   templateUrl: './godina-studija-edit.component.html',
   styleUrl: './godina-studija-edit.component.css'
@@ -29,8 +30,8 @@ export class GodinaStudijaEditComponent implements OnInit {
     private fb: FormBuilder,
     private godinaService: GodinaStudijaService,
     private dialogRef: MatDialogRef<GodinaStudijaEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: GodinaStudijaDialogData
+  ) { }
 
   ngOnInit(): void {
     const godina = this.data?.godina;
@@ -43,33 +44,33 @@ export class GodinaStudijaEditComponent implements OnInit {
   }
 
   onSubmit() {
-  if (this.form.invalid) return;
+    if (this.form.invalid) return;
 
-  const payload: GodinaStudija = {
-    id: this.data?.mode === 'edit' ? this.data?.godina?.id : null,
-    godina: this.form.value.godina
-  };
+    const payload: GodinaStudija = {
+      id: this.data?.mode === 'edit' ? this.data?.godina?.id : null,
+      godina: this.form.value.godina
+    };
 
-  if (this.data?.mode === 'edit' && payload.id != null) {
-    this.godinaService.update(payload.id, payload).subscribe({
-      next: (res) => this.dialogRef.close(res),
-      error: (err) => {
-        if (err.status === 409) {
-          this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
+    if (this.data?.mode === 'edit' && payload.id != null) {
+      this.godinaService.update(payload.id, payload).subscribe({
+        next: (res) => this.dialogRef.close(res),
+        error: (err) => {
+          if (err.status === 409) {
+            this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
+          }
         }
-      }
-    });
-  } else {
-    this.godinaService.create(payload).subscribe({
-      next: (res) => this.dialogRef.close(res),
-      error: (err) => {
-        if (err.status === 409) {
-          this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
+      });
+    } else {
+      this.godinaService.create(payload).subscribe({
+        next: (res) => this.dialogRef.close(res),
+        error: (err) => {
+          if (err.status === 409) {
+            this.errorMessage = err.error?.message || 'Već postoji zapis sa tim podacima.';
+          }
         }
-      }
-    });
+      });
+    }
   }
-}
 
 
   onCancel() {

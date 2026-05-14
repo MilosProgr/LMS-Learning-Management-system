@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Kurs } from '../../models/kursModel';
 import { KursService } from '../../Services/kurs.service';
@@ -6,7 +6,7 @@ import { GenericReusableTableComponent } from '../generics/generic-reusable-tabl
 import { FormField } from '../generics/generic-form/form-model';
 import { Validators } from '@angular/forms';
 import { GenericFormComponent } from '../generics/generic-form/generic-form.component';
-import { timeout } from 'rxjs';
+// import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-kurs-list',
@@ -49,7 +49,7 @@ export class KursListComponent implements OnInit {
       validations: [Validators.required]
     }
   ];
-  
+
   loadKursevi(): void {
     this.kursService.getAll().subscribe(kursevi => {
       this.kursevi = kursevi;
@@ -60,14 +60,14 @@ export class KursListComponent implements OnInit {
     });
   }
 
-  addKurs(formFieldsKurs: any) {
+  addKurs(formFieldsKurs: Kurs) {
     this.kursService.create(formFieldsKurs).subscribe(response => {
       console.log("Kurs uspesno kreiran:", response);
       this.loadKursevi();
-      this.errorMessage= "Kurs uspesno dodat."
+      this.errorMessage = "Kurs uspesno dodat."
       // Obrisati poruku nakon 2 sekunde
       setTimeout(() => {
-        this.errorMessage = '';  
+        this.errorMessage = '';
       }, 2000);
     });
   }

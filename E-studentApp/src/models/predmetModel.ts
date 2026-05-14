@@ -1,5 +1,5 @@
-import { GodinaStudija } from "./godinaStudija/godinaStudija";
-import { Sifra } from "./sifra";
+
+import { Kurs } from "./kursModel";
 import { StudijskiProgram } from "./studijskiprogramModel";
 
 export interface Predmet {
@@ -12,15 +12,15 @@ export interface Predmet {
   drugiObliciNastave?: number;
   istrazivackiRad?: number;
   ostaliCasovi?: number;
-  silabus?: number | null;   
-  kursevi?: any
+  silabus?: number | null;
+  kursevi?: Kurs[];
   brojPrijava?: number;
   studijskiProgrami?: StudijskiProgram[];
   sifra?: {
     id?: number;
     tekst?: string;
   }
-  godinaStudija?:{
+  godinaStudija?: {
     id?: number | null;
     godina?: string;
   }
