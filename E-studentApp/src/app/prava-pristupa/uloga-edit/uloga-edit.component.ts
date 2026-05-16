@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GenericFormComponent } from '../../generics/generic-form/generic-form.component';
 import { Uloga } from '../../../models/uloga';
@@ -70,36 +70,36 @@ export class UlogaEditComponent implements OnInit {
     });
   }
 
-  handleFormSubmit(updatedData: Uloga | any): void {
+  handleFormSubmit(updatedData: Uloga): void {
     console.log("Novi uneti podaci: ", updatedData);
 
     if (updatedData) {
-      const id = Number(this.route.snapshot.paramMap.get('id')); 
+      const id = Number(this.route.snapshot.paramMap.get('id'));
 
-        const payload: Uloga = {
-          id: id, 
-          ime: updatedData.ime, 
-        }
-        console.log("Payload for update: ", payload);
-
-        this.ulogaService.update(id, payload).subscribe({
-          next: () => {
-            this.router.navigate(['/uloga-list']);
-          },
-          error: (err) => console.error('Error updating uloga', err)
-        });
-      } else {
-        console.error('Selected uloga ID is invalid');
+      const payload: Uloga = {
+        id: id,
+        ime: updatedData.ime,
       }
-    }
+      console.log("Payload for update: ", payload);
 
-        // Prilagođeni validator za ulogu
-        private roleValidator(): ValidatorFn {
-          return (control: AbstractControl): ValidationErrors | null => {
-            const value = control.value;
-            // Proverava da li je unos u formatu ROLE_XXX
-            const valid = /^ROLE_[A-Z]+$/.test(value);
-            return valid ? null : { roleInvalid: true };
-          };
-        }
+      this.ulogaService.update(id, payload).subscribe({
+        next: () => {
+          this.router.navigate(['/uloga-list']);
+        },
+        error: (err) => console.error('Error updating uloga', err)
+      });
+    } else {
+      console.error('Selected uloga ID is invalid');
+    }
   }
+
+  // Prilagođeni validator za ulogu
+  private roleValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value;
+      // Proverava da li je unos u formatu ROLE_XXX
+      const valid = /^ROLE_[A-Z]+$/.test(value);
+      return valid ? null : { roleInvalid: true };
+    };
+  }
+}

@@ -4,7 +4,7 @@ export interface IspitniRok {
     naziv: string,
     pocetak: string;
     kraj: string;
-    redovan: Boolean;
+    redovan: boolean;
     realizacijaPredmeta?: [],
     prijavljeniIspiti?: []
 }

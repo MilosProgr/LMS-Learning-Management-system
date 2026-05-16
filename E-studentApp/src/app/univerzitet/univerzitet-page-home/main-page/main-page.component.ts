@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavComponent } from '../nav/nav.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -14,7 +13,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
-export class MainPageComponent implements OnInit{
+export class MainPageComponent implements OnInit {
   univerziteti: Univerzitet[] = [];
 
   currentPage: number = 1;

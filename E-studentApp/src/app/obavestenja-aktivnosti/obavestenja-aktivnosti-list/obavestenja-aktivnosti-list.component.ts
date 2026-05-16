@@ -3,7 +3,7 @@ import { ObavestenjeAktivnosti } from '../../../models/obavestenja/obavestenjaAk
 import { MatDialog } from '@angular/material/dialog';
 import { ObavestenjaAktivnostiService } from '../../../Services/obavestenja/obavestenjaAktivnosti.service';
 import { ObavestenjaAktivnostiEditComponent } from '../obavestenja-aktivnosti-edit/obavestenja-aktivnosti-edit.component';
-import { DatePipe, NgFor, NgIf, SlicePipe } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { RegistrovaniKorisnikService } from '../../../Services/registrovaniKorisnici.service';
 import { RegistrovaniKorisnik } from '../../../models/registrovaniKorisnik';
@@ -26,7 +26,7 @@ export class ObavestenjaAktivnostiListComponent implements OnInit {
     private obavestenjeAktivnostiService: ObavestenjaAktivnostiService,
     private dialog: MatDialog,
     private registrovaniKorisniciService: RegistrovaniKorisnikService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.load();
@@ -45,9 +45,10 @@ export class ObavestenjaAktivnostiListComponent implements OnInit {
   openAddDialog() {
     const dialogRef = this.dialog.open(ObavestenjaAktivnostiEditComponent, {
       width: '700px',
-      data: { mode: 'add',
+      data: {
+        mode: 'add',
         registrovaniKorisnici: this.registrovaniKorisnici
-       }
+      }
     });
     dialogRef.afterClosed().subscribe(result => { if (result) this.load(); });
   }
@@ -55,9 +56,10 @@ export class ObavestenjaAktivnostiListComponent implements OnInit {
   openEditDialog(row: ObavestenjeAktivnosti) {
     const dialogRef = this.dialog.open(ObavestenjaAktivnostiEditComponent, {
       width: '700px',
-      data: { mode: 'edit', obavestenje: row,
+      data: {
+        mode: 'edit', obavestenje: row,
         registrovaniKorisnici: this.registrovaniKorisnici
-       }
+      }
     });
     dialogRef.afterClosed().subscribe(result => { if (result) this.load(); });
   }
@@ -72,17 +74,18 @@ export class ObavestenjaAktivnostiListComponent implements OnInit {
     });
   }
 
-  loadRegistrovaniKorisnici(){
+  loadRegistrovaniKorisnici() {
     this.registrovaniKorisniciService.getAll().subscribe({
       next: (res) => {
         this.registrovaniKorisnici = res
         // console.log(this.registrovaniKorisnici);
-        
+
       },
       error: (err) => {
-
+        console.error("Error loading registered users:", err);
+        this.errorMessage = 'Nije moguće učitati registrovane korisnike.';
       }
-      
+
     })
   }
 

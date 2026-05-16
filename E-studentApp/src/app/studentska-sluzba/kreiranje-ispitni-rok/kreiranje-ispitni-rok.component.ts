@@ -15,7 +15,7 @@ import { IspitniRokEditComponent } from './ispitni-rok-edit/ispitni-rok-edit.com
 })
 export class KreiranjeIspitniRokComponent implements OnInit {
 
-    currentPage = 1;
+  currentPage = 1;
   itemsPerPage = 10;
 
   rokovi: IspitniRok[] = [];
@@ -24,7 +24,7 @@ export class KreiranjeIspitniRokComponent implements OnInit {
   constructor(
     private rokService: IspitniRokService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadRokovi();
@@ -73,7 +73,7 @@ export class KreiranjeIspitniRokComponent implements OnInit {
   izbrisiRok(id: number): void {
     if (id == null) return;
 
-    const pre = this.rokovi;
+    // const pre = this.rokovi;
     this.rokovi = this.rokovi.filter(r => r.id !== id);
 
     if (this.rokovi.length === 0) this.currentPage = 1;

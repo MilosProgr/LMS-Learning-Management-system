@@ -15,7 +15,7 @@ import { GenericFormComponent } from '../../generics/generic-form/generic-form.c
   templateUrl: './uloga-list.component.html',
   styleUrl: './uloga-list.component.css'
 })
-export class UlogaListComponent implements OnInit{
+export class UlogaListComponent implements OnInit {
   uloge: Uloga[] = [];
   errorMessage = "";
 
@@ -24,12 +24,12 @@ export class UlogaListComponent implements OnInit{
     { imeKolone: 'Id', kljuc: 'id' }
   ];
 
-  constructor(private ulogaService: UlogaService) {}
+  constructor(private ulogaService: UlogaService) { }
 
   ngOnInit(): void {
     this.loadUloge();
     // console.log(this.uloge);
-    
+
   }
 
   formFieldsUloga: FormField[] = [
@@ -46,23 +46,23 @@ export class UlogaListComponent implements OnInit{
       this.uloge = data;
       // if (this.uloge.length > 0) {
       //   this.kljuceviUloga = Object.keys(this.uloge[0]);
-        console.log("kljucevi za ulogu su:", this.kljuceviUloga);
-        console.log("Uloge su:", this.uloge);
+      console.log("kljucevi za ulogu su:", this.kljuceviUloga);
+      console.log("Uloge su:", this.uloge);
       // }
     });
   }
 
-  addUloga(formFieldsUloga: any) {
+  addUloga(formFieldsUloga: Uloga) {
     this.ulogaService.create(formFieldsUloga).subscribe(response => {
       console.log("Uloga uspesno kreirana:", response);
       this.loadUloge();
 
-      this.errorMessage="Uloga uspesno dodata."
+      this.errorMessage = "Uloga uspesno dodata."
       // Obrisati poruku nakon 2 sekunde
       setTimeout(() => {
-        this.errorMessage = ''; 
+        this.errorMessage = '';
       }, 2000);
-    
+
     });
   }
 
@@ -71,7 +71,7 @@ export class UlogaListComponent implements OnInit{
       this.loadUloge(); // Ponovo učitavanje liste nakon brisanja
     });
   }
-  
+
   // Prilagođeni validator za ulogu
   private roleValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {

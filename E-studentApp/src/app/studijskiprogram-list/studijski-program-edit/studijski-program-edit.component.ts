@@ -78,7 +78,7 @@ export class StudijskiProgramEditComponent implements OnInit {
   }
 
 
-  handleFormSubmit(updatedData: StudijskiProgram | any): void {
+  handleFormSubmit(updatedData: StudijskiProgram): void {
     console.log("Novi uneti podaci: ", updatedData);
 
     if (updatedData) {

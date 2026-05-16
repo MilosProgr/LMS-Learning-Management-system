@@ -4,28 +4,28 @@ export interface UserPermissionList {
     id: number;
 
     korisnik: {
-        id: number;
-        ime: string;
-        prezime: string;
-        korisnickoIme: string;
-        lozinka: string;
-        email: string;
+        id?: number;
+        ime?: string;
+        prezime?: string;
+        korisnickoIme?: string;
+        lozinka?: string;
+        email?: string;
     }
-    listaUloga: Uloga[];
+    listaUloga?: Uloga[];
 }
 
 export interface UserPermission {
 
-    id: number;
+    id?: number;
     permission?: {
-        id: number;
-        ime: string;
+        id?: number;
+        ime?: string;
     }
     korisnik: {
-        id: number;
+        id?: number;
         ime?: string;
         prezime?: string;
-        korisnickoIme: string;
+        korisnickoIme?: string;
         lozinka?: string;
         email?: string;
         pravaPristupa?: [],

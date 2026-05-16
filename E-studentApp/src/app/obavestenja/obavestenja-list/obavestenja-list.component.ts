@@ -1,4 +1,4 @@
-import { DatePipe, NgFor, NgIf, SlicePipe } from '@angular/common';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Obavestenje } from '../../../models/obavestenja/obavestenjeModel';
 import { ObavestenjeService } from '../../../Services/obavestenja/obavestenje.service';
@@ -22,7 +22,7 @@ export class ObavestenjaListComponent implements OnInit {
   constructor(
     private service: ObavestenjeService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.load();
@@ -35,7 +35,7 @@ export class ObavestenjaListComponent implements OnInit {
         // console.log(this.obavestenja);
         // console.log(this.obavestenja[1].datum)
         // console.log(this.obavestenja[1].vreme)
-                      
+
       },
       error: (err) => console.error(err)
     });

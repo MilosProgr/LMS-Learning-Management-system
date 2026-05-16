@@ -1,25 +1,32 @@
-import { StatusOdmora } from "./status-odmora.enum";
+// import { StatusOdmora } from "./status-odmora.enum";
+
+import { RegistrovaniKorisnik } from './registrovaniKorisnik';
 
 export interface Nastavnik {
+    ime: string;
+    prezime: string;
+    brojIskoristenihDana: number;
 
     id?: number | null;
-    biografija?: string;
-    jmbg?: string;
+
+    korisnik?: RegistrovaniKorisnik;
+
+    korisnickoIme?: string;
+
+    imePrezime?: string;
+
+    email?: string;
+
     telefon?: string;
+
+    jmbg?: string;
+
     poslovniMail?: string;
+
+    biografija?: string;
+
     brojSlobodnihDana?: number;
-    brojIskoristenihDana?: number;
-    korisnik?:{
-        id?: number | null;
-        ime?: string;
-        prezime?: string;
-        korisnickoIme?: string;
-        email?: string;
-        pravaPristupa?: string[];
-    }
-    statusOdmora?: StatusOdmora;
-    roles?: string[];
-    zvanja?: any[];
-    naucneOblasti?: any[];
-    fakultet?: string | null;
+
+    brojIskoriscenihDana?: number;
 }
+// statusOdmora ?: StatusOdmora;

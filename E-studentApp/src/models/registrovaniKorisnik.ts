@@ -1,4 +1,5 @@
 export interface RegistrovaniKorisnik {
+    // length: number;
     id?: number;
     ime: string;
     prezime: string;

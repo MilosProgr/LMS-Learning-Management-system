@@ -37,13 +37,13 @@ export class SemestarEditComponent {
     private semestarService: SemestarService,
     private dialogRef: MatDialogRef<SemestarEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { mode: 'add' | 'edit', semestar?: Semestar }
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const s = this.data?.semestar;
 
-    const poc = s?.datumPocetka ? new Date(s.datumPocetka as any) : null;
-    const krj = s?.datumKraja   ? new Date(s.datumKraja as any)   : null;
+    const poc = s?.datumPocetka ? new Date(s.datumPocetka as string) : null;
+    const krj = s?.datumKraja ? new Date(s.datumKraja as string) : null;
 
     this.form = this.fb.group(
       {
@@ -69,7 +69,7 @@ export class SemestarEditComponent {
       tip: v.tip,
       datumPocetka: start.toISOString(),
       datumKraja: end.toISOString()
-    } as any;
+    };
 
     if (this.data?.mode === 'edit' && payload.id != null) {
       this.semestarService.update(payload.id as number, payload).subscribe({

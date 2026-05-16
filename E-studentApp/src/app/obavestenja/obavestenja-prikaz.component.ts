@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Obavestenje } from '../../models/obavestenja/obavestenjeModel';
-import { CommonModule, NgClass, NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { ObavestenjeService } from '../../Services/obavestenja/obavestenje.service';
 import { Router } from '@angular/router';
 import { LoginService } from '../../Services/login.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ObavestenjaAktivnostiService } from '../../Services/obavestenja/obavestenjaAktivnosti.service';
+import { ObavestenjeAktivnosti } from '../../models/obavestenja/obavestenjaAktivnostiModel';
 
 @Component({
   selector: 'app-obavestenja',
@@ -17,8 +18,8 @@ import { ObavestenjaAktivnostiService } from '../../Services/obavestenja/obavest
 export class ObavestenjaPrikazComponent implements OnInit {
 
   listaObavestenja: Obavestenje[] = [];
-  listaObavestenjaAktivnosti: any[] = [];
-  procitanaObavestenjaAktivnosti: any[] = [];
+  listaObavestenjaAktivnosti: ObavestenjeAktivnosti[] = [];
+  procitanaObavestenjaAktivnosti: ObavestenjeAktivnosti[] = [];
   prijavljeniKorisnik = this.loginService.user;
 
   constructor(private obavestenjeService: ObavestenjeService,
@@ -47,13 +48,13 @@ export class ObavestenjaPrikazComponent implements OnInit {
       //samo obaveštenja koja pripadaju ulogovanom korisniku
       // console.log("Podaci:", data);
 
-      this.listaObavestenjaAktivnosti = data.filter((obavestenje: any) =>
+      this.listaObavestenjaAktivnosti = data.filter((obavestenje: ObavestenjeAktivnosti) =>
         obavestenje.registrovaniKorisnik.id === userId &&
         obavestenje.procitano === false
       );
       console.log(this.listaObavestenjaAktivnosti);
 
-      this.procitanaObavestenjaAktivnosti = data.filter((obavestenje: any) =>
+      this.procitanaObavestenjaAktivnosti = data.filter((obavestenje: ObavestenjeAktivnosti) =>
         obavestenje.registrovaniKorisnik.id === userId &&
         obavestenje.procitano === true
       );
@@ -62,9 +63,9 @@ export class ObavestenjaPrikazComponent implements OnInit {
 
     });
   }
-  
-  oznaciProcitano(obavestenje: any) {
-    this.obavestenjaAktivnostiService.oznaciKaoProcitano(obavestenje.id).subscribe(() => {
+
+  oznaciProcitano(obavestenje: ObavestenjeAktivnosti) {
+    this.obavestenjaAktivnostiService.oznaciKaoProcitano(obavestenje.id as number).subscribe(() => {
       // ukloni iz liste nepročitanih
       this.listaObavestenjaAktivnosti = this.listaObavestenjaAktivnosti.filter(o => o.id !== obavestenje.id);
 
@@ -75,9 +76,9 @@ export class ObavestenjaPrikazComponent implements OnInit {
 
   obrisiObavestenje(id: number): void {
     console.log("Id obavestenja je:", id);
-      this.obavestenjeService.delete(id).subscribe(() => {
-        this.loadObavestenja();
-        window.location.reload();
-      });
+    this.obavestenjeService.delete(id).subscribe(() => {
+      this.loadObavestenja();
+      window.location.reload();
+    });
   }
 }

@@ -5,7 +5,6 @@ import { Semestar } from '../../../models/semestarModel';
 import { SemestarService } from '../../../Services/semestar.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SemestarEditComponent } from './semestar-edit/semestar-edit.component';
-import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-semestar-list',

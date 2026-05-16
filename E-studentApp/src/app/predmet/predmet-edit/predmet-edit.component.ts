@@ -1,195 +1,227 @@
-import { CommonModule } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { PredmetService } from '../../../Services/predmet.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Predmet } from '../../../models/predmetModel';
-import { StudijskiProgram } from '../../../models/studijskiprogramModel';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatOptionModule } from '@angular/material/core';
-import { MatButtonModule } from '@angular/material/button';
-import { Sifra } from '../../../models/sifra';
-import { GodinaStudija } from '../../../models/godinaStudija/godinaStudija';
-import { map, Observable, startWith } from 'rxjs';
+// import { CommonModule } from '@angular/common';
+// import { Component, Inject, OnInit } from '@angular/core';
+// import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-@Component({
-  selector: 'app-predmet-edit',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    MatOptionModule,
-    MatButtonModule
-  ],
-  templateUrl: './predmet-edit.component.html',
-  styleUrl: './predmet-edit.component.css'
-})
-export class PredmetEditComponent implements OnInit {
-  form = this.fb.group({
-    naziv: ['', Validators.required],
-    esbn: [null as number | null],
-    obavezan: [false, Validators.required],
-    brojPredavanja: [null as number | null],
-    brojVezbi: [null as number | null],
-    drugiObliciNastave: [null as number | null],
-    istrazivackiRad: [null as number | null],
-    ostaliCasovi: [null as number | null],
-    studijskiProgramIds: this.fb.control<number[]>([], { validators: [Validators.required] })
-  });
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatSelectModule } from '@angular/material/select';
+// import { MatCheckboxModule } from '@angular/material/checkbox';
+// import { MatAutocompleteModule } from '@angular/material/autocomplete';
+// import { MatOptionModule } from '@angular/material/core';
+// import { MatButtonModule } from '@angular/material/button';
 
-  // autocomplete kontroleri za šifru i godinu (drže objekat ili string tokom kucanja)
-  sifraCtrl = new FormControl<Sifra | string | null>(null);
-  godinaCtrl = new FormControl<GodinaStudija | string | null>(null);
-  
-  filteredSifre$!: Observable<Sifra[]>;
-  filteredGodine$!: Observable<GodinaStudija[]>;
-  errorMessage = ""
+// import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-  constructor(
-    private fb: FormBuilder,
-    private predmetService: PredmetService,
-    public dialogRef: MatDialogRef<PredmetEditComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+// import { map, Observable, startWith } from 'rxjs';
 
-  ngOnInit(): void {
+// import { PredmetService } from '../../../Services/predmet.service';
+// import { Predmet } from '../../../models/predmetModel';
+// import { StudijskiProgram } from '../../../models/studijskiprogramModel';
+// import { Sifra } from '../../../models/sifra';
+// import { GodinaStudija } from '../../../models/godinaStudija/godinaStudija';
+// import { PredmetDialogData } from '../../../models/dijalogModel/dijalogModel';
 
-    this.filteredSifre$ = this.sifraCtrl.valueChanges.pipe(
-      startWith(this.sifraCtrl.value),
-      map(val => this.filterSifre(val))
-    );
+// @Component({
+//   selector: 'app-predmet-edit',
+//   standalone: true,
+//   imports: [
+//     CommonModule,
+//     ReactiveFormsModule,
+//     MatFormFieldModule,
+//     MatInputModule,
+//     MatSelectModule,
+//     MatCheckboxModule,
+//     MatAutocompleteModule,
+//     MatOptionModule,
+//     MatButtonModule
+//   ],
+//   templateUrl: './predmet-edit.component.html',
+//   styleUrl: './predmet-edit.component.css'
+// })
+// export class PredmetEditComponent implements OnInit {
 
-    this.filteredGodine$ = this.godinaCtrl.valueChanges.pipe(
-      startWith(this.godinaCtrl.value),
-      map(val => this.filterGodine(val))
-    );
+//   form = this.fb.group({
+//     naziv: ['', Validators.required],
+//     esbn: [null as number | null],
+//     obavezan: [false, Validators.required],
+//     brojPredavanja: [null as number | null],
+//     brojVezbi: [null as number | null],
+//     drugiObliciNastave: [null as number | null],
+//     istrazivackiRad: [null as number | null],
+//     ostaliCasovi: [null as number | null],
+//     studijskiProgramIds: this.fb.control<number[]>([], { validators: [Validators.required] })
+//   });
 
-    // patch za edit
-    if (this.data.mode === 'edit' && this.data.predmet) {
-      const p = this.data.predmet;
+//   sifraCtrl = new FormControl<Sifra | string | null>(null);
+//   godinaCtrl = new FormControl<GodinaStudija | string | null>(null);
 
-      this.form.patchValue({
-        naziv: p.naziv,
-        esbn: p.esbn ?? null,
-        obavezan: !!p.obavezan,
-        brojPredavanja: p.brojPredavanja ?? null,
-        brojVezbi: p.brojVezbi ?? null,
-        drugiObliciNastave: p.drugiObliciNastave ?? null,
-        istrazivackiRad: p.istrazivackiRad ?? null,
-        ostaliCasovi: p.ostaliCasovi ?? null,
-        studijskiProgramIds: (p.studijskiProgrami || []).map((sp: StudijskiProgram) => sp.id!)
-      });
+//   filteredSifre$!: Observable<Sifra[]>;
+//   filteredGodine$!: Observable<GodinaStudija[]>;
 
-      if (p.godinaStudija) {
-        const matchG = this.data.godine.find((g: GodinaStudija) => g.id === p.godinaStudija!.id);
-        this.godinaCtrl.setValue(
-          matchG ?? { id: p.godinaStudija.id ?? null, godina: p.godinaStudija.godina }
-        );
-      }
+//   errorMessage = '';
 
-      // setuj autocomplete vrednosti objektima
-      if (p.sifra) {
-        const match = this.data.sifre.find((s: Sifra) => s.id === p.sifra?.id);
-        console.log(match);
-        this.sifraCtrl.setValue(match ?? { id: p.sifra.id!, tekst: p.sifra.tekst });
+//   constructor(
+//     private fb: FormBuilder,
+//     private predmetService: PredmetService,
+//     public dialogRef: MatDialogRef<PredmetEditComponent>,
+//     @Inject(MAT_DIALOG_DATA) public data: PredmetDialogData
+//   ) { }
 
-      }
-      if (p.godinaStudija) {
-        const matchGodina = this.data.godine.find((g: GodinaStudija) => g.id === p.godinaStudija?.id);
-        console.log(matchGodina);
+//   ngOnInit(): void {
 
-        this.godinaCtrl.setValue(matchGodina ?? { id: p.godinaStudija.id!, naziv: p.godinaStudija.godina });
-      }
-    }
-  }
+//     this.filteredSifre$ = this.sifraCtrl.valueChanges.pipe(
+//       startWith(this.sifraCtrl.value),
+//       map(val => this.filterSifre(val))
+//     );
 
-  // displayWith funkcije
-  displaySifra = (val?: Sifra | string | null) =>
-    typeof val === 'string'
-      ? val
-      : (val?.tekst ?? (val?.id != null ? `ID: ${val.id}` : ''));
+//     this.filteredGodine$ = this.godinaCtrl.valueChanges.pipe(
+//       startWith(this.godinaCtrl.value),
+//       map(val => this.filterGodine(val))
+//     );
 
-  displayGodina = (val?: GodinaStudija | string | null): string => {
-    if (typeof val === 'string') return val || '';
-    if (!val) return '';
-    return val.godina != null
-      ? val.godina.toString()
-      : (val.id != null ? `ID: ${val.id}` : '');
-  };
+//     if (this.data.mode === 'edit' && this.data.predmet) {
 
-  // filteri
-  private filterSifre(val: Sifra | string | null): Sifra[] {
-    const q = (typeof val === 'string' ? val : (val?.tekst ?? '')).toLowerCase();
-    if (!q) return this.data.sifre;
-    return this.data.sifre.filter((s: Sifra) =>
-      (s.tekst ?? `ID: ${s.id}`).toLowerCase().includes(q)
-    );
-  }
+//       const p = this.data.predmet;
 
-  private filterGodine(val: GodinaStudija | string | null): GodinaStudija[] {
-    if (!val || typeof val !== 'string') return this.data.godine;
+//       this.form.patchValue({
+//         naziv: p.naziv,
+//         esbn: p.esbn ?? null,
+//         obavezan: !!p.obavezan,
+//         brojPredavanja: p.brojPredavanja ?? null,
+//         brojVezbi: p.brojVezbi ?? null,
+//         drugiObliciNastave: p.drugiObliciNastave ?? null,
+//         istrazivackiRad: p.istrazivackiRad ?? null,
+//         ostaliCasovi: p.ostaliCasovi ?? null,
+//         studijskiProgramIds: (p.studijskiProgrami || []).map((sp: StudijskiProgram) => sp.id!)
+//       });
 
-    const q = val.toLowerCase();
-    return this.data.godine.filter((g: GodinaStudija) =>
-      (g.godina != null && g.godina.toString().includes(q)) ||
-      (g.id != null && g.id.toString().includes(q))
-    );
-  }
+//       // =======================
+//       // SIFRA
+//       // =======================
+//       if (p.sifra) {
+//         const match = this.data.sifre.find(
+//           s => s.id === p.sifra?.id
+//         );
 
-  onSubmit(): void {
-    if (this.form.invalid) return;
+//         this.sifraCtrl.setValue(
+//           match ?? { id: p.sifra.id ?? null, tekst: p.sifra.tekst }
+//         );
+//       }
 
-    const v = this.form.value;
+//       // =======================
+//       // GODINA (FIXED 100%)
+//       // =======================
+//       if (p.godinaStudija) {
 
-    // izvuci iz autocomplete kontrole PRAVI objekat (ne string tokom kucanja)
-    const sifraVal = this.sifraCtrl.value as Sifra | string | null;
-    const godinaVal = this.godinaCtrl.value as GodinaStudija | string | null;
+//         const targetId = p.godinaStudija.id ?? null;
 
-    const sifraObj: Sifra | undefined =
-      sifraVal && typeof sifraVal !== 'string' ? { id: sifraVal.id! } : undefined;
+//         const matchGodina = this.data.godine.find(
+//           g => g.id === targetId
+//         );
 
-    let godinaObj: { id: number } | undefined;
-    if (godinaVal && typeof godinaVal !== 'string' && godinaVal.id != null) {
-      godinaObj = { id: godinaVal.id };
-    }
-    // sastavi DTO po tvom modelu
-    const dto: Predmet = {
-      id: this.data.predmet?.id,
-      naziv: v.naziv!,
-      esbn: v.esbn ?? undefined,
-      obavezan: !!v.obavezan,
-      brojPredavanja: v.brojPredavanja ?? undefined,
-      brojVezbi: v.brojVezbi ?? undefined,
-      drugiObliciNastave: v.drugiObliciNastave ?? undefined,
-      istrazivackiRad: v.istrazivackiRad ?? undefined,
-      ostaliCasovi: v.ostaliCasovi ?? undefined,
-      studijskiProgrami: (v.studijskiProgramIds || []).map(id => ({ id } as any)),
-      sifra: sifraObj ? { id: sifraObj.id } : undefined,
-      godinaStudija: godinaObj ? { id: godinaObj.id } as any : undefined
-    };
+//         this.godinaCtrl.setValue(
+//           matchGodina ?? {
+//             id: targetId,
+//             godina: p.godinaStudija.godina
+//           }
+//         );
+//       }
+//     }
+//   }
 
-    const req$ = this.data.mode === 'add'
-      ? this.predmetService.create(dto as any)
-      : this.predmetService.update(dto.id!, dto as any);
+//   // =======================
+//   // DISPLAY
+//   // =======================
 
-    req$.subscribe({
-      next: () => this.dialogRef.close(true),
-      error: (err) => {
-        console.error(err)
-        this.errorMessage = err.error?.message
+//   displaySifra = (val?: Sifra | string | null): string =>
+//     typeof val === 'string'
+//       ? val
+//       : val?.tekst ?? (val?.id != null ? `ID: ${val.id}` : '');
 
+//   displayGodina = (val?: GodinaStudija | string | null): string =>
+//     typeof val === 'string'
+//       ? val
+//       : val?.godina != null
+//         ? val.godina.toString()
+//         : '';
 
+//   // =======================
+//   // FILTERS
+//   // =======================
 
-      }
-    });
-  }
-}
+//   private filterSifre(val: Sifra | string | null): Sifra[] {
+//     const q =
+//       typeof val === 'string'
+//         ? val.toLowerCase()
+//         : (val?.tekst ?? '').toLowerCase();
+
+//     return this.data.sifre.filter(s =>
+//       (s.tekst ?? '').toLowerCase().includes(q)
+//     );
+//   }
+
+//   private filterGodine(val: GodinaStudija | string | null): GodinaStudija[] {
+//     const q =
+//       typeof val === 'string'
+//         ? val.toLowerCase()
+//         : (val?.godina?.toString() ?? '');
+
+//     return this.data.godine.filter(g =>
+//       g.godina?.toString().includes(q) ||
+//       g.id?.toString().includes(q)
+//     );
+//   }
+
+//   // =======================
+//   // SUBMIT
+//   // =======================
+//   onSubmit(): void {
+//     if (this.form.invalid) return;
+
+//     const v = this.form.value;
+
+//     const sifraVal = this.sifraCtrl.value;
+//     const godinaVal = this.godinaCtrl.value;
+
+//     const sifraObj =
+//       sifraVal && typeof sifraVal !== 'string' && sifraVal.id != null
+//         ? { id: sifraVal.id }
+//         : undefined;
+
+//     const godinaObj =
+//       godinaVal && typeof godinaVal !== 'string' && godinaVal.id != null
+//         ? { id: godinaVal.id }
+//         : undefined;
+
+//     const dto: Predmet = {
+//       id: this.data.predmet?.id,
+//       naziv: v.naziv!,
+//       esbn: v.esbn ?? undefined,
+//       obavezan: !!v.obavezan,
+//       brojPredavanja: v.brojPredavanja ?? undefined,
+//       brojVezbi: v.brojVezbi ?? undefined,
+//       drugiObliciNastave: v.drugiObliciNastave ?? undefined,
+//       istrazivackiRad: v.istrazivackiRad ?? undefined,
+//       ostaliCasovi: v.ostaliCasovi ?? undefined,
+
+//       studijskiProgrami: (v.studijskiProgramIds || []).map(id => ({
+//         id
+//       } as StudijskiProgram)),
+
+//       sifra: sifraObj,
+//       godinaStudija: godinaObj
+//     };
+
+//     const req$ = this.data.mode === 'add'
+//       ? this.predmetService.create(dto)
+//       : this.predmetService.update(dto.id!, dto);
+
+//     req$.subscribe({
+//       next: () => this.dialogRef.close(true),
+//       error: (err) => {
+//         console.error(err);
+//         this.errorMessage = err.error?.message ?? 'Greška';
+//       }
+//     });
+//   }
+// }

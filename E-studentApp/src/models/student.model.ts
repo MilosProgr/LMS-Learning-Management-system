@@ -1,4 +1,9 @@
 export interface Student {
+  korisnickoIme: string;
+  ime: string;
+  prezime: string;
+  brojSlobodnihDana: number;
+  brojIskoristenihDana: number;
   id?: number;
   statusStudiranja?: string;
   stanjeNaRacunu?: number;
@@ -31,6 +36,8 @@ export interface Student {
     naziv?: string
   },
   korisnik: {
+    korisnickoIme: string;
+    email: string;
     id: number,
     ime: string,
     prezime: string

@@ -1,8 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Predmet } from '../../../models/predmetModel';
-import { IspitniRok } from '../../../models/ispitniRok/ispitniRokModel';
-import { PredmetService } from '../../../Services/predmet.service';
-import { IspitniRokService } from '../../../Services/ispitniRok/ispitni-rok.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-rasporedi-dogadjaja',

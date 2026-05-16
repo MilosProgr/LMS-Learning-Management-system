@@ -1,6 +1,9 @@
-import { Time } from "@angular/common";
+
+import { RegistrovaniKorisnik } from "../registrovaniKorisnik";
 
 export interface Obavestenje {
+    sadrzaj: string;
+    registrovaniKorisnik: RegistrovaniKorisnik;
     id: number;
     naslov: string;
     tekst: string;

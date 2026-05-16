@@ -8,17 +8,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { PrijavljeniIspitService } from '../../../Services/prijavljeniIspit.service';
+import { Predmet } from '../../../models/predmetModel';
 
 @Component({
   selector: 'app-prijava-ispita-dialog',
   standalone: true,
   imports: [
-        CommonModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatButtonModule,
-        ReactiveFormsModule
+    CommonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   templateUrl: './prijava-ispita-dialog.component.html',
   styleUrl: './prijava-ispita-dialog.component.css'
@@ -34,7 +35,7 @@ export class PrijavaIspitaDialogComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: {
-      predmet: any;
+      predmet: Predmet;
       studentId: number;
       studentNaGodiniId: number;
       cenaPrijave?: number | null;
@@ -43,7 +44,7 @@ export class PrijavaIspitaDialogComponent {
     private fb: FormBuilder,
     private ispitniRokService: IspitniRokService,
     private prijavljeniIspitService: PrijavljeniIspitService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ispitniRokService.getRokoviKojiNisuProsli().subscribe({
@@ -53,8 +54,10 @@ export class PrijavaIspitaDialogComponent {
           this.form.patchValue({ rokId: this.ispitniRokovi[0].id! });
         }
       },
-      error: () => { console.error("Greska u ucitavanju ispitnih rokova."
-      );}
+      error: () => {
+        console.error("Greska u ucitavanju ispitnih rokova."
+        );
+      }
     });
   }
 
@@ -78,7 +81,7 @@ export class PrijavaIspitaDialogComponent {
       next: () => {
         this.dialogRef.close({ success: true });
       },
-      error : (err) => {
+      error: (err) => {
         if (err.status === 409) {
           this.errorMessage = err.error?.message || 'Greska prijave ispita.';
         }

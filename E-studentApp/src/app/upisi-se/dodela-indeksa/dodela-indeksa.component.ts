@@ -5,15 +5,15 @@ import { RegistrovaniKorisnikService } from '../../../Services/registrovaniKoris
 import { GodinaStudijaService } from '../../../Services/godinaStudija/godinaStudijaModel.service';
 import { Student } from '../../../models/student.model';
 import { GodinaStudija } from '../../../models/godinaStudija/godinaStudija';
-import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { StudentNaGodiniService } from '../../../Services/student/studentNaGodini.service';
 import { StudentNaGodini } from '../../../models/studentNaGodini/studentNaGodini';
 import { RegistrovaniKorisnik } from '../../../models/registrovaniKorisnik';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatOption } from '@angular/material/core';
-import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { map, Observable, startWith } from 'rxjs';
 import { StudijskiProgramService } from '../../../Services/studijski-program.service';
@@ -85,6 +85,7 @@ export class DodelaIndeksaComponent implements OnInit {
 
     this.studentNaGodiniService.create(payload).subscribe({
       next: (res) => {
+        console.log('Uspešno upisan student na godinu:', res);
         this.errorMessage = "Student je uspešno upisan i dodeljen mu je broj indeksa.";
         setTimeout(() => {
           this.errorMessage = '';

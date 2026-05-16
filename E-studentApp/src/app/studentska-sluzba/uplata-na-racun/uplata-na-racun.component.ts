@@ -45,7 +45,7 @@ export class UplataNaRacunComponent implements OnInit {
     private fb: FormBuilder,
     private studentService: StudentService,
     private loginService: LoginService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.ucitajStudente();
@@ -62,7 +62,7 @@ export class UplataNaRacunComponent implements OnInit {
 
         const prijavljeniId = this.loginService?.user?.id;
         if (prijavljeniId) {
-          const ja = this.students.find(s => s?.id === prijavljeniId || (s as any)?.korisnik?.id === prijavljeniId);
+          const ja = this.students.find(s => s?.id === prijavljeniId || (s as Student)?.korisnik?.id === prijavljeniId);
           if (ja) {
             this.form.controls.student.setValue(ja);
           }
@@ -83,9 +83,9 @@ export class UplataNaRacunComponent implements OnInit {
 
   //dobavljanje i kreiranje punog imena
   getFullName(s: Student): string {
-    const k = (s as any)?.korisnik ?? {};
-    const ime = (s as any)?.ime ?? k?.ime ?? '';
-    const prezime = (s as any)?.prezime ?? k?.prezime ?? '';
+    const k = (s as Student)?.korisnik ?? {};
+    const ime = (s as Student)?.ime ?? k?.ime ?? '';
+    const prezime = (s as Student)?.prezime ?? k?.prezime ?? '';
     return `${ime ?? ''} ${prezime ?? ''}`.trim();
   }
 
@@ -112,7 +112,7 @@ export class UplataNaRacunComponent implements OnInit {
     this.loading = true;
 
     this.studentService.UvecajStanjeNaRacunu(selected.id, iznos).subscribe({
-      next: (student: any) => {
+      next: (student: Student) => {
         this.loading = false;
         this.stanje = typeof student?.stanjeNaRacunu === 'number'
           ? student.stanjeNaRacunu
@@ -123,13 +123,13 @@ export class UplataNaRacunComponent implements OnInit {
       error: (err) => {
         this.loading = false;
         if (err.status === 409) {
-        this.errorMessage = err.error?.message || "Doslo je do greske kod uplate."
+          this.errorMessage = err.error?.message || "Doslo je do greske kod uplate."
         }
 
       }
     });
   }
-  
+
   reset(): void {
     this.form.reset();
   }
